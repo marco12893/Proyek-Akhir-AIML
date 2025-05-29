@@ -1,0 +1,580 @@
+Rk,Squad,MP,W,D,L,GF,GA,GD,Pts,Pts/MP,xG,xGA,xGD,xGD/90,Attendance,Top Team Scorer,Goalkeeper,Notes,Season,Division
+1,Manchester City,38,28,5,5,94,33,61,89,2.34,78.6,32.1,46.5,1.22,"53,249",Erling Haaland - 36,Ederson,→ Champions League via league finish,2023,1
+2,Arsenal,38,26,6,6,88,43,45,84,2.21,71.6,42,29.6,0.78,"60,191","Martin Ødegaard, Gabriel Martinelli - 15",Aaron Ramsdale,→ Champions League via league finish,2023,1
+3,Manchester Utd,38,23,6,9,58,43,15,75,1.97,67.7,50.4,17.3,0.45,"73,671",Marcus Rashford - 17,David de Gea,→ Champions League via league finish,2023,1
+4,Newcastle Utd,38,19,14,5,68,33,35,71,1.87,71.9,39.5,32.3,0.85,"52,127",Callum Wilson - 18,Nick Pope,→ Champions League via league finish,2023,1
+5,Liverpool,38,19,10,9,75,47,28,67,1.76,71.5,50.8,20.7,0.55,"53,163",Mohamed Salah - 19,Alisson,→ Europa League via league finish,2023,1
+6,Brighton,38,18,8,12,72,53,19,62,1.63,73.3,50.2,23.1,0.61,"31,477",Alexis Mac Allister - 10,Robert Sánchez,→ Europa League via league finish,2023,1
+7,Aston Villa,38,18,7,13,51,46,5,61,1.61,50.3,52.5,-2.2,-0.06,"41,679",Ollie Watkins - 15,Emiliano Martínez,→ Europa Conference League via league finish,2023,1
+8,Tottenham,38,18,6,14,70,63,7,60,1.58,57,49.6,7.4,0.2,"61,585",Harry Kane - 30,Hugo Lloris,,2023,1
+9,Brentford,38,15,14,9,58,46,12,59,1.55,56.3,48.8,7.5,0.2,"17,078",Ivan Toney - 20,David Raya,,2023,1
+10,Fulham,38,15,7,16,55,53,2,52,1.37,46.2,63.6,-17.4,-0.46,"23,746",Aleksandar Mitrović - 14,Bernd Leno,,2023,1
+11,Crystal Palace,38,11,12,15,40,49,-9,45,1.18,39.3,48.1,-8.8,-0.23,"24,952",Eberechi Eze - 10,Vicente Guaita,,2023,1
+12,Chelsea,38,11,11,16,38,47,-9,44,1.16,49.5,52.5,-3,-0.08,"40,002",Kai Havertz - 7,Kepa Arrizabalaga,,2023,1
+13,Wolves,38,11,8,19,31,58,-27,41,1.08,36.8,59.9,-23,-0.61,"31,482","Rúben Neves, Daniel Podence - 6",José Sá,,2023,1
+14,West Ham,38,11,7,20,42,55,-13,40,1.05,49.2,53,-3.9,-0.1,"62,462","Saïd Benrahma, Jarrod Bowen - 6",Łukasz Fabiański,,2023,1
+15,Bournemouth,38,11,6,21,37,71,-34,39,1.03,38.5,63.8,-25.3,-0.67,"10,362",Philip Billing - 7,Neto,,2023,1
+16,Nott'ham Forest,38,9,11,18,38,68,-30,38,1,39.3,64.2,-24.9,-0.66,"29,188",Taiwo Awoniyi - 10,Dean Henderson,,2023,1
+17,Everton,38,8,12,18,34,57,-23,36,0.95,45.2,65.5,-20.4,-0.54,"39,243",Dwight McNeil - 7,Jordan Pickford,,2023,1
+18,Leicester City,38,9,7,22,51,68,-17,34,0.89,50.5,63.3,-12.8,-0.34,"31,887",Harvey Barnes - 13,Danny Ward,Relegated,2023,1
+19,Leeds United,38,7,10,21,48,78,-30,31,0.82,47.3,67.1,-19.8,-0.52,"36,566",Rodrigo - 13,Illan Meslier,Relegated,2023,1
+20,Southampton,38,6,7,25,36,73,-37,25,0.66,37.8,60.8,-23,-0.61,"30,440",James Ward-Prowse - 9,Gavin Bazunu,Relegated,2023,1
+1,Manchester City,38,29,6,3,99,26,73,93,2.45,88.7,24.6,64,1.68,"52,774",Kevin De Bruyne - 15,Ederson,→ Champions League via league finish,2022,1
+2,Liverpool,38,28,8,2,94,26,68,92,2.42,88.7,33.8,54.9,1.45,"53,352",Mohamed Salah - 23,Alisson,→ Champions League via league finish,2022,1
+3,Chelsea,38,21,11,6,76,33,43,74,1.95,63.4,33.2,30.1,0.79,"36,443",Mason Mount - 11,Edouard Mendy,→ Champions League via league finish,2022,1
+4,Tottenham,38,22,5,11,69,40,29,71,1.87,61.2,39.3,21.9,0.58,"56,523",Son Heung-min - 23,Hugo Lloris,→ Champions League via league finish,2022,1
+5,Arsenal,38,22,3,13,61,48,13,69,1.82,60.5,45.7,14.9,0.39,"59,665",Bukayo Saka - 11,Aaron Ramsdale,→ Europa League via league finish,2022,1
+6,Manchester Utd,38,16,10,12,57,57,0,58,1.53,55.8,53,2.8,0.07,"73,150",Cristiano Ronaldo - 18,David de Gea,→ Europa League via league finish,2022,1
+7,West Ham,38,16,8,14,60,51,9,56,1.47,51.4,53.5,-2.1,-0.06,"58,370",Jarrod Bowen - 12,Łukasz Fabiański,→ Europa Conference League via league finish,2022,1
+8,Leicester City,38,14,10,14,62,59,3,52,1.37,47.8,59.3,-11.5,-0.3,"32,493",Jamie Vardy - 15,Kasper Schmeichel,,2022,1
+9,Brighton,38,12,15,11,42,44,-2,51,1.34,46.2,42.9,3.3,0.09,"30,966","Leandro Trossard, Neal Maupay - 8",Robert Sánchez,,2022,1
+10,Wolves,38,15,6,17,38,43,-5,51,1.34,37.5,56.9,-19.4,-0.51,"30,841",Raúl Jiménez - 6,José Sá,,2022,1
+11,Newcastle Utd,38,13,10,15,44,62,-18,49,1.29,38.1,57.1,-19,-0.5,"51,487",Callum Wilson - 8,Martin Dúbravka,,2022,1
+12,Crystal Palace,38,11,15,12,50,46,4,48,1.26,46.4,40.7,5.7,0.15,"24,588",Wilfried Zaha - 14,Vicente Guaita,,2022,1
+13,Brentford,38,13,7,18,48,56,-8,46,1.21,45.8,48.5,-2.7,-0.07,"16,918",Ivan Toney - 12,David Raya,,2022,1
+14,Aston Villa,38,13,6,19,52,54,-2,45,1.18,44,49,-4.9,-0.13,"41,681",Ollie Watkins - 11,Emiliano Martínez,,2022,1
+15,Southampton,38,9,13,16,43,67,-24,40,1.05,44.8,60,-15.2,-0.4,"30,134",James Ward-Prowse - 10,Fraser Forster,,2022,1
+16,Everton,38,11,6,21,43,66,-23,39,1.03,41.2,55.4,-14.2,-0.37,"38,446",Richarlison - 10,Jordan Pickford,,2022,1
+17,Leeds United,38,9,11,18,42,79,-37,38,1,44.4,67.8,-23.5,-0.62,"36,308",Raphinha - 11,Illan Meslier,,2022,1
+18,Burnley,38,7,14,17,34,53,-19,35,0.92,39.7,57.1,-17.4,-0.46,"19,278",Maxwel Cornet - 9,Nick Pope,Relegated,2022,1
+19,Watford,38,6,5,27,34,77,-43,23,0.61,40,64.5,-24.5,-0.64,"20,614",Emmanuel Dennis - 10,Ben Foster,Relegated,2022,1
+20,Norwich City,38,5,7,26,23,84,-61,22,0.58,32.3,75.5,-43.2,-1.14,"26,836",Teemu Pukki - 11,Tim Krul,Relegated,2022,1
+1,Manchester City,38,27,5,6,83,32,51,86,2.26,68.2,30.2,38,1,526,İlkay Gündoğan - 13,Ederson,→ Champions League via league finish,2021,1
+2,Manchester Utd,38,21,11,6,73,44,29,74,1.95,60.1,41.4,18.6,0.49,526,Bruno Fernandes - 18,David de Gea,→ Champions League via league finish,2021,1
+3,Liverpool,38,20,9,9,68,42,26,69,1.82,67.5,43,24.5,0.65,837,Mohamed Salah - 22,Alisson,→ Champions League via league finish,2021,1
+4,Chelsea,38,19,10,9,58,36,22,67,1.76,62.4,30.3,32.1,0.85,526,Jorginho - 7,Edouard Mendy,→ Champions League via league finish,2021,1
+5,Leicester City,38,20,6,12,68,50,18,66,1.74,55.8,46,9.8,0.26,421,Jamie Vardy - 15,Kasper Schmeichel,→ Europa League via cup win,2021,1
+6,West Ham,38,19,8,11,62,47,15,65,1.71,55.4,48.7,6.7,0.18,632,"Michail Antonio, Tomáš Souček - 10",Łukasz Fabiański,→ Europa League via league finish,2021,1
+7,Tottenham,38,18,8,12,68,45,23,62,1.63,53.1,49.1,4,0.1,632,Harry Kane - 23,Hugo Lloris,→ Europa Conference League via league finish 1,2021,1
+8,Arsenal,38,18,7,13,55,39,16,61,1.61,51.7,43,8.8,0.23,632,Alexandre Lacazette - 13,Bernd Leno,,2021,1
+9,Leeds United,38,18,5,15,62,54,8,59,1.55,55.6,57.9,-2.2,-0.06,421,Patrick Bamford - 17,Illan Meslier,,2021,1
+10,Everton,38,17,8,13,47,48,-1,59,1.55,45.7,50.1,-4.5,-0.12,368,Dominic Calvert-Lewin - 16,Jordan Pickford,,2021,1
+11,Aston Villa,38,16,7,15,55,46,9,55,1.45,52.5,51.1,1.5,0.04,526,Ollie Watkins - 14,Emiliano Martínez,,2021,1
+12,Newcastle Utd,38,12,9,17,46,62,-16,45,1.18,43.4,58.3,-14.9,-0.39,526,Callum Wilson - 12,Karl Darlow,,2021,1
+13,Wolves,38,12,9,17,36,52,-16,45,1.18,36.5,49.5,-13,-0.34,237,"Rúben Neves, Pedro Neto - 5",Rui Patrício,,2021,1
+14,Crystal Palace,38,12,8,18,41,66,-25,44,1.16,34.1,58.2,-24.2,-0.64,447,Wilfried Zaha - 11,Vicente Guaita,,2021,1
+15,Southampton,38,12,7,19,47,68,-21,43,1.13,41.2,53.1,-11.8,-0.31,526,Danny Ings - 12,Alex McCarthy,,2021,1
+16,Brighton,38,9,14,15,40,46,-6,41,1.08,50.9,35.3,15.6,0.41,523,Neal Maupay - 8,Robert Sánchez,,2021,1
+17,Burnley,38,10,9,19,33,55,-22,39,1.03,39.3,54.7,-15.4,-0.4,178,Chris Wood - 12,Nick Pope,,2021,1
+18,Fulham,38,5,13,20,27,53,-26,28,0.74,40.5,52.6,-12.1,-0.32,211,Bobby De Cordova-Reid - 5,Alphonse Areola,Relegated,2021,1
+19,West Brom,38,5,11,22,35,76,-41,26,0.68,35.8,67.9,-32,-0.84,283,Matheus Pereira - 11,Sam Johnstone,Relegated,2021,1
+20,Sheffield Utd,38,7,2,29,20,63,-43,23,0.61,32.6,62.2,-29.6,-0.78,263,David McGoldrick - 8,Aaron Ramsdale,Relegated,2021,1
+1,Liverpool,38,32,3,3,85,33,52,99,2.61,68.9,37.7,31.2,0.82,"41,955",Mohamed Salah - 19,Alisson,→ Champions League via league finish,2020,1
+2,Manchester City,38,26,3,9,102,35,67,81,2.13,92,36.2,55.7,1.47,"37,097",Raheem Sterling - 20,Ederson,→ Champions League via league finish,2020,1
+3,Manchester Utd,38,18,12,8,66,36,30,66,1.74,62.2,37.7,24.5,0.64,"57,415","Anthony Martial, Marcus Rashford - 17",David de Gea,→ Champions League via league finish,2020,1
+4,Chelsea,38,20,6,12,69,54,15,66,1.74,69.2,38.6,30.6,0.81,"32,023",Tammy Abraham - 15,Kepa Arrizabalaga,→ Champions League via league finish,2020,1
+5,Leicester City,38,18,8,12,67,41,26,62,1.63,62.2,45.5,16.7,0.44,"25,312",Jamie Vardy - 23,Kasper Schmeichel,→ Europa League via league finish,2020,1
+6,Tottenham,38,16,11,11,61,47,14,59,1.55,47.9,54.2,-6.3,-0.17,"43,757",Harry Kane - 18,Hugo Lloris,→ Europa League via league finish 1,2020,1
+7,Wolves,38,15,14,9,51,40,11,59,1.55,54.1,38,16.1,0.42,"24,758",Raúl Jiménez - 17,Rui Patrício,,2020,1
+8,Arsenal,38,14,14,10,56,48,8,56,1.47,47,55.3,-8.3,-0.22,"47,589",Pierre-Emerick Aubameyang - 22,Bernd Leno,→ Europa League via cup win 2,2020,1
+9,Sheffield Utd,38,14,12,12,39,39,0,54,1.42,43,51,-7.9,-0.21,"24,370","Lys Mousset, Oliver McBurnie - 6",Dean Henderson,,2020,1
+10,Burnley,38,15,9,14,43,50,-7,54,1.42,47.4,49.8,-2.4,-0.06,"15,995",Chris Wood - 14,Nick Pope,,2020,1
+11,Southampton,38,15,7,16,51,60,-9,52,1.37,56.1,52.8,3.3,0.09,"23,428",Danny Ings - 22,Alex McCarthy,,2020,1
+12,Everton,38,13,10,15,44,56,-12,49,1.29,50.8,48.3,2.5,0.07,"28,848","Dominic Calvert-Lewin, Richarlison - 13",Jordan Pickford,,2020,1
+13,Newcastle Utd,38,11,11,16,38,58,-20,44,1.16,35.5,65.6,-30.1,-0.79,"35,551",Jonjo Shelvey - 6,Martin Dúbravka,,2020,1
+14,Crystal Palace,38,11,10,17,31,50,-19,43,1.13,35.8,57,-21.2,-0.56,"19,784",Jordan Ayew - 9,Vicente Guaita,,2020,1
+15,Brighton,38,9,14,15,39,54,-15,41,1.08,45.4,55,-9.5,-0.25,"22,369",Neal Maupay - 10,Mathew Ryan,,2020,1
+16,West Ham,38,10,9,19,49,62,-13,39,1.03,48.6,63.8,-15.2,-0.4,"44,155",Michail Antonio - 10,Łukasz Fabiański,,2020,1
+17,Aston Villa,38,9,8,21,41,67,-26,35,0.92,44.3,67.8,-23.5,-0.62,"28,505",Jack Grealish - 8,Tom Heaton,,2020,1
+18,Bournemouth,38,9,7,22,40,65,-25,34,0.89,44.8,62.3,-17.5,-0.46,"7,745",Callum Wilson - 8,Aaron Ramsdale,Relegated,2020,1
+19,Watford,38,8,10,20,36,64,-28,34,0.89,48.9,58.1,-9.3,-0.24,"15,353",Troy Deeney - 10,Ben Foster,Relegated,2020,1
+20,Norwich City,38,5,6,27,26,75,-49,21,0.55,37,66.5,-29.5,-0.78,"19,913",Teemu Pukki - 11,Tim Krul,Relegated,2020,1
+1,Manchester City,38,32,2,4,95,23,72,98,2.58,84.3,24.7,59.6,1.57,"54,130",Sergio Agüero - 21,Ederson,→ Champions League via league finish,2019,1
+2,Liverpool,38,30,7,1,89,22,67,97,2.55,73.7,28.8,44.9,1.18,"52,983","Sadio Mané, Mohamed Salah - 22",Alisson,→ Champions League via league finish,2019,1
+3,Chelsea,38,21,9,8,63,39,24,72,1.89,58.6,36.4,22.2,0.58,"40,437",Eden Hazard - 16,Kepa Arrizabalaga,→ Champions League via league finish,2019,1
+4,Tottenham,38,23,2,13,67,39,28,71,1.87,54.9,47.1,7.8,0.2,"54,216",Harry Kane - 17,Hugo Lloris,→ Champions League via league finish,2019,1
+5,Arsenal,38,21,7,10,73,51,22,70,1.84,60.1,54.2,5.8,0.15,"59,899",Pierre-Emerick Aubameyang - 22,Bernd Leno,→ Europa League via league finish,2019,1
+6,Manchester Utd,38,19,9,10,65,54,11,66,1.74,61.4,50.6,10.8,0.29,"74,498",Paul Pogba - 13,David de Gea,→ Europa League via league finish 1,2019,1
+7,Wolves,38,16,9,13,47,46,1,57,1.5,52.1,42.1,10.1,0.26,"31,030",Raúl Jiménez - 13,Rui Patrício,→ Europa League via league finish,2019,1
+8,Everton,38,15,9,14,54,46,8,54,1.42,49.7,45.7,4,0.1,"39,043","Gylfi Sigurðsson, Richarlison - 13",Jordan Pickford,,2019,1
+9,Leicester City,38,15,7,16,51,48,3,52,1.37,52.4,43.7,8.7,0.23,"31,851",Jamie Vardy - 18,Kasper Schmeichel,,2019,1
+10,West Ham,38,15,7,16,52,55,-3,52,1.37,47.6,61.9,-14.3,-0.38,"58,336",Marko Arnautović - 10,Łukasz Fabiański,,2019,1
+11,Watford,38,14,8,16,52,59,-7,50,1.32,48.2,59.2,-11,-0.29,"20,016",Gerard Deulofeu - 10,Ben Foster,,2019,1
+12,Crystal Palace,38,14,7,17,51,53,-2,49,1.29,47.6,50.1,-2.5,-0.07,"25,455",Luka Milivojević - 12,Vicente Guaita,,2019,1
+13,Newcastle Utd,38,12,9,17,42,48,-6,45,1.18,39.1,53.6,-14.5,-0.38,"51,121",Ayoze Pérez - 12,Martin Dúbravka,,2019,1
+14,Bournemouth,38,13,6,19,56,70,-14,45,1.18,53.3,57.2,-3.9,-0.1,"10,532",Callum Wilson - 14,Asmir Begović,,2019,1
+15,Burnley,38,11,7,20,45,68,-23,40,1.05,44.4,62.1,-17.7,-0.46,"20,534",Ashley Barnes - 12,"Tom Heaton, Joe Hart",,2019,1
+16,Southampton,38,9,12,17,45,65,-20,39,1.03,46.9,55.1,-8.2,-0.22,"30,139","Danny Ings, James Ward-Prowse - 7",Alex McCarthy,,2019,1
+17,Brighton,38,9,9,20,35,60,-25,36,0.95,35.3,59.1,-23.8,-0.63,"30,426",Glenn Murray - 13,Mathew Ryan,,2019,1
+18,Cardiff City,38,10,4,24,34,69,-35,34,0.89,42.4,61.5,-19.1,-0.5,"31,408","Bobby De Cordova-Reid, Víctor Camarasa - 5",Neil Etheridge,Relegated,2019,1
+19,Fulham,38,7,5,26,34,81,-47,26,0.68,41.3,68.2,-26.8,-0.71,"24,371",Aleksandar Mitrović - 11,Sergio Rico,Relegated,2019,1
+20,Huddersfield,38,3,7,28,22,76,-54,16,0.42,28.8,60.9,-32.2,-0.85,"23,203",Karlan Grant - 4,Jonas Lössl,Relegated,2019,1
+1,Burnley,46,29,14,3,87,35,52,101,2.2,66.2,38.2,28,0.61,"19,776",Nathan Tella - 17,Arijanet Muric,Promoted,2023,2
+2,Sheffield Utd,46,28,7,11,73,39,34,91,1.98,71.8,44.3,27.4,0.6,"28,729",Iliman Ndiaye - 14,Wes Foderingham,Promoted,2023,2
+3,Luton Town,46,21,17,8,57,39,18,80,1.74,58.2,43.8,14.4,0.31,"10,290",Carlton Morris - 20,Ethan Horvath,"Promoted, → Semi-finals",2023,2
+4,Middlesbrough,46,22,9,15,84,56,28,75,1.63,72.6,48.3,24.3,0.53,"27,410",Chuba Akpom - 28,Zack Steffen,→ Semi-finals,2023,2
+5,Coventry City,46,18,16,12,58,46,12,70,1.52,62.9,54.7,8.2,0.18,"24,932",Viktor Gyökeres - 21,Ben Wilson,→ Semi-finals,2023,2
+6,Sunderland,46,18,15,13,68,55,13,69,1.5,58.3,52.3,6,0.13,"40,483",Amad Diallo - 13,Anthony Patterson,→ Semi-finals,2023,2
+7,Blackburn,46,20,9,17,52,54,-2,69,1.5,46.7,53.3,-6.7,-0.14,"14,772",Ben Brereton - 14,Thomas Kaminski,,2023,2
+8,Millwall,46,19,11,16,57,50,7,68,1.48,56.8,48.3,8.4,0.18,"14,767",Tom Bradshaw - 17,George Long,,2023,2
+9,West Brom,46,18,12,16,59,53,6,66,1.43,65.6,48.4,17.2,0.37,"23,094","Daryl Dike, Brandon Thomas-Asante - 7",Alex Palmer,,2023,2
+10,Swansea City,46,18,12,16,68,64,4,66,1.43,61.3,51.6,9.7,0.21,"16,821",Joël Piroe - 19,Andy Fisher,,2023,2
+11,Watford,46,16,15,15,56,53,3,63,1.37,56.6,50.6,6,0.13,"19,172",João Pedro - 11,Daniel Bachmann,,2023,2
+12,Preston,46,17,12,17,45,59,-14,63,1.37,47.6,56.2,-8.6,-0.19,"16,119",Ched Evans - 9,Freddie Woodman,,2023,2
+13,Norwich City,46,17,11,18,57,54,3,62,1.35,58.1,54.4,3.7,0.08,"26,510",Josh Sargent - 13,Angus Gunn,,2023,2
+14,Bristol City,46,15,14,17,55,56,-1,59,1.28,57.4,56.1,1.4,0.03,"20,374",Nahki Wells - 11,Max O'Leary,,2023,2
+15,Hull City,46,14,16,16,51,61,-10,58,1.26,46.8,61.2,-14.4,-0.31,"17,973",Oscar Estupiñan - 13,Matt Ingram,,2023,2
+16,Stoke City,46,14,11,21,55,54,1,53,1.15,57.6,49.9,7.7,0.17,"20,570",Tyrese Campbell - 9,Jack Bonham,,2023,2
+17,Birmingham City,46,14,11,21,47,58,-11,53,1.15,50.6,60.6,-9.9,-0.22,"15,513",Scott Hogan - 10,John Ruddy,,2023,2
+18,Huddersfield,46,14,11,21,47,62,-15,53,1.15,42.7,61.4,-18.7,-0.41,"18,978","Jordan Rhodes, Danny Ward... - 5",Lee Nicholls,,2023,2
+19,Rotherham Utd,46,11,17,18,49,60,-11,50,1.09,42.1,70.7,-28.7,-0.62,"10,515",Chiedozie Ogbene - 8,Viktor Johansson,,2023,2
+20,QPR,46,13,11,22,44,71,-27,50,1.09,50.3,62.4,-12,-0.26,"14,977",Lyndon Dykes - 8,Seny Dieng,,2023,2
+21,Cardiff City,46,13,10,23,41,58,-17,49,1.07,47.4,56.3,-9,-0.2,"19,020",Sory Kaba - 8,Ryan Allsop,,2023,2
+22,Reading,46,13,11,22,46,68,-22,50,1.09,41.8,59.9,-18.1,-0.39,"14,027","Andy Carroll, Tom Ince - 9",Joe Lumley,Relegated,2023,2
+23,Blackpool,46,11,11,24,48,72,-24,44,0.96,47.8,71.7,-23.9,-0.52,"12,674",Jerry Yates - 14,Chris Maxwell,Relegated,2023,2
+24,Wigan Athletic,46,10,15,21,38,65,-27,45,0.98,45.1,57.5,-12.4,-0.27,"12,210",Will Keane - 12,Ben Amos,Relegated,2023,2
+1,Fulham,46,27,9,10,106,43,63,90,1.96,95.1,43.3,51.8,1.13,"17,513",Aleksandar Mitrović - 43,Marek Rodák,Promoted,2022,2
+2,Bournemouth,46,25,13,8,74,39,35,88,1.91,75,46.4,28.7,0.62,"9,209",Dominic Solanke - 29,Mark Travers,Promoted,2022,2
+3,Huddersfield,46,23,13,10,64,47,17,82,1.78,57.9,56.4,1.5,0.03,"21,826",Danny Ward - 14,Lee Nicholls,→ Semi-finals,2022,2
+4,Nott'ham Forest,46,23,11,12,73,40,33,80,1.74,68.6,54.3,14.3,0.31,"28,399",Brennan Johnson - 16,Brice Samba,"Promoted, → Semi-finals",2022,2
+5,Sheffield Utd,46,21,12,13,63,45,18,75,1.63,72.2,52.4,19.8,0.43,"28,925",Billy Sharp - 14,Wes Foderingham,→ Semi-finals,2022,2
+6,Luton Town,46,21,12,13,63,55,8,75,1.63,62.1,54.5,7.6,0.16,"10,292",Elijah Adebayo - 16,Simon Sluga,→ Semi-finals,2022,2
+7,Middlesbrough,46,20,10,16,59,50,9,70,1.52,69.5,48.9,20.5,0.45,"21,825",Matt Crooks - 10,Joe Lumley,,2022,2
+8,Blackburn,46,19,12,15,59,50,9,69,1.5,60.7,57.6,3.1,0.07,"14,218",Ben Brereton - 22,Thomas Kaminski,,2022,2
+9,Millwall,46,18,15,13,53,45,8,69,1.5,58.4,64.2,-5.8,-0.13,"12,955",Benik Afobe - 12,Bartosz Białkowski,,2022,2
+10,West Brom,46,18,13,15,52,45,7,67,1.46,75.9,45.9,30,0.65,"21,481",Karlan Grant - 18,Sam Johnstone,,2022,2
+11,QPR,46,19,9,18,60,59,1,66,1.43,55.6,62.4,-6.8,-0.15,"14,434",Andre Gray - 10,Seny Dieng,,2022,2
+12,Coventry City,46,17,13,16,60,59,1,64,1.39,74.2,55.3,19,0.41,"19,541",Viktor Gyökeres - 17,Simon Moore,,2022,2
+13,Preston,46,16,16,14,52,56,-4,64,1.39,57.4,57.5,-0.1,0,"12,608",Emil Riis Jakobsen - 16,Daniel Iversen,,2022,2
+14,Stoke City,46,17,11,18,57,52,5,62,1.35,57,57.9,-0.9,-0.02,"20,486",Jacob Brown - 13,Josef Bursik,,2022,2
+15,Swansea City,46,16,13,17,58,68,-10,61,1.33,51.9,69.3,-17.4,-0.38,"17,389",Joël Piroe - 22,Ben Hamer,,2022,2
+16,Blackpool,46,16,12,18,54,58,-4,60,1.3,57.5,65.4,-8,-0.17,"12,104",Gary Madine - 9,Daniel Grimshaw,,2022,2
+17,Bristol City,46,15,10,21,62,77,-15,55,1.2,59.2,77.4,-18.2,-0.4,"19,453",Andreas Weimann - 22,Daniel Bentley,,2022,2
+18,Cardiff City,46,15,8,23,50,68,-18,53,1.15,58,59.5,-1.4,-0.03,"18,048",Aden Flint - 6,Alex Smithies,,2022,2
+19,Hull City,46,14,9,23,41,54,-13,51,1.11,49.5,66.8,-17.3,-0.38,"12,888",Keane Lewis-Potter - 12,Matt Ingram,,2022,2
+20,Birmingham City,46,11,14,21,50,75,-25,47,1.02,60.2,61.7,-1.5,-0.03,"16,162",Scott Hogan - 10,Matija Šarkić,,2022,2
+21,Reading,46,13,8,25,54,87,-33,41,0.89,49.8,75.4,-25.7,-0.56,"12,895",John Swift - 11,Luke Southwood,6-point deduction 1,2022,2
+22,P'borough Utd,46,9,10,27,43,87,-44,37,0.8,46.7,84.8,-38.1,-0.83,"10,088",Jonson Clarke-Harris - 12,David Cornell,Relegated,2022,2
+23,Derby County,46,14,13,19,45,53,-8,34,0.74,46.4,64.1,-17.7,-0.38,"23,010",Tom Lawrence - 11,Ryan Allsop,"21-point deduction 2, Relegated",2022,2
+24,Barnsley,46,6,12,28,33,73,-40,30,0.65,43.5,80.8,-37.3,-0.81,"12,824",Carlton Morris - 7,Bradley Collins,Relegated,2022,2
+1,Norwich City,46,29,10,7,75,36,39,97,2.11,76.9,52,25,0.54,174,Teemu Pukki - 26,Tim Krul,Promoted,2021,2
+2,Watford,46,27,10,9,63,30,33,91,1.98,66.6,45.7,20.8,0.45,172,Ismaila Sarr - 13,"Ben Foster, Daniel Bachmann",Promoted,2021,2
+3,Brentford,46,24,15,7,79,42,37,87,1.89,74.9,39.4,35.5,0.77,856,Ivan Toney - 31,David Raya,"Promoted, → Semi-finals",2021,2
+4,Swansea City,46,23,11,12,56,39,17,80,1.74,50.4,47.3,3.2,0.07,130,André Ayew - 16,Freddie Woodman,→ Semi-finals,2021,2
+5,Barnsley,46,23,9,14,58,50,8,78,1.7,58,47.6,10.4,0.23,165,Cauley Woodrow - 12,Jack Walton,→ Semi-finals,2021,2
+6,Bournemouth,46,22,11,13,73,46,27,77,1.67,64.4,50,14.4,0.31,261,"Arnaut Danjuma, Dominic Solanke - 15",Asmir Begović,→ Semi-finals,2021,2
+7,Reading,46,19,13,14,62,54,8,70,1.52,55.8,47.8,8,0.17,87,Lucas João - 19,Rafael Cabral,,2021,2
+8,Cardiff City,46,18,14,14,66,49,17,68,1.48,58.1,54,4.1,0.09,,Kieffer Moore - 20,Alex Smithies,,2021,2
+9,QPR,46,19,11,16,57,55,2,68,1.48,61,62.7,-1.7,-0.04,174,Lyndon Dykes - 12,Seny Dieng,,2021,2
+10,Middlesbrough,46,18,10,18,55,53,2,64,1.39,58.2,47.2,11,0.24,43,Duncan Watmore - 9,Marcus Bettinelli,,2021,2
+11,Millwall,46,15,17,14,47,52,-5,62,1.35,49.6,52.8,-3.1,-0.07,174,Jed Wallace - 11,Bartosz Białkowski,,2021,2
+12,Luton Town,46,17,11,18,41,52,-11,62,1.35,52.8,57,-4.2,-0.09,130,James Collins - 10,Simon Sluga,,2021,2
+13,Preston,46,18,7,21,49,56,-7,61,1.33,50.6,60.8,-10.2,-0.22,,Scott Sinclair - 9,Daniel Iversen,,2021,2
+14,Stoke City,46,15,15,16,50,52,-2,60,1.3,50.2,44.8,5.4,0.12,,Nick Powell - 12,Adam Davies,,2021,2
+15,Blackburn,46,15,12,19,65,54,11,57,1.24,68.9,52.4,16.5,0.36,,Adam Armstrong - 28,Thomas Kaminski,,2021,2
+16,Coventry City,46,14,13,19,49,61,-12,55,1.2,48.7,62,-13.4,-0.29,,Tyler Walker - 7,Ben Wilson,,2021,2
+17,Nott'ham Forest,46,12,16,18,37,45,-8,52,1.13,49.8,52.2,-2.4,-0.05,,Lewis Grabban - 6,Brice Samba,,2021,2
+18,Birmingham City,46,13,13,20,37,61,-24,52,1.13,45.6,61,-15.5,-0.34,,Lukas Jutkiewicz - 8,Neil Etheridge,,2021,2
+19,Bristol City,46,15,6,25,46,68,-22,51,1.11,39.8,71.2,-31.4,-0.68,,Nahki Wells - 10,Daniel Bentley,,2021,2
+20,Huddersfield,46,12,13,21,50,71,-21,49,1.07,46,68.4,-22.3,-0.49,,Josh Koroma - 8,Ryan Schofield,,2021,2
+21,Derby County,46,11,11,24,36,58,-22,44,0.96,47.4,54.3,-6.9,-0.15,,Colin Kazim-Richards - 8,David Marshall,,2021,2
+22,Wycombe,46,11,10,25,39,69,-30,43,0.93,47.2,74.2,-27,-0.59,87,Uche Ikpeazu - 6,Ryan Allsop,Relegated,2021,2
+23,Rotherham Utd,46,11,9,26,44,60,-16,42,0.91,57.2,62,-4.7,-0.1,,Michael Smith - 10,Jamal Blackman,Relegated,2021,2
+24,Sheffield Weds,46,12,11,23,40,61,-21,41,0.89,48.2,59.5,-11.4,-0.25,,Josh Windass - 9,Keiren Westwood,"6-point deduction 1, Relegated",2021,2
+1,Leeds United,46,28,9,9,77,35,42,93,2.02,86.5,37.6,48.9,1.06,"27,643",Patrick Bamford - 16,Kiko Casilla,Promoted,2020,2
+2,West Brom,46,22,17,7,77,45,32,83,1.8,75.7,50.8,24.9,0.54,"18,824","Hal Robson-Kanu, Charlie Austin - 10",Sam Johnstone,Promoted,2020,2
+3,Brentford,46,24,9,13,80,38,42,81,1.76,70.5,37.2,33.3,0.72,"9,156",Ollie Watkins - 25,David Raya,→ Promotion play-offs,2020,2
+4,Fulham,46,23,12,11,64,48,16,81,1.76,65.5,58.9,6.6,0.14,"15,038",Aleksandar Mitrović - 26,Marek Rodák,"Promoted, → Promotion play-offs",2020,2
+5,Cardiff City,46,19,16,11,68,58,10,73,1.59,56.6,59.3,-2.7,-0.06,"17,861",Lee Tomlin - 8,Alex Smithies,→ Promotion play-offs,2020,2
+6,Swansea City,46,18,16,12,62,53,9,70,1.52,65.8,64.2,1.6,0.04,"13,342",André Ayew - 15,Freddie Woodman,→ Promotion play-offs,2020,2
+7,Nott'ham Forest,46,18,16,12,58,50,8,70,1.52,55.7,59.8,-4.1,-0.09,"21,697",Lewis Grabban - 20,Brice Samba,,2020,2
+8,Millwall,46,17,17,12,57,51,6,68,1.48,59.2,53.8,5.4,0.12,"10,748",Matt Smith - 13,Bartosz Białkowski,,2020,2
+9,Preston,46,18,12,16,59,54,5,66,1.43,58,52.3,5.6,0.12,"11,218",Daniel Johnson - 12,Declan Rudd,,2020,2
+10,Derby County,46,17,13,16,62,64,-2,64,1.39,57.5,67.8,-10.3,-0.22,"22,079",Martyn Waghorn - 12,Ben Hamer,,2020,2
+11,Blackburn,46,17,12,17,66,63,3,63,1.37,53.4,59.7,-6.3,-0.14,"11,460",Adam Armstrong - 16,Christian Walton,,2020,2
+12,Bristol City,46,17,12,17,60,65,-5,63,1.37,61.8,70.6,-8.9,-0.19,"17,069",Famara Diedhiou - 12,Daniel Bentley,,2020,2
+13,QPR,46,16,10,20,67,76,-9,58,1.26,63.6,69.1,-5.5,-0.12,"11,335",Eberechi Eze - 14,Joe Lumley,,2020,2
+14,Reading,46,15,11,20,59,58,1,56,1.22,57.1,65.6,-8.5,-0.18,"11,275",Yakou Méïte - 13,Rafael Cabral,,2020,2
+15,Stoke City,46,16,8,22,62,68,-6,56,1.22,61,57.5,3.6,0.08,"18,858",Sam Clucas - 11,Jack Butland,,2020,2
+16,Sheffield Weds,46,15,11,20,58,66,-8,56,1.22,64.3,60.8,3.5,0.08,"18,573",Steven Fletcher - 13,Cameron Dawson,,2020,2
+17,Middlesbrough,46,13,14,19,48,61,-13,53,1.15,57.9,63.9,-6,-0.13,"16,466","Britt Assombalonga, Ashley Fletcher - 11",Aynsley Pears,,2020,2
+18,Huddersfield,46,13,12,21,52,70,-18,51,1.11,56,60.3,-4.3,-0.09,"17,966",Karlan Grant - 19,Kamil Grabara,,2020,2
+19,Luton Town,46,14,9,23,54,82,-28,51,1.11,48.6,78,-29.3,-0.64,"7,863",James Collins - 14,Simon Sluga,,2020,2
+20,Birmingham City,46,12,14,20,54,75,-21,50,1.09,61.2,65.4,-4.2,-0.09,"15,975",Lukas Jutkiewicz - 15,Lee Camp,,2020,2
+21,Barnsley,46,12,13,21,49,69,-20,49,1.07,57.8,68.5,-10.7,-0.23,"11,616",Cauley Woodrow - 14,Bradley Collins,,2020,2
+22,Charlton Ath,46,12,12,22,50,65,-15,48,1.04,53.1,76.1,-23,-0.5,"14,884","Lyle Taylor, Macauley Bonne - 11",Dillon Phillips,Relegated,2020,2
+23,Wigan Athletic,46,15,14,17,57,56,1,47,1.02,55.2,58.4,-3.2,-0.07,"8,290",Kieffer Moore - 10,David Marshall,"12-point deduction 1, Relegated",2020,2
+24,Hull City,46,12,9,25,57,87,-30,45,0.98,60.5,67,-6.5,-0.14,"9,544",Jarrod Bowen - 16,George Long,Relegated,2020,2
+1,Norwich City,46,27,13,6,93,57,36,94,2.04,78.4,47.5,30.9,0.67,"26,014",Teemu Pukki - 29,Tim Krul,Promoted,2019,2
+2,Sheffield Utd,46,26,11,9,78,41,37,89,1.93,74.7,42.3,32.4,0.71,"26,177",Billy Sharp - 23,Dean Henderson,Promoted,2019,2
+3,Leeds United,46,25,8,13,73,50,23,83,1.8,78,39.1,38.9,0.85,"35,613",Kemar Roofe - 14,Bailey Peacock-Farrell,→ Semi-finals,2019,2
+4,West Brom,46,23,11,12,87,62,25,80,1.74,74.6,61.7,12.9,0.28,"25,265",Dwight Gayle - 23,Sam Johnstone,→ Semi-finals,2019,2
+5,Aston Villa,46,20,16,10,82,61,21,76,1.65,73.7,57.3,16.4,0.36,"41,530",Tammy Abraham - 25,Ørjan Nyland,"Promoted, → Semi-finals",2019,2
+6,Derby County,46,20,14,12,69,54,15,74,1.61,55.7,57,-1.3,-0.03,"28,229",Harry Wilson - 15,Scott Carson,→ Semi-finals,2019,2
+7,Middlesbrough,46,20,13,13,49,41,8,73,1.59,63.1,56.9,6.2,0.14,"23,217",Britt Assombalonga - 14,Darren Randolph,,2019,2
+8,Bristol City,46,19,13,14,59,53,6,70,1.52,66,59.2,6.8,0.15,"21,080",Famara Diedhiou - 13,Niki Mäenpää,,2019,2
+9,Nott'ham Forest,46,17,15,14,61,54,7,66,1.43,56.5,63,-6.5,-0.14,"28,144",Lewis Grabban - 16,Costel Pantilimon,,2019,2
+10,Swansea City,46,18,11,17,65,62,3,65,1.41,72,55.9,16.1,0.35,"18,737",Oliver McBurnie - 22,Erwin Mulder,,2019,2
+11,Brentford,46,17,13,16,73,59,14,64,1.39,62.3,55.5,6.8,0.15,"10,257",Neal Maupay - 25,Daniel Bentley,,2019,2
+12,Sheffield Weds,46,16,16,14,60,62,-2,64,1.39,55.3,62.8,-7.5,-0.16,"24,429",Steven Fletcher - 11,Cameron Dawson,,2019,2
+13,Hull City,46,17,11,18,66,68,-2,62,1.35,61.9,67.7,-5.9,-0.13,"11,730",Jarrod Bowen - 22,David Marshall,,2019,2
+14,Preston,46,16,13,17,67,67,0,61,1.33,57,61.2,-4.2,-0.09,"14,160","Alan Browne, Callum Robinson - 12",Declan Rudd,,2019,2
+15,Blackburn,46,16,12,18,64,69,-5,60,1.3,63.6,66.8,-3.2,-0.07,"14,550","Bradley Dack, Danny Graham - 15",David Raya,,2019,2
+16,Stoke City,46,11,22,13,45,52,-7,55,1.2,53,54.3,-1.3,-0.03,"25,200",Benik Afobe - 8,Jack Butland,,2019,2
+17,Birmingham City,46,14,19,13,64,58,6,52,1.13,55.8,58.7,-3,-0.06,"22,483",Che Adams - 22,Lee Camp,9-point deduction 1,2019,2
+18,Wigan Athletic,46,13,13,20,51,64,-13,52,1.13,68.4,64.8,3.5,0.08,"11,663","Nick Powell, Joe Garner - 8",Christian Walton,,2019,2
+19,QPR,46,14,9,23,53,71,-18,51,1.11,59.4,66.5,-7.1,-0.15,"13,866","Tomer Hemed, Luke Freeman... - 7",Joe Lumley,,2019,2
+20,Reading,46,10,17,19,49,66,-17,47,1.02,48.8,82,-33.2,-0.72,"14,991",Yakou Méïte - 12,Emiliano Martínez,,2019,2
+21,Millwall,46,10,14,22,48,64,-16,44,0.96,57.7,58.8,-1.1,-0.02,"13,636",Lee Gregory - 10,Jordan Archer,,2019,2
+22,Rotherham Utd,46,8,16,22,52,83,-31,40,0.87,54.1,75.4,-21.3,-0.46,"9,880",Michael Smith - 8,Marek Rodák,Relegated,2019,2
+23,Bolton,46,8,8,30,29,78,-49,32,0.7,35.9,67.7,-31.8,-0.71,"14,636","Josh Magennis, Sammy Ameobi... - 4",Ben Alnwick,Relegated,2019,2
+24,Ipswich Town,46,5,16,25,36,77,-41,31,0.67,33.2,77,-43.8,-0.95,"17,765","Freddie Sears, Gwion Edwards - 6",Bartosz Białkowski,Relegated,2019,2
+1,Plymouth Argyle,46,31,8,7,82,47,35,101,2.2,-1,-1,-1,-1,"15,579",Ryan Hardie - 13,Michael Cooper,Promoted,2023,3
+2,Ipswich Town,46,28,14,4,101,35,66,98,2.13,-1,-1,-1,-1,"26,184",Conor Chaplin - 26,Christian Walton,Promoted,2023,3
+3,Sheffield Weds,46,28,12,6,81,37,44,96,2.09,-1,-1,-1,-1,"26,762",Michael Smith - 17,David Stockdale,"Promoted, → Semi-finals",2023,3
+4,Barnsley,46,26,8,12,80,47,33,86,1.87,-1,-1,-1,-1,"15,666",Devante Cole - 15,Bradley Collins,→ Semi-finals,2023,3
+5,Bolton,46,23,12,11,62,36,26,81,1.76,-1,-1,-1,-1,"19,833",Dion Charles - 16,James Trafford,→ Semi-finals,2023,3
+6,P'borough Utd,46,24,5,17,75,54,21,77,1.67,-1,-1,-1,-1,"9,408",Jonson Clarke-Harris - 26,Will Norris,→ Semi-finals,2023,3
+7,Derby County,46,21,13,12,67,46,21,76,1.65,-1,-1,-1,-1,"27,259",David McGoldrick - 22,Joe Wildsmith,,2023,3
+8,Portsmouth,46,17,19,10,61,50,11,70,1.52,-1,-1,-1,-1,"18,064",Colby Bishop - 20,Joshua Griffiths,,2023,3
+9,Wycombe,46,20,9,17,59,51,8,69,1.5,-1,-1,-1,-1,"5,753","Lewis Wing, Anis Mehmeti - 9",Max Stryjek,,2023,3
+10,Charlton Ath,46,16,14,16,70,66,4,62,1.35,-1,-1,-1,-1,"13,436",Jesurun Rak Sakyi - 15,Ashley Maynard-Brewer,,2023,3
+11,Lincoln City,46,14,20,12,47,47,0,62,1.35,-1,-1,-1,-1,"8,486",Ben House - 12,Carl Rushworth,,2023,3
+12,Shrewsbury,46,17,8,21,52,61,-9,59,1.28,-1,-1,-1,-1,"6,430",Luke Leahy - 9,Marko Maroši,,2023,3
+13,Fleetwood Town,46,14,16,16,53,51,2,58,1.26,-1,-1,-1,-1,"3,492",Jack Marriott - 8,Jay Lynch,,2023,3
+14,Exeter City,46,15,11,20,64,68,-4,56,1.22,-1,-1,-1,-1,"6,846",Sam Nombe - 15,Jamal Blackman,,2023,3
+15,Burton Albion,46,15,11,20,57,79,-22,56,1.22,-1,-1,-1,-1,"3,445",Victor Adeboyejo - 11,Ben Garratt,,2023,3
+16,Cheltenham,46,14,12,20,45,61,-16,54,1.17,-1,-1,-1,-1,"4,485",Alfie May - 20,Luke Southwood,,2023,3
+17,Bristol Rovers,46,14,11,21,58,73,-15,53,1.15,-1,-1,-1,-1,"8,907",Aaron Collins - 16,James Belshaw,,2023,3
+18,Port Vale,46,13,10,23,48,71,-23,49,1.07,-1,-1,-1,-1,"7,681",Ellis Harrison - 11,Jack Stevens,,2023,3
+19,Oxford United,46,11,14,21,49,56,-7,47,1.02,-1,-1,-1,-1,"8,393","Cameron Brannagan, Kyle Joseph - 9",Simon Eastwood,,2023,3
+20,Cambridge Utd,46,13,7,26,41,68,-27,46,1,-1,-1,-1,-1,"6,199",Sam Smith - 13,Dimitar Mitov,,2023,3
+21,MK Dons,46,11,12,23,44,66,-22,45,0.98,-1,-1,-1,-1,"8,462",Mohamed Eisa - 11,Jamie Cumming,Relegated,2023,3
+22,Morecambe,46,10,14,22,47,78,-31,44,0.96,-1,-1,-1,-1,"4,572",Cole Stockton - 11,Connor Ripley,Relegated,2023,3
+23,Acc'ton Stanley,46,11,11,24,40,77,-37,44,0.96,-1,-1,-1,-1,"2,988",Tommy Leigh - 7,Lukas Jensen,Relegated,2023,3
+24,FG Rovers,46,6,9,31,31,89,-58,27,0.59,-1,-1,-1,-1,"3,204",Connor Wickham - 6,Luke McGee,Relegated,2023,3
+1,Wigan Athletic,46,27,11,8,82,44,38,92,2,-1,-1,-1,-1,"10,371",Will Keane - 26,Ben Amos,Promoted,2022,3
+2,Rotherham Utd,46,27,9,10,70,33,37,90,1.96,-1,-1,-1,-1,"9,337",Michael Smith - 19,Viktor Johansson,Promoted,2022,3
+3,MK Dons,46,26,11,9,78,44,34,89,1.93,-1,-1,-1,-1,"9,821",Scott Twine - 20,Andy Fisher,→ Semi-finals,2022,3
+4,Sheffield Weds,46,24,13,9,78,50,28,85,1.85,-1,-1,-1,-1,"23,904",Lee Gregory - 16,Bailey Peacock-Farrell,→ Semi-finals,2022,3
+5,Sunderland,46,24,12,10,79,53,26,84,1.83,-1,-1,-1,-1,"35,937",Ross Stewart - 24,Ron-Thorben Hoffmann,"Promoted, → Semi-finals",2022,3
+6,Wycombe,46,23,14,9,75,51,24,83,1.8,-1,-1,-1,-1,"6,052",Sam Vokes - 16,David Stockdale,→ Semi-finals,2022,3
+7,Plymouth Argyle,46,23,11,12,68,48,20,80,1.74,-1,-1,-1,-1,"13,130",Ryan Hardie - 16,Michael Cooper,,2022,3
+8,Oxford United,46,22,10,14,82,59,23,76,1.65,-1,-1,-1,-1,"8,463",Matty Taylor - 20,Jack Stevens,,2022,3
+9,Bolton,46,21,10,15,74,57,17,73,1.59,-1,-1,-1,-1,"15,439",Oladapo Afolayan - 12,Joel Dixon,,2022,3
+10,Portsmouth,46,20,13,13,68,51,17,73,1.59,-1,-1,-1,-1,"15,003",George Hirst - 13,Gavin Bazunu,,2022,3
+11,Ipswich Town,46,18,16,12,67,46,21,70,1.52,-1,-1,-1,-1,"21,779","Wes Burns, Macauley Bonne - 12",Christian Walton,,2022,3
+12,Acc'ton Stanley,46,17,10,19,61,80,-19,61,1.33,-1,-1,-1,-1,"2,915",Colby Bishop - 11,Toby Savin,,2022,3
+13,Charlton Ath,46,17,8,21,55,59,-4,59,1.28,-1,-1,-1,-1,"15,592",Jayden Stockley - 13,Craig MacGillivray,,2022,3
+14,Cambridge Utd,46,15,13,18,56,74,-18,58,1.26,-1,-1,-1,-1,"5,668",Sam Smith - 15,Dimitar Mitov,,2022,3
+15,Cheltenham,46,13,17,16,66,80,-14,56,1.22,-1,-1,-1,-1,"4,239",Alfie May - 23,Owen Evans,,2022,3
+16,Burton Albion,46,14,11,21,51,67,-16,53,1.15,-1,-1,-1,-1,"3,229",Daniel Jebbison - 7,Ben Garratt,,2022,3
+17,Lincoln City,46,14,10,22,55,63,-8,52,1.13,-1,-1,-1,-1,"8,773",Anthony Scully - 11,Joshua Griffiths,,2022,3
+18,Shrewsbury,46,12,14,20,47,51,-4,50,1.09,-1,-1,-1,-1,"6,216",Daniel Udoh - 13,Marko Maroši,,2022,3
+19,Morecambe,46,10,12,24,57,88,-31,42,0.91,-1,-1,-1,-1,"4,310",Cole Stockton - 23,Trevor Carson,,2022,3
+20,Fleetwood Town,46,8,16,22,62,82,-20,40,0.87,-1,-1,-1,-1,"3,247",Gerard Garner - 7,Alex Cairns,,2022,3
+21,Gillingham,46,8,16,22,35,69,-34,40,0.87,-1,-1,-1,-1,"4,850",Vadaine Oliver - 10,Jamie Cumming,Relegated,2022,3
+22,Doncaster,46,10,8,28,37,82,-45,38,0.83,-1,-1,-1,-1,"6,906",Tommy Rowe - 7,"Jonathan Mitchell, Pontus Dahlberg",Relegated,2022,3
+23,AFC Wimbledon,46,6,19,21,49,75,-26,37,0.8,-1,-1,-1,-1,"6,389",Jack Rudoni - 12,Nik Tzanev,Relegated,2022,3
+24,Crewe Alexandra,46,7,8,31,37,83,-46,29,0.63,-1,-1,-1,-1,"4,523",Chris Long - 10,Dave Richards,Relegated,2022,3
+1,Hull City,46,27,8,11,80,38,42,89,1.93,-1,-1,-1,-1,,Mallik Wilks - 19,Matt Ingram,Promoted,2021,3
+2,P'borough Utd,46,26,9,11,83,46,37,87,1.89,-1,-1,-1,-1,,Jonson Clarke-Harris - 31,Christy Pym,Promoted,2021,3
+3,Blackpool,46,23,11,12,60,37,23,80,1.74,-1,-1,-1,-1,598,Jerry Yates - 20,Chris Maxwell,"Promoted, → Semi-finals",2021,3
+4,Sunderland,46,20,17,9,70,42,28,77,1.67,-1,-1,-1,-1,434,Charlie Wyke - 25,Lee Burge,→ Semi-finals,2021,3
+5,Lincoln City,46,22,11,13,69,50,19,77,1.67,-1,-1,-1,-1,137,Jorge Grant - 13,Alex Palmer,→ Semi-finals,2021,3
+6,Oxford United,46,22,8,16,77,56,21,74,1.61,-1,-1,-1,-1,270,Matty Taylor - 18,Jack Stevens,→ Semi-finals,2021,3
+7,Charlton Ath,46,20,14,12,70,56,14,74,1.61,-1,-1,-1,-1,130,Chuks Aneke - 15,Ben Amos,,2021,3
+8,Portsmouth,46,21,9,16,65,51,14,72,1.57,-1,-1,-1,-1,174,John Marquis - 16,Craig MacGillivray,,2021,3
+9,Ipswich Town,46,19,12,15,46,46,0,69,1.5,-1,-1,-1,-1,87,James Norwood - 9,Tomáš Holý,,2021,3
+10,Gillingham,46,19,10,17,63,60,3,67,1.46,-1,-1,-1,-1,,Vadaine Oliver - 17,Jack Bonham,,2021,3
+11,Acc'ton Stanley,46,18,13,15,63,68,-5,67,1.46,-1,-1,-1,-1,,Dion Charles - 19,Toby Savin,,2021,3
+12,Crewe Alexandra,46,18,12,16,56,61,-5,66,1.43,-1,-1,-1,-1,174,"Mikael Mandron, Owen Dale - 11",William Jääskeläinen,,2021,3
+13,MK Dons,46,18,11,17,64,62,2,65,1.41,-1,-1,-1,-1,,Scott Fraser - 14,Andy Fisher,,2021,3
+14,Doncaster,46,19,7,20,63,67,-4,64,1.39,-1,-1,-1,-1,,Fejiri Okenabirhie - 11,Ellery Balcombe,,2021,3
+15,Fleetwood Town,46,16,12,18,49,46,3,60,1.3,-1,-1,-1,-1,,Callum Camps - 9,Alex Cairns,,2021,3
+16,Burton Albion,46,15,12,19,61,73,-12,57,1.24,-1,-1,-1,-1,,Kane Hemmings - 15,Ben Garratt,,2021,3
+17,Shrewsbury,46,13,15,18,50,57,-7,54,1.17,-1,-1,-1,-1,43,Shaun Whalley - 8,Matija Šarkić,,2021,3
+18,Plymouth Argyle,46,14,11,21,53,80,-27,53,1.15,-1,-1,-1,-1,166,Luke Jephcott - 16,Michael Cooper,,2021,3
+19,AFC Wimbledon,46,12,15,19,54,70,-16,51,1.11,-1,-1,-1,-1,,Joe Pigott - 20,Connal Trueman,,2021,3
+20,Wigan Athletic,46,13,9,24,54,77,-23,48,1.04,-1,-1,-1,-1,,Will Keane - 11,Jamie Jones,,2021,3
+21,Rochdale,46,11,14,21,61,78,-17,47,1.02,-1,-1,-1,-1,,Matty Lund - 11,Gavin Bazunu,Relegated,2021,3
+22,Northampton,46,11,12,23,41,67,-26,45,0.98,-1,-1,-1,-1,138,Ryan Watson - 9,Jonathan Mitchell,Relegated,2021,3
+23,Swindon Town,46,13,4,29,55,89,-34,43,0.93,-1,-1,-1,-1,174,Brett Pitman - 11,Matej Kovar,Relegated,2021,3
+24,Bristol Rovers,46,10,8,28,40,70,-30,38,0.83,-1,-1,-1,-1,,"Luke Leahy, Brandon Hanlan - 7",Anssi Jaakkola,Relegated,2021,3
+1,Coventry City,34,18,13,3,48,30,18,67,1.97,-1,-1,-1,-1,"6,677",Matthew Godden - 14,Marko Maroši,Promoted,2020,3
+2,Rotherham Utd,35,18,8,9,61,38,23,62,1.77,-1,-1,-1,-1,"8,906",Freddie Ladapo - 14,Daniel Iversen,Promoted,2020,3
+3,Wycombe,34,17,8,9,45,40,5,59,1.74,-1,-1,-1,-1,"5,521",Adebayo Akinfenwa - 10,Ryan Allsop,"Promoted, → Semi-finals",2020,3
+4,Oxford United,35,17,9,9,61,37,24,60,1.71,-1,-1,-1,-1,"7,636",Matty Taylor - 13,Simon Eastwood,→ Semi-finals,2020,3
+5,Portsmouth,35,17,9,9,53,36,17,60,1.71,-1,-1,-1,-1,"17,804",Ronan Curtis - 11,Craig MacGillivray,→ Semi-finals,2020,3
+6,Fleetwood Town,35,16,12,7,51,38,13,60,1.71,-1,-1,-1,-1,"3,130",Paddy Madden - 15,Alex Cairns,→ Semi-finals,2020,3
+7,P'borough Utd,35,17,8,10,68,40,28,59,1.69,-1,-1,-1,-1,"7,371",Ivan Toney - 24,Christy Pym,,2020,3
+8,Sunderland,36,16,11,9,48,32,16,59,1.64,-1,-1,-1,-1,"30,118",Lynden Gooch - 11,Jon McLaughlin,,2020,3
+9,Doncaster,34,15,9,10,51,33,18,54,1.59,-1,-1,-1,-1,"8,252",Kieran Sadlier - 11,Seny Dieng,,2020,3
+10,Gillingham,35,12,15,8,42,34,8,51,1.46,-1,-1,-1,-1,"5,148",Alex Jakubiak - 6,Jack Bonham,,2020,3
+11,Ipswich Town,36,14,10,12,46,36,10,52,1.44,-1,-1,-1,-1,"19,549","Kayden Jackson, James Norwood - 11",Tomáš Holý,,2020,3
+12,Burton Albion,35,12,12,11,50,50,0,48,1.37,-1,-1,-1,-1,"2,986",Lucas Akins - 9,Kieran O'Hara,,2020,3
+13,Blackpool,35,11,12,12,44,43,1,45,1.29,-1,-1,-1,-1,"8,770",Armand Gnanduillet - 15,Jak Alnwick,,2020,3
+14,Bristol Rovers,35,12,9,14,38,49,-11,45,1.29,-1,-1,-1,-1,"6,943",Jonson Clarke-Harris - 13,Anssi Jaakkola,,2020,3
+15,Shrewsbury,34,10,11,13,31,42,-11,41,1.21,-1,-1,-1,-1,"6,059","Jason Cummings, Callum Lang... - 4",Max O'Leary,,2020,3
+16,Lincoln City,35,12,6,17,44,46,-2,42,1.2,-1,-1,-1,-1,"8,986",Tyler Walker - 13,Josh Vickers,,2020,3
+17,Acc'ton Stanley,35,10,10,15,47,53,-6,40,1.14,-1,-1,-1,-1,"2,862",Colby Bishop - 10,Dimitar Evtimov,,2020,3
+18,Rochdale,34,10,6,18,39,57,-18,36,1.06,-1,-1,-1,-1,"3,632",Ian Henderson - 15,Robert Sánchez,,2020,3
+19,MK Dons,35,10,7,18,36,47,-11,37,1.06,-1,-1,-1,-1,"9,246",Rhys Healey - 11,Lee Nicholls,,2020,3
+20,AFC Wimbledon,35,8,11,16,39,52,-13,35,1,-1,-1,-1,-1,"4,383",Marcus Forss - 11,Nathan Trott,,2020,3
+21,Tranmere Rovers,34,8,8,18,36,60,-24,32,0.94,-1,-1,-1,-1,"6,777",Morgan Ferrier - 5,Scott Davies,Relegated,2020,3
+22,Southend United,35,4,7,24,39,85,-46,19,0.54,-1,-1,-1,-1,"6,192","Charlie Kelman, Stephen Humphrys - 5",Mark Oxley,Relegated,2020,3
+23,Bolton,34,5,11,18,27,66,-39,14,0.41,-1,-1,-1,-1,"11,511",Daryl Murphy - 8,Remi Matthews,"12-point deduction 1, Relegated",2020,3
+24,Bury,0,0,0,0,0,0,0,-12,,,,,,,,,12-point deduction; expelled 2,2020,3
+1,Luton Town,46,27,13,6,90,42,48,94,2.04,,,,,"9,516",James Collins - 25,James Shea,Promoted,2019,3
+2,Barnsley,46,26,13,7,80,39,41,91,1.98,,,,,"12,527",Kieffer Moore - 17,Adam Davies,Promoted,2019,3
+3,Charlton Ath,46,26,10,10,73,40,33,88,1.91,,,,,"16,244",Lyle Taylor - 21,Dillon Phillips,"Promoted, → Semi-finals",2019,3
+4,Portsmouth,46,25,13,8,83,51,32,88,1.91,,,,,"19,009",Jamal Lowe - 15,Craig MacGillivray,→ Semi-finals,2019,3
+5,Sunderland,46,22,19,5,80,47,33,85,1.85,,,,,"33,314",Josh Maja - 15,Jon McLaughlin,→ Semi-finals,2019,3
+6,Doncaster,46,20,13,13,76,58,18,73,1.59,,,,,"8,582",John Marquis - 21,Marko Maroši,→ Semi-finals,2019,3
+7,P'borough Utd,46,20,12,14,71,62,9,72,1.57,,,,,"7,365",Ivan Toney - 16,Aaron Chapman,,2019,3
+8,Coventry City,46,18,11,17,54,54,0,65,1.41,,,,,"12,363",Jordy Hiwula - 12,Lee Burge,,2019,3
+9,Burton Albion,46,17,12,17,66,57,9,63,1.37,,,,,"3,351",Lucas Akins - 13,Bradley Collins,,2019,3
+10,Blackpool,46,15,17,14,50,52,-2,62,1.35,,,,,"5,517",Armand Gnanduillet - 10,Mark Howard,,2019,3
+11,Fleetwood Town,46,16,13,17,58,52,6,61,1.33,,,,,"3,165",Ched Evans - 17,Alex Cairns,,2019,3
+12,Oxford United,46,15,15,16,58,64,-6,60,1.3,,,,,"7,315",James Henry - 11,Simon Eastwood,,2019,3
+13,Gillingham,46,15,10,21,61,72,-11,55,1.2,,,,,"5,050",Tom Eaves - 21,Tomáš Holý,,2019,3
+14,Acc'ton Stanley,46,14,13,19,51,67,-16,55,1.2,,,,,"2,764",Sean McConville - 15,Connor Ripley,,2019,3
+15,Bristol Rovers,46,13,15,18,47,50,-3,54,1.17,,,,,"8,320",Jonson Clarke-Harris - 11,Jack Bonham,,2019,3
+16,Rochdale,46,15,9,22,54,87,-33,54,1.17,,,,,"3,550",Ian Henderson - 20,Josh Lillis,,2019,3
+17,Wycombe,46,14,11,21,55,67,-12,53,1.15,,,,,"5,329",Adebayo Akinfenwa - 8,Ryan Allsop,,2019,3
+18,Shrewsbury,46,12,16,18,51,59,-8,52,1.13,,,,,"6,407",Fejiri Okenabirhie - 10,Steve Arnold,,2019,3
+19,Southend United,46,14,8,24,55,68,-13,50,1.09,,,,,"6,932",Simon Cox - 15,Mark Oxley,,2019,3
+20,AFC Wimbledon,46,13,11,22,42,63,-21,50,1.09,,,,,"4,254",Joe Pigott - 15,Aaron Ramsdale,,2019,3
+21,Plymouth Argyle,46,13,11,22,56,80,-24,50,1.09,,,,,"9,852",Freddie Ladapo - 18,Matt Macey,Relegated,2019,3
+22,Walsall,46,12,11,23,49,71,-22,47,1.02,,,,,"4,927",Andy Cook - 13,Liam Roberts,Relegated,2019,3
+23,Scunthorpe Utd,46,12,10,24,53,83,-30,46,1,,,,,"4,227",Lee Novak - 12,Jak Alnwick,Relegated,2019,3
+24,Bradford City,46,11,8,27,49,77,-28,41,0.89,,,,,"16,130",Eoin Doyle - 11,Richard O'Donnell,Relegated,2019,3
+1,Leyton Orient,46,26,13,7,61,34,27,91,1.98,,,,,"7,844",Paul Smyth - 10,Lawrence Vigouroux,Promoted,2023,4
+2,Stevenage,46,24,13,9,61,39,22,85,1.85,,,,,"3,691","Luke Norris, Jamie Reid... - 10",Taye Ashby-Hammond,Promoted,2023,4
+3,Northampton,46,23,14,9,62,42,20,83,1.8,,,,,"5,920",Sam Hoskins - 22,Lee Burge,Promoted,2023,4
+4,Stockport,46,22,13,11,65,37,28,79,1.72,,,,,"9,504",Kyle Wootton - 14,Ben Hinchliffe,→ Semi-finals,2023,4
+5,Carlisle United,46,20,16,10,66,43,23,76,1.65,,,,,"8,807",Kristian Dennis - 20,Tomáš Holý,"Promoted, → Semi-finals",2023,4
+6,Bradford City,46,20,16,10,61,43,18,76,1.65,,,,,"18,662",Andy Cook - 28,Harry Lewis,→ Semi-finals,2023,4
+7,Salford City,46,22,9,15,72,54,18,75,1.63,,,,,"3,002",Callum Hendry - 12,Alex Cairns,→ Semi-finals,2023,4
+8,Mansfield Town,46,21,12,13,72,55,17,75,1.63,,,,,"6,696",Will Swan - 10,Christy Pym,,2023,4
+9,Barrow,46,18,8,20,47,53,-6,62,1.35,,,,,"3,492",Josh Gordon - 15,Paul Farman,,2023,4
+10,Swindon Town,46,16,13,17,61,55,6,61,1.33,,,,,"9,064",Jonny Williams - 10,Solomon Brynn,,2023,4
+11,Grimsby Town,46,16,13,17,49,56,-7,61,1.33,,,,,"6,279",Harry Clifton - 7,Max Crocombe,,2023,4
+12,Tranmere Rovers,46,15,13,18,45,48,-3,58,1.26,,,,,"6,148",Josh Hawkes - 10,Ross Doohan,,2023,4
+13,Crewe Alexandra,46,14,16,16,48,60,-12,58,1.26,,,,,"4,289",Dan Agyei - 16,Arthur Okonkwo,,2023,4
+14,Sutton United,46,15,13,18,46,58,-12,58,1.26,,,,,"3,309","Will Randall, Omar Bugiel - 6",Jack Rose,,2023,4
+15,Newport County,46,14,15,17,53,56,-3,57,1.24,,,,,"4,089",Omar Bogle - 17,Joe Day,,2023,4
+16,Walsall,46,12,19,15,46,49,-3,55,1.2,,,,,"5,540",Danny Johnson - 12,Owen Evans,,2023,4
+17,Gillingham,46,14,13,19,36,49,-13,55,1.2,,,,,"5,375",Tom Nichols - 6,Glenn Morris,,2023,4
+18,Doncaster,46,16,7,23,46,65,-19,55,1.2,,,,,"6,500",George Miller - 11,Jonathan Mitchell,,2023,4
+19,Harrogate,46,12,16,18,59,68,-9,52,1.13,,,,,"2,296",Luke Armstrong - 16,Pete Jameson,,2023,4
+20,Colchester Utd,46,12,13,21,44,51,-7,49,1.07,,,,,"3,586",Noah Chilvers - 9,Kieran O'Hara,,2023,4
+21,AFC Wimbledon,46,11,15,20,48,60,-12,48,1.04,,,,,"7,604",Ali Al Hamadi - 10,Nik Tzanev,,2023,4
+22,Crawley Town,46,11,13,22,48,71,-23,46,1,,,,,"3,044",Dom Telford - 12,Corey Addai,,2023,4
+23,Hartlepool Utd,46,9,16,21,52,78,-26,43,0.93,,,,,"4,672",Josh Umerah - 12,Ben Killip,Relegated,2023,4
+24,Rochdale,46,9,11,26,46,70,-24,38,0.83,,,,,"2,942",Devante Rodney - 11,Richard O'Donnell,Relegated,2023,4
+1,FG Rovers,46,23,15,8,75,44,31,84,1.83,,,,,"2,604",Mathew Stevens - 23,Luke McGee,Promoted,2022,4
+2,Exeter City,46,23,15,8,65,41,24,84,1.83,,,,,"5,312",Matt Jay - 14,Cameron Dawson,Promoted,2022,4
+3,Bristol Rovers,46,23,11,12,71,49,22,80,1.74,,,,,"7,512",Aaron Collins - 16,James Belshaw,Promoted,2022,4
+4,Northampton,46,23,11,12,60,38,22,80,1.74,,,,,"5,697",Sam Hoskins - 13,Liam Roberts,→ Semi-finals,2022,4
+5,Port Vale,46,22,12,12,67,46,21,78,1.7,,,,,"6,612","Ben Garrity, Jamie Proctor - 12",Lucas,"Promoted, → Semi-finals",2022,4
+6,Swindon Town,46,22,11,13,77,54,23,77,1.67,,,,,"10,215",Harry McKirdy - 18,Jojo Wollacott,→ Semi-finals,2022,4
+7,Mansfield Town,46,22,11,13,67,52,15,77,1.67,,,,,"7,053",Rhys Oates - 9,Nathan Bishop,→ Semi-finals,2022,4
+8,Sutton United,46,22,10,14,69,53,16,76,1.65,,,,,"3,020","David Ajiboye, Isaac Olaofe... - 8",Dean Bouzanis,,2022,4
+9,Tranmere Rovers,46,21,12,13,53,40,13,75,1.63,,,,,"6,662",Kane Hemmings - 8,Ross Doohan,,2022,4
+10,Salford City,46,19,13,14,60,46,14,70,1.52,,,,,"2,152",Brandon Thomas-Asante - 11,Tom King,,2022,4
+11,Newport County,46,19,12,15,67,58,9,69,1.5,,,,,"3,938",Dom Telford - 25,Joe Day,,2022,4
+12,Crawley Town,46,17,10,19,56,66,-10,61,1.33,,,,,"2,285",Kwesi Appiah - 11,Glenn Morris,,2022,4
+13,Leyton Orient,46,14,16,16,62,47,15,58,1.26,,,,,"5,116","Aaron Drinan, Harry Smith - 13",Lawrence Vigouroux,,2022,4
+14,Bradford City,46,14,16,16,53,55,-2,58,1.26,,,,,"15,427",Andy Cook - 12,Alex Bass,,2022,4
+15,Colchester Utd,46,14,13,19,48,60,-12,55,1.2,,,,,"2,813",Freddie Sears - 14,Shamal George,,2022,4
+16,Walsall,46,14,12,20,47,60,-13,54,1.17,,,,,"5,067",George Miller - 12,Carl Rushworth,,2022,4
+17,Hartlepool Utd,46,14,12,20,44,64,-20,54,1.17,,,,,"5,178",Luke Molyneux - 8,Ben Killip,,2022,4
+18,Rochdale,46,12,17,17,51,59,-8,53,1.15,,,,,"2,670",Jake Beesley - 9,Jay Lynch,,2022,4
+19,Harrogate,46,14,11,21,64,75,-11,53,1.15,,,,,"2,301",Jack Diamond - 13,Mark Oxley,,2022,4
+20,Carlisle United,46,14,11,21,39,62,-23,53,1.15,,,,,"4,966",Omari Patrick - 9,Mark Howard,,2022,4
+21,Stevenage,46,11,14,21,45,68,-23,47,1.02,,,,,"2,904",Luke Norris - 14,Christy Pym,,2022,4
+22,Barrow,46,10,14,22,44,57,-13,44,0.96,,,,,"3,202",Ollie Banks - 9,Paul Farman,,2022,4
+23,Oldham Athletic,46,9,11,26,46,75,-29,38,0.83,,,,,"4,961",Davis Keillor-Dunn - 15,"Jayson Leutwiler, Danny Rogers",Relegated,2022,4
+24,Scunthorpe Utd,46,4,14,28,29,90,-61,26,0.57,,,,,"2,781","Myles Hippolyte, Ryan Loft - 4",Rory Watson,Relegated,2022,4
+1,Cheltenham,46,24,10,12,61,39,22,82,1.78,,,,,117,"Andy Williams, Alfie May - 8",Joshua Griffiths,Promoted,2021,4
+2,Cambridge Utd,46,24,8,14,73,49,24,80,1.74,,,,,254,Paul Mullin - 32,Callum Burton,Promoted,2021,4
+3,Bolton,46,23,10,13,59,50,9,79,1.72,,,,,,Eoin Doyle - 19,Matt Gilks,Promoted,2021,4
+4,Morecambe,46,23,9,14,69,58,11,78,1.7,,,,,395,Carlos Mendes Gomes - 15,Kyle Letheren,"Promoted, → Semi-finals",2021,4
+5,Newport County,46,20,13,13,57,42,15,73,1.59,,,,,,"Scott Twine, Matthew Dolan... - 6",Nick Townsend,→ Semi-finals,2021,4
+6,FG Rovers,46,20,13,13,59,51,8,73,1.59,,,,,118,Jamille Matt - 16,Luke McGee,→ Semi-finals,2021,4
+7,Tranmere Rovers,46,20,13,13,55,50,5,73,1.59,,,,,87,James Vaughan - 18,Scott Davies,→ Semi-finals,2021,4
+8,Salford City,46,19,14,13,54,34,20,71,1.54,,,,,,Ian Henderson - 17,Václav Hladký,,2021,4
+9,Exeter City,46,18,16,12,71,50,21,70,1.52,,,,,215,Matt Jay - 18,Jökull Andrésson,,2021,4
+10,Carlisle United,46,18,12,16,60,51,9,66,1.43,,,,,391,Jon Mellish - 11,Paul Farman,,2021,4
+11,Leyton Orient,46,17,10,19,53,55,-2,61,1.33,,,,,75,Danny Johnson - 17,Lawrence Vigouroux,,2021,4
+12,Crawley Town,46,16,13,17,56,62,-6,61,1.33,,,,,93,Max Watters - 13,Glenn Morris,,2021,4
+13,Port Vale,46,17,9,20,57,57,0,60,1.3,,,,,,Devante Rodney - 11,Scott Brown,,2021,4
+14,Stevenage,46,14,18,14,41,41,0,60,1.3,,,,,65,Elliott List - 9,Jamie Cumming,,2021,4
+15,Bradford City,46,16,11,19,48,53,-5,59,1.28,,,,,,Andy Cook - 8,Richard O'Donnell,,2021,4
+16,Mansfield Town,46,13,19,14,57,55,2,58,1.26,,,,,,Jordan Bowery - 10,Marek Štěch,,2021,4
+17,Harrogate,46,16,9,21,52,61,-9,57,1.24,,,,,39,Jack Muldoon - 15,James Belshaw,,2021,4
+18,Oldham Athletic,46,15,9,22,72,81,-9,54,1.17,,,,,,Conor McAleny - 17,Ian Lawlor,,2021,4
+19,Walsall,46,11,20,15,45,53,-8,53,1.15,,,,,,Elijah Adebayo - 10,Liam Roberts,,2021,4
+20,Colchester Utd,46,11,18,17,44,61,-17,51,1.11,,,,,91,Callum Harriott - 9,Dean Gerken,,2021,4
+21,Barrow,46,13,11,22,53,59,-6,50,1.09,,,,,95,Scott Quigley - 14,Joel Dixon,,2021,4
+22,Scunthorpe Utd,46,13,9,24,41,64,-23,48,1.04,,,,,,Abo Eisa - 9,Mark Howard,,2021,4
+23,Southend United,46,10,15,21,29,58,-29,45,0.98,,,,,174,"Timothée Dieng, Thomas Clifford - 3",Mark Oxley,Relegated,2021,4
+24,Grimsby Town,46,10,13,23,37,69,-32,43,0.93,,,,,,Lenell John-Lewis - 4,James McKeown,Relegated,2021,4
+1,Swindon Town,36,21,6,9,62,39,23,69,1.92,,,,,"7,788",Eoin Doyle - 25,Steven Benda,Promoted,2020,4
+2,Crewe Alexandra,37,20,9,8,67,43,24,69,1.86,,,,,"4,580",Chris Porter - 12,William Jääskeläinen,Promoted,2020,4
+3,Plymouth Argyle,37,20,8,9,61,39,22,68,1.84,,,,,"10,338",Antoni Sarcevic - 10,Alex Palmer,Promoted,2020,4
+4,Cheltenham,36,17,13,6,52,27,25,64,1.78,,,,,"3,203",Ryan Broom - 8,Scott Flinders,→ Semi-finals,2020,4
+5,Exeter City,37,18,11,8,53,43,10,65,1.76,,,,,"4,847",Ryan Bowman - 13,Lewis Ward,→ Semi-finals,2020,4
+6,Colchester Utd,37,15,13,9,52,37,15,58,1.57,,,,,"3,634",Theo Robinson - 11,Dean Gerken,→ Semi-finals,2020,4
+7,Northampton,37,17,7,13,54,40,14,58,1.57,,,,,"5,101","Andy Williams, Sam Hoskins - 8",David Cornell,"Promoted, → Semi-finals",2020,4
+8,Port Vale,37,14,15,8,50,44,6,57,1.54,,,,,"4,862","Tom Pope, Richie Bennett - 6",Scott Brown,,2020,4
+9,Bradford City,37,14,12,11,44,40,4,54,1.46,,,,,"14,309",James Vaughan - 11,Richard O'Donnell,,2020,4
+10,FG Rovers,36,13,10,13,43,40,3,49,1.36,,,,,"2,542",Joseph Mills - 7,Lewis Thomas,,2020,4
+11,Salford City,37,13,11,13,49,46,3,50,1.35,,,,,"2,997",Adam Rooney - 8,Kyle Letheren,,2020,4
+12,Walsall,36,13,8,15,40,49,-9,47,1.31,,,,,"4,664",Josh Gordon - 9,Liam Roberts,,2020,4
+13,Crawley Town,37,11,15,11,51,47,4,48,1.3,,,,,"2,232",Ollie Palmer - 13,Glenn Morris,,2020,4
+14,Newport County,36,12,10,14,32,39,-7,46,1.28,,,,,"3,867",Pádraig Amond - 8,Tom King,,2020,4
+15,Grimsby Town,37,12,11,14,45,51,-6,47,1.27,,,,,"4,599",James Hanson - 9,James McKeown,,2020,4
+16,Cambridge Utd,37,12,9,16,40,48,-8,45,1.22,,,,,"4,178","Sam Smith, Harvey Knibbs - 7",Dimitar Mitov,,2020,4
+17,Leyton Orient,36,10,12,14,47,55,-8,42,1.17,,,,,"5,504",Josh Wright - 8,Dean Brill,,2020,4
+18,Carlisle United,37,10,12,15,39,56,-17,42,1.14,,,,,"4,140","Nathan Thomas, Olufela Olomola... - 5",Adam Collin,,2020,4
+19,Oldham Athletic,37,9,14,14,44,57,-13,41,1.11,,,,,"3,466",Jonny Smith - 9,Zeus de la Paz,,2020,4
+20,Scunthorpe Utd,37,10,10,17,44,56,-12,40,1.08,,,,,"3,546",Kevin van Veen - 10,Rory Watson,,2020,4
+21,Mansfield Town,36,9,11,16,48,55,-7,38,1.06,,,,,"4,419",Nicky Maynard - 14,Conrad Logan,,2020,4
+22,Morecambe,37,7,11,19,35,60,-25,32,0.86,,,,,"2,264","Lewis Alessandra, Cole Stockton - 5",Barry Roche,,2020,4
+23,Stevenage,36,3,13,20,24,50,-26,22,0.61,,,,,"2,906","Charlie Carter, Kurtis Guthrie - 5",Paul Farman,Retained 1,2020,4
+24,Macclesfield,37,7,15,15,32,47,-15,19,0.51,,,,,"1,998",Joe Ironside - 6,Owen Evans,"17-point deduction 2, Relegated",2020,4
+1,Lincoln City,46,23,16,7,73,43,30,85,1.85,,,,,"9,006",John Akinde - 15,Josh Vickers,Promoted,2019,4
+2,Bury,46,22,13,11,82,56,26,79,1.72,,,,,"4,044",Nicky Maynard - 20,Joe Murphy,Promoted,2019,4
+3,MK Dons,46,23,10,13,71,49,22,79,1.72,,,,,"8,224",Kieran Agard - 20,Lee Nicholls,Promoted,2019,4
+4,Mansfield Town,46,20,16,10,69,41,28,76,1.65,,,,,"5,217",Tyler Walker - 22,"Conrad Logan, Bobby Olejnik",→ Semi-finals,2019,4
+5,FG Rovers,46,20,14,12,68,47,21,74,1.61,,,,,"2,896",Christian Doidge - 14,James Montgomery,→ Semi-finals,2019,4
+6,Tranmere Rovers,46,20,13,13,63,50,13,73,1.59,,,,,"6,968",James Norwood - 29,Scott Davies,"Promoted, → Semi-finals",2019,4
+7,Newport County,46,20,11,15,59,59,0,71,1.54,,,,,"4,768","Pádraig Amond, Jamille Matt - 14",Joe Day,→ Semi-finals,2019,4
+8,Colchester Utd,46,20,10,16,65,53,12,70,1.52,,,,,"3,522",Sammie Szmodics - 14,Rene Gilmartin,,2019,4
+9,Exeter City,46,19,13,14,60,49,11,70,1.52,,,,,"4,418",Jayden Stockley - 16,Christy Pym,,2019,4
+10,Stevenage,46,20,10,16,59,55,4,70,1.52,,,,,"2,715",Kurtis Guthrie - 11,Paul Farman,,2019,4
+11,Carlisle United,46,20,8,18,67,62,5,68,1.48,,,,,"4,712",Hallam Hope - 14,Adam Collin,,2019,4
+12,Crewe Alexandra,46,19,8,19,60,59,1,65,1.41,,,,,"3,762",Chris Porter - 13,Ben Garratt,,2019,4
+13,Swindon Town,46,16,16,14,59,56,3,64,1.39,,,,,"6,635",Michael Doughty - 13,Lawrence Vigouroux,,2019,4
+14,Oldham Athletic,46,16,14,16,67,60,7,62,1.35,,,,,"4,364",Callum Lang - 13,Daniel Iversen,,2019,4
+15,Northampton,46,14,19,13,64,63,1,61,1.33,,,,,"5,100",Andy Williams - 13,David Cornell,,2019,4
+16,Cheltenham,46,15,12,19,57,68,-11,57,1.24,,,,,"3,134",Luke Varney - 14,Scott Flinders,,2019,4
+17,Grimsby Town,46,16,8,22,45,56,-11,56,1.22,,,,,"4,430",Wes Thomas - 11,James McKeown,,2019,4
+18,Morecambe,46,14,12,20,54,70,-16,54,1.17,,,,,"2,033",Aaron Collins - 8,Mark Halstead,,2019,4
+19,Crawley Town,46,15,8,23,51,68,-17,53,1.15,,,,,"2,290",Ollie Palmer - 14,Glenn Morris,,2019,4
+20,Port Vale,46,12,13,21,39,55,-16,49,1.07,,,,,"4,431",Tom Pope - 11,Scott Brown,,2019,4
+21,Cambridge Utd,46,12,11,23,40,66,-26,47,1.02,,,,,"4,338",Jevani Brown - 7,David Forde,,2019,4
+22,Macclesfield,46,10,14,22,48,74,-26,44,0.96,,,,,"2,389",Scott Wilson - 10,Kieran O'Hara,,2019,4
+23,Notts County,46,9,14,23,48,84,-36,41,0.89,,,,,"7,357",Kane Hemmings - 14,Ross Fitzsimons,Relegated,2019,4
+24,Yeovil Town,46,9,13,24,41,66,-25,40,0.87,,,,,"2,953",Alex Fisher - 7,Nathan Baxter,Relegated,2019,4
+1,Wrexham,46,34,9,3,116,43,73,111,2.41,,,,,"9,973",Paul Mullin - 38,Mark Howard,Promoted,2023,5
+2,Notts County,46,32,11,3,117,42,75,107,2.33,,,,,"8,982",Macaulay Langstaff - 42,Sam Slocombe,"Promoted, → Semi-finals",2023,5
+3,Chesterfield,46,25,9,12,81,52,29,84,1.83,,,,,"8,987",Liam Mandeville - 9,Ross Fitzsimons,→ Semi-finals,2023,5
+4,Woking,46,24,10,12,71,48,23,82,1.78,,,,,"2,952",Rhys Browne - 13,Craig Ross,→ Quarter-finals,2023,5
+5,Barnet,46,21,11,14,75,67,8,74,1.61,,,,,"2,074",Nicke Kabamba - 19,Laurie Walker,→ Quarter-finals,2023,5
+6,Boreham Wood,46,19,15,12,52,40,12,72,1.57,,,,,"1,185",Lee Ndlovu - 11,Nathan Ashmore,→ Quarter-finals,2023,5
+7,Bromley,46,18,17,11,68,53,15,71,1.54,,,,,"2,637",Michael Cheek - 15,Reice Charles-Cook,→ Quarter-finals,2023,5
+8,Southend United,46,20,9,17,57,45,12,69,1.5,,,,,"6,040",Jack Bridge - 13,Collin Andeng-Ndi,,2023,5
+9,Eastleigh,46,19,10,17,56,57,-1,67,1.46,,,,,"2,332",Danny Whitehall - 12,Joe McDonnell,,2023,5
+10,Dag & Red,46,18,9,19,61,72,-11,63,1.37,,,,,"1,775","Junior Morias, Josh Walker - 10",Elliot Justham,,2023,5
+11,FC Halifax Town,46,16,13,17,49,48,1,61,1.33,,,,,"2,192",Emmanuel Dieseruvwe - 13,Sam Johnson,,2023,5
+12,Oldham Athletic,46,16,13,17,63,64,-1,61,1.33,,,,,"6,660",Mike Fondop-Talom - 11,Magnus Norman,,2023,5
+13,Wealdstone,46,16,12,18,57,72,-15,60,1.3,,,,,"1,564",Micah Obiero - 8,Samuel Howes,,2023,5
+14,Gateshead,46,15,15,16,67,62,5,60,1.3,,,,,"1,218",Adam Campbell - 13,Filip Marshall,,2023,5
+15,Solihull Moors,46,15,13,18,62,66,-4,58,1.26,,,,,"1,689",Andrew Dallas - 13,Ryan Boot,,2023,5
+16,Dorking Wand.,46,16,9,21,67,91,-24,57,1.24,,,,,"1,987",James McShane - 17,Dan Lincoln,,2023,5
+17,Altrincham,46,14,14,18,68,82,-14,56,1.22,,,,,"2,115",Chris Conn-Clarke - 9,Oliver Byrne,,2023,5
+18,Aldershot Town,46,14,11,21,64,76,-12,53,1.15,,,,,"2,052",Inih Effiong - 14,Luca Ashby-Hammond,,2023,5
+19,York City,46,13,12,21,55,63,-8,51,1.11,,,,,"4,827",Lenell John-Lewis - 14,Ethan Ross,,2023,5
+20,Maidenhead Utd,46,13,11,22,47,66,-19,50,1.09,,,,,"1,525",Emile Acquah - 13,Daniel Gyollai,,2023,5
+21,Torquay,46,12,12,22,58,80,-22,48,1.04,,,,,"2,422",Aaron Jarvis - 15,Mark Halstead,Relegated,2023,5
+22,Yeovil Town,46,7,19,20,35,60,-25,40,0.87,,,,,"2,730","Alex Fisher, Malachi Linton - 5",Grant Smith,Relegated,2023,5
+23,Scunthorpe Utd,46,8,10,28,49,87,-38,34,0.74,,,,,"3,259",Joe Nuttall - 9,Marcus Dewhurst,Relegated,2023,5
+24,Maidstone Utd,46,5,10,31,45,104,-59,25,0.54,,,,,"2,138",Jack Barham - 9,Yusuf Mersin,Relegated,2023,5
+1,Stockport,44,30,4,10,87,38,49,94,2.14,,,,,"7,126",Paddy Madden - 23,Ben Hinchliffe,Promoted,2022,5
+2,Wrexham,44,26,10,8,91,46,45,88,2,,,,,"9,087",Paul Mullin - 26,Rob Lainton,→ Semi-finals,2022,5
+3,Solihull Moors,44,25,12,7,83,45,38,87,1.98,,,,,"3,002",Andrew Dallas - 19,Ryan Boot,→ Semi-finals,2022,5
+4,FC Halifax Town,44,25,9,10,62,35,27,84,1.91,,,,,"2,388",Billy Waters - 17,Sam Johnson,→ Quarter-finals,2022,5
+5,Notts County,44,24,10,10,81,52,29,82,1.86,,,,,"7,469","Kyle Wootton, Ruben Rodrigues - 19",Sam Slocombe,→ Quarter-finals,2022,5
+6,Grimsby Town,44,23,8,13,68,46,22,77,1.75,,,,,"5,704",John Mcatee - 14,Max Crocombe,"Promoted, → Quarter-finals",2022,5
+7,Chesterfield,44,20,14,10,69,51,18,74,1.68,,,,,"6,403",Kabongo Tshimanga - 24,Scott Loach,→ Quarter-finals,2022,5
+8,Dag & Red,44,22,7,15,80,53,27,73,1.66,,,,,"1,774",Paul McCallum - 18,Elliot Justham,,2022,5
+9,Boreham Wood,44,18,13,13,49,40,9,67,1.52,,,,,"1,058",Scott Boden - 11,Taye Ashby-Hammond,,2022,5
+10,Bromley,44,18,13,13,61,53,8,67,1.52,,,,,"1,804",Michael Cheek - 17,Mark Cousins,,2022,5
+11,Torquay,44,18,12,14,66,54,12,66,1.5,,,,,"2,576",Armani Little - 15,Shaun MacDonald,,2022,5
+12,Yeovil Town,44,15,14,15,43,46,-3,59,1.34,,,,,"2,375",Tom Knowles - 9,Grant Smith,,2022,5
+13,Southend United,44,16,10,18,45,61,-16,58,1.32,,,,,"5,515",Sam Dalby - 9,Steve Arnold,,2022,5
+14,Altrincham,44,15,10,19,62,69,-7,55,1.25,,,,,"2,119",Daniel Mooney - 12,Tony Thompson,,2022,5
+15,Woking,44,16,5,23,59,61,-2,53,1.2,,,,,"2,664","Inih Effiong, Max Kretzschmar... - 13",Craig Ross,,2022,5
+16,Wealdstone,44,14,11,19,51,65,-14,53,1.2,,,,,"1,432",Josh Umerah - 16,George Wickens,,2022,5
+17,Maidenhead Utd,44,13,12,19,48,67,-19,51,1.16,,,,,"1,409",Josh Kelly - 15,Daniel Gyollai,,2022,5
+18,Barnet,44,13,11,20,59,89,-30,50,1.14,,,,,"1,531",Adam Marriott - 17,Aston Oxborough,,2022,5
+19,Eastleigh,44,12,10,22,52,74,-22,46,1.05,,,,,"2,566",Danny Whitehall - 11,Joe McDonnell,,2022,5
+20,Aldershot Town,44,11,10,23,46,73,-27,43,0.98,,,,,"1,824",Corie Andrews - 9,Mitch Walker,,2022,5
+21,King's Lynn,44,8,10,26,47,79,-32,34,0.77,,,,,"1,158",Gold Omotayo - 10,Paul Jones,,2022,5
+22,Weymouth,44,6,10,28,40,88,-48,28,0.64,,,,,"1,176",Josh McQuoid - 7,Ross Fitzsimons,,2022,5
+23,Dover Athletic,44,2,7,35,37,101,-64,1,0.02,,,,,781,Alfie Pavey - 6,Adam Parkes,12-point deduction 1,2022,5
+1,Sutton United,42,25,9,8,72,36,36,84,2,,,,,131,Isaac Olaofe - 14,Dean Bouzanis,Promoted,2021,5
+2,Torquay,42,23,11,8,68,39,29,80,1.9,,,,,351,Connor Lemonheigh-Evans - 11,Lucas,→ Semi-finals,2021,5
+3,Stockport,42,21,14,7,69,32,37,77,1.83,,,,,103,Alex Reid - 16,Ben Hinchliffe,→ Semi-finals,2021,5
+4,Hartlepool Utd,42,22,10,10,66,43,23,76,1.81,,,,,397,Rhys Oates - 14,Ben Killip,"Promoted, → Quarter-finals",2021,5
+5,Notts County,42,20,10,12,62,41,21,70,1.67,,,,,200,Kyle Wootton - 15,Sam Slocombe,→ Quarter-finals,2021,5
+6,Chesterfield,42,21,6,15,60,43,17,69,1.64,,,,,140,Akwasi Asante - 10,Grant Smith,→ Quarter-finals,2021,5
+7,Bromley,42,19,12,11,63,53,10,69,1.64,,,,,61,Michael Cheek - 21,Mark Cousins,→ Quarter-finals,2021,5
+8,Wrexham,42,19,11,12,64,43,21,68,1.62,,,,,,Luke Young - 11,Rob Lainton,,2021,5
+9,Eastleigh,42,18,12,12,49,40,9,66,1.57,,,,,,Joe Tomlinson - 12,Joe McDonnell,,2021,5
+10,FC Halifax Town,42,19,8,15,63,54,9,65,1.55,,,,,40,Jake Hyde - 12,Sam Johnson,,2021,5
+11,Solihull Moors,42,19,7,16,58,48,10,64,1.52,,,,,26,Jimmy Ball - 9,Ryan Boot,,2021,5
+12,Dag & Red,42,17,9,16,53,48,5,60,1.43,,,,,98,Paul McCallum - 15,Elliot Justham,,2021,5
+13,Maidenhead Utd,42,15,11,16,62,60,2,56,1.33,,,,,,Danilo Orsi-Dadamo - 19,Taye Ashby-Hammond,,2021,5
+14,Boreham Wood,42,13,16,13,52,48,4,55,1.31,,,,,62,Kabongo Tshimanga - 18,Nathan Ashmore,,2021,5
+15,Aldershot Town,42,15,7,20,59,66,-7,52,1.24,,,,,56,Harry Panayiotou - 11,Mitch Walker,,2021,5
+16,Yeovil Town,42,15,7,20,58,68,-10,52,1.24,,,,,,Rhys Murphy - 12,Adam Smith,,2021,5
+17,Altrincham,42,12,11,19,46,60,-14,47,1.12,,,,,49,Josh Hancock - 12,Tony Thompson,,2021,5
+18,Weymouth,42,11,6,25,45,71,-26,39,0.93,,,,,86,Andrew Dallas - 12,Ethan Ross,,2021,5
+19,Wealdstone,42,10,7,25,49,99,-50,37,0.88,,,,,37,Jacob Mendy - 9,Harvey Isted,,2021,5
+20,Woking,42,8,9,25,42,69,-27,33,0.79,,,,,67,Max Kretzschmar - 5,Craig Ross,,2021,5
+21,King's Lynn,42,7,10,25,50,98,-48,31,0.74,,,,,96,"Michael Gash, Kairo Mitchell - 7",Archie Mair,,2021,5
+22,Barnet,42,8,7,27,37,88,-51,31,0.74,,,,,33,"Michael Petrasso, JJ Hooper - 7",Scott Loach,,2021,5
+23,Dover Athletic,0,0,0,0,0,0,0,0,,,,,,,,,Record expunged 1,2021,5
+24,Macclesfield,0,0,0,0,0,0,0,0,,,,,,,,,Expelled 2,2021,5
+1,Barrow,37,21,7,9,68,39,29,70,1.89,,,,,"2,010",Scott Quigley - 20,Joel Dixon,Promoted,2020,5
+2,Harrogate,37,19,9,9,61,44,17,66,1.78,,,,,"1,301",Jack Muldoon - 13,James Belshaw,"Promoted, → Semi-finals",2020,5
+3,Notts County,38,17,12,9,61,38,23,63,1.66,,,,,"5,210",Kyle Wootton - 13,Sam Slocombe,→ Semi-finals,2020,5
+4,Yeovil Town,37,17,9,11,61,44,17,60,1.62,,,,,"2,951",Rhys Murphy - 17,Stuart Nelson,→ Qualifying round,2020,5
+5,Boreham Wood,37,16,12,9,55,40,15,60,1.62,,,,,724,Kabongo Tshimanga - 18,Nathan Ashmore,→ Qualifying round,2020,5
+6,FC Halifax Town,37,17,7,13,50,49,1,58,1.57,,,,,"2,141",Liam McAlinden - 10,Sam Johnson,→ Qualifying round,2020,5
+7,Barnet,35,14,12,9,52,42,10,54,1.54,,,,,"1,214",Simeon Akinola - 15,Scott Loach,→ Qualifying round,2020,5
+8,Stockport,39,16,10,13,51,54,-3,58,1.49,,,,,"4,342",Elliot Osborne - 9,Ben Hinchliffe,,2020,5
+9,Solihull Moors,38,15,10,13,48,37,11,55,1.45,,,,,"1,403",Paul McCallum - 9,Ryan Boot,,2020,5
+10,Woking,38,15,10,13,50,55,-5,55,1.45,,,,,"2,138",Jake Hyde - 16,Craig Ross,,2020,5
+11,Dover Athletic,38,15,9,14,49,49,0,54,1.42,,,,,"1,104",Inih Effiong - 16,Lee Worgan,,2020,5
+12,Hartlepool Utd,39,14,13,12,56,50,6,55,1.41,,,,,"3,355",Gime Toure - 12,Ben Killip,,2020,5
+13,Bromley,38,14,10,14,57,52,5,52,1.37,,,,,"1,985",Michael Cheek - 13,Ryan Huddart,,2020,5
+14,Torquay,36,14,6,16,56,61,-5,48,1.33,,,,,"2,460",Jamie Reid - 18,Lucas,,2020,5
+15,Sutton United,38,12,14,12,47,42,5,50,1.32,,,,,"1,722",Harry Beautyman - 15,"Nik Tzanev, Jamie Butler",,2020,5
+16,Eastleigh,37,11,13,13,43,55,-12,46,1.24,,,,,"1,832",Tyrone Barnett - 11,Max Stryjek,,2020,5
+17,Dag & Red,37,11,11,15,40,44,-4,44,1.19,,,,,"1,401",Ángelo Balanta - 8,Elliot Justham,,2020,5
+18,Aldershot Town,39,12,10,17,43,55,-12,46,1.18,,,,,"1,786",Ethan Chislett - 9,Mitch Walker,,2020,5
+19,Wrexham,37,11,10,16,46,49,-3,43,1.16,,,,,"4,057",Bobby Grant - 7,Rob Lainton,,2020,5
+20,Chesterfield,38,11,11,16,55,65,-10,44,1.16,,,,,"3,670","Mike Fondop-Talom, Scott Boden - 10",Shwan Jalal,,2020,5
+21,Maidenhead Utd,38,12,5,21,44,58,-14,41,1.08,,,,,"1,339",Danny Whitehall - 13,Taye Ashby-Hammond,Retained 1,2020,5
+22,Ebbsfleet Utd,39,10,12,17,47,68,-21,42,1.08,,,,,979,Gozie Ugwu - 12,Jordan Holmes,Relegated,2020,5
+23,Fylde,37,9,12,16,44,60,-16,39,1.05,,,,,"1,470",Jordan Williams - 9,Sam Hornby,Relegated,2020,5
+24,Chorley,38,4,14,20,31,65,-34,26,0.68,,,,,"1,271","Chris Holroyd, Alex Newby - 6",Matthew Urwin,Relegated,2020,5
+1,Leyton Orient,46,25,14,7,73,35,38,89,1.93,,,,,"5,445",Macauley Bonne - 23,Dean Brill,Promoted,2019,5
+2,Solihull Moors,46,25,11,10,73,43,30,86,1.87,,,,,"1,434",Adi Yussuf - 14,Ryan Boot,→ Semi-finals,2019,5
+3,Salford City,46,25,10,11,77,45,32,85,1.85,,,,,"2,618",Adam Rooney - 20,Chris Neal,"Promoted, → Semi-finals",2019,5
+4,Wrexham,46,25,9,12,58,39,19,84,1.83,,,,,"5,365",Shaun Pearson - 6,Rob Lainton,→ Qualifying round,2019,5
+5,Fylde,46,22,15,9,72,41,31,81,1.76,,,,,"2,073",Danny Rowe - 27,Jay Lynch,→ Qualifying round,2019,5
+6,Harrogate,46,21,11,14,78,57,21,74,1.61,,,,,"1,576",Jack Muldoon - 15,James Belshaw,→ Qualifying round,2019,5
+7,Eastleigh,46,22,8,16,62,63,-1,74,1.61,,,,,"1,797",Paul McCallum - 26,Luke Southwood,→ Qualifying round,2019,5
+8,Ebbsfleet Utd,46,18,13,15,64,50,14,67,1.46,,,,,"1,450",Michael Cheek - 16,Nathan Ashmore,,2019,5
+9,Gateshead,46,19,9,18,52,48,4,57,1.24,,,,,841,Scott Boden - 11,Aynsley Pears,"9-point deduction 1, Relegated 2",2019,5
+10,Sutton United,46,17,14,15,55,60,-5,65,1.41,,,,,"1,910",Craig Eastmond - 7,Jamie Butler,,2019,5
+11,Barrow,46,17,13,16,52,51,1,64,1.39,,,,,"1,376",Jack Hindle - 12,Joel Dixon,,2019,5
+12,Bromley,46,16,12,18,68,69,-1,60,1.3,,,,,"1,470",JJ Hooper - 13,David Gregory,,2019,5
+13,Barnet,46,16,12,18,45,50,-5,60,1.3,,,,,"1,338",Shaq Coulthirst - 12,Mark Cousins,,2019,5
+14,Dover Athletic,46,16,12,18,58,64,-6,60,1.3,,,,,"1,123",Inih Effiong - 9,Mitch Walker,,2019,5
+15,Chesterfield,46,14,17,15,55,53,2,59,1.28,,,,,"4,504",Scott Boden - 10,Shwan Jalal,,2019,5
+16,FC Halifax Town,46,13,20,13,44,43,1,59,1.28,,,,,"1,553",Devante Rodney - 7,Sam Johnson,,2019,5
+17,Hartlepool Utd,46,15,14,17,56,62,-6,59,1.28,,,,,"3,124",Liam Noble - 12,Scott Loach,,2019,5
+18,Dag & Red,46,15,11,20,50,56,-6,56,1.22,,,,,"1,423",Conor Wilkinson - 12,Elliot Justham,,2019,5
+19,Maidenhead Utd,46,16,6,24,45,70,-25,54,1.17,,,,,"1,365",Adrian Clifton - 14,Carl Pentney,,2019,5
+20,Boreham Wood,46,12,16,18,53,65,-12,52,1.13,,,,,718,Justin Shaibu - 9,Ryan Huddart,,2019,5
+21,Aldershot Town,46,11,11,24,38,67,-29,44,0.96,,,,,"1,744",Scott Rendell - 7,"Jake Cole, William Mannion",Retained 3,2019,5
+22,Braintree Town,46,11,8,27,48,78,-30,38,0.83,,,,,678,Mohamed Bettamer - 6,Ben Killip,"3-point deduction 4, Relegated",2019,5
+23,Havant & W'ville,46,9,13,24,62,84,-22,40,0.87,,,,,"1,277",Alfie Rutherford - 15,Ben Dudzinski,Relegated,2019,5
+24,Maidstone Utd,46,9,7,30,37,82,-45,34,0.74,,,,,"2,179",Blair Turgott - 14,Lee Worgan,Relegated,2019,5

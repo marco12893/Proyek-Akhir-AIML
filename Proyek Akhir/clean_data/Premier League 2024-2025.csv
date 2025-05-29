@@ -1,0 +1,381 @@
+Wk,Day,Date,Time,Home,xG,Score,xG.1,Away,Attendance,Venue,Referee,Match Report,Notes,HomeGoals,AwayGoals
+1,Fri,2024-08-16,20:00 (02:00),Manchester Utd,2.4,1–0,0.4,Fulham,"73,297",Old Trafford,Robert Jones,Match Report,,1.0,0.0
+1,Sat,2024-08-17,12:30 (18:30),Ipswich Town,0.5,0–2,2.6,Liverpool,"30,014",Portman Road Stadium,Tim Robinson,Match Report,,0.0,2.0
+1,Sat,2024-08-17,15:00 (21:00),Newcastle Utd,0.3,1–0,1.8,Southampton,"52,196",St James' Park,Craig Pawson,Match Report,,1.0,0.0
+1,Sat,2024-08-17,15:00 (21:00),Everton,0.5,0–3,1.4,Brighton,"39,217",Goodison Park,Simon Hooper,Match Report,,0.0,3.0
+1,Sat,2024-08-17,15:00 (21:00),Nott'ham Forest,1.3,1–1,1.2,Bournemouth,"29,763",The City Ground,Michael Oliver,Match Report,,1.0,1.0
+1,Sat,2024-08-17,15:00 (21:00),Arsenal,1.2,2–0,0.5,Wolves,"60,261",Emirates Stadium,Jarred Gillett,Match Report,,2.0,0.0
+1,Sat,2024-08-17,17:30 (23:30),West Ham,2.3,1–2,2.0,Aston Villa,"62,463",London Stadium,Tony Harrington,Match Report,,1.0,2.0
+1,Sun,2024-08-18,14:00 (20:00),Brentford,1.6,2–1,1.2,Crystal Palace,"16,988",Gtech Community Stadium,Samuel Barrott,Match Report,,2.0,1.0
+1,Sun,2024-08-18,16:30 (22:30),Chelsea,1.0,0–2,0.8,Manchester City,"39,818",Stamford Bridge,Anthony Taylor,Match Report,,0.0,2.0
+1,Mon,2024-08-19,20:00 (02:00),Leicester City,1.0,1–1,1.2,Tottenham,"31,977",King Power Stadium,Chris Kavanagh,Match Report,,1.0,1.0
+2,Sat,2024-08-24,12:30 (18:30),Brighton,2.1,2–1,1.4,Manchester Utd,"31,537",The American Express Stadium,Craig Pawson,Match Report,,2.0,1.0
+2,Sat,2024-08-24,15:00 (21:00),Manchester City,3.3,4–1,0.3,Ipswich Town,"53,147",Etihad Stadium,Samuel Allison,Match Report,,4.0,1.0
+2,Sat,2024-08-24,15:00 (21:00),Southampton,0.1,0–1,2.2,Nott'ham Forest,"31,150",St Mary's Stadium,Samuel Barrott,Match Report,,0.0,1.0
+2,Sat,2024-08-24,15:00 (21:00),Tottenham,2.4,4–0,1.0,Everton,"61,357",Tottenham Hotspur Stadium,Anthony Taylor,Match Report,,4.0,0.0
+2,Sat,2024-08-24,15:00 (21:00),Fulham,1.8,2–1,0.6,Leicester City,"25,401",Craven Cottage,Darren Bond,Match Report,,2.0,1.0
+2,Sat,2024-08-24,15:00 (21:00),Crystal Palace,1.3,0–2,1.4,West Ham,"25,099",Selhurst Park,Robert Jones,Match Report,,0.0,2.0
+2,Sat,2024-08-24,17:30 (23:30),Aston Villa,1.2,0–2,0.9,Arsenal,"41,587",Villa Park,Michael Oliver,Match Report,,0.0,2.0
+2,Sun,2024-08-25,14:00 (20:00),Wolves,1.9,2–6,1.6,Chelsea,"31,235",Molineux Stadium,Darren England,Match Report,,2.0,6.0
+2,Sun,2024-08-25,14:00 (20:00),Bournemouth,2.2,1–1,1.6,Newcastle Utd,"11,161",Vitality Stadium,David Coote,Match Report,,1.0,1.0
+2,Sun,2024-08-25,16:30 (22:30),Liverpool,2.5,2–0,0.5,Brentford,"60,017",Anfield,Stuart Attwell,Match Report,,2.0,0.0
+3,Sat,2024-08-31,12:30 (18:30),Arsenal,2.1,1–1,1.7,Brighton,"60,326",Emirates Stadium,Chris Kavanagh,Match Report,,1.0,1.0
+3,Sat,2024-08-31,15:00 (21:00),Ipswich Town,0.4,1–1,0.9,Fulham,"29,517",Portman Road Stadium,Lewis Smith,Match Report,,1.0,1.0
+3,Sat,2024-08-31,15:00 (21:00),Nott'ham Forest,1.0,1–1,0.7,Wolves,"29,918",The City Ground,Simon Hooper,Match Report,,1.0,1.0
+3,Sat,2024-08-31,15:00 (21:00),Brentford,2.8,3–1,1.5,Southampton,"16,955",Gtech Community Stadium,Joshua Smith,Match Report,,3.0,1.0
+3,Sat,2024-08-31,15:00 (21:00),Leicester City,0.4,1–2,1.4,Aston Villa,"31,725",King Power Stadium,David Coote,Match Report,,1.0,2.0
+3,Sat,2024-08-31,15:00 (21:00),Everton,1.8,2–3,2.4,Bournemouth,"38,805",Goodison Park,Stuart Attwell,Match Report,,2.0,3.0
+3,Sat,2024-08-31,17:30 (23:30),West Ham,0.7,1–3,3.0,Manchester City,"62,469",London Stadium,Michael Oliver,Match Report,,1.0,3.0
+3,Sun,2024-09-01,13:30 (19:30),Newcastle Utd,1.8,2–1,1.2,Tottenham,"52,211",St James' Park,Robert Jones,Match Report,,2.0,1.0
+3,Sun,2024-09-01,13:30 (19:30),Chelsea,2.4,1–1,0.5,Crystal Palace,"39,298",Stamford Bridge,Jarred Gillett,Match Report,,1.0,1.0
+3,Sun,2024-09-01,16:00 (22:00),Manchester Utd,1.4,0–3,1.8,Liverpool,"73,738",Old Trafford,Anthony Taylor,Match Report,,0.0,3.0
+4,Sat,2024-09-14,12:30 (18:30),Southampton,1.1,0–3,2.6,Manchester Utd,"31,144",St Mary's Stadium,Stuart Attwell,Match Report,,0.0,3.0
+4,Sat,2024-09-14,15:00 (21:00),Manchester City,2.1,2–1,1.0,Brentford,"52,148",Etihad Stadium,Darren Bond,Match Report,,2.0,1.0
+4,Sat,2024-09-14,15:00 (21:00),Liverpool,0.9,0–1,0.4,Nott'ham Forest,"60,344",Anfield,Michael Oliver,Match Report,,0.0,1.0
+4,Sat,2024-09-14,15:00 (21:00),Crystal Palace,2.5,2–2,1.2,Leicester City,"25,147",Selhurst Park,Tony Harrington,Match Report,,2.0,2.0
+4,Sat,2024-09-14,15:00 (21:00),Fulham,1.5,1–1,0.8,West Ham,"26,528",Craven Cottage,Tim Robinson,Match Report,,1.0,1.0
+4,Sat,2024-09-14,15:00 (21:00),Brighton,1.6,0–0,0.3,Ipswich Town,"41,573",The American Express Stadium,Samuel Barrott,Match Report,,0.0,0.0
+4,Sat,2024-09-14,17:30 (23:30),Aston Villa,2.1,3–2,0.9,Everton,"41,573",Villa Park,Craig Pawson,Match Report,,3.0,2.0
+4,Sat,2024-09-14,20:00 (02:00),Bournemouth,1.7,0–1,0.8,Chelsea,"11,235",Vitality Stadium,Anthony Taylor,Match Report,,0.0,1.0
+4,Sun,2024-09-15,14:00 (20:00),Tottenham,0.7,0–1,0.7,Arsenal,"61,645",Tottenham Hotspur Stadium,Jarred Gillett,Match Report,,0.0,1.0
+4,Sun,2024-09-15,16:30 (22:30),Wolves,1.2,1–2,1.5,Newcastle Utd,"30,255",Molineux Stadium,Chris Kavanagh,Match Report,,1.0,2.0
+5,Sat,2024-09-21,12:30 (18:30),West Ham,0.9,0–3,2.2,Chelsea,"62,473",London Stadium,Samuel Barrott,Match Report,,0.0,3.0
+5,Sat,2024-09-21,15:00 (21:00),Tottenham,3.5,3–1,0.8,Brentford,"61,246",Tottenham Hotspur Stadium,John Brooks,Match Report,,3.0,1.0
+5,Sat,2024-09-21,15:00 (21:00),Aston Villa,1.7,3–1,0.5,Wolves,"39,978",Villa Park,Tim Robinson,Match Report,,3.0,1.0
+5,Sat,2024-09-21,15:00 (21:00),Fulham,2.2,3–1,1.5,Newcastle Utd,"25,700",Craven Cottage,Peter Bankes,Match Report,,3.0,1.0
+5,Sat,2024-09-21,15:00 (21:00),Southampton,2.4,1–1,1.6,Ipswich Town,"31,117",St Mary's Stadium,Samuel Allison,Match Report,,1.0,1.0
+5,Sat,2024-09-21,15:00 (21:00),Leicester City,0.7,1–1,1.1,Everton,"31,765",King Power Stadium,Darren England,Match Report,,1.0,1.0
+5,Sat,2024-09-21,15:00 (21:00),Liverpool,2.0,3–0,1.1,Bournemouth,"60,347",Anfield,Tony Harrington,Match Report,,3.0,0.0
+5,Sat,2024-09-21,17:30 (23:30),Crystal Palace,1.0,0–0,1.6,Manchester Utd,"25,172",Selhurst Park,David Coote,Match Report,,0.0,0.0
+5,Sun,2024-09-22,14:00 (20:00),Brighton,1.0,2–2,1.4,Nott'ham Forest,"31,444",The American Express Stadium,Robert Jones,Match Report,,2.0,2.0
+5,Sun,2024-09-22,16:30 (22:30),Manchester City,2.1,2–2,0.7,Arsenal,"52,846",Etihad Stadium,Michael Oliver,Match Report,,2.0,2.0
+6,Sat,2024-09-28,12:30 (18:30),Newcastle Utd,1.6,1–1,0.9,Manchester City,"52,248",St James' Park,Jarred Gillett,Match Report,,1.0,1.0
+6,Sat,2024-09-28,15:00 (21:00),Brentford,0.4,1–1,1.0,West Ham,"17,050",Gtech Community Stadium,Simon Hooper,Match Report,,1.0,1.0
+6,Sat,2024-09-28,15:00 (21:00),Everton,0.9,2–1,0.9,Crystal Palace,"38,954",Goodison Park,Andy Madley,Match Report,,2.0,1.0
+6,Sat,2024-09-28,15:00 (21:00),Arsenal,4.4,4–2,0.3,Leicester City,"60,323",Emirates Stadium,Samuel Barrott,Match Report,,4.0,2.0
+6,Sat,2024-09-28,15:00 (21:00),Chelsea,4.2,4–2,1.1,Brighton,"39,495",Stamford Bridge,Peter Bankes,Match Report,,4.0,2.0
+6,Sat,2024-09-28,15:00 (21:00),Nott'ham Forest,0.8,0–1,1.3,Fulham,"30,139",The City Ground,Joshua Smith,Match Report,,0.0,1.0
+6,Sat,2024-09-28,17:30 (23:30),Wolves,0.6,1–2,2.5,Liverpool,"31,413",Molineux Stadium,Anthony Taylor,Match Report,,1.0,2.0
+6,Sun,2024-09-29,14:00 (20:00),Ipswich Town,1.2,2–2,0.8,Aston Villa,"29,943",Portman Road Stadium,Stuart Attwell,Match Report,,2.0,2.0
+6,Sun,2024-09-29,16:30 (22:30),Manchester Utd,1.0,0–3,4.4,Tottenham,"73,587",Old Trafford,Chris Kavanagh,Match Report,,0.0,3.0
+6,Mon,2024-09-30,20:00 (02:00),Bournemouth,1.3,3–1,0.6,Southampton,"11,243",Vitality Stadium,Michael Oliver,Match Report,,3.0,1.0
+7,Sat,2024-10-05,12:30 (18:30),Crystal Palace,0.6,0–1,1.4,Liverpool,"25,185",Selhurst Park,Simon Hooper,Match Report,,0.0,1.0
+7,Sat,2024-10-05,15:00 (21:00),Brentford,4.2,5–3,1.0,Wolves,"16,960",Gtech Community Stadium,Andy Madley,Match Report,,5.0,3.0
+7,Sat,2024-10-05,15:00 (21:00),Leicester City,0.8,1–0,2.1,Bournemouth,"31,706",King Power Stadium,Darren Bond,Match Report,,1.0,0.0
+7,Sat,2024-10-05,15:00 (21:00),Manchester City,1.6,3–2,2.6,Fulham,"53,017",Etihad Stadium,Peter Bankes,Match Report,,3.0,2.0
+7,Sat,2024-10-05,15:00 (21:00),West Ham,3.6,4–1,0.6,Ipswich Town,"62,467",London Stadium,Anthony Taylor,Match Report,,4.0,1.0
+7,Sat,2024-10-05,15:00 (21:00),Arsenal,2.8,3–1,0.6,Southampton,"60,307",Emirates Stadium,Tony Harrington,Match Report,,3.0,1.0
+7,Sat,2024-10-05,17:30 (23:30),Everton,0.7,0–0,2.1,Newcastle Utd,"39,265",Goodison Park,Craig Pawson,Match Report,,0.0,0.0
+7,Sun,2024-10-06,14:00 (20:00),Aston Villa,0.5,0–0,0.6,Manchester Utd,"42,682",Villa Park,Robert Jones,Match Report,,0.0,0.0
+7,Sun,2024-10-06,14:00 (20:00),Chelsea,2.3,1–1,0.9,Nott'ham Forest,"39,501",Stamford Bridge,Chris Kavanagh,Match Report,,1.0,1.0
+7,Sun,2024-10-06,16:30 (22:30),Brighton,1.8,3–2,1.3,Tottenham,"31,487",The American Express Stadium,David Coote,Match Report,,3.0,2.0
+8,Sat,2024-10-19,12:30 (18:30),Tottenham,1.9,4–1,0.8,West Ham,"61,381",Tottenham Hotspur Stadium,Andy Madley,Match Report,,4.0,1.0
+8,Sat,2024-10-19,15:00 (21:00),Fulham,1.8,1–3,1.6,Aston Villa,"26,743",Craven Cottage,Darren England,Match Report,,1.0,3.0
+8,Sat,2024-10-19,15:00 (21:00),Ipswich Town,1.3,0–2,1.7,Everton,"29,862",Portman Road Stadium,Michael Oliver,Match Report,,0.0,2.0
+8,Sat,2024-10-19,15:00 (21:00),Southampton,2.1,2–3,3.1,Leicester City,"31,145",St Mary's Stadium,Anthony Taylor,Match Report,,2.0,3.0
+8,Sat,2024-10-19,15:00 (21:00),Manchester Utd,1.3,2–1,0.9,Brentford,"73,738",Old Trafford,Samuel Barrott,Match Report,,2.0,1.0
+8,Sat,2024-10-19,15:00 (21:00),Newcastle Utd,2.0,0–1,1.1,Brighton,"52,220",St James' Park,Peter Bankes,Match Report,,0.0,1.0
+8,Sat,2024-10-19,17:30 (23:30),Bournemouth,1.8,2–0,0.7,Arsenal,"11,235",Vitality Stadium,Robert Jones,Match Report,,2.0,0.0
+8,Sun,2024-10-20,14:00 (20:00),Wolves,0.8,1–2,1.6,Manchester City,"31,319",Molineux Stadium,Chris Kavanagh,Match Report,,1.0,2.0
+8,Sun,2024-10-20,16:30 (22:30),Liverpool,1.9,2–1,1.0,Chelsea,"60,277",Anfield,John Brooks,Match Report,,2.0,1.0
+8,Mon,2024-10-21,20:00 (02:00),Nott'ham Forest,1.7,1–0,1.0,Crystal Palace,"29,443",The City Ground,Tim Robinson,Match Report,,1.0,0.0
+9,Fri,2024-10-25,20:00 (02:00),Leicester City,0.8,1–3,1.7,Nott'ham Forest,"31,879",King Power Stadium,Craig Pawson,Match Report,,1.0,3.0
+9,Sat,2024-10-26,15:00 (21:00),Brighton,1.3,2–2,1.3,Wolves,"31,840",The American Express Stadium,Michael Oliver,Match Report,,2.0,2.0
+9,Sat,2024-10-26,15:00 (21:00),Manchester City,2.9,1–0,0.2,Southampton,"52,844",Etihad Stadium,Tony Harrington,Match Report,,1.0,0.0
+9,Sat,2024-10-26,15:00 (21:00),Brentford,4.0,4–3,1.3,Ipswich Town,"17,109",Gtech Community Stadium,Lewis Smith,Match Report,,4.0,3.0
+9,Sat,2024-10-26,15:00 (21:00),Aston Villa,1.8,1–1,0.3,Bournemouth,"42,165",Villa Park,Chris Kavanagh,Match Report,,1.0,1.0
+9,Sat,2024-10-26,17:30 (23:30),Everton,0.8,1–1,1.2,Fulham,"38,742",Goodison Park,John Brooks,Match Report,,1.0,1.0
+9,Sun,2024-10-27,14:00 (21:00),West Ham,2.8,2–1,2.3,Manchester Utd,"62,474",London Stadium,David Coote,Match Report,,2.0,1.0
+9,Sun,2024-10-27,14:00 (21:00),Chelsea,1.6,2–1,1.8,Newcastle Utd,"39,526",Stamford Bridge,Simon Hooper,Match Report,,2.0,1.0
+9,Sun,2024-10-27,14:00 (21:00),Crystal Palace,0.8,1–0,0.7,Tottenham,"25,108",Selhurst Park,Darren Bond,Match Report,,1.0,0.0
+9,Sun,2024-10-27,16:30 (23:30),Arsenal,0.9,2–2,0.8,Liverpool,"60,383",Emirates Stadium,Anthony Taylor,Match Report,,2.0,2.0
+10,Sat,2024-11-02,12:30 (19:30),Newcastle Utd,0.5,1–0,1.1,Arsenal,"52,249",St James' Park,John Brooks,Match Report,,1.0,0.0
+10,Sat,2024-11-02,15:00 (22:00),Liverpool,1.6,2–1,1.0,Brighton,"60,331",Anfield,Tony Harrington,Match Report,,2.0,1.0
+10,Sat,2024-11-02,15:00 (22:00),Southampton,0.7,1–0,1.6,Everton,"31,143",St Mary's Stadium,Andy Madley,Match Report,,1.0,0.0
+10,Sat,2024-11-02,15:00 (22:00),Nott'ham Forest,2.2,3–0,0.1,West Ham,"30,112",The City Ground,Peter Bankes,Match Report,,3.0,0.0
+10,Sat,2024-11-02,15:00 (22:00),Ipswich Town,1.0,1–1,1.5,Leicester City,"29,874",Portman Road Stadium,Tim Robinson,Match Report,,1.0,1.0
+10,Sat,2024-11-02,15:00 (22:00),Bournemouth,2.0,2–1,1.6,Manchester City,"11,231",Vitality Stadium,Michael Oliver,Match Report,,2.0,1.0
+10,Sat,2024-11-02,17:30 (00:30),Wolves,1.5,2–2,2.4,Crystal Palace,"31,124",Molineux Stadium,Anthony Taylor,Match Report,,2.0,2.0
+10,Sun,2024-11-03,14:00 (21:00),Tottenham,2.4,4–1,1.8,Aston Villa,"61,253",Tottenham Hotspur Stadium,Craig Pawson,Match Report,,4.0,1.0
+10,Sun,2024-11-03,16:30 (23:30),Manchester Utd,2.0,1–1,1.1,Chelsea,"73,813",Old Trafford,Robert Jones,Match Report,,1.0,1.0
+10,Mon,2024-11-04,20:00 (03:00),Fulham,1.3,2–1,0.6,Brentford,"24,931",Craven Cottage,Stuart Attwell,Match Report,,2.0,1.0
+11,Sat,2024-11-09,15:00 (22:00),West Ham,0.8,0–0,1.1,Everton,"62,463",London Stadium,Stuart Attwell,Match Report,,0.0,0.0
+11,Sat,2024-11-09,15:00 (22:00),Crystal Palace,1.5,0–2,1.8,Fulham,"25,142",Selhurst Park,Michael Salisbury,Match Report,,0.0,2.0
+11,Sat,2024-11-09,15:00 (22:00),Wolves,1.3,2–0,0.6,Southampton,"31,403",Molineux Stadium,Thomas Bramall,Match Report,,2.0,0.0
+11,Sat,2024-11-09,15:00 (22:00),Brentford,1.5,3–2,2.6,Bournemouth,"16,587",Gtech Community Stadium,Darren Bond,Match Report,,3.0,2.0
+11,Sat,2024-11-09,17:30 (00:30),Brighton,2.3,2–1,2.1,Manchester City,"31,715",The American Express Stadium,Samuel Barrott,Match Report,,2.0,1.0
+11,Sat,2024-11-09,20:00 (03:00),Liverpool,2.0,2–0,1.2,Aston Villa,"60,292",Anfield,David Coote,Match Report,,2.0,0.0
+11,Sun,2024-11-10,14:00 (21:00),Tottenham,1.5,1–2,1.6,Ipswich Town,"61,505",Tottenham Hotspur Stadium,Darren England,Match Report,,1.0,2.0
+11,Sun,2024-11-10,14:00 (21:00),Nott'ham Forest,0.6,1–3,1.6,Newcastle Utd,"30,145",The City Ground,Anthony Taylor,Match Report,,1.0,3.0
+11,Sun,2024-11-10,14:00 (21:00),Manchester Utd,0.8,3–0,0.6,Leicester City,"73,829",Old Trafford,Peter Bankes,Match Report,,3.0,0.0
+11,Sun,2024-11-10,16:30 (23:30),Chelsea,1.5,1–1,1.5,Arsenal,"39,780",Stamford Bridge,Michael Oliver,Match Report,,1.0,1.0
+12,Sat,2024-11-23,12:30 (19:30),Leicester City,1.1,1–2,2.7,Chelsea,"31,880",King Power Stadium,Andy Madley,Match Report,,1.0,2.0
+12,Sat,2024-11-23,15:00 (22:00),Aston Villa,3.0,2–2,1.3,Crystal Palace,"42,175",Villa Park,Tim Robinson,Match Report,,2.0,2.0
+12,Sat,2024-11-23,15:00 (22:00),Fulham,1.0,1–4,1.3,Wolves,"26,685",Craven Cottage,Robert Jones,Match Report,,1.0,4.0
+12,Sat,2024-11-23,15:00 (22:00),Bournemouth,1.6,1–2,0.9,Brighton,"11,196",Vitality Stadium,Stuart Attwell,Match Report,,1.0,2.0
+12,Sat,2024-11-23,15:00 (22:00),Arsenal,1.2,3–0,0.3,Nott'ham Forest,"60,298",Emirates Stadium,Simon Hooper,Match Report,,3.0,0.0
+12,Sat,2024-11-23,15:00 (22:00),Everton,1.2,0–0,1.1,Brentford,"38,915",Goodison Park,Chris Kavanagh,Match Report,,0.0,0.0
+12,Sat,2024-11-23,17:30 (00:30),Manchester City,2.1,0–4,2.5,Tottenham,"52,478",Etihad Stadium,John Brooks,Match Report,,0.0,4.0
+12,Sun,2024-11-24,14:00 (21:00),Southampton,1.3,2–3,3.1,Liverpool,"31,278",St Mary's Stadium,Samuel Barrott,Match Report,,2.0,3.0
+12,Sun,2024-11-24,16:30 (23:30),Ipswich Town,1.6,1–1,0.8,Manchester Utd,"30,017",Portman Road Stadium,Anthony Taylor,Match Report,,1.0,1.0
+12,Mon,2024-11-25,20:00 (03:00),Newcastle Utd,1.6,0–2,0.9,West Ham,"52,094",St James' Park,Craig Pawson,Match Report,,0.0,2.0
+13,Fri,2024-11-29,20:00 (03:00),Brighton,1.7,1–1,1.0,Southampton,"31,542",The American Express Stadium,Robert Jones,Match Report,,1.0,1.0
+13,Sat,2024-11-30,15:00 (22:00),Wolves,0.5,2–4,3.3,Bournemouth,"26,685",Molineux Stadium,Peter Bankes,Match Report,,2.0,4.0
+13,Sat,2024-11-30,15:00 (22:00),Nott'ham Forest,1.6,1–0,0.6,Ipswich Town,"30,237",The City Ground,Tony Harrington,Match Report,,1.0,0.0
+13,Sat,2024-11-30,15:00 (22:00),Brentford,2.4,4–1,1.1,Leicester City,"17,084",Gtech Community Stadium,Michael Oliver,Match Report,,4.0,1.0
+13,Sat,2024-11-30,15:00 (22:00),Crystal Palace,1.7,1–1,0.0,Newcastle Utd,"25,101",Selhurst Park,Darren England,Match Report,,1.0,1.0
+13,Sat,2024-11-30,17:30 (00:30),West Ham,1.5,2–5,3.5,Arsenal,"62,475",London Stadium,Anthony Taylor,Match Report,,2.0,5.0
+13,Sun,2024-12-01,13:30 (20:30),Manchester Utd,1.1,4–0,0.6,Everton,"73,817",Old Trafford,John Brooks,Match Report,,4.0,0.0
+13,Sun,2024-12-01,13:30 (20:30),Tottenham,0.8,1–1,1.5,Fulham,"61,141",Tottenham Hotspur Stadium,Darren Bond,Match Report,,1.0,1.0
+13,Sun,2024-12-01,13:30 (20:30),Chelsea,1.6,3–0,1.2,Aston Villa,"40,853",Stamford Bridge,Stuart Attwell,Match Report,,3.0,0.0
+13,Sun,2024-12-01,16:00 (23:00),Liverpool,3.4,2–0,0.8,Manchester City,"60,248",Anfield,Chris Kavanagh,Match Report,,2.0,0.0
+14,Tue,2024-12-03,19:30 (02:30),Ipswich Town,0.5,0–1,1.6,Crystal Palace,"29,533",Portman Road Stadium,Craig Pawson,Match Report,,0.0,1.0
+14,Tue,2024-12-03,20:15 (03:15),Leicester City,1.7,3–1,3.0,West Ham,"30,947",King Power Stadium,Joshua Smith,Match Report,,3.0,1.0
+14,Wed,2024-12-04,19:30 (02:30),Newcastle Utd,2.1,3–3,1.9,Liverpool,"52,237",St James' Park,Andy Madley,Match Report,,3.0,3.0
+14,Wed,2024-12-04,19:30 (02:30),Everton,1.0,4–0,0.8,Wolves,"38,820",Goodison Park,Michael Salisbury,Match Report,,4.0,0.0
+14,Wed,2024-12-04,19:30 (02:30),Manchester City,2.4,3–0,1.0,Nott'ham Forest,"51,764",Etihad Stadium,Michael Oliver,Match Report,,3.0,0.0
+14,Wed,2024-12-04,19:30 (02:30),Southampton,1.6,1–5,5.2,Chelsea,"31,193",St Mary's Stadium,Tony Harrington,Match Report,,1.0,5.0
+14,Wed,2024-12-04,20:15 (03:15),Arsenal,2.1,2–0,0.2,Manchester Utd,"60,256",Emirates Stadium,Samuel Barrott,Match Report,,2.0,0.0
+14,Wed,2024-12-04,20:15 (03:15),Aston Villa,2.4,3–1,0.9,Brentford,"42,148",Villa Park,Lewis Smith,Match Report,,3.0,1.0
+14,Thu,2024-12-05,19:30 (02:30),Fulham,1.1,3–1,1.4,Brighton,"26,368",Craven Cottage,Peter Bankes,Match Report,,3.0,1.0
+14,Thu,2024-12-05,20:15 (03:15),Bournemouth,3.5,1–0,0.9,Tottenham,"11,234",Vitality Stadium,Simon Hooper,Match Report,,1.0,0.0
+15,Sat,2024-12-07,15:00 (22:00),Aston Villa,2.3,1–0,0.3,Southampton,"42,453",Villa Park,Darren Bond,Match Report,,1.0,0.0
+15,Sat,2024-12-07,15:00 (22:00),Crystal Palace,1.3,2–2,1.4,Manchester City,"25,142",Selhurst Park,Robert Jones,Match Report,,2.0,2.0
+15,Sat,2024-12-07,15:00 (22:00),Brentford,1.2,4–2,1.5,Newcastle Utd,"17,078",Gtech Community Stadium,Simon Hooper,Match Report,,4.0,2.0
+15,Sat,2024-12-07,17:30 (00:30),Manchester Utd,1.6,2–3,0.8,Nott'ham Forest,"73,778",Old Trafford,Darren England,Match Report,,2.0,3.0
+15,Sun,2024-12-08,14:00 (21:00),Leicester City,1.3,2–2,1.5,Brighton,"31,647",King Power Stadium,Stuart Attwell,Match Report,,2.0,2.0
+15,Sun,2024-12-08,14:00 (21:00),Ipswich Town,1.3,1–2,3.2,Bournemouth,"29,180",Portman Road Stadium,Michael Salisbury,Match Report,,1.0,2.0
+15,Sun,2024-12-08,14:00 (21:00),Fulham,0.2,1–1,1.8,Arsenal,"26,954",Craven Cottage,Chris Kavanagh,Match Report,,1.0,1.0
+15,Sun,2024-12-08,16:30 (23:30),Tottenham,2.8,3–4,2.8,Chelsea,"61,184",Tottenham Hotspur Stadium,Anthony Taylor,Match Report,,3.0,4.0
+15,Mon,2024-12-09,20:00 (03:00),West Ham,1.0,2–1,1.4,Wolves,"62,474",London Stadium,John Brooks,Match Report,,2.0,1.0
+16,Sat,2024-12-14,15:00 (22:00),Liverpool,2.1,2–2,1.2,Fulham,"60,333",Anfield,Tony Harrington,Match Report,,2.0,2.0
+16,Sat,2024-12-14,15:00 (22:00),Wolves,1.3,1–2,1.1,Ipswich Town,"30,866",Molineux Stadium,Simon Hooper,Match Report,,1.0,2.0
+16,Sat,2024-12-14,15:00 (22:00),Newcastle Utd,3.8,4–0,0.2,Leicester City,"52,235",St James' Park,Thomas Bramall,Match Report,,4.0,0.0
+16,Sat,2024-12-14,15:00 (22:00),Arsenal,1.2,0–0,0.1,Everton,"60,176",Emirates Stadium,Craig Pawson,Match Report,,0.0,0.0
+16,Sat,2024-12-14,17:30 (00:30),Nott'ham Forest,1.7,2–1,0.4,Aston Villa,"30,117",The City Ground,Samuel Barrott,Match Report,,2.0,1.0
+16,Sun,2024-12-15,14:00 (21:00),Brighton,1.0,1–3,2.2,Crystal Palace,"30,893",The American Express Stadium,Michael Oliver,Match Report,,1.0,3.0
+16,Sun,2024-12-15,16:30 (23:30),Manchester City,0.9,1–2,2.1,Manchester Utd,"53,184",Etihad Stadium,Anthony Taylor,Match Report,,1.0,2.0
+16,Sun,2024-12-15,19:00 (02:00),Southampton,0.8,0–5,2.3,Tottenham,"31,090",St Mary's Stadium,Darren England,Match Report,,0.0,5.0
+16,Sun,2024-12-15,19:00 (02:00),Chelsea,2.2,2–1,1.6,Brentford,"39,571",Stamford Bridge,Peter Bankes,Match Report,,2.0,1.0
+16,Mon,2024-12-16,20:00 (03:00),Bournemouth,1.9,1–1,2.1,West Ham,"11,204",Vitality Stadium,Chris Kavanagh,Match Report,,1.0,1.0
+17,Sat,2024-12-21,12:30 (19:30),Aston Villa,1.6,2–1,1.0,Manchester City,"42,345",Villa Park,Peter Bankes,Match Report,,2.0,1.0
+17,Sat,2024-12-21,15:00 (22:00),Ipswich Town,0.7,0–4,2.3,Newcastle Utd,"29,774",Portman Road Stadium,Stuart Attwell,Match Report,,0.0,4.0
+17,Sat,2024-12-21,15:00 (22:00),Brentford,0.7,0–2,0.9,Nott'ham Forest,"17,115",Gtech Community Stadium,Michael Oliver,Match Report,,0.0,2.0
+17,Sat,2024-12-21,15:00 (22:00),West Ham,1.2,1–1,0.9,Brighton,"62,460",London Stadium,Robert Jones,Match Report,,1.0,1.0
+17,Sat,2024-12-21,17:30 (00:30),Crystal Palace,1.6,1–5,2.5,Arsenal,"25,167",Selhurst Park,Simon Hooper,Match Report,,1.0,5.0
+17,Sun,2024-12-22,14:00 (21:00),Manchester Utd,2.2,0–3,1.6,Bournemouth,"73,720",Old Trafford,Craig Pawson,Match Report,,0.0,3.0
+17,Sun,2024-12-22,14:00 (21:00),Leicester City,0.8,0–3,1.1,Wolves,"31,818",King Power Stadium,Anthony Taylor,Match Report,,0.0,3.0
+17,Sun,2024-12-22,14:00 (21:00),Everton,1.0,0–0,1.2,Chelsea,"39,358",Goodison Park,Chris Kavanagh,Match Report,,0.0,0.0
+17,Sun,2024-12-22,14:00 (21:00),Fulham,0.9,0–0,0.3,Southampton,"26,819",Craven Cottage,Tim Robinson,Match Report,,0.0,0.0
+17,Sun,2024-12-22,16:30 (23:30),Tottenham,1.3,3–6,5.6,Liverpool,"61,439",Tottenham Hotspur Stadium,Samuel Barrott,Match Report,,3.0,6.0
+18,Thu,2024-12-26,12:30 (19:30),Manchester City,2.1,1–1,0.7,Everton,"55,527",Etihad Stadium,Simon Hooper,Match Report,,1.0,1.0
+18,Thu,2024-12-26,15:00 (22:00),Southampton,1.4,0–1,1.7,West Ham,"31,059",St Mary's Stadium,Lewis Smith,Match Report,,0.0,1.0
+18,Thu,2024-12-26,15:00 (22:00),Newcastle Utd,2.7,3–0,0.3,Aston Villa,"52,168",St James' Park,Anthony Taylor,Match Report,,3.0,0.0
+18,Thu,2024-12-26,15:00 (22:00),Nott'ham Forest,1.1,1–0,0.9,Tottenham,"30,200",The City Ground,Craig Pawson,Match Report,,1.0,0.0
+18,Thu,2024-12-26,15:00 (22:00),Bournemouth,1.4,0–0,0.4,Crystal Palace,"11,129",Vitality Stadium,Thomas Bramall,Match Report,,0.0,0.0
+18,Thu,2024-12-26,15:00 (22:00),Chelsea,1.1,1–2,1.8,Fulham,"39,687",Stamford Bridge,Samuel Barrott,Match Report,,1.0,2.0
+18,Thu,2024-12-26,17:30 (00:30),Wolves,0.9,2–0,0.4,Manchester Utd,"31,407",Molineux Stadium,Tony Harrington,Match Report,,2.0,0.0
+18,Thu,2024-12-26,20:00 (03:00),Liverpool,2.0,3–1,0.3,Leicester City,"60,300",Anfield,Darren Bond,Match Report,,3.0,1.0
+18,Fri,2024-12-27,19:30 (02:30),Brighton,1.3,0–0,1.1,Brentford,"31,548",The American Express Stadium,Andy Madley,Match Report,,0.0,0.0
+18,Fri,2024-12-27,20:15 (03:15),Arsenal,1.8,1–0,0.2,Ipswich Town,"60,271",Emirates Stadium,Darren England,Match Report,,1.0,0.0
+19,Sun,2024-12-29,14:30 (21:30),Leicester City,1.3,0–2,1.3,Manchester City,"32,057",King Power Stadium,Michael Oliver,Match Report,,0.0,2.0
+19,Sun,2024-12-29,15:00 (22:00),Everton,0.9,0–2,1.5,Nott'ham Forest,"25,414",Goodison Park,Tony Harrington,Match Report,,0.0,2.0
+19,Sun,2024-12-29,15:00 (22:00),Tottenham,2.2,2–2,0.7,Wolves,"61,284",Tottenham Hotspur Stadium,Chris Kavanagh,Match Report,,2.0,2.0
+19,Sun,2024-12-29,15:00 (22:00),Fulham,1.1,2–2,2.0,Bournemouth,"27,301",Craven Cottage,Robert Jones,Match Report,,2.0,2.0
+19,Sun,2024-12-29,15:00 (22:00),Crystal Palace,2.0,2–1,0.9,Southampton,"25,130",Selhurst Park,Michael Salisbury,Match Report,,2.0,1.0
+19,Sun,2024-12-29,17:15 (00:15),West Ham,0.4,0–5,3.1,Liverpool,"62,476",London Stadium,Anthony Taylor,Match Report,,0.0,5.0
+19,Mon,2024-12-30,19:45 (02:45),Aston Villa,1.8,2–2,1.1,Brighton,"41,414",Villa Park,Craig Pawson,Match Report,,2.0,2.0
+19,Mon,2024-12-30,19:45 (02:45),Ipswich Town,1.6,2–0,2.0,Chelsea,"29,968",Portman Road Stadium,John Brooks,Match Report,,2.0,0.0
+19,Mon,2024-12-30,20:00 (03:00),Manchester Utd,0.8,0–2,1.9,Newcastle Utd,"73,809",Old Trafford,Simon Hooper,Match Report,,0.0,2.0
+19,Wed,2025-01-01,17:30 (00:30),Brentford,0.3,1–3,1.9,Arsenal,"47,190",Gtech Community Stadium,Peter Bankes,Match Report,,1.0,3.0
+20,Sat,2025-01-04,12:30 (19:30),Tottenham,0.9,1–2,2.5,Newcastle Utd,"61,293",Tottenham Hotspur Stadium,Andy Madley,Match Report,,1.0,2.0
+20,Sat,2025-01-04,15:00 (22:00),Aston Villa,1.4,2–1,0.4,Leicester City,"42,386",Villa Park,Jarred Gillett,Match Report,,2.0,1.0
+20,Sat,2025-01-04,15:00 (22:00),Bournemouth,1.8,1–0,0.7,Everton,"11,223",Vitality Stadium,John Brooks,Match Report,,1.0,0.0
+20,Sat,2025-01-04,15:00 (22:00),Crystal Palace,1.1,1–1,1.2,Chelsea,"25,179",Selhurst Park,Tim Robinson,Match Report,,1.0,1.0
+20,Sat,2025-01-04,15:00 (22:00),Southampton,0.3,0–5,4.4,Brentford,"31,001",St Mary's Stadium,Stuart Attwell,Match Report,,0.0,5.0
+20,Sat,2025-01-04,15:00 (22:00),Manchester City,1.9,4–1,1.4,West Ham,"52,737",Etihad Stadium,Michael Salisbury,Match Report,,4.0,1.0
+20,Sat,2025-01-04,17:30 (00:30),Brighton,1.5,1–1,0.9,Arsenal,"31,714",The American Express Stadium,Anthony Taylor,Match Report,,1.0,1.0
+20,Sun,2025-01-05,14:00 (21:00),Fulham,2.2,2–2,1.5,Ipswich Town,"27,042",Craven Cottage,Darren Bond,Match Report,,2.0,2.0
+20,Sun,2025-01-05,16:30 (23:30),Liverpool,2.7,2–2,1.0,Manchester Utd,"60,275",Anfield,Michael Oliver,Match Report,,2.0,2.0
+20,Mon,2025-01-06,20:00 (03:00),Wolves,1.5,0–3,2.1,Nott'ham Forest,"29,940",Molineux Stadium,Peter Bankes,Match Report,,0.0,3.0
+21,Tue,2025-01-14,19:30 (02:30),West Ham,1.0,3–2,1.7,Fulham,"62,456",London Stadium,Craig Pawson,Match Report,,3.0,2.0
+21,Tue,2025-01-14,19:30 (02:30),Chelsea,2.5,2–2,1.2,Bournemouth,"39,092",Stamford Bridge,Robert Jones,Match Report,,2.0,2.0
+21,Tue,2025-01-14,19:30 (02:30),Brentford,2.5,2–2,2.2,Manchester City,"17,048",Gtech Community Stadium,Anthony Taylor,Match Report,,2.0,2.0
+21,Tue,2025-01-14,20:00 (03:00),Nott'ham Forest,0.3,1–1,2.0,Liverpool,"30,249",The City Ground,Chris Kavanagh,Match Report,,1.0,1.0
+21,Wed,2025-01-15,19:30 (02:30),Leicester City,1.7,0–2,1.8,Crystal Palace,"29,766",King Power Stadium,Andy Madley,Match Report,,0.0,2.0
+21,Wed,2025-01-15,19:30 (02:30),Everton,1.1,0–1,1.2,Aston Villa,"39,085",Goodison Park,Samuel Barrott,Match Report,,0.0,1.0
+21,Wed,2025-01-15,19:30 (02:30),Newcastle Utd,2.1,3–0,1.6,Wolves,"51,975",St James' Park,Darren England,Match Report,,3.0,0.0
+21,Wed,2025-01-15,20:00 (03:00),Arsenal,1.4,2–1,0.8,Tottenham,"60,287",Emirates Stadium,Simon Hooper,Match Report,,2.0,1.0
+21,Thu,2025-01-16,19:30 (02:30),Ipswich Town,0.3,0–2,1.0,Brighton,"29,403",Portman Road Stadium,Tony Harrington,Match Report,,0.0,2.0
+21,Thu,2025-01-16,20:00 (03:00),Manchester Utd,3.4,3–1,1.4,Southampton,"73,722",Old Trafford,John Brooks,Match Report,,3.0,1.0
+22,Sat,2025-01-18,12:30 (19:30),Newcastle Utd,0.8,1–4,2.0,Bournemouth,"52,227",St James' Park,Stuart Attwell,Match Report,,1.0,4.0
+22,Sat,2025-01-18,15:00 (22:00),Leicester City,0.6,0–2,2.0,Fulham,"31,500",King Power Stadium,Michael Salisbury,Match Report,,0.0,2.0
+22,Sat,2025-01-18,15:00 (22:00),West Ham,0.3,0–2,1.3,Crystal Palace,"62,469",London Stadium,Thomas Bramall,Match Report,,0.0,2.0
+22,Sat,2025-01-18,15:00 (22:00),Brentford,0.7,0–2,3.4,Liverpool,"17,215",Gtech Community Stadium,Andy Madley,Match Report,,0.0,2.0
+22,Sat,2025-01-18,17:30 (00:30),Arsenal,1.3,2–2,1.0,Aston Villa,"60,067",Emirates Stadium,Chris Kavanagh,Match Report,,2.0,2.0
+22,Sun,2025-01-19,14:00 (21:00),Everton,1.8,3–2,1.1,Tottenham,"39,326",Goodison Park,Darren England,Match Report,,3.0,2.0
+22,Sun,2025-01-19,14:00 (21:00),Manchester Utd,1.5,1–3,1.9,Brighton,"73,758",Old Trafford,Peter Bankes,Match Report,,1.0,3.0
+22,Sun,2025-01-19,14:00 (21:00),Nott'ham Forest,1.8,3–2,0.9,Southampton,"30,180",The City Ground,Anthony Taylor,Match Report,,3.0,2.0
+22,Sun,2025-01-19,16:30 (23:30),Ipswich Town,0.5,0–6,3.0,Manchester City,"29,841",Portman Road Stadium,Samuel Barrott,Match Report,,0.0,6.0
+22,Mon,2025-01-20,20:00 (03:00),Chelsea,3.1,3–1,0.8,Wolves,"39,221",Stamford Bridge,Simon Hooper,Match Report,,3.0,1.0
+23,Sat,2025-01-25,15:00 (22:00),Southampton,0.8,1–3,2.9,Newcastle Utd,"31,141",St Mary's Stadium,Samuel Barrott,Match Report,,1.0,3.0
+23,Sat,2025-01-25,15:00 (22:00),Brighton,0.7,0–1,0.8,Everton,"31,087",The American Express Stadium,Tim Robinson,Match Report,,0.0,1.0
+23,Sat,2025-01-25,15:00 (22:00),Liverpool,2.0,4–1,0.5,Ipswich Town,"60,420",Anfield,Michael Salisbury,Match Report,,4.0,1.0
+23,Sat,2025-01-25,15:00 (22:00),Bournemouth,1.7,5–0,1.0,Nott'ham Forest,"11,228",Vitality Stadium,Craig Pawson,Match Report,,5.0,0.0
+23,Sat,2025-01-25,15:00 (22:00),Wolves,0.7,0–1,1.0,Arsenal,"31,503",Molineux Stadium,Michael Oliver,Match Report,,0.0,1.0
+23,Sat,2025-01-25,17:30 (00:30),Manchester City,2.2,3–1,1.8,Chelsea,"52,687",Etihad Stadium,John Brooks,Match Report,,3.0,1.0
+23,Sun,2025-01-26,14:00 (21:00),Crystal Palace,1.1,1–2,1.3,Brentford,"25,066",Selhurst Park,Tony Harrington,Match Report,,1.0,2.0
+23,Sun,2025-01-26,14:00 (21:00),Tottenham,1.0,1–2,1.6,Leicester City,"61,295",Tottenham Hotspur Stadium,Robert Jones,Match Report,,1.0,2.0
+23,Sun,2025-01-26,16:30 (23:30),Aston Villa,0.9,1–1,1.3,West Ham,"41,628",Villa Park,Peter Bankes,Match Report,,1.0,1.0
+23,Sun,2025-01-26,19:00 (02:00),Fulham,0.7,0–1,0.3,Manchester Utd,"27,288",Craven Cottage,Anthony Taylor,Match Report,,0.0,1.0
+24,Sat,2025-02-01,12:30 (19:30),Nott'ham Forest,3.3,7–0,0.9,Brighton,"30,164",The City Ground,Simon Hooper,Match Report,,7.0,0.0
+24,Sat,2025-02-01,15:00 (22:00),Everton,2.5,4–0,0.3,Leicester City,"39,376",Goodison Park,Darren Bond,Match Report,,4.0,0.0
+24,Sat,2025-02-01,15:00 (22:00),Newcastle Utd,0.8,1–2,1.6,Fulham,"52,173",St James' Park,Chris Kavanagh,Match Report,,1.0,2.0
+24,Sat,2025-02-01,15:00 (22:00),Bournemouth,1.6,0–2,2.5,Liverpool,"11,239",Vitality Stadium,Darren England,Match Report,,0.0,2.0
+24,Sat,2025-02-01,15:00 (22:00),Ipswich Town,1.8,1–2,0.9,Southampton,"29,902",Portman Road Stadium,Michael Oliver,Match Report,,1.0,2.0
+24,Sat,2025-02-01,17:30 (00:30),Wolves,1.6,2–0,0.4,Aston Villa,"31,385",Molineux Stadium,Andy Madley,Match Report,,2.0,0.0
+24,Sun,2025-02-02,14:00 (21:00),Manchester Utd,1.1,0–2,2.6,Crystal Palace,"73,751",Old Trafford,John Brooks,Match Report,,0.0,2.0
+24,Sun,2025-02-02,14:00 (21:00),Brentford,2.1,0–2,0.8,Tottenham,"17,154",Gtech Community Stadium,Jarred Gillett,Match Report,,0.0,2.0
+24,Sun,2025-02-02,16:30 (23:30),Arsenal,1.0,5–1,0.8,Manchester City,"60,355",Emirates Stadium,Peter Bankes,Match Report,,5.0,1.0
+24,Mon,2025-02-03,20:00 (03:00),Chelsea,1.6,2–1,1.2,West Ham,"39,459",Stamford Bridge,Stuart Attwell,Match Report,,2.0,1.0
+15,Wed,2025-02-12,19:30 (02:30),Everton,1.0,2–2,0.6,Liverpool,"39,280",Goodison Park,Michael Oliver,Match Report,,2.0,2.0
+25,Fri,2025-02-14,20:00 (03:00),Brighton,1.4,3–0,0.5,Chelsea,"31,324",The American Express Stadium,Chris Kavanagh,Match Report,,3.0,0.0
+25,Sat,2025-02-15,12:30 (19:30),Leicester City,0.2,0–2,1.4,Arsenal,"31,968",King Power Stadium,Samuel Barrott,Match Report,,0.0,2.0
+25,Sat,2025-02-15,15:00 (22:00),Fulham,2.1,2–1,0.4,Nott'ham Forest,"27,164",Craven Cottage,Thomas Bramall,Match Report,,2.0,1.0
+25,Sat,2025-02-15,15:00 (22:00),Manchester City,1.9,4–0,0.5,Newcastle Utd,"52,479",Etihad Stadium,Andy Madley,Match Report,,4.0,0.0
+25,Sat,2025-02-15,15:00 (22:00),Southampton,0.8,1–3,1.2,Bournemouth,"31,037",St Mary's Stadium,Jarred Gillett,Match Report,,1.0,3.0
+25,Sat,2025-02-15,15:00 (22:00),Aston Villa,2.4,1–1,0.4,Ipswich Town,"42,510",Villa Park,Robert Jones,Match Report,,1.0,1.0
+25,Sat,2025-02-15,15:00 (22:00),West Ham,0.8,0–1,1.6,Brentford,"62,415",London Stadium,Darren England,Match Report,,0.0,1.0
+25,Sat,2025-02-15,17:30 (00:30),Crystal Palace,1.6,1–2,0.9,Everton,"25,108",Selhurst Park,Anthony Taylor,Match Report,,1.0,2.0
+25,Sun,2025-02-16,14:00 (21:00),Liverpool,1.7,2–1,1.5,Wolves,"60,248",Anfield,Simon Hooper,Match Report,,2.0,1.0
+25,Sun,2025-02-16,16:30 (23:30),Tottenham,2.2,1–0,1.5,Manchester Utd,"61,383",Tottenham Hotspur Stadium,Peter Bankes,Match Report,,1.0,0.0
+29,Wed,2025-02-19,19:30 (02:30),Aston Villa,0.6,2–2,2.5,Liverpool,"41,910",Villa Park,Craig Pawson,Match Report,,2.0,2.0
+26,Fri,2025-02-21,20:00 (03:00),Leicester City,0.5,0–4,1.5,Brentford,"31,077",King Power Stadium,Tony Harrington,Match Report,,0.0,4.0
+26,Sat,2025-02-22,12:30 (19:30),Everton,1.6,2–2,0.4,Manchester Utd,"39,290",Goodison Park,Andy Madley,Match Report,,2.0,2.0
+26,Sat,2025-02-22,15:00 (22:00),Fulham,0.2,0–2,1.3,Crystal Palace,"26,777",Craven Cottage,Robert Jones,Match Report,,0.0,2.0
+26,Sat,2025-02-22,15:00 (22:00),Bournemouth,0.9,0–1,2.0,Wolves,"11,206",Vitality Stadium,Michael Salisbury,Match Report,,0.0,1.0
+26,Sat,2025-02-22,15:00 (22:00),Ipswich Town,1.1,1–4,1.7,Tottenham,"30,003",Portman Road Stadium,Tim Robinson,Match Report,,1.0,4.0
+26,Sat,2025-02-22,15:00 (22:00),Arsenal,1.2,0–1,1.1,West Ham,"60,262",Emirates Stadium,Craig Pawson,Match Report,,0.0,1.0
+26,Sat,2025-02-22,15:00 (22:00),Southampton,0.1,0–4,3.9,Brighton,"30,775",St Mary's Stadium,Darren Bond,Match Report,,0.0,4.0
+26,Sat,2025-02-22,17:30 (00:30),Aston Villa,2.3,2–1,2.3,Chelsea,"42,423",Villa Park,Michael Oliver,Match Report,,2.0,1.0
+26,Sun,2025-02-23,14:00 (21:00),Newcastle Utd,2.9,4–3,1.7,Nott'ham Forest,"52,223",St James' Park,Jarred Gillett,Match Report,,4.0,3.0
+26,Sun,2025-02-23,16:30 (23:30),Manchester City,0.6,0–2,0.7,Liverpool,"52,803",Etihad Stadium,Anthony Taylor,Match Report,,0.0,2.0
+27,Tue,2025-02-25,19:30 (02:30),Brighton,2.4,2–1,1.5,Bournemouth,"31,138",The American Express Stadium,Michael Oliver,Match Report,,2.0,1.0
+27,Tue,2025-02-25,19:30 (02:30),Crystal Palace,4.3,4–1,0.4,Aston Villa,"24,712",Selhurst Park,Samuel Barrott,Match Report,,4.0,1.0
+27,Tue,2025-02-25,19:30 (02:30),Wolves,1.3,1–2,1.7,Fulham,"28,708",Molineux Stadium,Peter Bankes,Match Report,,1.0,2.0
+27,Tue,2025-02-25,20:15 (03:15),Chelsea,2.4,4–0,0.7,Southampton,"39,485",Stamford Bridge,Thomas Bramall,Match Report,,4.0,0.0
+27,Wed,2025-02-26,19:30 (02:30),Tottenham,1.3,0–1,2.1,Manchester City,"60,820",Tottenham Hotspur Stadium,Jarred Gillett,Match Report,,0.0,1.0
+27,Wed,2025-02-26,19:30 (02:30),Nott'ham Forest,0.4,0–0,1.0,Arsenal,"30,200",The City Ground,Andy Madley,Match Report,,0.0,0.0
+27,Wed,2025-02-26,19:30 (02:30),Manchester Utd,0.7,3–2,1.4,Ipswich Town,"73,827",Old Trafford,Darren England,Match Report,,3.0,2.0
+27,Wed,2025-02-26,19:30 (02:30),Brentford,1.4,1–1,1.5,Everton,"17,082",Gtech Community Stadium,Simon Hooper,Match Report,,1.0,1.0
+27,Wed,2025-02-26,20:15 (03:15),Liverpool,1.7,2–0,0.2,Newcastle Utd,"60,374",Anfield,Stuart Attwell,Match Report,,2.0,0.0
+27,Thu,2025-02-27,20:00 (03:00),West Ham,1.3,2–0,0.4,Leicester City,"62,455",London Stadium,Anthony Taylor,Match Report,,2.0,0.0
+28,Sat,2025-03-08,12:30 (19:30),Nott'ham Forest,0.7,1–0,0.9,Manchester City,"30,252",The City Ground,Chris Kavanagh,Match Report,,1.0,0.0
+28,Sat,2025-03-08,15:00 (22:00),Liverpool,3.9,3–1,0.4,Southampton,"60,399",Anfield,Lewis Smith,Match Report,,3.0,1.0
+28,Sat,2025-03-08,15:00 (22:00),Brighton,1.5,2–1,0.9,Fulham,"31,584",The American Express Stadium,Samuel Barrott,Match Report,,2.0,1.0
+28,Sat,2025-03-08,15:00 (22:00),Crystal Palace,3.2,1–0,1.5,Ipswich Town,"25,155",Selhurst Park,Simon Hooper,Match Report,,1.0,0.0
+28,Sat,2025-03-08,17:30 (00:30),Brentford,0.8,0–1,1.3,Aston Villa,"17,171",Gtech Community Stadium,Jarred Gillett,Match Report,,0.0,1.0
+28,Sat,2025-03-08,20:00 (03:00),Wolves,0.8,1–1,1.2,Everton,"30,738",Molineux Stadium,Stuart Attwell,Match Report,,1.0,1.0
+28,Sun,2025-03-09,14:00 (21:00),Chelsea,1.7,1–0,0.1,Leicester City,"39,750",Stamford Bridge,Tim Robinson,Match Report,,1.0,0.0
+28,Sun,2025-03-09,14:00 (21:00),Tottenham,1.5,2–2,2.2,Bournemouth,"61,178",Tottenham Hotspur Stadium,John Brooks,Match Report,,2.0,2.0
+28,Sun,2025-03-09,16:30 (23:30),Manchester Utd,1.5,1–1,1.6,Arsenal,"73,812",Old Trafford,Anthony Taylor,Match Report,,1.0,1.0
+28,Mon,2025-03-10,20:00 (03:00),West Ham,0.7,0–1,1.4,Newcastle Utd,"62,463",London Stadium,Michael Salisbury,Match Report,,0.0,1.0
+29,Sat,2025-03-15,15:00 (22:00),Everton,1.0,1–1,0.8,West Ham,"39,343",Goodison Park,Darren Bond,Match Report,,1.0,1.0
+29,Sat,2025-03-15,15:00 (22:00),Southampton,1.3,1–2,0.4,Wolves,"30,950",St Mary's Stadium,Robert Jones,Match Report,,1.0,2.0
+29,Sat,2025-03-15,15:00 (22:00),Ipswich Town,0.4,2–4,1.5,Nott'ham Forest,"29,878",Portman Road Stadium,Michael Salisbury,Match Report,,2.0,4.0
+29,Sat,2025-03-15,15:00 (22:00),Manchester City,1.7,2–2,2.0,Brighton,"52,471",Etihad Stadium,Simon Hooper,Match Report,,2.0,2.0
+29,Sat,2025-03-15,17:30 (00:30),Bournemouth,1.6,1–2,0.8,Brentford,"11,180",Vitality Stadium,Craig Pawson,Match Report,,1.0,2.0
+29,Sun,2025-03-16,13:30 (20:30),Arsenal,0.7,1–0,0.4,Chelsea,"60,311",Emirates Stadium,Chris Kavanagh,Match Report,,1.0,0.0
+29,Sun,2025-03-16,13:30 (20:30),Fulham,1.0,2–0,0.9,Tottenham,"27,182",Craven Cottage,Andy Madley,Match Report,,2.0,0.0
+29,Sun,2025-03-16,19:00 (02:00),Leicester City,1.0,0–3,0.9,Manchester Utd,"31,773",King Power Stadium,Thomas Bramall,Match Report,,0.0,3.0
+30,Tue,2025-04-01,19:45 (01:45),Arsenal,2.2,2–1,1.0,Fulham,"60,256",Emirates Stadium,John Brooks,Match Report,,2.0,1.0
+30,Tue,2025-04-01,19:45 (01:45),Wolves,1.2,1–0,1.3,West Ham,"29,587",Molineux Stadium,Tony Harrington,Match Report,,1.0,0.0
+30,Tue,2025-04-01,20:00 (02:00),Nott'ham Forest,0.5,1–0,1.6,Manchester Utd,"30,249",The City Ground,Jarred Gillett,Match Report,,1.0,0.0
+30,Wed,2025-04-02,19:45 (01:45),Newcastle Utd,1.3,2–1,1.5,Brentford,"52,021",St James' Park,Peter Bankes,Match Report,,2.0,1.0
+30,Wed,2025-04-02,19:45 (01:45),Manchester City,2.2,2–0,0.1,Leicester City,"52,148",Etihad Stadium,Darren England,Match Report,,2.0,0.0
+30,Wed,2025-04-02,19:45 (01:45),Southampton,0.7,1–1,0.7,Crystal Palace,"30,158",St Mary's Stadium,Andy Madley,Match Report,,1.0,1.0
+30,Wed,2025-04-02,19:45 (01:45),Bournemouth,1.8,1–2,1.2,Ipswich Town,"11,192",Vitality Stadium,Robert Jones,Match Report,,1.0,2.0
+30,Wed,2025-04-02,19:45 (01:45),Brighton,0.9,0–3,1.2,Aston Villa,"27,895",The American Express Stadium,Stuart Attwell,Match Report,,0.0,3.0
+30,Wed,2025-04-02,20:00 (02:00),Liverpool,1.5,1–0,0.9,Everton,"60,457",Anfield,Samuel Barrott,Match Report,,1.0,0.0
+30,Thu,2025-04-03,20:00 (02:00),Chelsea,1.0,1–0,0.9,Tottenham,"39,852",Stamford Bridge,Craig Pawson,Match Report,,1.0,0.0
+31,Sat,2025-04-05,12:30 (18:30),Everton,1.1,1–1,1.8,Arsenal,"39,316",Goodison Park,Darren England,Match Report,,1.0,1.0
+31,Sat,2025-04-05,15:00 (21:00),Crystal Palace,0.6,2–1,1.0,Brighton,"24,564",Selhurst Park,Anthony Taylor,Match Report,,2.0,1.0
+31,Sat,2025-04-05,15:00 (21:00),Ipswich Town,0.8,1–2,2.6,Wolves,"29,549",Portman Road Stadium,Peter Bankes,Match Report,,1.0,2.0
+31,Sat,2025-04-05,15:00 (21:00),West Ham,0.7,2–2,2.1,Bournemouth,"62,459",London Stadium,Tim Robinson,Match Report,,2.0,2.0
+31,Sat,2025-04-05,17:30 (23:30),Aston Villa,3.0,2–1,1.5,Nott'ham Forest,"42,743",Villa Park,Simon Hooper,Match Report,,2.0,1.0
+31,Sun,2025-04-06,14:00 (20:00),Fulham,0.7,3–2,1.5,Liverpool,"27,770",Craven Cottage,Chris Kavanagh,Match Report,,3.0,2.0
+31,Sun,2025-04-06,14:00 (20:00),Brentford,1.1,0–0,1.2,Chelsea,"17,183",Gtech Community Stadium,Michael Oliver,Match Report,,0.0,0.0
+31,Sun,2025-04-06,14:00 (20:00),Tottenham,2.1,3–1,1.0,Southampton,"60,984",Tottenham Hotspur Stadium,Michael Salisbury,Match Report,,3.0,1.0
+31,Sun,2025-04-06,16:30 (22:30),Manchester Utd,0.9,0–0,0.5,Manchester City,"73,738",Old Trafford,John Brooks,Match Report,,0.0,0.0
+31,Mon,2025-04-07,20:00 (02:00),Leicester City,0.5,0–3,3.2,Newcastle Utd,"30,403",King Power Stadium,Robert Jones,Match Report,,0.0,3.0
+32,Sat,2025-04-12,12:30 (18:30),Manchester City,3.7,5–2,1.8,Crystal Palace,"52,489",Etihad Stadium,Jarred Gillett,Match Report,,5.0,2.0
+32,Sat,2025-04-12,15:00 (21:00),Brighton,3.8,2–2,1.5,Leicester City,"31,150",The American Express Stadium,Darren Bond,Match Report,,2.0,2.0
+32,Sat,2025-04-12,15:00 (21:00),Southampton,0.3,0–3,3.0,Aston Villa,"30,199",St Mary's Stadium,Thomas Bramall,Match Report,,0.0,3.0
+32,Sat,2025-04-12,15:00 (21:00),Nott'ham Forest,0.5,0–1,1.4,Everton,"30,199",The City Ground,Craig Pawson,Match Report,,0.0,1.0
+32,Sat,2025-04-12,17:30 (23:30),Arsenal,1.0,1–1,0.2,Brentford,"60,184",Emirates Stadium,Simon Hooper,Match Report,,1.0,1.0
+32,Sun,2025-04-13,14:00 (20:00),Liverpool,1.8,2–1,1.4,West Ham,"60,376",Anfield,Andy Madley,Match Report,,2.0,1.0
+32,Sun,2025-04-13,14:00 (20:00),Chelsea,2.2,2–2,1.1,Ipswich Town,"39,805",Stamford Bridge,Stuart Attwell,Match Report,,2.0,2.0
+32,Sun,2025-04-13,14:00 (20:00),Wolves,2.4,4–2,2.0,Tottenham,"31,463",Molineux Stadium,Anthony Taylor,Match Report,,4.0,2.0
+32,Sun,2025-04-13,16:30 (22:30),Newcastle Utd,2.2,4–1,0.7,Manchester Utd,"52,252",St James' Park,Chris Kavanagh,Match Report,,4.0,1.0
+32,Mon,2025-04-14,20:00 (02:00),Bournemouth,1.4,1–0,1.0,Fulham,"11,195",Vitality Stadium,Michael Oliver,Match Report,,1.0,0.0
+29,Wed,2025-04-16,19:30 (01:30),Newcastle Utd,1.5,5–0,2.0,Crystal Palace,"52,197",St James' Park,Darren England,Match Report,,5.0,0.0
+33,Sat,2025-04-19,15:00 (21:00),Everton,0.9,0–2,2.0,Manchester City,"39,332",Goodison Park,Simon Hooper,Match Report,,0.0,2.0
+33,Sat,2025-04-19,15:00 (21:00),West Ham,0.9,1–1,0.6,Southampton,"62,461",London Stadium,Andrew Kitchen,Match Report,,1.0,1.0
+33,Sat,2025-04-19,15:00 (21:00),Crystal Palace,0.4,0–0,0.7,Bournemouth,"25,185",Selhurst Park,Samuel Barrott,Match Report,,0.0,0.0
+33,Sat,2025-04-19,15:00 (21:00),Brentford,2.1,4–2,1.4,Brighton,"17,083",Gtech Community Stadium,Tim Robinson,Match Report,,4.0,2.0
+33,Sat,2025-04-19,17:30 (23:30),Aston Villa,2.2,4–1,1.0,Newcastle Utd,"42,618",Villa Park,Jarred Gillett,Match Report,,4.0,1.0
+33,Sun,2025-04-20,14:00 (20:00),Fulham,0.3,1–2,0.9,Chelsea,"27,712",Craven Cottage,Anthony Taylor,Match Report,,1.0,2.0
+33,Sun,2025-04-20,14:00 (20:00),Ipswich Town,0.2,0–4,2.4,Arsenal,"29,549",Portman Road Stadium,Chris Kavanagh,Match Report,,0.0,4.0
+33,Sun,2025-04-20,14:00 (20:00),Manchester Utd,1.3,0–1,0.2,Wolves,"73,819",Old Trafford,Robert Jones,Match Report,,0.0,1.0
+33,Sun,2025-04-20,16:30 (22:30),Leicester City,0.3,0–1,2.5,Liverpool,"30,402",King Power Stadium,Stuart Attwell,Match Report,,0.0,1.0
+33,Mon,2025-04-21,20:00 (02:00),Tottenham,2.1,1–2,0.5,Nott'ham Forest,"59,314",Tottenham Hotspur Stadium,Peter Bankes,Match Report,,1.0,2.0
+34,Tue,2025-04-22,20:00 (02:00),Manchester City,1.3,2–1,1.8,Aston Villa,"51,834",Etihad Stadium,Craig Pawson,Match Report,,2.0,1.0
+34,Wed,2025-04-23,20:00 (02:00),Arsenal,1.2,2–2,1.7,Crystal Palace,"60,167",Emirates Stadium,Michael Salisbury,Match Report,,2.0,2.0
+34,Sat,2025-04-26,12:30 (18:30),Chelsea,0.8,1–0,0.4,Everton,"39,894",Stamford Bridge,Chris Kavanagh,Match Report,,1.0,0.0
+34,Sat,2025-04-26,15:00 (21:00),Brighton,1.3,3–2,1.3,West Ham,"31,499",The American Express Stadium,Darren England,Match Report,,3.0,2.0
+34,Sat,2025-04-26,15:00 (21:00),Wolves,2.0,3–0,1.1,Leicester City,"31,518",Molineux Stadium,Samuel Barrott,Match Report,,3.0,0.0
+34,Sat,2025-04-26,15:00 (21:00),Southampton,0.6,1–2,2.4,Fulham,"28,946",St Mary's Stadium,Tony Harrington,Match Report,,1.0,2.0
+34,Sat,2025-04-26,15:00 (21:00),Newcastle Utd,2.4,3–0,0.1,Ipswich Town,"52,171",St James' Park,Michael Salisbury,Match Report,,3.0,0.0
+34,Sun,2025-04-27,14:00 (20:00),Bournemouth,0.5,1–1,2.3,Manchester Utd,"11,241",Vitality Stadium,Peter Bankes,Match Report,,1.0,1.0
+34,Sun,2025-04-27,16:30 (22:30),Liverpool,2.2,5–1,0.5,Tottenham,"60,415",Anfield,Thomas Bramall,Match Report,,5.0,1.0
+34,Thu,2025-05-01,19:30 (01:30),Nott'ham Forest,0.9,0–2,1.3,Brentford,"29,040",The City Ground,Darren England,Match Report,,0.0,2.0
+35,Fri,2025-05-02,20:00 (02:00),Manchester City,0.7,1–0,0.4,Wolves,"53,282",Etihad Stadium,Peter Bankes,Match Report,,1.0,0.0
+35,Sat,2025-05-03,12:30 (18:30),Aston Villa,1.0,1–0,0.9,Fulham,"42,515",Villa Park,Robert Jones,Match Report,,1.0,0.0
+35,Sat,2025-05-03,15:00 (21:00),Leicester City,1.4,2–0,0.5,Southampton,"31,240",King Power Stadium,David Webb,Match Report,,2.0,0.0
+35,Sat,2025-05-03,15:00 (21:00),Everton,0.6,2–2,0.8,Ipswich Town,"39,305",Goodison Park,Lewis Smith,Match Report,,2.0,2.0
+35,Sat,2025-05-03,17:30 (23:30),Arsenal,1.4,1–2,0.9,Bournemouth,"60,110",Emirates Stadium,Jarred Gillett,Match Report,,1.0,2.0
+35,Sun,2025-05-04,14:00 (20:00),Brighton,0.7,1–1,1.7,Newcastle Utd,"31,580",The American Express Stadium,Craig Pawson,Match Report,,1.0,1.0
+35,Sun,2025-05-04,14:00 (20:00),West Ham,0.8,1–1,0.8,Tottenham,"62,468",London Stadium,Michael Oliver,Match Report,,1.0,1.0
+35,Sun,2025-05-04,14:00 (20:00),Brentford,2.8,4–3,1.5,Manchester Utd,"18,915",Gtech Community Stadium,Anthony Taylor,Match Report,,4.0,3.0
+35,Sun,2025-05-04,16:30 (22:30),Chelsea,3.1,3–1,1.0,Liverpool,"39,829",Stamford Bridge,Simon Hooper,Match Report,,3.0,1.0
+35,Mon,2025-05-05,20:00 (02:00),Crystal Palace,2.3,1–1,0.7,Nott'ham Forest,"25,096",Selhurst Park,Andy Madley,Match Report,,1.0,1.0
+36,Sat,2025-05-10,15:00 (21:00),Ipswich Town,0.9,0–1,1.4,Brentford,"29,511",Portman Road Stadium,Samuel Barrott,Match Report,,0.0,1.0
+36,Sat,2025-05-10,15:00 (21:00),Fulham,0.8,1–3,1.1,Everton,"27,653",Craven Cottage,Darren England,Match Report,,1.0,3.0
+36,Sat,2025-05-10,15:00 (21:00),Wolves,0.9,0–2,1.6,Brighton,"31,279",Molineux Stadium,Michael Oliver,Match Report,,0.0,2.0
+36,Sat,2025-05-10,15:00 (21:00),Southampton,0.1,0–0,1.7,Manchester City,"30,937",St Mary's Stadium,Tim Robinson,Match Report,,0.0,0.0
+36,Sat,2025-05-10,17:30 (23:30),Bournemouth,0.8,0–1,1.0,Aston Villa,"11,187",Vitality Stadium,Stuart Attwell,Match Report,,0.0,1.0
+36,Sun,2025-05-11,12:00 (18:00),Newcastle Utd,1.6,2–0,0.7,Chelsea,"52,231",St James' Park,John Brooks,Match Report,,2.0,0.0
+36,Sun,2025-05-11,14:15 (20:15),Nott'ham Forest,1.3,2–2,1.1,Leicester City,"30,245",The City Ground,Tony Harrington,Match Report,,2.0,2.0
+36,Sun,2025-05-11,14:15 (20:15),Tottenham,0.7,0–2,3.4,Crystal Palace,"60,254",Tottenham Hotspur Stadium,Chris Kavanagh,Match Report,,0.0,2.0
+36,Sun,2025-05-11,14:15 (20:15),Manchester Utd,2.1,0–2,1.7,West Ham,"73,804",Old Trafford,Jarred Gillett,Match Report,,0.0,2.0
+36,Sun,2025-05-11,16:30 (22:30),Liverpool,2.4,2–2,2.6,Arsenal,"60,324",Anfield,Anthony Taylor,Match Report,,2.0,2.0
+37,Fri,2025-05-16,19:30 (01:30),Aston Villa,1.4,2–0,0.5,Tottenham,"42,239",Villa Park,Peter Bankes,Match Report,,2.0,0.0
+37,Fri,2025-05-16,20:15 (02:15),Chelsea,0.8,1–0,0.3,Manchester Utd,"39,849",Stamford Bridge,Chris Kavanagh,Match Report,,1.0,0.0
+37,Sun,2025-05-18,12:00 (18:00),Everton,2.7,2–0,1.2,Southampton,"39,201",Goodison Park,Michael Oliver,Match Report,,2.0,0.0
+37,Sun,2025-05-18,14:15 (20:15),West Ham,1.1,1–2,1.9,Nott'ham Forest,"62,466",London Stadium,Samuel Barrott,Match Report,,1.0,2.0
+37,Sun,2025-05-18,15:00 (21:00),Brentford,2.5,2–3,1.0,Fulham,"17,136",Gtech Community Stadium,Jarred Gillett,Match Report,,2.0,3.0
+37,Sun,2025-05-18,15:00 (21:00),Leicester City,0.8,2–0,1.4,Ipswich Town,"31,986",King Power Stadium,Andrew Kitchen,Match Report,,2.0,0.0
+37,Sun,2025-05-18,16:30 (22:30),Arsenal,0.6,1–0,1.5,Newcastle Utd,"60,160",Emirates Stadium,Simon Hooper,Match Report,,1.0,0.0
+37,Mon,2025-05-19,20:00 (02:00),Brighton,2.2,3–2,2.2,Liverpool,"31,611",The American Express Stadium,Andy Madley,Match Report,,3.0,2.0
+37,Tue,2025-05-20,20:00 (02:00),Manchester City,1.5,3–1,1.1,Bournemouth,"52,487",Etihad Stadium,Thomas Bramall,Match Report,,3.0,1.0
+37,Tue,2025-05-20,20:00 (02:00),Crystal Palace,1.7,4–2,1.4,Wolves,"24,766",Selhurst Park,David Webb,Match Report,,4.0,2.0
+38,Sun,2025-05-25,16:00 (22:00),Manchester Utd,2.9,2–0,0.4,Aston Villa,"73,839",Old Trafford,Thomas Bramall,Match Report,,2.0,0.0
+38,Sun,2025-05-25,16:00 (22:00),Ipswich Town,0.7,1–3,1.1,West Ham,"29,771",Portman Road Stadium,Tim Robinson,Match Report,,1.0,3.0
+38,Sun,2025-05-25,16:00 (22:00),Wolves,1.0,1–1,1.4,Brentford,"31,382",Molineux Stadium,Craig Pawson,Match Report,,1.0,1.0
+38,Sun,2025-05-25,16:00 (22:00),Southampton,0.6,1–2,2.3,Arsenal,"31,289",St Mary's Stadium,Darren Bond,Match Report,,1.0,2.0
+38,Sun,2025-05-25,16:00 (22:00),Liverpool,2.1,1–1,1.8,Crystal Palace,"60,382",Anfield,Darren England,Match Report,,1.0,1.0
+38,Sun,2025-05-25,16:00 (22:00),Nott'ham Forest,1.2,0–1,1.1,Chelsea,"30,263",The City Ground,Anthony Taylor,Match Report,,0.0,1.0
+38,Sun,2025-05-25,16:00 (22:00),Fulham,1.3,0–2,3.0,Manchester City,"27,671",Craven Cottage,Andy Madley,Match Report,,0.0,2.0
+38,Sun,2025-05-25,16:00 (22:00),Newcastle Utd,1.2,0–1,1.2,Everton,"52,221",St James' Park,Tony Harrington,Match Report,,0.0,1.0
+38,Sun,2025-05-25,16:00 (22:00),Bournemouth,1.6,2–0,0.3,Leicester City,"11,238",Vitality Stadium,Lewis Smith,Match Report,,2.0,0.0
+38,Sun,2025-05-25,16:00 (22:00),Tottenham,2.0,1–4,2.2,Brighton,"61,449",Tottenham Hotspur Stadium,Robert Jones,Match Report,,1.0,4.0
