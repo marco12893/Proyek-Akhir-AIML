@@ -8,8 +8,8 @@ from tqdm import tqdm
 print("Starting data cleaning pipeline...")
 
 # Load datasets
-df = pd.read_csv('data/English Football 2018-2023 XGBoost.csv')
-team_divisions = pd.read_csv('data/League Division.csv')
+df = pd.read_csv('data/English_Football_2018-2025_With_Form.csv')
+team_divisions = pd.read_csv('data/League Division 2.csv')
 
 # 1. Remove rows containing 'Attendance' (duplicate headers)
 df = df[~df.apply(lambda row: row.astype(str).str.contains('Attendance', case=False, na=False)).any(axis=1)]
@@ -20,8 +20,6 @@ df_cleaned = df[df['Wk'] != 'Wk']
 # 3. Drop sparse rows (<3 valid values)
 df_cleaned = df_cleaned.dropna(thresh=3)
 
-# 4. Remove cancelled matches
-df_cleaned = df_cleaned[df_cleaned['Notes'] != 'Match Cancelled']
 
 # 5. Convert xG to numeric
 df_cleaned['xG'] = pd.to_numeric(df_cleaned['xG'], errors='coerce')
@@ -123,5 +121,5 @@ df_cleaned[form_features] = df_cleaned[form_features].fillna(0)
 # FINAL OUTPUT
 # ======================
 print("Saving cleaned dataset with form features...")
-df_cleaned.to_csv('clean_data/English_Football_2018-2023_With_Form.csv', index=False)
+df_cleaned.to_csv('clean_data/English_Football_2018-2023_With_Form 2.csv', index=False)
 print("Pipeline completed successfully!")

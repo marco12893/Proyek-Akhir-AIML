@@ -89,11 +89,11 @@ y_pred, probs = predict_with_division_rules(model, X_test)
 results_df = test_df[['Date', 'Home', 'Away', 'Winner', 'DivisionGap', 'AbsoluteDivisionGap']].copy()
 results_df['Predicted'] = y_pred
 results_df['Correct'] = results_df['Winner'] == results_df['Predicted']
-results_df['Actual Outcome'] = results_df['Winner'].map({0: 'Home Win', 2: 'Away Win'})
-results_df['Predicted Outcome'] = results_df['Predicted'].map({0: 'Home Win', 2: 'Away Win'})
+results_df['Actual Outcome'] = results_df['Winner'].map({0: 'Away Win', 2: 'Home Win'})
+results_df['Predicted Outcome'] = results_df['Predicted'].map({0: 'Away Win', 2: 'Home Win'})
 
 # Add probabilities
-results_df[['Home Win Prob', 'Draw Prob', 'Away Win Prob']] = (probs * 100).round(1)
+results_df[['Away Win Prob', 'Draw Prob', 'Home Win Prob']] = (probs * 100).round(1)
 
 # Accuracy
 accuracy = accuracy_score(y_test, y_pred)
@@ -104,7 +104,7 @@ print("Overall Classification Report:")
 print(classification_report(
     y_test, y_pred,
     labels=[0, 2],
-    target_names=['Home Win', 'Away Win'],
+    target_names=['Away Win', 'Home Win'],
     zero_division=0
 ))
 

@@ -57,7 +57,7 @@ for i, pred in enumerate(y_pred_raw):
 y_pred = np.array(y_pred)
 
 # Create outcome mapping
-outcome_map = {0: 'Home Win', 1: 'Draw', 2: 'Away Win'}
+outcome_map = {0: 'Away Win', 1: 'Draw', 2: 'Home Win'}
 
 # Create results dataframe
 results_df = test_df[['Date', 'Home', 'Away', 'Winner']].copy()
@@ -81,7 +81,7 @@ unique_classes = np.unique(y_test)
 print(f"Classes present in test data: {unique_classes}")  # Will show [0, 2] for FA Cup
 
 # Use only the target names that exist
-target_names = ['Home Win', 'Away Win']  # No 'Draw' in FA Cup
+target_names = ['Away Win', 'Home Win']  # No 'Draw' in FA Cup
 
 print("Confusion Matrix:")
 print(confusion_matrix(y_test, y_pred, labels=unique_classes))

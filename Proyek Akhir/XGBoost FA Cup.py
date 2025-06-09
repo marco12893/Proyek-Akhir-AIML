@@ -48,7 +48,7 @@ for i, pred in enumerate(y_pred_raw):
 y_pred = np.array(y_pred)
 
 # Create outcome mapping
-outcome_map = {0: 'Home Win', 1: 'Draw', 2: 'Away Win'}
+outcome_map = {0: 'Away Win', 1: 'Draw', 2: 'Home Win'}
 
 # Create results dataframe
 results_df = test_df[['Date', 'Home', 'Away', 'Winner']].copy()

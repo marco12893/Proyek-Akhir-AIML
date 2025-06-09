@@ -92,15 +92,15 @@ y_pred, probs = predict_with_division_rules(model, X_test)
 results_df = test_df[['Date', 'Home', 'Away', 'Winner', 'DivisionGap', 'AbsoluteDivisionGap']].copy()
 results_df['Predicted'] = y_pred
 results_df['Correct'] = results_df['Winner'] == results_df['Predicted']
-results_df['Actual Outcome'] = results_df['Winner'].map({0: 'Home Win', 2: 'Away Win'})
-results_df['Predicted Outcome'] = results_df['Predicted'].map({0: 'Home Win', 2: 'Away Win'})
+results_df['Actual Outcome'] = results_df['Winner'].map({0: 'Away Win', 2: 'Home Win'})
+results_df['Predicted Outcome'] = results_df['Predicted'].map({0: 'Away Win', 2: 'Home Win'})
 results_df[['Home Win Prob', 'Draw Prob', 'Away Win Prob']] = (probs * 100).round(1)
 
 # Evaluate classification
 accuracy = accuracy_score(y_test, y_pred)
 print(f"\nXGBoost Accuracy on FA Cup test set: {accuracy * 100:.2f}%\n")
 print("Overall Classification Report:")
-print(classification_report(y_test, y_pred, labels=[0, 2], target_names=['Home Win', 'Away Win'], zero_division=0))
+print(classification_report(y_test, y_pred, labels=[0, 2], target_names=['Away Win', 'Home Win'], zero_division=0))
 
 print("\nPerformance by Division Gap:")
 for gap_range in [(0, 1), (2, 3), (4, 6)]:
@@ -119,59 +119,59 @@ plot_importance(model, max_num_features=15, importance_type='weight')
 plt.title('Feature Importance (Weight)')
 plt.show()
 
-# -------------------------------
-# 🎯 Score Prediction Starts Here
-# -------------------------------
-y_train_home = train_df['HomeGoals']
-y_train_away = train_df['AwayGoals']
-y_test_home = test_df['HomeGoals']
-y_test_away = test_df['AwayGoals']
-X_train_score = train_df[features]
-X_test_score = test_df[features]
-
-home_goal_model = XGBRegressor(
-    learning_rate=0.01,
-    max_depth=4,
-    n_estimators=200,
-    subsample=0.8,
-    colsample_bytree=0.8
-)
-away_goal_model = XGBRegressor(
-    learning_rate=0.01,
-    max_depth=4,
-    n_estimators=200,
-    subsample=0.8,
-    colsample_bytree=0.8
-)
-
-home_goal_model.fit(X_train_score, y_train_home)
-away_goal_model.fit(X_train_score, y_train_away)
-
-pred_home_goals = home_goal_model.predict(X_test_score)
-pred_away_goals = away_goal_model.predict(X_test_score)
-
-rounded_home_goals = np.round(pred_home_goals).astype(int)
-rounded_away_goals = np.round(pred_away_goals).astype(int)
-
-# Add to result DataFrame
-results_df['Predicted Home Goals'] = rounded_home_goals
-results_df['Predicted Away Goals'] = rounded_away_goals
-results_df['Actual Home Goals'] = y_test_home.values
-results_df['Actual Away Goals'] = y_test_away.values
-
-# Evaluation
-home_rmse = mean_squared_error(y_test_home, pred_home_goals, squared=False)
-away_rmse = mean_squared_error(y_test_away, pred_away_goals, squared=False)
-home_mae = mean_absolute_error(y_test_home, pred_home_goals)
-away_mae = mean_absolute_error(y_test_away, pred_away_goals)
-
-print(f"\nScore Prediction Evaluation:")
-print(f"Home Goals - RMSE: {home_rmse:.3f}, MAE: {home_mae:.3f}")
-print(f"Away Goals - RMSE: {away_rmse:.3f}, MAE: {away_mae:.3f}")
-
-exact_score_correct = (
-    (rounded_home_goals == y_test_home.values) &
-    (rounded_away_goals == y_test_away.values)
-).sum()
-exact_score_accuracy = exact_score_correct / len(y_test_home)
-print(f"Exact Score Prediction Accuracy: {exact_score_accuracy:.2%} ({exact_score_correct}/{len(y_test_home)})")
+# # -------------------------------
+# # 🎯 Score Prediction Starts Here
+# # -------------------------------
+# y_train_home = train_df['HomeGoals']
+# y_train_away = train_df['AwayGoals']
+# y_test_home = test_df['HomeGoals']
+# y_test_away = test_df['AwayGoals']
+# X_train_score = train_df[features]
+# X_test_score = test_df[features]
+#
+# home_goal_model = XGBRegressor(
+#     learning_rate=0.01,
+#     max_depth=4,
+#     n_estimators=200,
+#     subsample=0.8,
+#     colsample_bytree=0.8
+# )
+# away_goal_model = XGBRegressor(
+#     learning_rate=0.01,
+#     max_depth=4,
+#     n_estimators=200,
+#     subsample=0.8,
+#     colsample_bytree=0.8
+# )
+#
+# home_goal_model.fit(X_train_score, y_train_home)
+# away_goal_model.fit(X_train_score, y_train_away)
+#
+# pred_home_goals = home_goal_model.predict(X_test_score)
+# pred_away_goals = away_goal_model.predict(X_test_score)
+#
+# rounded_home_goals = np.round(pred_home_goals).astype(int)
+# rounded_away_goals = np.round(pred_away_goals).astype(int)
+#
+# # Add to result DataFrame
+# results_df['Predicted Home Goals'] = rounded_home_goals
+# results_df['Predicted Away Goals'] = rounded_away_goals
+# results_df['Actual Home Goals'] = y_test_home.values
+# results_df['Actual Away Goals'] = y_test_away.values
+#
+# # Evaluation
+# home_rmse = mean_squared_error(y_test_home, pred_home_goals, squared=False)
+# away_rmse = mean_squared_error(y_test_away, pred_away_goals, squared=False)
+# home_mae = mean_absolute_error(y_test_home, pred_home_goals)
+# away_mae = mean_absolute_error(y_test_away, pred_away_goals)
+#
+# print(f"\nScore Prediction Evaluation:")
+# print(f"Home Goals - RMSE: {home_rmse:.3f}, MAE: {home_mae:.3f}")
+# print(f"Away Goals - RMSE: {away_rmse:.3f}, MAE: {away_mae:.3f}")
+#
+# exact_score_correct = (
+#     (rounded_home_goals == y_test_home.values) &
+#     (rounded_away_goals == y_test_away.values)
+# ).sum()
+# exact_score_accuracy = exact_score_correct / len(y_test_home)
+# print(f"Exact Score Prediction Accuracy: {exact_score_accuracy:.2%} ({exact_score_correct}/{len(y_test_home)})")

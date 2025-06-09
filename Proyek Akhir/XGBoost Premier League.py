@@ -68,7 +68,7 @@ accuracy = accuracy_score(y_test, y_pred)
 print(f"XGBoost Accuracy on Premier League 2023 test set: {accuracy * 100:.2f}%\n")
 
 classes = [0, 1, 2]
-target_names = ['Home Win', 'Draw', 'Away Win']
+target_names = ['Away Win', 'Draw', 'Home Win']
 
 print("Confusion Matrix:")
 print(confusion_matrix(y_test, y_pred, labels=classes))
@@ -81,7 +81,7 @@ results_df = test_df[['Date', 'Home', 'Away', 'Winner']].copy()
 results_df['Predicted'] = y_pred
 results_df['Correct'] = results_df['Winner'] == results_df['Predicted']
 
-outcome_map = {0: 'Home Win', 1: 'Draw', 2: 'Away Win'}
+outcome_map = {0: 'Away Win', 1: 'Draw', 2: 'Home Win'}
 results_df['Actual Outcome'] = results_df['Winner'].map(outcome_map)
 results_df['Predicted Outcome'] = results_df['Predicted'].map(outcome_map)
 

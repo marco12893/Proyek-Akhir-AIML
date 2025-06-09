@@ -47,7 +47,7 @@ for i, pred in enumerate(y_pred_raw):
 y_pred = np.array(y_pred)
 
 # Map outcomes
-outcome_map = {0: 'Home Win', 1: 'Draw', 2: 'Away Win'}
+outcome_map = {0: 'Away Win', 1: 'Draw', 2: 'Home Win'}
 
 # Results DataFrame
 results_df = test_df[['Date', 'Home', 'Away', 'Winner']].copy()
@@ -66,7 +66,7 @@ print(f"Random Forest Accuracy on FA Cup test set: {accuracy * 100:.2f}%\n")
 unique_classes = np.unique(y_test)
 print(f"Classes present in test data: {unique_classes}")
 
-target_names = ['Home Win', 'Away Win']
+target_names = ['Away Win', 'Home Win']
 
 print("Confusion Matrix:")
 print(confusion_matrix(y_test, y_pred, labels=unique_classes))

@@ -46,7 +46,7 @@ for i, pred in enumerate(y_pred_raw):
 y_pred = np.array(y_pred)
 
 # Create outcome mapping
-outcome_map = {0: 'Home Win', 1: 'Draw', 2: 'Away Win'}
+outcome_map = {0: 'Away Win', 1: 'Draw', 2: 'Home Win'}
 
 # Create results dataframe
 results_df = test_df[['Date', 'Home', 'Away', 'Winner']].copy()
@@ -65,7 +65,7 @@ print(f"Random Forest Accuracy on FA Cup test set (only 2 features): {accuracy *
 unique_classes = np.unique(y_test)
 print(f"Classes present in test data: {unique_classes}")
 
-target_names = ['Home Win', 'Away Win']  # No Draw in test set
+target_names = ['Away Win', 'Home Win']  # No Draw in test set
 
 print("Confusion Matrix:")
 print(confusion_matrix(y_test, y_pred, labels=unique_classes))
