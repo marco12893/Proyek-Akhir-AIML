@@ -62,33 +62,38 @@ y_pred = model.predict(X_test)
 y_proba = model.predict_proba(X_test)
 
 # Evaluation
-print("\nLogistic Regression (All Features)")
-print("=" * 55)
 accuracy = accuracy_score(y_test, y_pred)
-print(f"Accuracy: {accuracy:.2%}")
+accuracyFormatted = accuracy * 100
 
-print("\nConfusion Matrix:")
-print(confusion_matrix(y_test, y_pred, labels=[0, 2]))
 
-print("\nClassification Report:")
-print(classification_report(
-    y_test, y_pred,
-    labels=[0, 2],
-    target_names=['Home Loss (0)', 'Home Win (2)']
-))
 
-# Results dataframe
-results_df = test_df[['Date', 'Home', 'Away', 'Winner']].copy()
-results_df['Predicted'] = y_pred
-results_df['Home Loss Prob'] = (y_proba[:, 0] * 100).round(1)
-results_df['Home Win Prob'] = (y_proba[:, 1] * 100).round(1)
-results_df['Correct'] = results_df['Winner'] == results_df['Predicted']
+if __name__ == '__main__':
+    print("\nLogistic Regression (All Features)")
+    print("=" * 55)
+    print(f"Accuracy: {accuracy:.2%}")
 
-print("\nSample Predictions:")
-print(results_df.head(10))
+    print("\nConfusion Matrix:")
+    print(confusion_matrix(y_test, y_pred, labels=[0, 2]))
 
-# Model coefficients
-print("\nModel Coefficients:")
-print(f"Intercept: {model.intercept_[0]:.4f}")
-for feature_name, coef in zip(features, model.coef_[0]):
-    print(f"{feature_name}: {coef:.4f}")
+    print("\nClassification Report:")
+    print(classification_report(
+        y_test, y_pred,
+        labels=[0, 2],
+        target_names=['Home Loss (0)', 'Home Win (2)']
+    ))
+
+    # Results dataframe
+    results_df = test_df[['Date', 'Home', 'Away', 'Winner']].copy()
+    results_df['Predicted'] = y_pred
+    results_df['Home Loss Prob'] = (y_proba[:, 0] * 100).round(1)
+    results_df['Home Win Prob'] = (y_proba[:, 1] * 100).round(1)
+    results_df['Correct'] = results_df['Winner'] == results_df['Predicted']
+
+    print("\nSample Predictions:")
+    print(results_df.head(10))
+
+    # Model coefficients
+    print("\nModel Coefficients:")
+    print(f"Intercept: {model.intercept_[0]:.4f}")
+    for feature_name, coef in zip(features, model.coef_[0]):
+        print(f"{feature_name}: {coef:.4f}")
