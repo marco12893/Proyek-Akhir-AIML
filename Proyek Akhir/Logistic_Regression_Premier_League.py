@@ -50,25 +50,28 @@ y_pred = model.predict(X_test)
 
 # Evaluate
 accuracy = accuracy_score(y_test, y_pred)
-print(f"Logistic Regression Accuracy on Premier League 2023 test set: {accuracy * 100:.2f} %\n")
+accuracyFormatted=accuracy*100
 
-classes = [0, 1, 2]
-target_names = ['Away Win', 'Draw', 'Home Win']
+if __name__ == '__main__':
+    print(f"Logistic Regression Accuracy on Premier League 2023 test set: {accuracy * 100:.2f} %\n")
 
-print("Confusion Matrix:")
-print(confusion_matrix(y_test, y_pred, labels=classes))
+    classes = [0, 1, 2]
+    target_names = ['Away Win', 'Draw', 'Home Win']
 
-print("\nClassification Report:")
-print(classification_report(y_test, y_pred, labels=classes, target_names=target_names, zero_division=0))
+    print("Confusion Matrix:")
+    print(confusion_matrix(y_test, y_pred, labels=classes))
 
-# Display results
-results_df = test_df[['Date', 'Home', 'Away', 'Winner']].copy()
-results_df['Predicted'] = y_pred
-results_df['Correct'] = results_df['Winner'] == results_df['Predicted']
+    print("\nClassification Report:")
+    print(classification_report(y_test, y_pred, labels=classes, target_names=target_names, zero_division=0))
 
-outcome_map = {0: 'Away Win', 1: 'Draw', 2: 'Home Win'}
-results_df['Actual Outcome'] = results_df['Winner'].map(outcome_map)
-results_df['Predicted Outcome'] = results_df['Predicted'].map(outcome_map)
+    # Display results
+    results_df = test_df[['Date', 'Home', 'Away', 'Winner']].copy()
+    results_df['Predicted'] = y_pred
+    results_df['Correct'] = results_df['Winner'] == results_df['Predicted']
 
-print("\nSample Predictions:")
-print(results_df[['Date', 'Home', 'Away', 'Actual Outcome', 'Predicted Outcome', 'Correct']].head(20))
+    outcome_map = {0: 'Away Win', 1: 'Draw', 2: 'Home Win'}
+    results_df['Actual Outcome'] = results_df['Winner'].map(outcome_map)
+    results_df['Predicted Outcome'] = results_df['Predicted'].map(outcome_map)
+
+    print("\nSample Predictions:")
+    print(results_df[['Date', 'Home', 'Away', 'Actual Outcome', 'Predicted Outcome', 'Correct']].head(20))

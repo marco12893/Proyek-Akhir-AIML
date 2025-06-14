@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Soccer Winner Predictor</title>
+
+  <!--STYLES-->
+  <style>
+    .team-selection {
+      gap: 10px;
+
+    }
+
+    :root {
+      --team1-color: #d9534f;
+      --draw-color: #f0ad4e;
+      --team2-color: #5bc0de;
+      --bg-color: #f4f6f9;
+      --card-bg: #ffffff;
+      --accent: #343a40;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+      background-color: var(--bg-color);
+      color: #333;
+    }
+
+    .team-selection {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 15px;
+      padding: 20px;
+      background-color: var(--card-bg);
+      box-shadow: 0 1px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    select {
+      padding: 10px 14px;
+      font-size: 16px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      min-width: 180px;
+      background-color: #fff;
+    }
+
+    .vs-label {
+      font-size: 18px;
+      font-weight: bold;
+      color: var(--accent);
+    }
+
+    .header {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 40px 20px 20px;
+      background-color: var(--card-bg);
+      gap: 30px;
+    }
+
+    .header img {
+      height: 80px;
+      width: auto;
+    }
+
+    .vs {
+      font-size: 32px;
+      font-weight: bold;
+      color: var(--accent);
+    }
+
+    .win-chance {
+      text-align: center;
+      font-size: 26px;
+      font-weight: bold;
+      color: var(--accent);
+      margin: 30px 0;
+    }
+
+    .models-container {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      padding: 20px;
+      gap: 20px;
+    }
+
+    .model-box {
+      background-color: var(--card-bg);
+      width: 320px;
+      border-radius: 12px;
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+      padding: 24px;
+      transition: transform 0.2s ease;
+    }
+
+    .model-box:hover {
+      transform: translateY(-4px);
+    }
+
+    .model-box h3 {
+      text-align: center;
+      font-size: 22px;
+      margin-bottom: 20px;
+      color: var(--accent);
+    }
+
+ .progress-bar {
+  display: flex;
+  height: 48px;
+  width: 100%;
+  margin: 0 auto 40px;
+  border-radius: 5px;
+  overflow: hidden;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+  font-weight: bold;
+}
+
+.progress-bar > div {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  white-space: nowrap;
+  overflow: hidden;
+  min-width: 0;
+  flex-grow: 1;
+  position: relative;
+  padding: 0 6px;
+}
+
+.progress-bar > div span {
+  display: block;
+  width: 100%;
+  text-align: center;
+  font-size: clamp(10px, 1.1vw, 16px);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.bar-team1 {
+  background-color: var(--team1-color);
+  flex-grow: 60;
+}
+
+.bar-draw {
+  background-color: var(--draw-color);
+  flex-grow: 25;
+}
+
+.bar-team2 {
+  background-color: var(--team2-color);
+  flex-grow: 15;
+}
+    .dummy-data {
+      font-size: 15px;
+      line-height: 1.6;
+      color: #555;
+    }
+
+    @media (max-width: 768px) {
+
+      .models-container {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .header {
+        flex-direction: column;
+        gap: 20px;
+      }
+
+        .progress-bar > div {
+    font-size: 14px;
+  }
+    }
+  </style>
+</head>
+
+<!--simple header-->
+<header style="background-color: #343a40; color: #fff; padding: 20px 40px; display: flex; justify-content: space-between; align-items: center;">
+  <!-- Logo Section -->
+  <div style="font-size: 24px; font-weight: bold;">
+    <a href="/" style="text-decoration: none; color: #5bc0de;">PlayPredictor</a>
+  </div>
+
+  <!-- Navigation Menu -->
+  <nav style="display: flex; gap: 20px;">
+    <a href="/" style="color: #fff; text-decoration: none; font-size: 16px;">Home</a>
+    <a href="/about" style="color: #fff; text-decoration: none; font-size: 16px;">About</a>
+    <a href="/predictions" style="color: #fff; text-decoration: none; font-size: 16px;">Predictions</a>
+    <a href="/contact" style="color: #fff; text-decoration: none; font-size: 16px;">Contact</a>
+  </nav>
+
+  <!-- Call-to-Action Button -->
+  <div>
+    <a href="/signup" style="background-color: #5bc0de; color: #fff; padding: 10px 20px; border-radius: 6px; text-decoration: none; font-size: 16px; font-weight: bold;">
+      Get Started
+    </a>
+  </div>
+</header>
+
+
+
+<!--CONTENT STARTS HERE-->
+<body>
+  <form action="" method="post">
+    <div class="team-selection">
+      <!--  Select a team from 2018-2023 with form  -->
+      <select id="team1" name="team1">
+        <option value="" disabled selected>Select Team 1</option>
+        {% for team in team_list %}
+        <option value="{{ team }}">{{ team }}</option>
+        {% endfor %}
+      </select>
+      <span class="vs-label">VS</span>
+      <select id="team2" name="team2">
+        <option value="" disabled selected>Select Team 2</option>
+        {% for team in team_list %}
+        <option value="{{ team }}">{{ team }}</option>
+        {% endfor %}
+      </select>
+    </div>
+    <div class="header" style="display: flex; flex-direction: column; align-items: center; gap: 20px;">
+      <div style="display: flex; justify-content: center; align-items: center; gap: 20px;">
+        <img src="team1-logo.png" alt="Team 1 Logo" />
+        <span class="vs">VS</span>
+        <img src="team2-logo.png" alt="Team 2 Logo" />
+      </div>
+      <button type="submit" style="padding: 10px 20px; font-size: 16px; border: none; border-radius: 6px; background-color: var(--accent); color: #fff; cursor: pointer;">
+        Predict Winner
+      </button>
+    </div>
+  </form>
+
+<!--FORM DISPLAY-->
+  <div style="display: flex; justify-content: space-around; margin: 20px 80px 0 80px; font-size: 20px;">
+    <div style="text-align: left;">
+      <strong>Form:</strong>
+      <span style="color: red;">L L L</span>
+      <span style="color: black;">D</span>
+      <span style="color: green;">W</span>
+    </div>
+    <div style="text-align: right;">
+      <strong>Form:</strong>
+      <span style="color: green;">W W W W W W</span>
+    </div>
+  </div>
+
+<!--SHOW RESULTS FOR FA-CUP-->
+  <div style="font-size: 32px;font-weight: bold;color: var(--accent);display:flex;justify-content: center">
+    FA-Cup
+  </div>
+
+  <div class="models-container">
+    <div class="model-box">
+      <h3>XGBoost</h3>
+      <div class="progress-bar">
+        <div class="bar-team1"><span>60% MU Win</span></div>
+        <div class="bar-draw"><span>25% Draw</span></div>
+        <div class="bar-team2"><span>15% City Win</span></div>
+      </div>
+
+      <div class="dummy-data">
+        • Accuracy: {{accuracyXG_FAcup}}%<br />
+        • Predicted Score: 2 - 1<br />
+      </div>
+    </div>
+
+    <div class="model-box">
+      <h3>Random Forest</h3>
+      <div class="progress-bar">
+        <div class="bar-team1"><span>60% MU Win</span></div>
+        <div class="bar-draw"><span>25% Draw</span></div>
+        <div class="bar-team2"><span>15% City Win</span></div>
+      </div>
+
+      <div class="dummy-data">
+        • Accuracy: {{accuracyRF_FAcup}}%<br />
+        • Predicted Score: 1 - 1<br />
+      </div>
+    </div>
+
+    <div class="model-box">
+      <h3>Logistic Regression</h3>
+      <div class="progress-bar">
+        <div class="bar-team1"><span>60% MU Win</span></div>
+        <div class="bar-draw"><span>25% Draw</span></div>
+        <div class="bar-team2"><span>15% City Win</span></div>
+      </div>
+
+      <div class="dummy-data">
+        • Accuracy: {{accuracyLR_FAcup}}%<br />
+        • Predicted Score: 1 - 0<br />
+      </div>
+    </div>
+  </div>
+
+  <!--SHOW RESULTS FOR Premier League-->
+  <div style="font-size: 32px;font-weight: bold;color: var(--accent);display:flex;justify-content: center;margin-top: 70px">
+    Premier League
+  </div>
+
+  <div class="models-container">
+    <div class="model-box">
+      <h3>XGBoost</h3>
+      <div class="progress-bar">
+        <div class="bar-team1"><span>60% MU Win</span></div>
+        <div class="bar-draw"><span>25% Draw</span></div>
+        <div class="bar-team2"><span>15% City Win</span></div>
+      </div>
+
+      <div class="dummy-data">
+        • Accuracy: {{accuracyXG_PL}}%<br />
+        • Predicted Score: 2 - 1<br />
+      </div>
+    </div>
+
+    <div class="model-box">
+      <h3>Random Forest</h3>
+      <div class="progress-bar">
+        <div class="bar-team1"><span>60% MU Win</span></div>
+        <div class="bar-draw"><span>25% Draw</span></div>
+        <div class="bar-team2"><span>15% City Win</span></div>
+      </div>
+
+      <div class="dummy-data">
+        • Accuracy: {{accuracyRF_PL}}%<br />
+        • Predicted Score: 1 - 1<br />
+      </div>
+    </div>
+
+    <div class="model-box">
+      <h3>Logistic Regression</h3>
+      <div class="progress-bar">
+        <div class="bar-team1"><span>60% MU Win</span></div>
+        <div class="bar-draw"><span>25% Draw</span></div>
+        <div class="bar-team2"><span>15% City Win</span></div>
+      </div>
+
+      <div class="dummy-data">
+        • Accuracy: {{accuracyLR_PL}}%<br />
+        • Predicted Score: 1 - 0<br />
+      </div>
+    </div>
+  </div>
+<!-- FOOTER -->
+  <footer style="background-color: #343a40; color: #fff; padding: 40px 20px;margin-top: 100px">
+  <div style="display: flex; flex-wrap: wrap; justify-content: space-between; max-width: 1200px; margin: 0 auto;">
+    <!-- Branding Section -->
+    <div style="flex: 1; min-width: 200px; margin-bottom: 20px;">
+      <h3 style="font-size: 24px; font-weight: bold;">PlayPredictor</h3>
+      <p style="line-height: 1.6; color: #ccc;">
+        Your ultimate destination for accurate match outcome predictions powered by machine learning.
+      </p>
+    </div>
+
+    <!-- Quick Links Section -->
+    <div style="flex: 1; min-width: 200px; margin-bottom: 20px;">
+      <h4 style="font-size: 18px; font-weight: bold; margin-bottom: 10px;">Quick Links</h4>
+      <ul style="list-style: none; padding: 0; line-height: 1.8;">
+        <li><a href="#" style="color: #5bc0de; text-decoration: none;">Home</a></li>
+        <li><a href="#" style="color: #5bc0de; text-decoration: none;">About Us</a></li>
+        <li><a href="#" style="color: #5bc0de; text-decoration: none;">Predictions</a></li>
+        <li><a href="#" style="color: #5bc0de; text-decoration: none;">Contact</a></li>
+      </ul>
+    </div>
+
+    <!-- Contact Section -->
+    <div style="flex: 1; min-width: 200px; margin-bottom: 20px;">
+      <h4 style="font-size: 18px; font-weight: bold; margin-bottom: 10px;">Contact Us</h4>
+      <p style="line-height: 1.6; color: #ccc;">
+        <strong>Email:</strong> support@playpredictor.com<br />
+        <strong>Phone:</strong> +123-456-7890
+      </p>
+      <p style="line-height: 1.6; color: #ccc;">
+        Follow us on:
+        <a href="#" style="color: #5bc0de; text-decoration: none;">Twitter</a> |
+        <a href="#" style="color: #5bc0de; text-decoration: none;">Facebook</a> |
+        <a href="#" style="color: #5bc0de; text-decoration: none;">Instagram</a>
+      </p>
+    </div>
+  </div>
+
+  <!-- Copyright Section -->
+  <div style="text-align: center; padding-top: 20px; border-top: 1px solid #444; margin-top: 20px; color: #ccc; font-size: 14px;">
+    &copy; 2025 PlayPredictor. All rights reserved.
+  </div>
+</footer>
+
+</body>
+</html>

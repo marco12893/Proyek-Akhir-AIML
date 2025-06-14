@@ -97,39 +97,42 @@ results_df[['Away Win Prob', 'Draw Prob', 'Home Win Prob']] = (probs * 100).roun
 
 # Accuracy
 accuracy = accuracy_score(y_test, y_pred)
-print(f"\nRandom Forest Accuracy on FA Cup test set: {accuracy * 100:.2f}%\n")
+accuracyFormatted = accuracy*100
 
-# Classification report
-print("Overall Classification Report:")
-print(classification_report(
-    y_test, y_pred,
-    labels=[0, 2],
-    target_names=['Away Win', 'Home Win'],
-    zero_division=0
-))
+if __name__ =='__main__':
+    print(f"\nRandom Forest Accuracy on FA Cup test set: {accuracy * 100:.2f}%\n")
 
-# Accuracy by division gap
-print("\nPerformance by Division Gap:")
-for gap_range in [(0, 1), (2, 3), (4, 6)]:
-    mask = results_df['AbsoluteDivisionGap'].between(*gap_range)
-    if mask.any():
-        gap_acc = accuracy_score(y_test[mask], y_pred[mask])
-        print(f"Division gap {gap_range[0]}-{gap_range[1]}: {gap_acc:.2%} accuracy ({mask.sum()} matches)")
+    # Classification report
+    print("Overall Classification Report:")
+    print(classification_report(
+        y_test, y_pred,
+        labels=[0, 2],
+        target_names=['Away Win', 'Home Win'],
+        zero_division=0
+    ))
 
-# Confusion matrix
-unique_classes = np.unique(y_test)
-print(f"\nClasses present in test data: {unique_classes}")
-print("Confusion Matrix:")
-print(confusion_matrix(y_test, y_pred, labels=unique_classes))
+    # Accuracy by division gap
+    print("\nPerformance by Division Gap:")
+    for gap_range in [(0, 1), (2, 3), (4, 6)]:
+        mask = results_df['AbsoluteDivisionGap'].between(*gap_range)
+        if mask.any():
+            gap_acc = accuracy_score(y_test[mask], y_pred[mask])
+            print(f"Division gap {gap_range[0]}-{gap_range[1]}: {gap_acc:.2%} accuracy ({mask.sum()} matches)")
 
-# Feature importance
-importances = model.feature_importances_
-indices = np.argsort(importances)[::-1]
-feature_names = [features[i] for i in indices]
+    # Confusion matrix
+    unique_classes = np.unique(y_test)
+    print(f"\nClasses present in test data: {unique_classes}")
+    print("Confusion Matrix:")
+    print(confusion_matrix(y_test, y_pred, labels=unique_classes))
 
-plt.figure(figsize=(10, 6))
-plt.title("Feature Importance (Random Forest)")
-plt.bar(range(len(features)), importances[indices], align='center')
-plt.xticks(range(len(features)), feature_names, rotation=45)
-plt.tight_layout()
-plt.show()
+    # Feature importance
+    importances = model.feature_importances_
+    indices = np.argsort(importances)[::-1]
+    feature_names = [features[i] for i in indices]
+
+    plt.figure(figsize=(10, 6))
+    plt.title("Feature Importance (Random Forest)")
+    plt.bar(range(len(features)), importances[indices], align='center')
+    plt.xticks(range(len(features)), feature_names, rotation=45)
+    plt.tight_layout()
+    plt.show()
