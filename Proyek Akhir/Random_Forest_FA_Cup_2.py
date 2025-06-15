@@ -61,27 +61,30 @@ results_df['Away Win Prob'] = (probs[:, 2] * 100).round(1)
 
 # Evaluation
 accuracy = accuracy_score(y_test, y_pred)
-print(f"Random Forest Accuracy on FA Cup test set: {accuracy * 100:.2f}%\n")
+accuracyFormatted =  accuracy*100
 
-unique_classes = np.unique(y_test)
-print(f"Classes present in test data: {unique_classes}")
+if __name__=='__main__':
+    print(f"Random Forest Accuracy on FA Cup test set: {accuracy * 100:.2f}%\n")
 
-target_names = ['Away Win', 'Home Win']
+    unique_classes = np.unique(y_test)
+    print(f"Classes present in test data: {unique_classes}")
 
-print("Confusion Matrix:")
-print(confusion_matrix(y_test, y_pred, labels=unique_classes))
+    target_names = ['Away Win', 'Home Win']
 
-print("\nClassification Report:")
-print(classification_report(y_test, y_pred,
-                           labels=unique_classes,
-                           target_names=target_names,
-                           zero_division=0))
+    print("Confusion Matrix:")
+    print(confusion_matrix(y_test, y_pred, labels=unique_classes))
 
-# Feature importance plot
-importances = model.feature_importances_
-plt.figure(figsize=(8, 4))
-plt.barh(features, importances)
-plt.xlabel("Feature Importance")
-plt.title("Random Forest Feature Importance")
-plt.tight_layout()
-plt.show()
+    print("\nClassification Report:")
+    print(classification_report(y_test, y_pred,
+                               labels=unique_classes,
+                               target_names=target_names,
+                               zero_division=0))
+
+    # Feature importance plot
+    importances = model.feature_importances_
+    plt.figure(figsize=(8, 4))
+    plt.barh(features, importances)
+    plt.xlabel("Feature Importance")
+    plt.title("Random Forest Feature Importance")
+    plt.tight_layout()
+    plt.show()
