@@ -17,12 +17,15 @@ le_team.fit(pd.concat([df['Home'], df['Away']]))
 df['HomeTeam_enc'] = le_team.transform(df['Home'])
 df['AwayTeam_enc'] = le_team.transform(df['Away'])
 
+# Add DivisionGap
+df['DivisionGap'] = df['AwayDivision'] - df['HomeDivision']
+
 # Train-test split: FA Cup 2023 as test set
 train_df = df[~((df['Type'] == 'FA Cup') & (df['Season'] == 2023))]
 test_df = df[(df['Type'] == 'FA Cup') & (df['Season'] == 2023)]
 
 # Define features
-features = ['HomeTeam_enc', 'AwayTeam_enc']
+features = ['HomeTeam_enc', 'AwayTeam_enc', 'DivisionGap', 'NeutralVenue']
 X_train = train_df[features]
 y_train = train_df['Winner']
 X_test = test_df[features]
@@ -31,6 +34,7 @@ y_test = test_df['Winner']
 # Train logistic regression model
 model = LogisticRegression(
     class_weight='balanced',
+
     solver='lbfgs',
     max_iter=1000,
     random_state=42
@@ -41,34 +45,38 @@ model.fit(X_train, y_train)
 y_pred = model.predict(X_test)
 y_proba = model.predict_proba(X_test)
 
-# Evaluation
-print("\nLogistic Regression Benchmark (Only 2 Features)")
-print("="*50)
 accuracy = accuracy_score(y_test, y_pred)
-print(f"Accuracy: {accuracy:.2%}")
+accuracyFormatted =  accuracy*100
 
-print("\nConfusion Matrix:")
-print(confusion_matrix(y_test, y_pred, labels=[0, 2]))
+if __name__=='__main__':
+    # Evaluation
+    print("\nLogistic Regression (w/ DivisionGap & NeutralVenue)")
+    print("="*55)
 
-print("\nClassification Report:")
-print(classification_report(
-    y_test, y_pred,
-    labels=[0, 2],
-    target_names=['Home Loss (0)', 'Home Win (2)']
-))
+    print(f"Accuracy: {accuracy:.2%}")
 
-# Results dataframe
-results_df = test_df[['Date', 'Home', 'Away', 'Winner']].copy()
-results_df['Predicted'] = y_pred
-results_df['Home Loss Prob'] = (y_proba[:, 0] * 100).round(1)
-results_df['Home Win Prob'] = (y_proba[:, 1] * 100).round(1)
-results_df['Correct'] = results_df['Winner'] == results_df['Predicted']
+    print("\nConfusion Matrix:")
+    print(confusion_matrix(y_test, y_pred, labels=[0, 2]))
 
-print("\nSample Predictions:")
-print(results_df.head(10))
+    print("\nClassification Report:")
+    print(classification_report(
+        y_test, y_pred,
+        labels=[0, 2],
+        target_names=['Home Loss (0)', 'Home Win (2)']
+    ))
 
-# Model coefficients
-print("\nModel Coefficients:")
-print(f"Intercept: {model.intercept_[0]:.4f}")
-print(f"Coefficient for HomeTeam_enc: {model.coef_[0][0]:.4f}")
-print(f"Coefficient for AwayTeam_enc: {model.coef_[0][1]:.4f}")
+    # Results dataframe
+    results_df = test_df[['Date', 'Home', 'Away', 'Winner']].copy()
+    results_df['Predicted'] = y_pred
+    results_df['Home Loss Prob'] = (y_proba[:, 0] * 100).round(1)
+    results_df['Home Win Prob'] = (y_proba[:, 1] * 100).round(1)
+    results_df['Correct'] = results_df['Winner'] == results_df['Predicted']
+
+    print("\nSample Predictions:")
+    print(results_df.head(10))
+
+    # Model coefficients
+    print("\nModel Coefficients:")
+    print(f"Intercept: {model.intercept_[0]:.4f}")
+    for feature_name, coef in zip(features, model.coef_[0]):
+        print(f"{feature_name}: {coef:.4f}")

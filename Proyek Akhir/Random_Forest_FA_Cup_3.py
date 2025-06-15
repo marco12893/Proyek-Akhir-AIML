@@ -62,8 +62,34 @@ model = RandomForestClassifier(
 )
 model.fit(X_train, y_train)
 
-# Prediction with division-aware post-processing
-def predict_with_division_rules(model, X, division_gap_threshold=3):
+
+# Function to calculate confidence
+def calculate_confidence(probs):
+    """
+    Calculate the confidence of predictions based on the highest probability.
+
+    Args:
+        probs (numpy.ndarray): Array of predicted probabilities from the model.
+
+    Returns:
+        numpy.ndarray: Array of confidence values corresponding to predictions.
+    """
+    return probs.max(axis=1)
+
+
+# Prediction with division-aware post-processing and confidence calculation
+def predict_with_confidence(model, X, division_gap_threshold=3):
+    """
+    Predict outcomes with division-aware rules and calculate confidence.
+
+    Args:
+        model: Trained RandomForestClassifier model.
+        X (pd.DataFrame): Test dataset.
+        division_gap_threshold (int): Threshold for applying division-aware rules.
+
+    Returns:
+        tuple: Predicted labels, probabilities, and confidence values.
+    """
     probs = model.predict_proba(X)
     y_pred_raw = np.argmax(probs, axis=1)
 
@@ -81,9 +107,14 @@ def predict_with_division_rules(model, X, division_gap_threshold=3):
         else:
             y_pred.append(0 if pred == 1 and probs[i][0] > probs[i][2] else (2 if pred == 1 else pred))
 
-    return np.array(y_pred), probs
+    confidence = calculate_confidence(probs)
+    return np.array(y_pred), probs, confidence
 
-y_pred, probs = predict_with_division_rules(model, X_test)
+
+# Use the updated function for prediction and confidence
+y_pred, probs, confidence = predict_with_confidence(model, X_test)
+
+
 
 # Evaluation
 results_df = test_df[['Date', 'Home', 'Away', 'Winner', 'DivisionGap', 'AbsoluteDivisionGap']].copy()
@@ -91,6 +122,8 @@ results_df['Predicted'] = y_pred
 results_df['Correct'] = results_df['Winner'] == results_df['Predicted']
 results_df['Actual Outcome'] = results_df['Winner'].map({0: 'Away Win', 2: 'Home Win'})
 results_df['Predicted Outcome'] = results_df['Predicted'].map({0: 'Away Win', 2: 'Home Win'})
+# Add confidence to the results dataframe
+results_df['Confidence'] = (confidence * 100).round(1)
 
 # Add probabilities
 results_df[['Away Win Prob', 'Draw Prob', 'Home Win Prob']] = (probs * 100).round(1)
@@ -98,6 +131,29 @@ results_df[['Away Win Prob', 'Draw Prob', 'Home Win Prob']] = (probs * 100).roun
 # Accuracy
 accuracy = accuracy_score(y_test, y_pred)
 accuracyFormatted = accuracy*100
+confidence_df=results_df[['Date', 'Home', 'Away', 'Predicted Outcome', 'Confidence', 'Actual Outcome']].head()
+
+# Generate classification report as a dictionary
+report = classification_report(y_test, y_pred, labels=[0, 2], target_names=['Away Win', 'Home Win'], zero_division=0, output_dict=True)
+
+# Extract metrics for each class
+away_win_metrics = report['Away Win']  # Dict for 'Away Win'
+home_win_metrics = report['Home Win']  # Dict for 'Home Win'
+
+# Example: precision, recall, and F1-score for 'Away Win'
+away_precision = away_win_metrics['precision']
+away_recall = away_win_metrics['recall']
+away_f1 = away_win_metrics['f1-score']
+
+# Example: accuracy
+accuracy = report['accuracy']
+
+# Prepare data for HTML
+metrics_data = [
+    {'Class': 'Away Win', 'Precision': away_precision, 'Recall': away_recall, 'F1-Score': away_f1},
+    {'Class': 'Home Win', 'Precision': home_win_metrics['precision'], 'Recall': home_win_metrics['recall'], 'F1-Score': home_win_metrics['f1-score']},
+    {'Class': 'Overall Accuracy', 'Precision': '', 'Recall': '', 'F1-Score': accuracy},
+]
 
 if __name__ =='__main__':
     print(f"\nRandom Forest Accuracy on FA Cup test set: {accuracy * 100:.2f}%\n")
@@ -124,6 +180,9 @@ if __name__ =='__main__':
     print(f"\nClasses present in test data: {unique_classes}")
     print("Confusion Matrix:")
     print(confusion_matrix(y_test, y_pred, labels=unique_classes))
+
+    # confidence 5
+    print(results_df[['Date', 'Home', 'Away', 'Predicted Outcome', 'Confidence']].head())
 
     # Feature importance
     importances = model.feature_importances_
