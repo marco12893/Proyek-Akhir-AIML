@@ -11,12 +11,27 @@ from Logistic_Regression_Premier_League import accuracyFormatted as accuracyLR_P
 '''
 //CATATAN PERSONAL//
 - 0 itu kalah, 1 itu draw, 2 itu menang
-- Year yg dipake buat training (PREDIKSI !<= DATA ITU) = 2018 s.d. 2023
+- Year yg dipake buat training (PREDIKSI !<= DATA ITU) = 2018 s.d. 2023 
+-
+- 
 
-besok mau nanya:
-- apa saja yang mau di tampilkan (apa lagi yang mau di link ke front endnya)
-- prediction score & predict winner (?)
-- form ini nunjukinnya dalam bentuk apa
+
+Yg harus dikerjakan (Rayner):
+- tambahin date dan neutral venue untuk selection & form mengambil dari yang paling recent (date and time, main view)
+- tombol stats for nerds di masukin di navbar header
+- grafik yg nunjukin progress kita (3 algoritma dari 3 file) (route yg beda)
+- classification report (route yg beda juga), boleh tunjukin performance by division gap
+- PLOT seberapa penting attribute (route yg beda juga)
+- confusion matrix (route yg beda)
+
+- 
+
+
+(marco):
+- modif backend untuk prediksi winner & prediksi goal 
+- untuk training data, stats untuk home dan away (berapa win, draw, loss)
+- Learning curve (seberapa akurat seiring kita nambahin training data) (route yg beda juga)
+- 
 -
 '''
 
