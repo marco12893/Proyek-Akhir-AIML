@@ -4,6 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
 
   <title>PlayPredictor</title>
 
@@ -113,54 +114,6 @@
       color: var(--accent);
     }
 
- .progress-bar {
-  display: flex;
-  height: 48px;
-  width: 100%;
-  margin: 0 auto 40px;
-  border-radius: 5px;
-  overflow: hidden;
-  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
-  font-weight: bold;
-}
-
-.progress-bar > div {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: #fff;
-  white-space: nowrap;
-  overflow: hidden;
-  min-width: 0;
-  flex-grow: 1;
-  position: relative;
-  padding: 0 6px;
-}
-
-.progress-bar > div span {
-  display: block;
-  width: 100%;
-  text-align: center;
-  font-size: clamp(10px, 1.1vw, 16px);
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-
-.bar-team1 {
-  background-color: var(--team1-color);
-  flex-grow: 60;
-}
-
-.bar-draw {
-  background-color: var(--draw-color);
-  flex-grow: 25;
-}
-
-.bar-team2 {
-  background-color: var(--team2-color);
-  flex-grow: 15;
-}
 .dummy-data {
   font-size: 20px;
   line-height: 1.6;
@@ -247,35 +200,39 @@
         <span class="vs">VS</span>
         <img src="team2-logo.png" alt="Team 2 Logo" />
       </div>
-      <button type="submit" style="padding: 10px 20px; font-size: 16px; border: none; border-radius: 6px; background-color: var(--accent); color: #fff; cursor: pointer;">
+      <button type="submit" class="bg-gray-800 hover:bg-gray-700" style="padding: 10px 20px; font-size: 16px; border: none; border-radius: 6px; color: #fff; cursor: pointer;">
         Predict Winner
       </button>
     </div>
   </form>
 
 <div style="display: flex; justify-content: space-around; margin: 20px 80px 0 80px; font-size: 20px;">
-  <div style="text-align: left;">
-    <strong>Form:</strong>
-    {% for result in form_team1 %}
-      <span style="color:
-        {% if result == 'W' %}green
-        {% elif result == 'D' %}black
-        {% else %}red
-        {% endif %}
-      ">{{ result }}</span>
-    {% endfor %}
-  </div>
-  <div style="text-align: right;">
-    <strong>Form:</strong>
-    {% for result in form_team2 %}
-      <span style="color:
-        {% if result == 'W' %}green
-        {% elif result == 'D' %}black
-        {% else %}red
-        {% endif %}
-      ">{{ result }}</span>
-    {% endfor %}
-  </div>
+<div class="flex gap-1">
+  <strong>Form:</strong>
+  {% for result in form_team1 %}
+    {% if result == 'W' %}
+      {% set color = 'text-green-500 bg-green-100' %}
+    {% elif result == 'D' %}
+      {% set color = 'text-yellow-500 bg-yellow-100' %}
+    {% else %}
+      {% set color = 'text-red-500 bg-red-100' %}
+    {% endif %}
+    <span class="flex size-8 justify-center items-center rounded-full {{ color }}">{{ result }}</span>
+  {% endfor %}
+</div>
+<div class="flex gap-1">
+  <strong>Form:</strong>
+  {% for result in form_team2 %}
+    {% if result == 'W' %}
+      {% set color = 'text-green-500 bg-green-100' %}
+    {% elif result == 'D' %}
+      {% set color = 'text-yellow-500 bg-yellow-100' %}
+    {% else %}
+      {% set color = 'text-red-500 bg-red-100' %}
+    {% endif %}
+    <span class="flex size-8 justify-center items-center rounded-full {{ color }}">{{ result }}</span>
+  {% endfor %}
+</div>
 </div>
 
 
@@ -423,10 +380,10 @@
   <div class="models-container">
     <div class="model-box">
       <h3>XGBoost</h3>
-      <div class="progress-bar">
-        <div class="bar-team1"><span>60% MU Win</span></div>
-        <div class="bar-draw"><span>25% Draw</span></div>
-        <div class="bar-team2"><span>15% City Win</span></div>
+      <div class="flex text-white font-bold">
+        <div class="flex w-[60%] bg-red-500"><span>60% MU Win</span></div>
+        <div class="flex w-[25%] bg-yellow-500"><span>25% Draw</span></div>
+        <div class="flex w-[15%] bg-green-500"><span>15% City Win</span></div>
       </div>
 
       <div class="dummy-data">
@@ -437,10 +394,10 @@
 
     <div class="model-box">
       <h3>Random Forest</h3>
-      <div class="progress-bar">
-        <div class="bar-team1"><span>60% MU Win</span></div>
-        <div class="bar-draw"><span>25% Draw</span></div>
-        <div class="bar-team2"><span>15% City Win</span></div>
+      <div class="flex text-white font-bold">
+        <div class="flex w-[60%] bg-red-500"><span>60% MU Win</span></div>
+        <div class="flex w-[25%] bg-yellow-500"><span>25% Draw</span></div>
+        <div class="flex w-[15%] bg-green-500"><span>15% City Win</span></div>
       </div>
 
       <div class="dummy-data">
@@ -451,10 +408,10 @@
 
     <div class="model-box">
       <h3>Logistic Regression</h3>
-      <div class="progress-bar">
-        <div class="bar-team1"><span>60% MU Win</span></div>
-        <div class="bar-draw"><span>25% Draw</span></div>
-        <div class="bar-team2"><span>15% City Win</span></div>
+      <div class="flex text-white font-bold">
+        <div class="flex w-[60%] bg-red-500"><span>60% MU Win</span></div>
+        <div class="flex w-[25%] bg-yellow-500"><span>25% Draw</span></div>
+        <div class="flex w-[15%] bg-green-500"><span>15% City Win</span></div>
       </div>
 
       <div class="dummy-data">
@@ -463,49 +420,9 @@
       </div>
     </div>
   </div>
-<!-- FOOTER -->
-  <footer style="background-color: #343a40; color: #fff; padding: 40px 20px;margin-top: 100px">
-  <div style="display: flex; flex-wrap: wrap; justify-content: space-between; max-width: 1200px; margin: 0 auto;">
-    <!-- Branding Section -->
-    <div style="flex: 1; min-width: 200px; margin-bottom: 20px;">
-      <h3 style="font-size: 24px; font-weight: bold;">PlayPredictor</h3>
-      <p style="line-height: 1.6; color: #ccc;">
-        Your ultimate destination for accurate match outcome predictions powered by machine learning.
-      </p>
-    </div>
 
-    <!-- Quick Links Section -->
-    <div style="flex: 1; min-width: 200px; margin-bottom: 20px;">
-      <h4 style="font-size: 18px; font-weight: bold; margin-bottom: 10px;">Quick Links</h4>
-      <ul style="list-style: none; padding: 0; line-height: 1.8;">
-        <li><a href="#" style="color: #5bc0de; text-decoration: none;">Home</a></li>
-        <li><a href="#" style="color: #5bc0de; text-decoration: none;">About Us</a></li>
-        <li><a href="#" style="color: #5bc0de; text-decoration: none;">Predictions</a></li>
-        <li><a href="#" style="color: #5bc0de; text-decoration: none;">Contact</a></li>
-      </ul>
-    </div>
-
-    <!-- Contact Section -->
-    <div style="flex: 1; min-width: 200px; margin-bottom: 20px;">
-      <h4 style="font-size: 18px; font-weight: bold; margin-bottom: 10px;">Contact Us</h4>
-      <p style="line-height: 1.6; color: #ccc;">
-        <strong>Email:</strong> support@playpredictor.com<br />
-        <strong>Phone:</strong> +123-456-7890
-      </p>
-      <p style="line-height: 1.6; color: #ccc;">
-        Follow us on:
-        <a href="#" style="color: #5bc0de; text-decoration: none;">Twitter</a> |
-        <a href="#" style="color: #5bc0de; text-decoration: none;">Facebook</a> |
-        <a href="#" style="color: #5bc0de; text-decoration: none;">Instagram</a>
-      </p>
-    </div>
-  </div>
-
-  <!-- Copyright Section -->
-  <div style="text-align: center; padding-top: 20px; border-top: 1px solid #444; margin-top: 20px; color: #ccc; font-size: 14px;">
-    &copy; 2025 PlayPredictor. All rights reserved.
-  </div>
-</footer>
+  <br>
+  <br>
 
 </body>
 </html>
