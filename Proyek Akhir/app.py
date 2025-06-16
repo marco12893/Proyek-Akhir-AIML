@@ -49,6 +49,8 @@ Yg harus dikerjakan (Rayner):
 
 (Fabio):
 -Tambahain logo untuk semua team
+-Tambahin search bar di drop down
+_Pindahin tabel ke stats for nerds, tambahin bar win rate and lose rate
 '''
 
 
@@ -83,6 +85,7 @@ formattedLR_PL = "{:.2f}".format(accuracyLR_PL)
 FA_df = df[(df['Type'] == 'FA Cup')]
 unique_values = FA_df['Home'].unique()
 team_list = unique_values.tolist()
+
 
 
 app = Flask(__name__)
