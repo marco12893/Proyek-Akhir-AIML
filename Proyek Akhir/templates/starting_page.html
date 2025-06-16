@@ -227,19 +227,19 @@
   <form action="" method="post">
     <div class="team-selection">
       <!--  Select a team from 2018-2023 with form  -->
-      <select id="team1" name="team1">
-        <option value="" disabled selected>Select Team 1</option>
-        {% for team in team_list %}
-        <option value="{{ team }}">{{ team }}</option>
-        {% endfor %}
-      </select>
+   <select id="team1" name="team1">
+  <option value="" disabled {% if not selected_team1 %}selected{% endif %}>Select Team 1</option>
+  {% for team in team_list %}
+  <option value="{{ team }}" {% if team == selected_team1 %}selected{% endif %}>{{ team }}</option>
+  {% endfor %}
+</select>
       <span class="vs-label">VS</span>
-      <select id="team2" name="team2">
-        <option value="" disabled selected>Select Team 2</option>
-        {% for team in team_list %}
-        <option value="{{ team }}">{{ team }}</option>
-        {% endfor %}
-      </select>
+    <select id="team2" name="team2">
+  <option value="" disabled {% if not selected_team2 %}selected{% endif %}>Select Team 2</option>
+  {% for team in team_list %}
+  <option value="{{ team }}" {% if team == selected_team2 %}selected{% endif %}>{{ team }}</option>
+  {% endfor %}
+</select>
     </div>
     <div class="header" style="display: flex; flex-direction: column; align-items: center; gap: 20px;">
       <div style="display: flex; justify-content: center; align-items: center; gap: 20px;">
@@ -253,19 +253,31 @@
     </div>
   </form>
 
-<!--FORM DISPLAY-->
-  <div style="display: flex; justify-content: space-around; margin: 20px 80px 0 80px; font-size: 20px;">
-    <div style="text-align: left;">
-      <strong>Form:</strong>
-      <span style="color: red;">L L L</span>
-      <span style="color: black;">D</span>
-      <span style="color: green;">W</span>
-    </div>
-    <div style="text-align: right;">
-      <strong>Form:</strong>
-      <span style="color: green;">W W W W W W</span>
-    </div>
+<div style="display: flex; justify-content: space-around; margin: 20px 80px 0 80px; font-size: 20px;">
+  <div style="text-align: left;">
+    <strong>Form:</strong>
+    {% for result in form_team1 %}
+      <span style="color:
+        {% if result == 'W' %}green
+        {% elif result == 'D' %}black
+        {% else %}red
+        {% endif %}
+      ">{{ result }}</span>
+    {% endfor %}
   </div>
+  <div style="text-align: right;">
+    <strong>Form:</strong>
+    {% for result in form_team2 %}
+      <span style="color:
+        {% if result == 'W' %}green
+        {% elif result == 'D' %}black
+        {% else %}red
+        {% endif %}
+      ">{{ result }}</span>
+    {% endfor %}
+  </div>
+</div>
+
 
 
 <!--SHOW RESULTS FOR FA-CUP-->
