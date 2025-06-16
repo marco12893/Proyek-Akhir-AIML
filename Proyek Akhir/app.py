@@ -46,7 +46,11 @@ Yg harus dikerjakan (Rayner):
 - Learning curve (seberapa akurat seiring kita nambahin training data) (route yg beda juga)
 - 
 -
+
+(Fabio):
+-Tambahain logo untuk semua team
 '''
+
 
 # XGBoost variables (FA)
 results_XG_FA  = results_XG_FA.to_dict(orient='records')
@@ -82,9 +86,54 @@ team_list = unique_values.tolist()
 
 
 app = Flask(__name__)
+
+def get_team_form(team_name, num_matches=5):
+    # Filter matches where the team was home or away
+    team_matches = df[(df['Home'] == team_name) | (df['Away'] == team_name)]
+
+    # Sort by date DESCENDING
+    team_matches = team_matches.sort_values(by='Date', ascending=False)
+
+    # Get only recent N matches
+    recent_matches = team_matches.head(num_matches)
+
+    form = []
+
+    for _, row in recent_matches.iterrows():
+        if row['Home'] == team_name:
+            if row['Winner'] == 2:  # Home win
+                form.append('W')
+            elif row['Winner'] == 1:
+                form.append('D')
+            else:
+                form.append('L')
+        else:  # team is Away
+            if row['Winner'] == 0:  # Away win
+                form.append('W')
+            elif row['Winner'] == 1:
+                form.append('D')
+            else:
+                form.append('L')
+
+    return form
+
 # MAIN ROUTE VIEW
-@app.route('/')
+@app.route('/', methods=['GET', 'POST'])
 def home():
+    team1 = None
+    team2 = None
+    form_team1 = []
+    form_team2 = []
+
+    if request.method == 'POST':
+        team1 = request.form.get('team1')
+        team2 = request.form.get('team2')
+
+        if team1:
+            form_team1 = get_team_form(team1)
+        if team2:
+            form_team2 = get_team_form(team2)
+
     return render_template('starting_page.html',
                            accuracyXG_FAcup=formattedXG_FA, results_XG_FA=results_XG_FA,
                            accuracyRF_FAcup=formattedRF_FA, results_RF_FA=results_RF_FA,
@@ -92,7 +141,11 @@ def home():
                            accuracyXG_PL=formattedXG_PL,
                            accuracyRF_PL=formattedRF_PL,
                            accuracyLR_PL=formattedLR_PL,
-                           team_list=team_list)
+                           team_list=team_list,
+                           form_team1=form_team1,
+                           form_team2=form_team2,
+                           selected_team1=team1,
+                           selected_team2=team2)
 
 
 
