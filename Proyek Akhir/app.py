@@ -41,8 +41,8 @@ Yg harus dikerjakan (Rayner):
 
 
 (marco):
-- modif backend untuk prediksi winner & prediksi goal 
-- untuk training data, stats untuk home dan away (berapa win, draw, loss)
+- [SUDAH] modif backend untuk prediksi winner 
+- prediksi goal 
 - Learning curve (seberapa akurat seiring kita nambahin training data) (route yg beda juga)
 - 
 -
