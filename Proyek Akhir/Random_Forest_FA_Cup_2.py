@@ -55,9 +55,9 @@ results_df['Predicted'] = y_pred
 results_df['Correct'] = results_df['Winner'] == results_df['Predicted']
 results_df['Actual Outcome'] = results_df['Winner'].map(outcome_map)
 results_df['Predicted Outcome'] = results_df['Predicted'].map(outcome_map)
-results_df['Home Win Prob'] = (probs[:, 0] * 100).round(1)
+results_df['Away Win Prob'] = (probs[:, 0] * 100).round(1)
 results_df['Draw Prob'] = (probs[:, 1] * 100).round(1)
-results_df['Away Win Prob'] = (probs[:, 2] * 100).round(1)
+results_df['Home Win Prob'] = (probs[:, 2] * 100).round(1)
 
 # Evaluation
 accuracy = accuracy_score(y_test, y_pred)

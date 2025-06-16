@@ -102,6 +102,86 @@ def predict_with_division_rules(model, X, division_gap_threshold=3):
             y_pred.append(0 if pred == 1 and probs[i][0] > probs[i][2] else (2 if pred == 1 else pred))
     return np.array(y_pred), probs
 
+def predict_match(match_date_str, home_team, away_team, model=model, le=le_team, df_all=df):
+    import warnings
+    warnings.filterwarnings("ignore")
+
+    # Convert string date to datetime
+    match_date = pd.to_datetime(match_date_str)
+    df = df_all.copy()
+    df['Date'] = pd.to_datetime(df['Date'])
+
+    # Check if teams exist
+    teams_set = set(df['Home']).union(set(df['Away']))
+    if home_team not in teams_set or away_team not in teams_set:
+        print(f"⚠️ One or both teams not found in the dataset.")
+        return
+
+    # Get the most recent division for both teams before match date
+    def get_division(team):
+        matches = df[((df['Home'] == team) | (df['Away'] == team)) & (df['Date'] < match_date)]
+        if matches.empty:
+            print(f"⚠️ No matches found for {team} before {match_date_str}")
+            return np.nan
+        latest = matches.sort_values(by='Date', ascending=False).iloc[0]
+        if latest['Home'] == team:
+            return latest['HomeDivision']
+        else:
+            return latest['AwayDivision']
+
+    home_div = get_division(home_team)
+    away_div = get_division(away_team)
+
+    # Get last 5 results
+    def get_form(team):
+        matches = df[((df['Home'] == team) | (df['Away'] == team)) & (df['Date'] < match_date)].sort_values(by='Date', ascending=False).head(5)
+        if matches.empty:
+            print(f"⚠️ No recent matches for {team}")
+            return 0
+        wins = 0
+        for _, row in matches.iterrows():
+            if row['Winner'] == 2 and row['Home'] == team:
+                wins += 1
+            elif row['Winner'] == 0 and row['Away'] == team:
+                wins += 1
+        return wins
+
+    home_form = get_form(home_team)
+    away_form = get_form(away_team)
+
+    # Build feature row
+    try:
+        row = pd.DataFrame([{
+            'HomeTeam_enc': le.transform([home_team])[0],
+            'AwayTeam_enc': le.transform([away_team])[0],
+            'HomeDivision': home_div,
+            'AwayDivision': away_div,
+            'NeutralVenue': 1,
+            'DivisionGap': away_div - home_div,
+            'AbsoluteDivisionGap': abs(away_div - home_div),
+            'HomeLast5_Wins': home_form,
+            'AwayLast5_Wins': away_form,
+            'HomeFormWeighted': home_form / (abs(away_div - home_div) + 1),
+            'AwayFormWeighted': away_form * (abs(away_div - home_div) + 1)
+        }])
+    except:
+        print("⚠️ Failed to encode team names — likely due to unseen label.")
+        return
+
+    # Predict
+    probs = model.predict_proba(row)
+    confidence = np.max(probs) * 100
+    predicted = np.argmax(probs)
+
+    outcome = {0: 'Away Win', 2: 'Home Win'}
+    print(f"📅 {match_date_str}: {home_team} vs {away_team}")
+    print(f"🏆 Predicted: {outcome.get(predicted)} ({confidence:.2f}% confidence)")
+    print(f"📈 Home form: {home_form} wins in last 5")
+    print(f"📉 Away form: {away_form} wins in last 5")
+    print(f"🔢 Divisions: {home_team} (D{home_div}) vs {away_team} (D{away_div})")
+    print(f"📊 Probabilities: Home Win: {probs[0][2]*100:.1f}%, Draw: {probs[0][1]*100:.1f}%, Away Win: {probs[0][0]*100:.1f}%")
+
+
 y_pred, probs = predict_with_division_rules(model, X_test)
 
 # Use the function to calculate confidence
@@ -115,7 +195,7 @@ results_df['Predicted'] = y_pred
 results_df['Correct'] = results_df['Winner'] == results_df['Predicted']
 results_df['Actual Outcome'] = results_df['Winner'].map({0: 'Away Win', 2: 'Home Win'})
 results_df['Predicted Outcome'] = results_df['Predicted'].map({0: 'Away Win', 2: 'Home Win'})
-results_df[['Home Win Prob', 'Draw Prob', 'Away Win Prob']] = (probs * 100).round(1)
+results_df[['Away Win Prob', 'Draw Prob', 'Home Win Prob']] = (probs * 100).round(1)
 results_df['Confidence (%)'] = confidence.round(2)
 
 # Evaluate classification
@@ -145,7 +225,7 @@ metrics_data = [
     {'Class': 'Overall Accuracy', 'Precision': '', 'Recall': '', 'F1-Score': accuracy},
 ]
 
-if __name__ =='__main__':
+if __name__ == '__main__':
     print(f"\nXGBoost Accuracy on FA Cup test set: {accuracy * 100:.2f}%\n")
     print("Overall Classification Report:")
     print(classification_report(y_test, y_pred, labels=[0, 2], target_names=['Away Win', 'Home Win'], zero_division=0))
@@ -164,6 +244,7 @@ if __name__ =='__main__':
     # Display confidence levels
     print("\nTop 5 Predictions with Confidence Levels:")
     print(results_df[['Date', 'Home', 'Away', 'Predicted Outcome', 'Confidence (%)']].head())
+    predict_match("2024-05-24", "Manchester City", "Manchester Utd")
 
     # Feature importance plot
     plt.figure(figsize=(12, 8))

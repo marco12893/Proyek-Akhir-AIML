@@ -110,6 +110,76 @@ def predict_with_confidence(model, X, division_gap_threshold=3):
     confidence = calculate_confidence(probs)
     return np.array(y_pred), probs, confidence
 
+def predict_match_rf(match_date_str, home_team, away_team, model=model, le=le_team, df_all=df):
+    import warnings
+    warnings.filterwarnings("ignore")
+
+    match_date = pd.to_datetime(match_date_str)
+    df = df_all.copy()
+    df['Date'] = pd.to_datetime(df['Date'])
+
+    teams_set = set(df['Home']).union(set(df['Away']))
+    if home_team not in teams_set or away_team not in teams_set:
+        print("⚠️ One or both teams not found in dataset.")
+        return
+
+    def get_division(team):
+        matches = df[((df['Home'] == team) | (df['Away'] == team)) & (df['Date'] < match_date)]
+        if matches.empty:
+            print(f"⚠️ No division data for {team} before {match_date_str}")
+            return np.nan
+        latest = matches.sort_values(by='Date', ascending=False).iloc[0]
+        return latest['HomeDivision'] if latest['Home'] == team else latest['AwayDivision']
+
+    def get_form(team):
+        matches = df[((df['Home'] == team) | (df['Away'] == team)) & (df['Date'] < match_date)].sort_values(by='Date', ascending=False).head(5)
+        wins = 0
+        for _, row in matches.iterrows():
+            if row['Winner'] == 2 and row['Home'] == team:
+                wins += 1
+            elif row['Winner'] == 0 and row['Away'] == team:
+                wins += 1
+        return wins
+
+    home_div = get_division(home_team)
+    away_div = get_division(away_team)
+    home_form = get_form(home_team)
+    away_form = get_form(away_team)
+
+    try:
+        row = pd.DataFrame([{
+            'HomeTeam_enc': le.transform([home_team])[0],
+            'AwayTeam_enc': le.transform([away_team])[0],
+            'HomeDivision': home_div,
+            'AwayDivision': away_div,
+            'NeutralVenue': 1,
+            'DivisionGap': away_div - home_div,
+            'AbsoluteDivisionGap': abs(away_div - home_div),
+            'HomeLast5_Wins': home_form,
+            'AwayLast5_Wins': away_form,
+            'HomeFormWeighted': home_form / (abs(away_div - home_div) + 1),
+            'AwayFormWeighted': away_form * (abs(away_div - home_div) + 1)
+        }])
+    except:
+        print("⚠️ Error encoding teams — likely unseen label.")
+        return
+
+    # Predict
+    probs = model.predict_proba(row)
+    prediction = model.predict(row)[0]
+    confidence = np.max(probs) * 100
+
+    outcome_map = {0: 'Away Win', 2: 'Home Win'}
+    home_win_prob = probs[0][model.classes_ == 2][0] * 100
+    away_win_prob = probs[0][model.classes_ == 0][0] * 100
+
+    print(f"\n📅 {match_date_str}: {home_team} vs {away_team}")
+    print(f"🌲 Predicted: {outcome_map[prediction]} ({confidence:.2f}% confidence)")
+    print(f"📈 Home form: {home_form}/5 | 📉 Away form: {away_form}/5")
+    print(f"🔢 Divisions: {home_team} (D{home_div}) vs {away_team} (D{away_div})")
+    print(f"📊 Probabilities: Home Win: {probs[0][2]*100:.1f}%, Draw: {probs[0][1]*100:.1f}%, Away Win: {probs[0][0]*100:.1f}%")
+
+
 
 # Use the updated function for prediction and confidence
 y_pred, probs, confidence = predict_with_confidence(model, X_test)
@@ -155,7 +225,7 @@ metrics_data = [
     {'Class': 'Overall Accuracy', 'Precision': '', 'Recall': '', 'F1-Score': accuracy},
 ]
 
-if __name__ =='__main__':
+if __name__ == '__main__':
     print(f"\nRandom Forest Accuracy on FA Cup test set: {accuracy * 100:.2f}%\n")
 
     # Classification report
@@ -188,6 +258,7 @@ if __name__ =='__main__':
     importances = model.feature_importances_
     indices = np.argsort(importances)[::-1]
     feature_names = [features[i] for i in indices]
+    predict_match_rf("2024-05-24", "Manchester City", "Manchester Utd")
 
     plt.figure(figsize=(10, 6))
     plt.title("Feature Importance (Random Forest)")
