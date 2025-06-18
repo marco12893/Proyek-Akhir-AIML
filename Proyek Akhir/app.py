@@ -26,31 +26,33 @@ from Logistic_Regression_Premier_League import accuracyFormatted as accuracyLR_P
 //CATATAN PERSONAL//
 - 0 itu kalah, 1 itu draw, 2 itu menang
 - Year yg dipake buat training (PREDIKSI !<= DATA ITU) = 2018 s.d. 2023 
--
+- Kata kata yang ditaruh di dalam tanda kurung () itu komentar dari Marco
 - 
 
 
 Yg harus dikerjakan (Rayner):
 - tambahin date dan neutral venue untuk selection & form mengambil dari yang paling recent (date and time, main view)
 - [SUDAH] tombol stats for nerds di masukin di navbar header
-- [SUDAH] grafik yg nunjukin progress kita (3 algoritma dari 3 file) (route yg beda)
-- [SUDAH] classification report (route yg beda juga), boleh tunjukin performance by division gap
+- [SUDAH] grafik yg nunjukin progress kita (3 algoritma dari 3 file, totalnya 9 ya) (route yg beda)
+- [SUDAH] classification report (route yg beda juga)
+- Tunjukin performance by division gap
 - PLOT seberapa penting attribute (route yg beda juga)
 - confusion matrix (route yg beda)
-- 
 
 
 (marco):
 - [SUDAH] modif backend untuk prediksi winner 
 - prediksi goal 
 - Learning curve (seberapa akurat seiring kita nambahin training data) (route yg beda juga)
-- 
--
+
 
 (Fabio):
--Tambahain logo untuk semua team
--Tambahin search bar di drop down
-_Pindahin tabel ke stats for nerds, tambahin bar win rate and lose rate
+- Tambahain logo untuk semua team (Gak terlalu penting ini, lakuin kalau udah ada waktu aja)
+- Tambahin search bar di drop down
+- Pindahin tabel ke stats for nerds, tambahin bar win rate and lose rate (winrate lose rate ini buat apa ya? Aku gk paham)
+- Betulin prediksi winner untuk FA Cup biar gak ada drawnya 
+- Betulin feature engineeringnya supaya form yang ditampilin itu udah bener
+  ini berpotensi naikin akurasi prediksi kita dengan buanyak kalau sukses
 '''
 
 
