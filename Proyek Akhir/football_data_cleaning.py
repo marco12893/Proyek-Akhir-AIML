@@ -8,7 +8,7 @@ from tqdm import tqdm
 print("Starting data cleaning pipeline...")
 
 # Load datasets
-df = pd.read_csv('data/English Football 2018-2023 XGBoost.csv')
+df = pd.read_csv('data/English_Football_2018-2025_With_Form.csv')
 team_divisions = pd.read_csv('data/League Division 2.csv')
 
 # 1. Remove rows containing 'Attendance' (duplicate headers)
@@ -125,5 +125,5 @@ df_cleaned[form_features] = df_cleaned[form_features].fillna(0)
 # FINAL OUTPUT
 # ======================
 print("Saving cleaned dataset with form features...")
-df_cleaned.to_csv('clean_data/English_Football_2018-2023_With_Form 2.csv', index=False)
+df_cleaned.to_csv('clean_data/English_Football_2018-2025_With_Form 2.csv', index=False)
 print("Pipeline completed successfully!")
