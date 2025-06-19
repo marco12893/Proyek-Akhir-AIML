@@ -8,7 +8,7 @@ from tqdm import tqdm
 print("Starting data cleaning pipeline...")
 
 # Load datasets
-df = pd.read_csv('data/English_Football_2018-2025_With_Form.csv')
+df = pd.read_csv('data/English Football 2018-2023 XGBoost.csv')
 team_divisions = pd.read_csv('data/League Division 2.csv')
 
 # 1. Remove rows containing 'Attendance' (duplicate headers)
@@ -50,10 +50,14 @@ print("Calculating team form features...")
 
 def calculate_team_form(df, team_name, current_date, current_index):
     """Calculate form metrics using only prior matches"""
-    team_matches = df[((df['Home'] == team_name) | (df['Away'] == team_name)) &
-                      (df['Date'] < current_date)]
+    # Get all previous matches for this team
+    team_matches = df[((df['Home'] == team_name) | (df['Away'] == team_name)) & (df['Date'] < current_date)].copy()
 
-    last_5 = team_matches.tail(5)
+    # Sort by date descending to get most recent matches first
+    team_matches = team_matches.sort_values('Date', ascending=False)
+
+    # Take the last 5 matches (most recent)
+    last_5 = team_matches.head(5)
     if len(last_5) < 5:
         return None
 
@@ -72,7 +76,7 @@ def calculate_team_form(df, team_name, current_date, current_index):
         form['GoalsAgainst'] += ga
         form['CleanSheets'] += 1 if ga == 0 else 0
 
-        if match['Winner'] == (0 if is_home else 2):
+        if (is_home and match['Winner'] == 2) or (not is_home and match['Winner'] == 0):
             form['Wins'] += 1
         elif match['Winner'] == 1:
             form['Draws'] += 1

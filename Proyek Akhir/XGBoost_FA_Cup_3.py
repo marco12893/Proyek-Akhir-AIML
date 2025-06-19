@@ -49,6 +49,17 @@ form_features = [
     'HomeLast5_Wins', 'AwayLast5_Wins',
     'HomeFormWeighted', 'AwayFormWeighted'
 ]
+
+# form_features = [
+#     'HomeLast5_GoalsFor', 'AwayLast5_GoalsFor',
+#     'HomeLast5_GoalsAgainst', 'AwayLast5_GoalsAgainst',
+#     'HomeLast5_Wins', 'AwayLast5_Wins',
+#     'HomeLast5_Losses', 'AwayLast5_Losses',
+#     'HomeLast5_Draws', 'AwayLast5_Draws',
+#     'HomeLast5_CleanSheets', 'AwayLast5_CleanSheets',
+#     'HomeFormWeighted', 'AwayFormWeighted'
+# ]
+
 features = base_features + form_features
 
 # X and y for classification
