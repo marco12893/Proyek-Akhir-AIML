@@ -200,32 +200,32 @@
   </form>
 
 <div style="display: flex; justify-content: space-around; margin: 20px 80px 0 80px; font-size: 20px;">
-<div class="flex gap-1">
-  <strong>Form:</strong>
-  {% for result in form_team1 %}
-    {% if result == 'W' %}
-      {% set color = 'text-green-500 bg-green-100' %}
-    {% elif result == 'D' %}
-      {% set color = 'text-yellow-500 bg-yellow-100' %}
-    {% else %}
-      {% set color = 'text-red-500 bg-red-100' %}
-    {% endif %}
-    <span class="flex size-8 justify-center items-center rounded-full {{ color }}">{{ result }}</span>
-  {% endfor %}
-</div>
-<div class="flex gap-1">
-  <strong>Form:</strong>
-  {% for result in form_team2 %}
-    {% if result == 'W' %}
-      {% set color = 'text-green-500 bg-green-100' %}
-    {% elif result == 'D' %}
-      {% set color = 'text-yellow-500 bg-yellow-100' %}
-    {% else %}
-      {% set color = 'text-red-500 bg-red-100' %}
-    {% endif %}
-    <span class="flex size-8 justify-center items-center rounded-full {{ color }}">{{ result }}</span>
-  {% endfor %}
-</div>
+    <div class="flex gap-1">
+      <strong>Form:</strong>
+      {% for result in form_team1 %}
+        {% if result == 'W' %}
+          {% set color = 'text-green-500 bg-green-100' %}
+        {% elif result == 'D' %}
+          {% set color = 'text-yellow-500 bg-yellow-100' %}
+        {% else %}
+          {% set color = 'text-red-500 bg-red-100' %}
+        {% endif %}
+        <span class="flex size-8 justify-center items-center rounded-full {{ color }}">{{ result }}</span>
+      {% endfor %}
+    </div>
+    <div class="flex gap-1">
+      <strong>Form:</strong>
+      {% for result in form_team2 %}
+        {% if result == 'W' %}
+          {% set color = 'text-green-500 bg-green-100' %}
+        {% elif result == 'D' %}
+          {% set color = 'text-yellow-500 bg-yellow-100' %}
+        {% else %}
+          {% set color = 'text-red-500 bg-red-100' %}
+        {% endif %}
+        <span class="flex size-8 justify-center items-center rounded-full {{ color }}">{{ result }}</span>
+      {% endfor %}
+    </div>
 </div>
 
 
