@@ -4,7 +4,8 @@ from sklearn.preprocessing import LabelEncoder
 from sklearn.metrics import accuracy_score, confusion_matrix, classification_report
 from sklearn.ensemble import RandomForestClassifier
 import matplotlib.pyplot as plt
-
+import base64
+import io
 # Load data
 df = pd.read_csv("clean_data/English_Football_2018-2023_With_Form.csv")
 df['Date'] = pd.to_datetime(df['Date'])
@@ -225,6 +226,45 @@ metrics_data = [
     {'Class': 'Overall Accuracy', 'Precision': '', 'Recall': '', 'F1-Score': accuracy},
 ]
 
+# function to get division gap variable
+def show_division_gap(results_df=results_df):
+    results = []  # List to store the results
+    for gap_range in [(0, 1), (2, 3), (4, 6)]:
+        mask = results_df['AbsoluteDivisionGap'].between(*gap_range)
+        if mask.any():
+            gap_acc = accuracy_score(y_test[mask], y_pred[mask])
+            match_count = mask.sum()
+            results.append({
+                'gap_range': f"{gap_range[0]}-{gap_range[1]}",
+                'accuracy': gap_acc,
+                'matches': match_count
+            })
+    return results
+
+# Division gap variable
+division_gap=show_division_gap(results_df)
+# Feature importance
+importances = model.feature_importances_
+indices = np.argsort(importances)[::-1]
+feature_names = [features[i] for i in indices]
+
+# make plot
+buf = io.BytesIO()  # Create a buffer for the plot
+plt.figure(figsize=(12, 8))
+plt.title("Feature Importance (Random Forest)")
+plt.bar(range(len(features)), importances[indices], align='center')
+plt.xticks(range(len(features)), feature_names, rotation=45)
+plt.tight_layout()
+
+# save plot for import
+plt.savefig(buf, format='png')
+buf.seek(0)
+plot_data = base64.b64encode(buf.getvalue()).decode('utf-8')
+plt.close()
+
+# Compute confusion matrix
+cm = confusion_matrix(y_test, y_pred, labels=np.unique(y_test))
+
 if __name__ == '__main__':
     print(f"\nRandom Forest Accuracy on FA Cup test set: {accuracy * 100:.2f}%\n")
 
@@ -254,10 +294,7 @@ if __name__ == '__main__':
     # confidence 5
     print(results_df[['Date', 'Home', 'Away', 'Predicted Outcome', 'Confidence']].head())
 
-    # Feature importance
-    importances = model.feature_importances_
-    indices = np.argsort(importances)[::-1]
-    feature_names = [features[i] for i in indices]
+
     predict_match_rf("2024-05-24", "Manchester City", "Manchester Utd")
 
     plt.figure(figsize=(10, 6))
@@ -266,3 +303,4 @@ if __name__ == '__main__':
     plt.xticks(range(len(features)), feature_names, rotation=45)
     plt.tight_layout()
     plt.show()
+    plt.close()

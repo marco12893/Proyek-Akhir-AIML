@@ -5,6 +5,8 @@ from sklearn.metrics import accuracy_score, confusion_matrix, classification_rep
 from xgboost import XGBClassifier, XGBRegressor
 import matplotlib.pyplot as plt
 from xgboost import plot_importance
+import base64
+import io
 
 # Load data
 df = pd.read_csv("clean_data/English_Football_2018-2023_With_Form.csv")
@@ -208,6 +210,27 @@ accuracyFormatted = accuracy * 100
 confidence_df = results_df[['Date', 'Home', 'Away', 'Predicted Outcome', 'Confidence (%)', 'Actual Outcome']].head()
 
 # Generate classification report as a dictionary
+report = classification_report(y_test, y_pred, labels=[0, 2], target_names=['Away Win', 'Home Win'], zero_division=0, output_dict=True)
+# Extract metrics for each class
+away_win_metrics = report['Away Win']  # Dict for 'Away Win'
+home_win_metrics = report['Home Win']  # Dict for 'Home Win'
+
+# Example: precision, recall, and F1-score for 'Away Win'
+away_precision = away_win_metrics['precision']
+away_recall = away_win_metrics['recall']
+away_f1 = away_win_metrics['f1-score']
+
+# Example: accuracy
+accuracy = report['accuracy']
+
+# Prepare data for HTML
+metrics_data = [
+    {'Class': 'Away Win', 'Precision': away_precision, 'Recall': away_recall, 'F1-Score': away_f1},
+    {'Class': 'Home Win', 'Precision': home_win_metrics['precision'], 'Recall': home_win_metrics['recall'], 'F1-Score': home_win_metrics['f1-score']},
+    {'Class': 'Overall Accuracy', 'Precision': '', 'Recall': '', 'F1-Score': accuracy},
+]
+
+# Generate classification report as a dictionary
 report = classification_report(y_test, y_pred, labels=[0, 2], target_names=['Away Win', 'Home Win'], zero_division=0,
                                output_dict=True)
 
@@ -374,6 +397,52 @@ def run_goal_prediction(train_df, test_df, results_df):
 
     return results_df
 
+# function to get division gap variable
+def show_division_gap(results_df=results_df):
+    results = []  # List to store the results
+    for gap_range in [(0, 1), (2, 3), (4, 6)]:
+        mask = results_df['AbsoluteDivisionGap'].between(*gap_range)
+        if mask.any():
+            gap_acc = accuracy_score(y_test[mask], y_pred[mask])
+            match_count = mask.sum()
+            results.append({
+                'gap_range': f"{gap_range[0]}-{gap_range[1]}",
+                'accuracy': gap_acc,
+                'matches': match_count
+            })
+    return results
+
+# Division gap variable
+division_gap=show_division_gap(results_df)
+
+
+# Feature importance plot for outcome prediction
+plt.figure(figsize=(12, 8))
+plot_importance(model, max_num_features=15, importance_type='weight')
+plt.title('Outcome Prediction Feature Importance')
+
+
+# encode image as base64 to import
+buf = io.BytesIO()  # Create a buffer for the plot
+plt.figure(figsize=(12, 8))
+plot_importance(model, max_num_features=15, importance_type='weight')
+plt.title('Outcome Prediction Feature Importance')
+plt.tight_layout()
+plt.savefig(buf, format='png')
+buf.seek(0)
+plot_data = base64.b64encode(buf.getvalue()).decode('utf-8')
+plt.close()
+
+# Compute confusion matrix
+cm = confusion_matrix(y_test, y_pred, labels=np.unique(y_test))
+
+# # Convert to DataFrame for readability
+# labels = np.unique(y_test)  # Use unique values as labels
+# cm_df = pd.DataFrame(cm, index=labels, columns=labels)
+#
+# # Convert DataFrame to HTML table
+# cm_html = cm_df.to_html(classes="table table-bordered table-hover", border=0)
+
 if __name__ == '__main__':
     print(f"\nXGBoost Accuracy on FA Cup test set: {accuracy * 100:.2f}%\n")
     print("Overall Classification Report:")
@@ -388,11 +457,11 @@ if __name__ == '__main__':
 
     print(f"Classes present in test data: {np.unique(y_test)}")
     print("Confusion Matrix:")
-    print(confusion_matrix(y_test, y_pred, labels=np.unique(y_test)))
+    print(cm)
 
     # Display confidence levels
     print("\nTop 5 Predictions with Confidence Levels:")
-    print(results_df[['Date', 'Home', 'Away', 'Predicted Outcome', 'Confidence (%)']].head())
+    print(results_df[['Date', 'Home', 'Away', 'Predicted Outcome', 'Confidence (%)']].head(), "\n")
     predict_match("2024-05-24", "Manchester City", "Manchester Utd")
 
     # Run goal prediction
@@ -405,8 +474,11 @@ if __name__ == '__main__':
                       'Actual Outcome', 'Actual Home Goals', 'Actual Away Goals']].head(10))
 
     # Feature importance plot for outcome prediction
-    plt.figure(figsize=(12, 8))
+    plt.figure(figsize=(16, 10))
     plot_importance(model, max_num_features=15, importance_type='weight')
     plt.title('Outcome Prediction Feature Importance')
+    plt.tight_layout()
     plt.show()
+
+
 

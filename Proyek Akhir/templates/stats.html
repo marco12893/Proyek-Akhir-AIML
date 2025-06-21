@@ -222,7 +222,7 @@
     <!--  Model accuracy label:  -->
     <div style="display:flex; flex-direction:column;align-items:center; margin: 50px 40px 40px 40px">
         <h1 class="dummy-data" style="font-size: 30px;align-self: flex-start"> Model Accuracy:</h1>
-        <img src="data:image/png;base64,{{ plot_url }}" style="width:70%" alt="Model Accuracy Graph">
+        <img src="data:image/png;base64,{{ plot_url_perkembangan }}" style="width:70%" alt="Model Accuracy Graph">
     </div>
 
     <!--  Classification report label:  -->
@@ -234,7 +234,8 @@
     <div class="models-container">
         <div class="model-box">
           <h3>XGBoost</h3>
-
+          <!--Show plot for variable importance-->
+          <img src="data:image/png;base64,{{ plot_dataXG_FA }}" style="width:88%;margin-bottom: 50px;justify-self: center" alt="Variable importance">
           <table class="table" style="background-color: rgb(247, 247, 246);"border="1">
             <thead>
                 <tr>
@@ -273,12 +274,24 @@
                 {% endfor %}
             </tbody>
         </table>
+        <!--Print confusion matrix-->
+        <div>
+            <h1 style="font-size: 23px;margin: 25px 20px 10px 0px;">Confusion Matrix</h1>
+            <pre>{{ cmXG_FA }}</pre>
+        </div>
+        <!--Show division gap-->
+        <div class="dummy-data">
+            {% for division in division_gap_XG %}
+                Division gap {{ division.gap_range }}: {{ "{:.2f}".format(division.accuracy*100)  }}% accuracy ({{ division.matches }} matches) <br>
+            {% endfor %}
+        </div>
         </div>
 
 
         <div class="model-box">
           <h3>Random Forest</h3>
-
+          <!--Show plot for variable importance-->
+          <img src="data:image/png;base64,{{ plot_dataRF_FA }}" style="width:100%;margin-bottom: 50px;justify-self: center" alt="Variable importance">
           <table class="table" style="background-color: rgb(247, 247, 246);"border="1">
             <thead>
                 <tr>
@@ -317,11 +330,22 @@
                 {% endfor %}
             </tbody>
         </table>
-
+        <!--Print confusion matrix-->
+        <div>
+            <h1 style="font-size: 23px;margin: 25px 20px 10px 0px;">Confusion Matrix</h1>
+            <pre>{{ cmRF_FA }}</pre>
+        </div>
+        <!--Show division gap-->
+        <div class="dummy-data">
+            {% for division in division_gap_RF_FA %}
+                Division gap {{ division.gap_range }}: {{ "{:.2f}".format(division.accuracy*100)  }}% accuracy ({{ division.matches }} matches) <br>
+            {% endfor %}
+        </div>
         </div>
         <div class="model-box">
           <h3>Logistic regression</h3>
-
+          <!--Show plot for variable importance-->
+          <img src="data:image/png;base64,{{ plot_dataLR_FA }}" style="width:100%;margin-bottom: 50px;justify-self: center" alt="Variable importance">
           <table class="table" style="background-color: rgb(247, 247, 246);"border="1">
             <thead>
                 <tr>
@@ -360,7 +384,17 @@
                 {% endfor %}
             </tbody>
         </table>
-
+        <!--Print confusion matrix-->
+        <div>
+            <h1 style="font-size: 23px;margin: 25px 20px 10px 0px;">Confusion Matrix</h1>
+            <pre>{{ cmLR_FA }}</pre>
+        </div>
+        <!--Show division gap-->
+        <div class="dummy-data">
+            {% for division in division_gap_LR_FA %}
+                Division gap {{ division.gap_range }}: {{ "{:.2f}".format(division.accuracy*100)  }}% accuracy ({{ division.matches }} matches) <br>
+            {% endfor %}
+        </div>
         </div>
       </div>
     </body>

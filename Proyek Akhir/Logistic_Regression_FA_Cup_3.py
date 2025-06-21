@@ -1,8 +1,11 @@
 import pandas as pd
 import numpy as np
+import matplotlib.pyplot as plt
 from sklearn.preprocessing import LabelEncoder
 from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import accuracy_score, confusion_matrix, classification_report
+import base64
+import io
 
 # Load data
 df = pd.read_csv("clean_data/English_Football_2018-2023_With_Form.csv")
@@ -158,7 +161,7 @@ accuracy = accuracy_score(y_test, y_pred)
 accuracyFormatted = accuracy * 100
 
 # Results dataframe
-results_df = test_df[['Date', 'Home', 'Away', 'Winner']].copy()
+results_df = test_df[['Date', 'Home', 'Away', 'Winner','DivisionGap', 'AbsoluteDivisionGap']].copy()
 results_df['Predicted'] = y_pred
 results_df['Confidence'] = (confidence * 100).round(1)
 results_df['Home Loss Prob'] = (y_proba[:, 0] * 100).round(1)
@@ -189,6 +192,77 @@ metrics_data = [
     {'Class': 'Overall Accuracy', 'Precision': '', 'Recall': '', 'F1-Score': accuracy},
 ]
 
+
+
+
+def calculate_importance_scores(model, X_train, features):
+    """
+    Calculate feature importance scores based on scaled coefficients.
+
+    Args:
+        model: Trained logistic regression model.
+        X_train: Training data used for scaling.
+        features: List of feature names.
+
+    Returns:
+        pd.DataFrame: DataFrame containing feature names and importance scores.
+    """
+    # Get standard deviation of each feature from the training data
+    feature_std = X_train.std(axis=0)
+
+    # Calculate importance scores as |coefficient| * feature_std
+    importance_scores = np.abs(model.coef_[0]) * feature_std
+
+    # Create a DataFrame for better visualization
+    importance_df = pd.DataFrame({
+        'Feature': features,
+        'Importance': importance_scores
+    }).sort_values(by='Importance', ascending=False)
+
+    return importance_df
+
+
+
+# Calculate importance scores
+importance_df = calculate_importance_scores(model, X_train, features)
+
+# Plot the feature importance
+buf = io.BytesIO()
+plt.figure(figsize=(12, 8))
+plt.bar(importance_df['Feature'], importance_df['Importance'])
+plt.xlabel("Importance Score")
+plt.ylabel("Feature")
+plt.xticks(range(len(features)), features, rotation=45)
+plt.title("Logistic Regression Feature Importance (Scores)")
+plt.tight_layout()
+
+# save plot for import
+plt.savefig(buf, format='png')
+buf.seek(0)
+plot_data = base64.b64encode(buf.getvalue()).decode('utf-8')
+plt.close()
+
+# Compute confusion matrix
+cm = confusion_matrix(y_test, y_pred, labels=np.unique(y_test))
+
+# function to get division gap variable
+def show_division_gap(results_df=results_df):
+    results = []  # List to store the results
+    for gap_range in [(0, 1), (2, 3), (4, 6)]:
+        mask = results_df['AbsoluteDivisionGap'].between(*gap_range)
+        if mask.any():
+            gap_acc = accuracy_score(y_test[mask], y_pred[mask])
+            match_count = mask.sum()
+            results.append({
+                'gap_range': f"{gap_range[0]}-{gap_range[1]}",
+                'accuracy': gap_acc,
+                'matches': match_count
+            })
+    return results
+
+# Division gap variable
+division_gap=show_division_gap(results_df)
+
 if __name__ == '__main__':
     print("\nLogistic Regression (All Features)")
     print("=" * 55)
@@ -213,3 +287,14 @@ if __name__ == '__main__':
     for feature_name, coef in zip(features, model.coef_[0]):
         print(f"{feature_name}: {coef:.4f}")
     predict_match_logistic("2024-05-24", "Manchester City", "Manchester Utd")
+
+    # Plot the feature importance
+    plt.figure(figsize=(12, 8))
+    plt.bar(importance_df['Feature'], importance_df['Importance'])
+    plt.xlabel("Importance Score")
+    plt.ylabel("Feature")
+    plt.xticks(range(len(features)), features, rotation=45)
+    plt.title("Logistic Regression Feature Importance (Scores)")
+    plt.tight_layout()
+    plt.show()
+    plt.close()

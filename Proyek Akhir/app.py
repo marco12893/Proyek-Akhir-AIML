@@ -7,15 +7,15 @@ import io
 from sklearn.preprocessing import MinMaxScaler
 
 #Import method ataupun variable dari file yg diperlukan
-from XGBoost_FA_Cup_3 import accuracyFormatted as accuracyXG_FA, df, confidence_df as results_XG_FA, metrics_data
+from XGBoost_FA_Cup_3 import accuracyFormatted as accuracyXG_FA, df, confidence_df as results_XG_FA, metrics_data, division_gap, plot_data as plot_dataXG_FA, cm as cmXG_FA
 from XGBoost_FA_Cup_2 import accuracyFormatted as accuracyXG_FA_second
 from XGBoost_FA_Cup import accuracyFormatted as accuracyXG_FA_first
 
-from Random_Forest_FA_Cup_3 import accuracyFormatted as accuracyRF_FA, confidence_df as results_RF_FA, metrics_data as metrics_data_RF
+from Random_Forest_FA_Cup_3 import accuracyFormatted as accuracyRF_FA, confidence_df as results_RF_FA, metrics_data as metrics_data_RF_FA, division_gap as division_gap_RF_FA, plot_data as plot_dataRF_FA, cm as cmRF_FA
 from Random_Forest_FA_Cup_2 import accuracyFormatted as accuracyRF_FA_second
 from Random_Forest_FA_Cup import accuracyFormatted as accuracyRF_FA_first
 
-from Logistic_Regression_FA_Cup_3 import accuracyFormatted as accuracyLR_FA, confidence_df as results_LR_FA, metrics_data as metrics_data_LR
+from Logistic_Regression_FA_Cup_3 import accuracyFormatted as accuracyLR_FA, confidence_df as results_LR_FA, metrics_data as metrics_data_LR_FA, division_gap as division_gap_LR_FA, plot_data as plot_dataLR_FA, cm as cmLR_FA
 from Logistic_Regression_FA_Cup_2 import accuracyFormatted as accuracyLR_FA_second
 from Logistic_Regression_FA_Cup import accuracyFormatted as accuracyLR_FA_first
 
@@ -35,9 +35,9 @@ Yg harus dikerjakan (Rayner):
 - [SUDAH] tombol stats for nerds di masukin di navbar header
 - [SUDAH] grafik yg nunjukin progress kita (3 algoritma dari 3 file, totalnya 9 ya) (route yg beda)
 - [SUDAH] classification report (route yg beda juga)
-- Tunjukin performance by division gap
-- PLOT seberapa penting attribute (route yg beda juga)
-- confusion matrix (route yg beda)
+- [SUDAH] Tunjukin performance by division gap
+- [SUDAH] PLOT seberapa penting attribute (route yg beda juga)
+- [SUDAH] confusion matrix (route yg beda)
 
 
 (marco):
@@ -189,13 +189,14 @@ def stats_for_nerds():
     img = io.BytesIO()
     plt.savefig(img, format='png')
     img.seek(0)
-    plot_url = base64.b64encode(img.getvalue()).decode()
+    plot_url_perkembangan = base64.b64encode(img.getvalue()).decode()
     plt.close(fig)
     return render_template('stats.html',
-                           plot_url=plot_url,
-                           metrics_data_XG=metrics_data,
-                           metrics_data_RF=metrics_data_RF,
-                           metrics_data_LR=metrics_data_LR,)
+                           plot_url_perkembangan=plot_url_perkembangan,
+                           metrics_data_XG=metrics_data, division_gap_XG=division_gap, plot_dataXG_FA=plot_dataXG_FA, cmXG_FA=str(cmXG_FA),
+                           metrics_data_RF=metrics_data_RF_FA, division_gap_RF_FA=division_gap_RF_FA, plot_dataRF_FA=plot_dataRF_FA, cmRF_FA=str(cmRF_FA),
+                           metrics_data_LR=metrics_data_LR_FA, division_gap_LR_FA=division_gap_LR_FA, plot_dataLR_FA=plot_dataLR_FA, cmLR_FA=str(cmLR_FA),
+                           )
 
 if __name__ == '__main__':
     app.run(debug=True)
