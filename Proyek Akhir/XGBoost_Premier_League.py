@@ -135,6 +135,7 @@ def predict_match_premier_league(date_str, home_team, away_team, model=model, le
     print(f"📈 Home Form (last 5): {home_form} wins | 🧾 Division: {home_div}")
     print(f"📉 Away Form (last 5): {away_form} wins | 🧾 Division: {away_div}")
     print(f"📊 Probabilities — Home: {probs[2]*100:.1f}%, Draw: {probs[1]*100:.1f}%, Away: {probs[0]*100:.1f}%")
+    return {'win': probs[2]*100, 'draw': probs[1]*100, 'away': probs[0]*100, 'prediction': label_map[predicted_class]}
 
 
 if __name__ == '__main__':
@@ -163,3 +164,5 @@ if __name__ == '__main__':
 
     print("\n🔮 Prediksi Pertandingan Baru:")
     predict_match_premier_league("2023-08-27", "Fulham", "Liverpool")
+
+# if __name__ == 'app':

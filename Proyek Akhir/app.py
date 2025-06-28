@@ -19,7 +19,7 @@ from Logistic_Regression_FA_Cup_3 import accuracyFormatted as accuracyLR_FA, con
 from Logistic_Regression_FA_Cup_2 import accuracyFormatted as accuracyLR_FA_second
 from Logistic_Regression_FA_Cup import accuracyFormatted as accuracyLR_FA_first
 
-from XGBoost_Premier_League import accuracyFormatted as accuracyXG_PL
+from XGBoost_Premier_League import accuracyFormatted as accuracyXG_PL, predict_match_premier_league
 from Random_Forest_Premier_League import accuracyFormatted as accuracyRF_PL
 from Logistic_Regression_Premier_League import accuracyFormatted as accuracyLR_PL
 '''
@@ -89,14 +89,6 @@ formattedRF_PL = "{:.2f}".format(accuracyRF_PL)
 # XGBoost variables (Premier League)
 formattedLR_PL = "{:.2f}".format(accuracyLR_PL)
 
-# Ambil team name untuk option bar (masih salah mungkin)
-FA_df = df[(df['Type'] == 'FA Cup')]
-unique_values = FA_df['Home'].unique()
-unique_values.sort()
-team_list = unique_values.tolist()
-
-
-
 app = Flask(__name__)
 
 def get_team_form(team_name, num_matches=5):
@@ -136,15 +128,43 @@ def home():
     team2 = None
     form_team1 = []
     form_team2 = []
+    team_list=[]
+    selected_type = request.args.get('type')
 
-    if request.method == 'POST':
-        team1 = request.form.get('team1')
-        team2 = request.form.get('team2')
+    # Get team
+    if selected_type == 'fc':
+        FA_df = df[(df['Type'] == 'FA Cup')]
+        unique_values = FA_df['Home'].unique()
+        unique_values.sort()
+        team_list = unique_values.tolist()
+    elif selected_type == 'pl':
+        FA_df = df[(df['Type'] == 'League')]
+        unique_values = FA_df['Home'].unique()
+        unique_values.sort()
+        team_list = unique_values.tolist()
+
+    if request.method == 'GET':
+        team1 = request.args.get('team1')
+        team2 = request.args.get('team2')
 
         if team1:
             form_team1 = get_team_form(team1)
         if team2:
             form_team2 = get_team_form(team2)
+        if team1 and team2:
+            prediction = predict_match_premier_league("2023-08-27", team1, team2)
+            return render_template('starting_page.html',
+                                   accuracyXG_PL=formattedXG_PL,
+                                   accuracyRF_PL=formattedRF_PL,
+                                   accuracyLR_PL=formattedLR_PL,
+                                   team_list=team_list,
+                                   form_team1=form_team1,
+                                   form_team2=form_team2,
+                                   selected_team1=team1,
+                                   selected_team2=team2,
+                                   selected_type=selected_type,
+                                   prediction=prediction,
+                                   )
 
     return render_template('starting_page.html',
                            accuracyXG_PL=formattedXG_PL,
@@ -154,7 +174,9 @@ def home():
                            form_team1=form_team1,
                            form_team2=form_team2,
                            selected_team1=team1,
-                           selected_team2=team2)
+                           selected_team2=team2,
+                           selected_type=selected_type,
+                           )
 
 
 

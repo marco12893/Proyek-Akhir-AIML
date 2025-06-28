@@ -153,46 +153,65 @@
   </style>
 </head>
 
-<!--simple header-->
-<header style="background-color: #343a40; color: #fff; padding: 20px 40px; display: flex; justify-content: space-between; align-items: center;">
-  <!-- Logo Section -->
-  <div style="font-size: 24px; font-weight: bold;">
-    <a href="/" style="text-decoration: none; color: #5bc0de;">PlayPredictor</a>
-  </div>
-
-  <!-- Navigation Menu --> <!--MORE STATS ITU BUAT KE ROUTE STATS FOR NERDS-->
-  <nav style="display: flex; gap: 20px;">
-    <a href="/" style="color: #fff; text-decoration: none; font-size: 16px;">Home</a>
-    <a href="/statsfornerds" style="color: #fff; text-decoration: none; font-size: 16px;">More stats</a>
-  </nav>
-</header>
-
-
-
 <!--CONTENT STARTS HERE-->
-<body>
-  <form action="" method="post">
-    <div class="team-selection">
+<body class="h-screen {% if not prediction %}
+	overflow-hidden
+{% endif %} ">
+    <!--simple header-->
+    <div style="background-color: #343a40; color: #fff; padding: 20px 40px; display: flex; justify-content: space-between; align-items: center;">
+      <!-- Logo Section -->
+      <div style="font-size: 24px; font-weight: bold;">
+        <a href="/" style="text-decoration: none; color: #5bc0de;">PlayPredictor</a>
+      </div>
+
+      <!-- Navigation Menu --> <!--MORE STATS ITU BUAT KE ROUTE STATS FOR NERDS-->
+      <nav style="display: flex; gap: 20px;">
+        <a href="/" style="color: #fff; text-decoration: none; font-size: 16px;">Home</a>
+        <a href="/statsfornerds" style="color: #fff; text-decoration: none; font-size: 16px;">More stats</a>
+      </nav>
+    </div>
+  <form action="" method="get" class="bg-white flex flex-col items-center {% if not prediction %}
+  	h-full pt-24
+  {% endif %} ">
+      <label for="date" class="my-2 font-bold uppercase text-xl text-[#5bc0de]">Date of match</label>
+      <input type="date" name="date" id="date">
+    <div class="flex justify-center gap-4 pt-4">
       <!--  Select a team from 2018-2023 with form  -->
-   <select id="team1" name="team1" class="select2">
-      <option value="" disabled {% if not selected_team1 %}selected{% endif %}>Select Team 1</option>
-      {% for team in team_list %}
-          <option value="{{ team }}" {% if team == selected_team1 %}selected{% endif %}>{{ team }}</option>
-      {% endfor %}
-    </select>
-      <span class="vs-label">VS</span>
-    <select id="team2" name="team2" class="select2">
-      <option value="" disabled {% if not selected_team2 %}selected{% endif %}>Select Team 2</option>
-      {% for team in team_list %}
-      <option value="{{ team }}" {% if team == selected_team2 %}selected{% endif %}>{{ team }}</option>
-      {% endfor %}
-    </select>
+       <select id="team1" name="team1" class="select2">
+          <option value="" disabled {% if not selected_team1 %}selected{% endif %}>Select Team 1</option>
+          {% for team in team_list %}
+              <option value="{{ team }}" {% if team == selected_team1 %}selected{% endif %}>{{ team }}</option>
+          {% endfor %}
+        </select>
+          <span class="vs-label">VS</span>
+        <select id="team2" name="team2" class="select2">
+          <option value="" disabled {% if not selected_team2 %}selected{% endif %}>Select Team 2</option>
+          {% for team in team_list %}
+          <option value="{{ team }}" {% if team == selected_team2 %}selected{% endif %}>{{ team }}</option>
+          {% endfor %}
+        </select>
+    </div>
+    <div class="mt-4 flex flex-col items-center">
+        <div>
+            <input onchange="reloadWithQuery(this)" type="radio" name="type" id="type1" value="fc"
+                    {% if selected_type == 'fc' %}
+                   checked
+                    {% endif %} >
+            <label for="type1">FA Cup</label>
+        </div>
+        <div>
+            <input onchange="reloadWithQuery(this)" type="radio" name="type" id="type2" value="pl"
+                    {% if selected_type == 'pl' %}
+                   checked
+                    {% endif %} >
+            <label for="type2">Premiere League</label>
+        </div>
     </div>
     <div class="header" style="display: flex; flex-direction: column; align-items: center; gap: 20px;">
       <div style="display: flex; justify-content: center; align-items: center; gap: 20px;">
-        <img src="team1-logo.png" alt="Team 1 Logo" />
+        <img id="team-logo-1" src="https://cdn-icons-png.flaticon.com/512/2257/2257060.png" alt="Team 1 Logo" />
         <span class="vs">VS</span>
-        <img src="team2-logo.png" alt="Team 2 Logo" />
+        <img id="team-logo-2" src="https://cdn-icons-png.flaticon.com/512/2257/2257060.png" alt="Team 2 Logo" />
       </div>
       <button type="submit" class="bg-gray-800 hover:bg-gray-700" style="padding: 10px 20px; font-size: 16px; border: none; border-radius: 6px; color: #fff; cursor: pointer;">
         Predict Winner
@@ -200,36 +219,39 @@
     </div>
   </form>
 
-<div style="display: flex; justify-content: space-around; margin: 20px 80px 0 80px; font-size: 20px;">
-    <div class="flex gap-1">
-      <strong>Form:</strong>
-      {% for result in form_team1 %}
-        {% if result == 'W' %}
-          {% set color = 'text-green-500 bg-green-100' %}
-        {% elif result == 'D' %}
-          {% set color = 'text-yellow-500 bg-yellow-100' %}
-        {% else %}
-          {% set color = 'text-red-500 bg-red-100' %}
-        {% endif %}
-        <span class="flex size-8 justify-center items-center rounded-full {{ color }}">{{ result }}</span>
-      {% endfor %}
+  {% if prediction %}
+    <div style="display: flex; justify-content: space-around; margin: 20px 80px 0 80px; font-size: 20px;">
+        <div class="flex gap-1">
+          <strong>Form:</strong>
+          {% for result in form_team1 %}
+            {% if result == 'W' %}
+              {% set color = 'text-green-500 bg-green-100' %}
+            {% elif result == 'D' %}
+              {% set color = 'text-yellow-500 bg-yellow-100' %}
+            {% else %}
+              {% set color = 'text-red-500 bg-red-100' %}
+            {% endif %}
+            <span class="flex size-8 justify-center items-center rounded-full {{ color }}">{{ result }}</span>
+          {% endfor %}
+        </div>
+        <div class="flex gap-1">
+          <strong>Form:</strong>
+          {% for result in form_team2 %}
+            {% if result == 'W' %}
+              {% set color = 'text-green-500 bg-green-100' %}
+            {% elif result == 'D' %}
+              {% set color = 'text-yellow-500 bg-yellow-100' %}
+            {% else %}
+              {% set color = 'text-red-500 bg-red-100' %}
+            {% endif %}
+            <span class="flex size-8 justify-center items-center rounded-full {{ color }}">{{ result }}</span>
+          {% endfor %}
+        </div>
     </div>
-    <div class="flex gap-1">
-      <strong>Form:</strong>
-      {% for result in form_team2 %}
-        {% if result == 'W' %}
-          {% set color = 'text-green-500 bg-green-100' %}
-        {% elif result == 'D' %}
-          {% set color = 'text-yellow-500 bg-yellow-100' %}
-        {% else %}
-          {% set color = 'text-red-500 bg-red-100' %}
-        {% endif %}
-        <span class="flex size-8 justify-center items-center rounded-full {{ color }}">{{ result }}</span>
-      {% endfor %}
-    </div>
-</div>
+  {% endif %}
 
-  <!--SHOW RESULTS FOR Premier League-->
+  {% if prediction %}
+  	<!--SHOW RESULTS FOR Premier League-->
   <div style="font-size: 32px;font-weight: bold;color: var(--accent);display:flex;justify-content: center;margin-top: 70px">
     Premier League
   </div>
@@ -280,11 +302,92 @@
 
   <br>
   <br>
-
+  {% endif %}
 </body>
 <script>
 $(document).ready(function() {
     $('.select2').select2();
+
+    $('#team1').on('change', function () {
+        let teamName = $(this).val();
+        teamName = teamName.replace('Utd', 'United');
+
+        if (teamName) {
+            $.ajax({
+                method: 'GET',
+                url: "https://www.thesportsdb.com/api/v1/json/123/searchteams.php?t=" + encodeURIComponent(teamName),
+                success: function (response) {
+                    if (response.teams && response.teams.length > 0) {
+                        const teamLogoUrl = response.teams[0].strBadge;
+                        $('#team-logo-1').attr('src', teamLogoUrl)
+                    } else {
+                        console.log(`Team 1 (${teamName}) image not found`)
+                    }
+                }
+            })
+        }
+    })
+
+    $('#team2').on('change', function () {
+        let teamName = $(this).val();
+        teamName = teamName.replace('Utd', 'United');
+
+        if (teamName) {
+        $.ajax({
+            method: 'GET',
+            url: "https://www.thesportsdb.com/api/v1/json/123/searchteams.php?t=" + encodeURIComponent(teamName),
+            success: function (response) {
+                if (response.teams && response.teams.length > 0) {
+                    const teamLogoUrl = response.teams[0].strBadge;
+                    $('#team-logo-2').attr('src', teamLogoUrl)
+                } else {
+                    console.log(`Team 1 (${teamName}) image not found`)
+                }
+            }
+        })
+    }
+    });
+
+    const params = new URLSearchParams(window.location.search);
+    const team1 = params.get('team1');
+    const team2 = params.get('team2');
+
+    if (team1) {
+        $.ajax({
+            method: 'GET',
+            url: "https://www.thesportsdb.com/api/v1/json/123/searchteams.php?t=" + encodeURIComponent(team1),
+            success: function (response) {
+                if (response.teams && response.teams.length > 0) {
+                    const teamLogoUrl = response.teams[0].strBadge;
+                    $('#team-logo-1').attr('src', teamLogoUrl)
+                } else {
+                    console.log(`Team 1 (${team1}) image not found`)
+                }
+            }
+        })
+    }
+
+    if (team2) {
+        $.ajax({
+            method: 'GET',
+            url: "https://www.thesportsdb.com/api/v1/json/123/searchteams.php?t=" + encodeURIComponent(team2),
+            success: function (response) {
+                if (response.teams && response.teams.length > 0) {
+                    const teamLogoUrl = response.teams[0].strBadge;
+                    $('#team-logo-2').attr('src', teamLogoUrl)
+                } else {
+                    console.log(`Team 2 (${team2}) image not found`)
+                }
+            }
+        })
+    }
+
 });
+
+function reloadWithQuery(radio) {
+    const params = new URLSearchParams(window.location.search);
+    params.set('type', radio.value);
+    window.location.search = params.toString();
+}
 </script>
 </html>
