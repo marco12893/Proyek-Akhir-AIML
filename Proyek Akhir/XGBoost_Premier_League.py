@@ -67,6 +67,76 @@ probs = model.predict_proba(X_test)
 accuracy = accuracy_score(y_test, y_pred)
 accuracyFormatted=accuracy*100
 
+def predict_match_premier_league(date_str, home_team, away_team, model=model, le=le_team, df_all=df):
+    match_date = pd.to_datetime(date_str)
+    df = df_all.copy()
+    df['Date'] = pd.to_datetime(df['Date'])
+
+    # Cek keberadaan tim
+    teams_set = set(df['Home']).union(set(df['Away']))
+    if home_team not in teams_set or away_team not in teams_set:
+        print(f"⚠️ Tim tidak ditemukan dalam data historis.")
+        return
+
+    # Fungsi bantu ambil divisi terakhir sebelum pertandingan
+    def get_division(team):
+        matches = df[((df['Home'] == team) | (df['Away'] == team)) & (df['Date'] < match_date)]
+        if matches.empty:
+            print(f"⚠️ Tidak ada data historis divisi untuk {team}.")
+            return np.nan
+        latest = matches.sort_values(by='Date', ascending=False).iloc[0]
+        return latest['HomeDivision'] if latest['Home'] == team else latest['AwayDivision']
+
+    # Fungsi bantu ambil jumlah menang dari 5 pertandingan terakhir
+    def get_form_wins(team):
+        matches = df[((df['Home'] == team) | (df['Away'] == team)) & (df['Date'] < match_date)].sort_values(by='Date', ascending=False).head(5)
+        wins = 0
+        for _, row in matches.iterrows():
+            if row['Winner'] == 2 and row['Home'] == team:
+                wins += 1
+            elif row['Winner'] == 0 and row['Away'] == team:
+                wins += 1
+        return wins
+
+    # Ambil fitur
+    home_div = get_division(home_team)
+    away_div = get_division(away_team)
+    home_form = get_form_wins(home_team)
+    away_form = get_form_wins(away_team)
+    division_gap = away_div - home_div
+    abs_gap = abs(division_gap)
+
+    try:
+        input_data = pd.DataFrame([{
+            'HomeTeam_enc': le.transform([home_team])[0],
+            'AwayTeam_enc': le.transform([away_team])[0],
+            'HomeDivision': home_div,
+            'AwayDivision': away_div,
+            'NeutralVenue': 0,
+            'DivisionGap': division_gap,
+            'AbsoluteDivisionGap': abs_gap,
+            'HomeLast5_Wins': home_form,
+            'AwayLast5_Wins': away_form,
+            'HomeFormWeighted': home_form / (abs_gap + 1),
+            'AwayFormWeighted': away_form * (abs_gap + 1)
+        }])
+    except:
+        print("⚠️ Gagal encode tim. Mungkin ada tim baru yang belum dikenal.")
+        return
+
+    # Prediksi
+    probs = model.predict_proba(input_data)[0]
+    predicted_class = np.argmax(probs)
+    confidence = probs[predicted_class] * 100
+
+    label_map = {0: 'Away Win', 1: 'Draw', 2: 'Home Win'}
+    print(f"📅 Match: {date_str} — {home_team} vs {away_team}")
+    print(f"🏆 Prediction: {label_map[predicted_class]} ({confidence:.2f}% confidence)")
+    print(f"📈 Home Form (last 5): {home_form} wins | 🧾 Division: {home_div}")
+    print(f"📉 Away Form (last 5): {away_form} wins | 🧾 Division: {away_div}")
+    print(f"📊 Probabilities — Home: {probs[2]*100:.1f}%, Draw: {probs[1]*100:.1f}%, Away: {probs[0]*100:.1f}%")
+
+
 if __name__ == '__main__':
     print(f"XGBoost Accuracy on Premier League 2023 test set: {accuracy * 100:.2f}%\n")
 
@@ -90,3 +160,6 @@ if __name__ == '__main__':
 
     print("\nSample Predictions:")
     print(results_df[['Date', 'Home', 'Away', 'Actual Outcome', 'Predicted Outcome', 'Correct']].head(20))
+
+    print("\n🔮 Prediksi Pertandingan Baru:")
+    predict_match_premier_league("2023-08-27", "Fulham", "Liverpool")

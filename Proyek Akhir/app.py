@@ -47,12 +47,18 @@ Yg harus dikerjakan (Rayner):
 
 
 (Fabio):
-- Tambahain logo untuk semua team (Gak terlalu penting ini, lakuin kalau udah ada waktu aja)
-- [SUDAH] Tambahin search bar di drop down
-- Pindahin tabel ke stats for nerds, tambahin bar win rate and lose rate (winrate lose rate ini buat apa ya? Aku gk paham)
-- [SUDAH 1/3] Betulin prediksi winner untuk FA Cup biar gak ada drawnya 
-- Betulin feature engineeringnya supaya form yang ditampilin itu udah bener
+- Betulin prediksi winner untuk FA Cup biar gak ada drawnya 
+- (SUDAHH) Betulin feature engineeringnya supaya form yang ditampilin itu udah bener 
   ini berpotensi naikin akurasi prediksi kita dengan buanyak kalau sukses
+  
+(Chris):
+- (DONE) progress bar & small styling
+- Update & Sambungin dashboard dgn backend
+- Pindahin tabel ke stats for nerds, tambahin bar win rate and lose rate (winrate lose rate ini buat apa ya? Aku gk paham)
+- COnfusion matrix pakai pyplot
+- Tambahain logo untuk semua team (Gak terlalu penting ini, lakuin kalau udah ada waktu aja)
+- Tambahin search bar di drop down  
+  
 '''
 
 
@@ -86,6 +92,7 @@ formattedLR_PL = "{:.2f}".format(accuracyLR_PL)
 # Ambil team name untuk option bar (masih salah mungkin)
 FA_df = df[(df['Type'] == 'FA Cup')]
 unique_values = FA_df['Home'].unique()
+unique_values.sort()
 team_list = unique_values.tolist()
 
 
@@ -140,9 +147,6 @@ def home():
             form_team2 = get_team_form(team2)
 
     return render_template('starting_page.html',
-                           accuracyXG_FAcup=formattedXG_FA, results_XG_FA=results_XG_FA,
-                           accuracyRF_FAcup=formattedRF_FA, results_RF_FA=results_RF_FA,
-                           accuracyLR_FAcup=formattedLR_FA, results_LR_FA=results_LR_FA,
                            accuracyXG_PL=formattedXG_PL,
                            accuracyRF_PL=formattedRF_PL,
                            accuracyLR_PL=formattedLR_PL,
@@ -192,6 +196,12 @@ def stats_for_nerds():
     plot_url_perkembangan = base64.b64encode(img.getvalue()).decode()
     plt.close(fig)
     return render_template('stats.html',
+                           accuracyXG_FAcup=formattedXG_FA, results_XG_FA=results_XG_FA,
+                           accuracyRF_FAcup=formattedRF_FA, results_RF_FA=results_RF_FA,
+                           accuracyLR_FAcup=formattedLR_FA, results_LR_FA=results_LR_FA,
+                           accuracyXG_PL=formattedXG_PL,
+                           accuracyRF_PL=formattedRF_PL,
+                           accuracyLR_PL=formattedLR_PL,
                            plot_url_perkembangan=plot_url_perkembangan,
                            metrics_data_XG=metrics_data, division_gap_XG=division_gap, plot_dataXG_FA=plot_dataXG_FA, cmXG_FA=str(cmXG_FA),
                            metrics_data_RF=metrics_data_RF_FA, division_gap_RF_FA=division_gap_RF_FA, plot_dataRF_FA=plot_dataRF_FA, cmRF_FA=str(cmRF_FA),
