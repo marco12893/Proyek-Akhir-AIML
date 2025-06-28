@@ -48,9 +48,9 @@ Yg harus dikerjakan (Rayner):
 
 (Fabio):
 - Tambahain logo untuk semua team (Gak terlalu penting ini, lakuin kalau udah ada waktu aja)
-- Tambahin search bar di drop down
+- [SUDAH] Tambahin search bar di drop down
 - Pindahin tabel ke stats for nerds, tambahin bar win rate and lose rate (winrate lose rate ini buat apa ya? Aku gk paham)
-- Betulin prediksi winner untuk FA Cup biar gak ada drawnya 
+- [SUDAH 1/3] Betulin prediksi winner untuk FA Cup biar gak ada drawnya 
 - Betulin feature engineeringnya supaya form yang ditampilin itu udah bener
   ini berpotensi naikin akurasi prediksi kita dengan buanyak kalau sukses
 '''

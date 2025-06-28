@@ -12,6 +12,8 @@ import io
 df = pd.read_csv("clean_data/English_Football_2018-2023_With_Form.csv")
 df['Date'] = pd.to_datetime(df['Date'])
 
+df = df[df['Winner'] != 1]  # supaya no draws, it filters it out yeah
+df['Winner'] = df['Winner'].replace({0: 0, 2: 1})
 # Encode teams
 le_team = LabelEncoder()
 le_team.fit(pd.concat([df['Home'], df['Away']]))
@@ -38,7 +40,7 @@ if 'HomeGoals' not in df.columns or 'AwayGoals' not in df.columns:
 
 # Filter training and testing data
 train_df = df[~((df['Type'] == 'FA Cup') & (df['Season'] == 2023))]
-test_df = df[(df['Type'] == 'FA Cup') & (df['Season'] == 2023) & (df['Winner'] != 1)]
+test_df = df[(df['Type'] == 'FA Cup') & (df['Season'] == 2023)]
 
 # Feature selection
 base_features = [
@@ -66,9 +68,17 @@ features = base_features + form_features
 
 # X and y for classification
 X_train = train_df[features]
-y_train = train_df['Winner']
+y_train = train_df['Winner'].astype(int)  # Ensure integer type
 X_test = test_df[features]
-y_test = test_df['Winner']
+y_test = test_df['Winner'].astype(int)    # Ensure integer type
+
+
+if y_train.isna().sum() > 0:
+    X_train = X_train[~y_train.isna()]
+    y_train = y_train.dropna()
+if y_test.isna().sum() > 0:
+    X_test = X_test[~y_test.isna()]
+    y_test = y_test.dropna()
 
 # Train classification model
 model = XGBClassifier(
@@ -96,19 +106,17 @@ def get_prediction_confidence(probs):
 # Prediction with division-aware logic
 def predict_with_division_rules(model, X, division_gap_threshold=3):
     probs = model.predict_proba(X)
-    y_pred_raw = np.argmax(probs, axis=1)
+    y_pred_raw = np.argmax(probs, axis=1)  # 0 or 1
+
     y_pred = []
     division_gaps = X['AbsoluteDivisionGap'].values
+
     for i, (pred, gap) in enumerate(zip(y_pred_raw, division_gaps)):
         if gap >= division_gap_threshold:
-            if probs[i][0] > 0.7:
-                y_pred.append(0)
-            elif probs[i][2] > 0.7:
-                y_pred.append(2)
-            else:
-                y_pred.append(0 if X.iloc[i]['DivisionGap'] < 0 else 2)
+            y_pred.append(0 if X.iloc[i]['DivisionGap'] > 0 else 1)
         else:
-            y_pred.append(0 if pred == 1 and probs[i][0] > probs[i][2] else (2 if pred == 1 else pred))
+            y_pred.append(pred)
+
     return np.array(y_pred), probs
 
 def predict_match(match_date_str, home_team, away_team, model=model, le=le_team, df_all=df):
@@ -177,40 +185,52 @@ def predict_match(match_date_str, home_team, away_team, model=model, le=le_team,
         print("⚠️ Failed to encode team names — likely due to unseen label.")
         return
 
-    # Predict
+        # Predict
     probs = model.predict_proba(row)
+    predicted_index = np.argmax(probs)
+    predicted_class = np.argmax(probs)
     confidence = np.max(probs) * 100
     predicted = np.argmax(probs)
 
+
+
+    #no draws!!!!!!!!!!!
+    display_class = {0: 0, 1: 2}[predicted_class]
+    away_win_prob = probs[0][0] * 100
+    home_win_prob = probs[0][1] * 100
+
     outcome = {0: 'Away Win', 2: 'Home Win'}
     print(f"📅 {match_date_str}: {home_team} vs {away_team}")
-    print(f"🏆 Predicted: {outcome.get(predicted)} ({confidence:.2f}% confidence)")
+    print(f"🏆 Predicted: {outcome.get(display_class)} ({confidence:.2f}% confidence)")
     print(f"📈 Home form: {home_form} wins in last 5")
     print(f"📉 Away form: {away_form} wins in last 5")
     print(f"🔢 Divisions: {home_team} (D{home_div}) vs {away_team} (D{away_div})")
-    print(f"📊 Probabilities: Home Win: {probs[0][2] * 100:.1f}%, Draw: {probs[0][1] * 100:.1f}%, Away Win: {probs[0][0] * 100:.1f}%")
-
+    print(f"📊 Probabilities: Home Win: {home_win_prob:.1f}%, Away Win: {away_win_prob:.1f}%")
+y_test_mapped = y_test  if isinstance(y_test, pd.Series) else np.where(y_test == 2, 1, y_test)
 y_pred, probs = predict_with_division_rules(model, X_test)
+y_pred_display = np.where(y_pred == 1, 2, y_pred)
 
 # Use the function to calculate confidence
 confidence = get_prediction_confidence(probs)
 
 # Result DataFrame
-results_df = test_df[['Date', 'Home', 'Away', 'Winner', 'DivisionGap', 'AbsoluteDivisionGap']].copy()
-results_df['Predicted'] = y_pred
+results_df = test_df[['Date', 'Home', 'Away', 'Winner', 'AbsoluteDivisionGap']].copy()
+results_df['Predicted'] = y_pred_display
 results_df['Correct'] = results_df['Winner'] == results_df['Predicted']
 results_df['Actual Outcome'] = results_df['Winner'].map({0: 'Away Win', 2: 'Home Win'})
 results_df['Predicted Outcome'] = results_df['Predicted'].map({0: 'Away Win', 2: 'Home Win'})
-results_df[['Away Win Prob', 'Draw Prob', 'Home Win Prob']] = (probs * 100).round(1)
-results_df['Confidence (%)'] = confidence.round(2)
+results_df[['Away Win Prob', 'Home Win Prob']] = (probs * 100).round(1)
+results_df['Confidence (%)'] = np.max(probs, axis=1) * 100
 
 # Evaluate classification
-accuracy = accuracy_score(y_test, y_pred)
+accuracy = accuracy_score(y_test_mapped, y_pred)
 accuracyFormatted = accuracy * 100
 confidence_df = results_df[['Date', 'Home', 'Away', 'Predicted Outcome', 'Confidence (%)', 'Actual Outcome']].head()
 
 # Generate classification report as a dictionary
-report = classification_report(y_test, y_pred, labels=[0, 2], target_names=['Away Win', 'Home Win'], zero_division=0, output_dict=True)
+report = classification_report(y_test, y_pred, labels=[0, 1],
+                              target_names=['Away Win', 'Home Win'],
+                              zero_division=0, output_dict=True)
 # Extract metrics for each class
 away_win_metrics = report['Away Win']  # Dict for 'Away Win'
 home_win_metrics = report['Home Win']  # Dict for 'Home Win'
@@ -231,7 +251,7 @@ metrics_data = [
 ]
 
 # Generate classification report as a dictionary
-report = classification_report(y_test, y_pred, labels=[0, 2], target_names=['Away Win', 'Home Win'], zero_division=0,
+report = classification_report(y_test, y_pred, labels=[0, 1], target_names=['Away Win', 'Home Win'], zero_division=0,
                                output_dict=True)
 
 # -------------------------------
@@ -446,7 +466,7 @@ cm = confusion_matrix(y_test, y_pred, labels=np.unique(y_test))
 if __name__ == '__main__':
     print(f"\nXGBoost Accuracy on FA Cup test set: {accuracy * 100:.2f}%\n")
     print("Overall Classification Report:")
-    print(classification_report(y_test, y_pred, labels=[0, 2], target_names=['Away Win', 'Home Win'], zero_division=0))
+    print(classification_report(y_test, y_pred, labels=[0, 1], target_names=['Away Win', 'Home Win'], zero_division=0))
 
     print("\nPerformance by Division Gap:")
     for gap_range in [(0, 1), (2, 3), (4, 6)]:
