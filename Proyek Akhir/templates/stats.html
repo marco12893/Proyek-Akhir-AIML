@@ -114,7 +114,7 @@
 
     .model-box-b {
       background-color: var(--card-bg);
-      width: 85%;
+      width: 96%;
       border-radius: 12px;
       box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
       padding: 24px;
@@ -181,7 +181,13 @@
   flex-grow: 15;
 }
 .dummy-data {
+  font-size: 15px;
+  line-height: 1.6;
+  color: #555;
+}
+.headerbefore{
   font-size: 20px;
+  font-family: "Bebas Neue", cursive;
   line-height: 1.6;
   color: #555;
 }
@@ -231,155 +237,16 @@
         <a href="/statsfornerds" style="color: #fff; text-decoration: none; font-size: 16px;">More stats</a>
       </nav>
     </header>
-    <!--SHOW RESULTS FOR FA-CUP-->
-  <div class="mt-8" style="font-size: 32px;font-weight: bold;color: var(--accent);display:flex;justify-content: center">
-    FA-Cup
-  </div>
-
-  <div class="models-container-b">
-    <div class="model-box-b">
-      <h3>XGBoost</h3>
-      <h1 class="dummy-data" style="font-size: 30px">Confidence (5 recent):</h1>
-      <div style="display: flex;">
-        <table class="table table-striped table-bordered">
-          <thead>
-              <tr>
-                  <th>Date</th>
-                  <th>Home Team</th>
-                  <th>Away Team</th>
-                  <th>Predicted Outcome</th>
-                  <th>Confidence (%)</th>
-                  <th>Actual Outcome</th>
-              </tr>
-          </thead>
-          <tbody>
-            {% for result in results_XG_FA %}
-            <tr>
-                <td>{{ result['Date'] }}</td>
-                <td>{{ result['Home'] }}</td>
-                <td>{{ result['Away'] }}</td>
-                <td>{{ result['Predicted Outcome'] }}</td>
-                <td class="
-                        {% if result['Confidence (%)'] >= 80 %} high-confidence
-                        {% elif result['Confidence (%)'] >= 50 %} medium-confidence
-                        {% else %} low-confidence {% endif %}">{{ "{:.2f}".format(result['Confidence (%)']) }}%</td>
-                <td>{{ result['Actual Outcome'] }}</td>
-            </tr>
-            {% endfor %}
-          </tbody>
-        </table>
-      </div>
-
-      <div class="dummy-data">
-        • Accuracy: {{accuracyXG_FAcup}}%<br />
-        • Predicted Score: 2 - 1<br />
-      </div>
-    </div>
-
-    <div class="model-box-b">
-      <h3>Random Forest</h3>
-      <h1 class="dummy-data" style="font-size: 30px">Confidence (5 recent):</h1>
-      <div style="display: flex;">
-
-        <table class="table table-striped table-bordered">
-          <thead>
-              <tr>
-                  <th>Date</th>
-                  <th>Home Team</th>
-                  <th>Away Team</th>
-                  <th>Predicted Outcome</th>
-                  <th>Confidence (%)</th>
-                  <th>Actual Outcome</th>
-              </tr>
-          </thead>
-          <tbody>
-            {% for result in results_RF_FA %}
-            <tr>
-                <td>{{ result['Date'] }}</td>
-                <td>{{ result['Home'] }}</td>
-                <td>{{ result['Away'] }}</td>
-                <td>{{ result['Predicted Outcome'] }}</td>
-                <td class="
-                        {% if result['Confidence'] >= 80 %} high-confidence
-                        {% elif result['Confidence'] >= 50 %} medium-confidence
-                        {% else %} low-confidence {% endif %}">{{ "{:.2f}".format(result['Confidence']) }}%</td>
-                <td>{{ result['Actual Outcome'] }}</td>
-            </tr>
-            {% endfor %}
-          </tbody>
-        </table>
-      </div>
-
-      <div class="dummy-data">
-        • Accuracy: {{accuracyRF_FAcup}}%<br />
-        • Predicted Score: 1 - 0<br />
-      </div>
-    </div>
-
-    <div class="model-box-b">
-      <h3>Logistic Regression</h3>
-      <h1 class="dummy-data" style="font-size: 30px">Confidence (Top 5):</h1>
-      <div style="display: flex;">
-
-        <table class="table table-striped table-bordered">
-          <thead>
-              <tr>
-                  <th>Date</th>
-                  <th>Home Team</th>
-                  <th>Away Team</th>
-                  <th>Predicted Outcome</th>
-                  <th>Winner</th>
-                  <th>Confidence (%)</th>
-                  <th>Home Loss Prob (%)</th>
-                  <th>Home Win Prob (%)</th>
-                  <th>Correct</th>
-              </tr>
-          </thead>
-          <tbody>
-            {% for result in results_LR_FA %}
-            <tr>
-                <td>{{ result['Date'] }}</td>
-                <td>{{ result['Home'] }}</td>
-                <td>{{ result['Away'] }}</td>
-                <td>{{ result['Predicted'] }}</td>
-                <td>{{ result['Winner'] }}</td>
-                <td class="
-                        {% if result['Confidence'] >= 80 %} high-confidence
-                        {% elif result['Confidence'] >= 50 %} medium-confidence
-                        {% else %} low-confidence {% endif %}">{{ "{:.2f}".format(result['Confidence']) }}%</td>
-                <td>{{ result['Home Loss Prob'] }}%</td>
-                <td>{{ result['Home Win Prob'] }}%</td>
-                <td>{{ result['Correct'] }}</td>
-            </tr>
-            {% endfor %}
-          </tbody>
-        </table>
-      </div>
-
-      <div class="dummy-data">
-        • Accuracy: {{accuracyLR_FAcup}}%<br />
-        • Predicted Score: 1 - 1<br />
-      </div>
-    </div>
-
-
-
-  </div>
-
-        <!--SHOW ADDITIONAL STATS FOR FA_CUP -->
-    <div style="font-size: 32px;font-weight: bold;color: var(--accent);display:flex;justify-content: center;margin-top: 20px">
-        FA-Cup
-    </div>
 
     <!--  Model accuracy label:  -->
-    <div style="display:flex; flex-direction:column;align-items:center; margin: 50px 40px 40px 40px">
-        <h1 class="dummy-data" style="font-size: 30px;align-self: flex-start"> Model Accuracy:</h1>
+    <div style="display:flex; flex-direction:column;align-items:center; margin: 25px 40px 40px 50px">
+        <h1 class="headerbefore" style="font-size: 30px;align-self: flex-start"> Model Accuracy:</h1>
         <img src="data:image/png;base64,{{ plot_url_perkembangan }}" style="width:70%" alt="Model Accuracy Graph">
     </div>
 
     <!--  Classification report label:  -->
-    <div style="display:flex; flex-direction:column;align-items:center; margin: 50px 40px 40px 40px">
-        <h1 class="dummy-data" style="font-size: 30px;align-self: flex-start"> Classification report:</h1>
+    <div style="display:flex; flex-direction:column;align-items:center; margin: 50px 40px 10px 40px">
+        <h1 class="headerbefore" style="font-size: 30px;align-self: flex-start"> Classification report:</h1>
     </div>
 
 
@@ -429,7 +296,7 @@
         <!--Print confusion matrix-->
         <div>
             <h1 style="font-size: 23px;margin: 25px 20px 10px 0px;">Confusion Matrix</h1>
-            <pre>{{ cmXG_FA }}</pre>
+            <img src="data:image/png;base64,{{ confusion_plotXG_FA }}" style="width:100%;margin-bottom: 50px;justify-self: center" alt="Variable importance">
         </div>
         <!--Show division gap-->
         <div class="dummy-data">
@@ -485,7 +352,7 @@
         <!--Print confusion matrix-->
         <div>
             <h1 style="font-size: 23px;margin: 25px 20px 10px 0px;">Confusion Matrix</h1>
-            <pre>{{ cmRF_FA }}</pre>
+            <img src="data:image/png;base64,{{ confusion_plotRF_FA }}" style="width:100%;margin-bottom: 50px;justify-self: center" alt="Variable importance">
         </div>
         <!--Show division gap-->
         <div class="dummy-data">
@@ -536,10 +403,11 @@
                 {% endfor %}
             </tbody>
         </table>
+
         <!--Print confusion matrix-->
         <div>
             <h1 style="font-size: 23px;margin: 25px 20px 10px 0px;">Confusion Matrix</h1>
-            <pre>{{ cmLR_FA }}</pre>
+            <img src="data:image/png;base64,{{ confusion_plotLR_FA }}" style="width:100%;margin-bottom: 50px;justify-self: center" alt="Variable importance">
         </div>
         <!--Show division gap-->
         <div class="dummy-data">
@@ -549,5 +417,140 @@
         </div>
         </div>
       </div>
+
+     <!--SHOW CONFIDENCE-->
+    <div class="headerbefore" style="margin: 50px 40px 15px 40px;">
+       <h1 class="dummy-data" style="font-size: 30px;align-self: flex-start"> Confidence:</h1>
+    </div>
+
+ <div class="models-container-b">
+    <div class="model-box-b">
+      <h3>XGBoost</h3>
+      <div class="dummy-data" style="font-size: 20px">Confidence (5 recent):</div>
+      <div style="display: flex;">
+        <table class="table table-striped table-bordered">
+          <thead>
+              <tr>
+                  <th>Date</th>
+                  <th>Home Team</th>
+                  <th>Away Team</th>
+                  <th>Predicted Outcome</th>
+                  <th>Confidence (%)</th>
+                  <th>Actual Outcome</th>
+              </tr>
+          </thead>
+          <tbody>
+            {% for result in results_XG_FA %}
+            <tr>
+                <td>{{ result['Date'] }}</td>
+                <td>{{ result['Home'] }}</td>
+                <td>{{ result['Away'] }}</td>
+                <td>{{ result['Predicted Outcome'] }}</td>
+                <td class="
+                        {% if result['Confidence (%)'] >= 80 %} high-confidence
+                        {% elif result['Confidence (%)'] >= 50 %} medium-confidence
+                        {% else %} low-confidence {% endif %}">{{ "{:.2f}".format(result['Confidence (%)']) }}%</td>
+                <td>{{ result['Actual Outcome'] }}</td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+
+      <div class="dummy-data">
+        • Accuracy: {{accuracyXG_FAcup}}%<br />
+        • Predicted Score: 2 - 1<br />
+      </div>
+    </div>
+
+    <div class="model-box-b">
+      <h3>Random Forest</h3>
+      <div class="dummy-data" style="font-size: 20px">Confidence (5 recent):</div>
+      <div style="display: flex;">
+
+        <table class="table table-striped table-bordered">
+          <thead>
+              <tr>
+                  <th>Date</th>
+                  <th>Home Team</th>
+                  <th>Away Team</th>
+                  <th>Predicted Outcome</th>
+                  <th>Confidence (%)</th>
+                  <th>Actual Outcome</th>
+              </tr>
+          </thead>
+          <tbody>
+            {% for result in results_RF_FA %}
+            <tr>
+                <td>{{ result['Date'] }}</td>
+                <td>{{ result['Home'] }}</td>
+                <td>{{ result['Away'] }}</td>
+                <td>{{ result['Predicted Outcome'] }}</td>
+                <td class="
+                        {% if result['Confidence'] >= 80 %} high-confidence
+                        {% elif result['Confidence'] >= 50 %} medium-confidence
+                        {% else %} low-confidence {% endif %}">{{ "{:.2f}".format(result['Confidence']) }}%</td>
+                <td>{{ result['Actual Outcome'] }}</td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+
+      <div class="dummy-data">
+        • Accuracy: {{accuracyRF_FAcup}}%<br />
+        • Predicted Score: 1 - 0<br />
+      </div>
+    </div>
+
+    <div class="model-box-b">
+      <h3>Logistic Regression</h3>
+      <div class="dummy-data" style="font-size: 20px">Confidence (5 recent):</div>
+      <div style="display: flex;">
+
+        <table class="table table-striped table-bordered">
+          <thead>
+              <tr>
+                  <th>Date</th>
+                  <th>Home Team</th>
+                  <th>Away Team</th>
+                  <th>Predicted Outcome</th>
+                  <th>Winner</th>
+                  <th>Confidence (%)</th>
+                  <th>Home Loss Prob (%)</th>
+                  <th>Home Win Prob (%)</th>
+                  <th>Correct</th>
+              </tr>
+          </thead>
+          <tbody>
+            {% for result in results_LR_FA %}
+            <tr>
+                <td>{{ result['Date'] }}</td>
+                <td>{{ result['Home'] }}</td>
+                <td>{{ result['Away'] }}</td>
+                <td>{{ result['Predicted'] }}</td>
+                <td>{{ result['Winner'] }}</td>
+                <td class="
+                    {% if result['Confidence'] >= 80 %} high-confidence
+                    {% elif result['Confidence'] >= 50 %} medium-confidence
+                    {% else %} low-confidence {% endif %}">{{ "{:.2f}".format(result['Confidence']) }}%</td>
+                <td>{{ result['Home Loss Prob'] }}%</td>
+                <td>{{ result['Home Win Prob'] }}%</td>
+                <td>{{ result['Correct'] }}</td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+
+      <div class="dummy-data">
+        • Accuracy: {{accuracyLR_FAcup}}%<br />
+        • Predicted Score: 1 - 1<br />
+      </div>
+    </div>
+
+
+
+  </div>
     </body>
 </html>
