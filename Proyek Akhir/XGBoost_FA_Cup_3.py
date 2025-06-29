@@ -588,14 +588,18 @@ def run_goal_prediction(train_df, test_df, results_df):
     print(f"🧭 Direction Accuracy: {eval_results['Direction_Accuracy']:.2%}")
     print(f"🎯 Exact Score Accuracy: {eval_results['Exact_Accuracy']:.2%}")
     print(f"✅ Within 1 Goal Accuracy: {eval_results['Within_1_Goal_Accuracy']:.2%}")
-
+    stats_goal = {'home_RMSE': eval_results['Home_RMSE'], 'away_RMSE': eval_results['Away_RMSE'],
+                  'home_MAE': eval_results['Home_MAE'], 'away_MAE': eval_results['Away_MAE'],
+                  'direction_accuracy': eval_results['Direction_Accuracy'],
+                  'exact_accuracy': eval_results['Exact_Accuracy'],
+                  '1goal': eval_results['Within_1_Goal_Accuracy']}
     # Show feature importance
     plt.figure(figsize=(12, 8))
     plot_importance(home_goal_model, max_num_features=15)
     plt.title('Home Goal Prediction Feature Importance')
     plt.show()
 
-    return results_df
+    return results_df, stats_goal
 
 # function to get division gap variable
 def show_division_gap(results_df=results_df):
@@ -646,16 +650,12 @@ buf_cm.seek(0)
 confusion_plot = base64.b64encode(buf_cm.getvalue()).decode('utf-8')
 plt.close()
 
-# # Convert to DataFrame for readability
-# labels = np.unique(y_test)  # Use unique values as labels
-# cm_df = pd.DataFrame(cm, index=labels, columns=labels)
-#
-# # Convert DataFrame to HTML table
-# cm_html = cm_df.to_html(classes="table table-bordered table-hover", border=0)
-
 # predict score
 prediction = predict_match_score("2024-05-24", "Manchester City", "Manchester Utd")
 pred_home_goals, pred_away_goals, home_team, away_team = prediction['home_score'], prediction['away_score'], prediction['home_team'], prediction['away_team']
+
+# stats tambahan buat goal
+prediction_df, stats_goal = run_goal_prediction(train_df, test_df, results_df)
 
 if __name__ == '__main__':
     print(f"\nXGBoost Accuracy on FA Cup test set: {accuracy * 100:.2f}%\n")
@@ -680,11 +680,11 @@ if __name__ == '__main__':
     print(f"Predicted Score: {home_team} {pred_home_goals:.1f} - {pred_away_goals:.1f} {away_team}")
 
     # Run goal prediction
-    results_df = run_goal_prediction(train_df, test_df, results_df)
+    prediction_df = run_goal_prediction(train_df, test_df, results_df)
 
     # Show combined results
     print("\nCombined Predictions with Scores:")
-    print(results_df[['Date', 'Home', 'Away', 'Predicted Outcome', 'Confidence (%)',
+    print(prediction_df[['Date', 'Home', 'Away', 'Predicted Outcome', 'Confidence (%)',
                       'Predicted Home Goals', 'Predicted Away Goals',
                       'Actual Outcome', 'Actual Home Goals', 'Actual Away Goals']].head(10))
 

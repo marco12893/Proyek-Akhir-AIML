@@ -4,7 +4,8 @@ import seaborn as sns
 import matplotlib.pyplot as plt
 from sklearn.preprocessing import LabelEncoder
 from sklearn.linear_model import LogisticRegression
-from sklearn.metrics import accuracy_score, confusion_matrix, classification_report
+from sklearn.metrics import accuracy_score, confusion_matrix, classification_report, mean_squared_error, \
+    mean_absolute_error
 import base64
 import io
 
@@ -56,6 +57,10 @@ y_test = test_df['Winner']
 X_train_goals = train_df[features]
 X_test_goals = test_df[features]
 
+# DANGEROUS
+X_test_scores = test_df[features]
+y_test_home_goals = test_df['HomeGoals']  # Home goals in test set
+y_test_away_goals = test_df['AwayGoals']  # Away goals in test set
 
 # Train logistic regression model
 model = LogisticRegression(
@@ -82,6 +87,75 @@ away_goals_model = LogisticRegression(
     random_state=42
 )
 away_goals_model.fit(X_train_goals, train_df['AwayGoals'])
+
+#
+def evaluate_goal_predictions(actual_home, actual_away, pred_home, pred_away):
+    """Comprehensive evaluation of goal predictions"""
+    rmse_home = np.sqrt(mean_squared_error(actual_home, pred_home))
+    mae_home = mean_absolute_error(actual_home, pred_home)
+
+    rmse_away = np.sqrt(mean_squared_error(actual_away, pred_away))
+    mae_away = mean_absolute_error(actual_away, pred_away)
+
+    # Directional accuracy (home scores more/less than away)
+    actual_direction = (actual_home > actual_away).astype(int)
+    pred_direction = (pred_home > pred_away).astype(int)
+    direction_acc = accuracy_score(actual_direction, pred_direction)
+
+    # Exact score accuracy
+    exact_score = np.sum((actual_home == pred_home) & (actual_away == pred_away))
+    exact_accuracy = exact_score / len(actual_home)
+
+    # Within 1 goal accuracy
+    home_within_1 = np.abs(actual_home - pred_home) <= 1
+    away_within_1 = np.abs(actual_away - pred_away) <= 1
+    within_1_acc = np.sum(home_within_1 & away_within_1) / len(actual_home)
+
+    return {
+        'Home_RMSE': rmse_home,
+        'Home_MAE': mae_home,
+        'Away_RMSE': rmse_away,
+        'Away_MAE': mae_away,
+        'Direction_Accuracy': direction_acc,
+        'Exact_Accuracy': exact_accuracy,
+        'Within_1_Goal_Accuracy': within_1_acc
+    }
+
+# poisson to make metrics more realistic
+def poisson_adjust_predictions(predictions):
+    predictions = np.where(predictions < 0, 0, predictions)
+    predictions = np.round(predictions)
+
+    adjusted = []
+    for pred in predictions:
+        if pred > 3:  # For high predictions, add randomness
+            adj = np.random.poisson(pred * 0.9)  # Slightly reduce high predictions
+        else:
+            adj = pred
+        adjusted.append(min(adj, 6))
+    return np.array(adjusted)
+
+
+# Predict scores (kelanjutan dari line 71)
+LR_pred_home_goals = home_goals_model.predict(X_test)
+LR_pred_away_goals = away_goals_model.predict(X_test)
+
+# Adjust predictions
+LR_adjusted_home_goals = poisson_adjust_predictions(LR_pred_home_goals)
+LR_adjusted_away_goals = poisson_adjust_predictions(LR_pred_away_goals)
+
+# Evaluate goal predictions
+LR_goal_eval = evaluate_goal_predictions(
+    y_test_home_goals.values, y_test_away_goals.values,
+    LR_adjusted_home_goals, LR_adjusted_away_goals
+)
+
+# retrieve the evaluation as a dictionary for inject
+stats_goal = {'home_RMSE': LR_goal_eval['Home_RMSE'], 'away_RMSE': LR_goal_eval['Away_RMSE'],
+                  'home_MAE': LR_goal_eval['Home_MAE'], 'away_MAE': LR_goal_eval['Away_MAE'],
+                  'direction_accuracy': LR_goal_eval['Direction_Accuracy'],
+                  'exact_accuracy': LR_goal_eval['Exact_Accuracy'],
+                  '1goal': LR_goal_eval['Within_1_Goal_Accuracy']}
 
 # funciton to predict match with score
 def predict_match_score_logistic(match_date_str, home_team, away_team,
@@ -396,6 +470,14 @@ if __name__ == '__main__':
     for feature_name, coef in zip(features, model.coef_[0]):
         print(f"{feature_name}: {coef:.4f}")
 
+    # stats_goal
+    print("\nRandom Forest Goal Prediction Evaluation:")
+    print(f"🏠 Home Goals - RMSE: {LR_goal_eval['Home_RMSE']:.3f}, MAE: {LR_goal_eval['Home_MAE']:.3f}")
+    print(f"🛫 Away Goals - RMSE: {LR_goal_eval['Away_RMSE']:.3f}, MAE: {LR_goal_eval['Away_MAE']:.3f}")
+    print(f"🧭 Direction Accuracy: {LR_goal_eval['Direction_Accuracy']:.2%}")
+    print(f"🎯 Exact Score Accuracy: {LR_goal_eval['Exact_Accuracy']:.2%}")
+    print(f"✅ Within 1 Goal Accuracy: {LR_goal_eval['Within_1_Goal_Accuracy']:.2%}")
+    
     # predictions
     predict_match_logistic("2024-05-24", "Manchester City", "Manchester Utd")
     predict_match_score_logistic("2024-05-24", "Manchester City", "Manchester Utd")
