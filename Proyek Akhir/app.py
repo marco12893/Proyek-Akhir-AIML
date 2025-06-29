@@ -6,11 +6,11 @@ import base64
 import io
 
 # Import method ataupun variable dari file yg diperlukan
-from XGBoost_FA_Cup_3 import accuracyFormatted as accuracyXG_FA, df, confidence_df as results_XG_FA, metrics_data, division_gap, plot_data as plot_dataXG_FA, cm as cmXG_FA, confusion_plot as confusion_plotXG_FA, predict_match_score as predict_match_fc_xg
+from XGBoost_FA_Cup_3 import accuracyFormatted as accuracyXG_FA, df, confidence_df as results_XG_FA, metrics_data, division_gap, plot_data as plot_dataXG_FA, cm as cmXG_FA, confusion_plot as confusion_plotXG_FA, predict_match_score as predict_match_score_fc_xg, predict_match as predict_match_fc_xg
 from XGBoost_FA_Cup_2 import accuracyFormatted as accuracyXG_FA_second
 from XGBoost_FA_Cup import accuracyFormatted as accuracyXG_FA_first
 
-from Random_Forest_FA_Cup_3 import accuracyFormatted as accuracyRF_FA, confidence_df as results_RF_FA, metrics_data as metrics_data_RF_FA, division_gap as division_gap_RF_FA, plot_data as plot_dataRF_FA, cm as cmRF_FA, confusion_plot as confusion_plotRF_FA, predict_match_score as predict_match_fc_rf
+from Random_Forest_FA_Cup_3 import accuracyFormatted as accuracyRF_FA, confidence_df as results_RF_FA, metrics_data as metrics_data_RF_FA, division_gap as division_gap_RF_FA, plot_data as plot_dataRF_FA, cm as cmRF_FA, confusion_plot as confusion_plotRF_FA, predict_match_score as predict_match_score_fc_rf, predict_match_rf as predict_match_fc_rf
 from Random_Forest_FA_Cup_2 import accuracyFormatted as accuracyRF_FA_second
 from Random_Forest_FA_Cup import accuracyFormatted as accuracyRF_FA_first
 
@@ -177,8 +177,14 @@ def home():
             form_team2 = get_team_form(team2)
         if team1 and team2:
             if selected_type == 'fc':
-                prediction_xg = predict_match_fc_xg(date, team1, team2)
-                prediction_rf = predict_match_fc_rf(date, team1, team2)
+                prediction_xg1 = predict_match_fc_xg(date, team1, team2)
+                prediction_xg2 = predict_match_score_fc_xg(date, team1, team2)
+                prediction_xg = prediction_xg1 | prediction_xg2
+                prediction_rf1 = predict_match_fc_rf(date, team1, team2)
+                prediction_rf2 = predict_match_score_fc_rf(date, team1, team2)
+                prediction_rf = prediction_rf1 | prediction_rf2
+                print('ppp')
+                print(prediction_rf)
                 prediction_lr1 = predict_match_fc_lr(date, team1, team2)
                 prediction_lr2 = predict_match_score_fc_lr(date, team1, team2)
                 prediction_lr = prediction_lr1 | prediction_lr2

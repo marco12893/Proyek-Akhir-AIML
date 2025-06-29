@@ -274,6 +274,7 @@ def predict_match(match_date_str, home_team, away_team, model=model, le=le_team,
     home_prob = probs[0][1] * 100
     away_prob = probs[0][0] * 100
     print(f"📊 Probabilities: Home Win: {home_prob:.1f}%, Away Win: {away_prob:.1f}%")
+    return {'win': home_prob, 'lose': away_prob}
 
 
 y_pred, probs = predict_with_division_rules(model, X_test)

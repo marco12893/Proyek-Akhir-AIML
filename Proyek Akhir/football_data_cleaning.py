@@ -11,21 +11,16 @@ print("Starting data cleaning pipeline...")
 df = pd.read_csv('data/English_Football_2018-2025_With_Form.csv')
 team_divisions = pd.read_csv('data/League Division 2.csv')
 
-# 1. Remove rows containing 'Attendance' (duplicate headers)
 df = df[~df.apply(lambda row: row.astype(str).str.contains('Attendance', case=False, na=False)).any(axis=1)]
 
-# 2. Remove remaining header rows
 df_cleaned = df[df['Wk'] != 'Wk']
 
-# 3. Drop sparse rows (<3 valid values)
 df_cleaned = df_cleaned.dropna(thresh=3)
 
 
-# 5. Convert xG to numeric
 df_cleaned['xG'] = pd.to_numeric(df_cleaned['xG'], errors='coerce')
 df_cleaned['xG.1'] = pd.to_numeric(df_cleaned['xG.1'], errors='coerce')
 
-# 6. Extract goals from Score column
 df_cleaned[['HomeGoals', 'AwayGoals']] = df_cleaned['Score'].str.extract(r'(\d+)–(\d+)').astype(float)
 
 # 7. Convert dates and sort

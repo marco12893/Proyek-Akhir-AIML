@@ -277,7 +277,7 @@ def predict_match_rf(match_date_str, home_team, away_team, model=model, le=le_te
     print(f"📈 Home form: {home_form}/5 | 📉 Away form: {away_form}/5")
     print(f"🔢 Divisions: {home_team} (D{home_div}) vs {away_team} (D{away_div})")
     print(f"📊 Probabilities: Home Win: {probs[0][2]*100:.1f}%, Draw: {probs[0][1]*100:.1f}%, Away Win: {probs[0][0]*100:.1f}%")
-    return {'win': probs[0][2], 'draw': probs[0][1], 'lose': probs[0][0], 'prediction': outcome_map[prediction]}
+    return {'win': home_win_prob, 'lose': away_win_prob, 'prediction': outcome_map[prediction]}
 
 
 # Use the updated function for prediction and confidence
