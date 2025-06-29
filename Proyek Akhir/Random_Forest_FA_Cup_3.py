@@ -2,7 +2,7 @@ import pandas as pd
 import numpy as np
 import seaborn as sns
 from sklearn.preprocessing import LabelEncoder
-from sklearn.metrics import accuracy_score, confusion_matrix, classification_report
+from sklearn.metrics import accuracy_score, confusion_matrix, classification_report, mean_squared_error, mean_absolute_error
 from sklearn.ensemble import RandomForestClassifier, RandomForestRegressor
 import matplotlib.pyplot as plt
 import base64
@@ -90,6 +90,95 @@ away_goals_model = RandomForestRegressor(
 )
 away_goals_model.fit(X_train_scores, y_train_away_goals)
 
+# Train Random Forest for score prediction
+rf_home_goal_model = RandomForestRegressor(
+    n_estimators=300,
+    max_depth=8,
+    min_samples_split=4,
+    min_samples_leaf=2,
+    random_state=42
+)
+rf_home_goal_model.fit(X_train, y_train_home_goals)
+
+rf_away_goal_model = RandomForestRegressor(
+    n_estimators=300,
+    max_depth=8,
+    min_samples_split=4,
+    min_samples_leaf=2,
+    random_state=42
+)
+rf_away_goal_model.fit(X_train, y_train_away_goals)
+
+
+# evaluate goal predictions to find out metrics for goal (RMSE, MAE, dll.)
+def evaluate_goal_predictions(actual_home, actual_away, pred_home, pred_away):
+    """Comprehensive evaluation of goal predictions"""
+    rmse_home = np.sqrt(mean_squared_error(actual_home, pred_home))
+    mae_home = mean_absolute_error(actual_home, pred_home)
+
+    rmse_away = np.sqrt(mean_squared_error(actual_away, pred_away))
+    mae_away = mean_absolute_error(actual_away, pred_away)
+
+    # Directional accuracy (home scores more/less than away)
+    actual_direction = (actual_home > actual_away).astype(int)
+    pred_direction = (pred_home > pred_away).astype(int)
+    direction_acc = accuracy_score(actual_direction, pred_direction)
+
+    # Exact score accuracy
+    exact_score = np.sum((actual_home == pred_home) & (actual_away == pred_away))
+    exact_accuracy = exact_score / len(actual_home)
+
+    # Within 1 goal accuracy
+    home_within_1 = np.abs(actual_home - pred_home) <= 1
+    away_within_1 = np.abs(actual_away - pred_away) <= 1
+    within_1_acc = np.sum(home_within_1 & away_within_1) / len(actual_home)
+
+    return {
+        'Home_RMSE': rmse_home,
+        'Home_MAE': mae_home,
+        'Away_RMSE': rmse_away,
+        'Away_MAE': mae_away,
+        'Direction_Accuracy': direction_acc,
+        'Exact_Accuracy': exact_accuracy,
+        'Within_1_Goal_Accuracy': within_1_acc
+    }
+
+# poisson to make metrics more realistic
+def poisson_adjust_predictions(predictions):
+    predictions = np.where(predictions < 0, 0, predictions)
+    predictions = np.round(predictions)
+
+    adjusted = []
+    for pred in predictions:
+        if pred > 3:  # For high predictions, add randomness
+            adj = np.random.poisson(pred * 0.9)  # Slightly reduce high predictions
+        else:
+            adj = pred
+        adjusted.append(min(adj, 6))
+    return np.array(adjusted)
+
+# Predict scores (kelanjutan dari line 93)
+rf_pred_home_goals = rf_home_goal_model.predict(X_test)
+rf_pred_away_goals = rf_away_goal_model.predict(X_test)
+
+# Adjust predictions
+rf_adjusted_home_goals = poisson_adjust_predictions(rf_pred_home_goals)
+rf_adjusted_away_goals = poisson_adjust_predictions(rf_pred_away_goals)
+
+# Evaluate goal predictions
+rf_goal_eval = evaluate_goal_predictions(
+    y_test_home_goals.values, y_test_away_goals.values,
+    rf_adjusted_home_goals, rf_adjusted_away_goals
+)
+
+# retrieve the evaluation as a dictionary for inject
+stats_goal = {'home_RMSE': rf_goal_eval['Home_RMSE'], 'away_RMSE': rf_goal_eval['Away_RMSE'],
+                  'home_MAE': rf_goal_eval['Home_MAE'], 'away_MAE': rf_goal_eval['Away_MAE'],
+                  'direction_accuracy': rf_goal_eval['Direction_Accuracy'],
+                  'exact_accuracy': rf_goal_eval['Exact_Accuracy'],
+                  '1goal': rf_goal_eval['Within_1_Goal_Accuracy']}
+
+# function to predict the score of two opposing teams
 def predict_match_score(match_date_str, home_team, away_team,
                         home_model=home_goals_model, away_model=away_goals_model,
                         le=le_team, df_all=df):
@@ -398,6 +487,14 @@ if __name__ == '__main__':
     print(f"\nClasses present in test data: {unique_classes}")
     print("Confusion Matrix:")
     print(confusion_matrix(y_test, y_pred, labels=unique_classes))
+
+    # stats_goal
+    print("\nRandom Forest Goal Prediction Evaluation:")
+    print(f"🏠 Home Goals - RMSE: {rf_goal_eval['Home_RMSE']:.3f}, MAE: {rf_goal_eval['Home_MAE']:.3f}")
+    print(f"🛫 Away Goals - RMSE: {rf_goal_eval['Away_RMSE']:.3f}, MAE: {rf_goal_eval['Away_MAE']:.3f}")
+    print(f"🧭 Direction Accuracy: {rf_goal_eval['Direction_Accuracy']:.2%}")
+    print(f"🎯 Exact Score Accuracy: {rf_goal_eval['Exact_Accuracy']:.2%}")
+    print(f"✅ Within 1 Goal Accuracy: {rf_goal_eval['Within_1_Goal_Accuracy']:.2%}")
 
     # confidence 5
     print(results_df[['Date', 'Home', 'Away', 'Predicted Outcome', 'Confidence']].head())

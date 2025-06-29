@@ -304,7 +304,16 @@
                 Division gap {{ division.gap_range }}: {{ "{:.2f}".format(division.accuracy*100)  }}% accuracy ({{ division.matches }} matches) <br>
             {% endfor %}
         </div>
+        <!--other stats for goal-->
+        <div class="dummy-data" style="margin-top: 10px">
+            <h1 style="font-size: 20px">More stats:</h1>
+            Home Goals - RMSE: {{ "{:.3f}".format(stats_goalXG_FA['home_RMSE']) }}, MAE: {{ "{:.3f}".format(stats_goalXG_FA['home_MAE']) }} <br>
+            Away Goals - RMSE: {{ "{:.2f}".format(stats_goalXG_FA['away_RMSE']) }}, MAE: {{ "{:.3f}".format(stats_goalXG_FA['away_MAE']) }} <br>
+            Direction Accuracy: {{ "{:.2f}".format(stats_goalXG_FA['direction_accuracy']*100) }}% <br>
+            Exact Score Accuracy: {{ "{:.2f}".format(stats_goalXG_FA['exact_accuracy']*100) }}% <br>
+            Within 1 Goal Acuracy: {{ "{:.2f}".format(stats_goalXG_FA['1goal']*100) }}% <br>
         </div>
+    </div>
 
 
         <div class="model-box">
@@ -359,6 +368,15 @@
             {% for division in division_gap_RF_FA %}
                 Division gap {{ division.gap_range }}: {{ "{:.2f}".format(division.accuracy*100)  }}% accuracy ({{ division.matches }} matches) <br>
             {% endfor %}
+        </div>
+        <!--other stats for goal-->
+        <div class="dummy-data" style="margin-top: 10px">
+            <h1 style="font-size: 20px">More stats:</h1>
+            Home Goals - RMSE: {{ "{:.3f}".format(stats_goalRF_FA['home_RMSE']) }}, MAE: {{ "{:.3f}".format(stats_goalRF_FA['home_MAE']) }} <br>
+            Away Goals - RMSE: {{ "{:.2f}".format(stats_goalRF_FA['away_RMSE']) }}, MAE: {{ "{:.3f}".format(stats_goalRF_FA['away_MAE']) }} <br>
+            Direction Accuracy: {{ "{:.2f}".format(stats_goalRF_FA['direction_accuracy']*100) }}% <br>
+            Exact Score Accuracy: {{ "{:.2f}".format(stats_goalRF_FA['exact_accuracy']*100) }}% <br>
+            Within 1 Goal Acuracy: {{ "{:.2f}".format(stats_goalRF_FA['1goal']*100) }}% <br>
         </div>
         </div>
         <div class="model-box">
@@ -415,8 +433,17 @@
                 Division gap {{ division.gap_range }}: {{ "{:.2f}".format(division.accuracy*100)  }}% accuracy ({{ division.matches }} matches) <br>
             {% endfor %}
         </div>
+        <!--other stats for goal-->
+        <div class="dummy-data" style="margin-top: 10px">
+            <h1 style="font-size: 20px">More stats:</h1>
+            Home Goals - RMSE: {{ "{:.3f}".format(stats_goalLR_FA['home_RMSE']) }}, MAE: {{ "{:.3f}".format(stats_goalLR_FA['home_MAE']) }} <br>
+            Away Goals - RMSE: {{ "{:.2f}".format(stats_goalLR_FA['away_RMSE']) }}, MAE: {{ "{:.3f}".format(stats_goalLR_FA['away_MAE']) }} <br>
+            Direction Accuracy: {{ "{:.2f}".format(stats_goalLR_FA['direction_accuracy']*100) }}% <br>
+            Exact Score Accuracy: {{ "{:.2f}".format(stats_goalLR_FA['exact_accuracy']*100) }}% <br>
+            Within 1 Goal Acuracy: {{ "{:.2f}".format(stats_goalLR_FA['1goal']*100) }}% <br>
         </div>
-      </div>
+    </div>
+  </div>
 
      <!--SHOW CONFIDENCE-->
     <div class="headerbefore" style="margin: 50px 40px 15px 40px;">

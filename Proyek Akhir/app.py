@@ -1,20 +1,19 @@
 from flask import Flask, render_template, request,jsonify,Response
 import pandas as pd
-import numpy as np
 import matplotlib.pyplot as plt
 import base64
 import io
 
 # Import method ataupun variable dari file yg diperlukan
-from XGBoost_FA_Cup_3 import accuracyFormatted as accuracyXG_FA, df, confidence_df as results_XG_FA, metrics_data, division_gap, plot_data as plot_dataXG_FA, cm as cmXG_FA, confusion_plot as confusion_plotXG_FA, predict_match_score as predict_match_score_fc_xg, predict_match as predict_match_fc_xg
+from XGBoost_FA_Cup_3 import accuracyFormatted as accuracyXG_FA, df, confidence_df as results_XG_FA, metrics_data, division_gap, plot_data as plot_dataXG_FA, cm as cmXG_FA, confusion_plot as confusion_plotXG_FA, predict_match_score as predict_match_score_fc_xg, predict_match as predict_match_fc_xg, stats_goal as stats_goalXG_FA
 from XGBoost_FA_Cup_2 import accuracyFormatted as accuracyXG_FA_second
 from XGBoost_FA_Cup import accuracyFormatted as accuracyXG_FA_first
 
-from Random_Forest_FA_Cup_3 import accuracyFormatted as accuracyRF_FA, confidence_df as results_RF_FA, metrics_data as metrics_data_RF_FA, division_gap as division_gap_RF_FA, plot_data as plot_dataRF_FA, cm as cmRF_FA, confusion_plot as confusion_plotRF_FA, predict_match_score as predict_match_score_fc_rf, predict_match_rf as predict_match_fc_rf
 from Random_Forest_FA_Cup_2 import accuracyFormatted as accuracyRF_FA_second
+from Random_Forest_FA_Cup_3 import accuracyFormatted as accuracyRF_FA, confidence_df as results_RF_FA, metrics_data as metrics_data_RF_FA, division_gap as division_gap_RF_FA, plot_data as plot_dataRF_FA, cm as cmRF_FA, confusion_plot as confusion_plotRF_FA, predict_match_score as predict_match_score_fc_rf, predict_match_rf as predict_match_fc_rf, stats_goal as stats_goalRF_FA
 from Random_Forest_FA_Cup import accuracyFormatted as accuracyRF_FA_first
 
-from Logistic_Regression_FA_Cup_3 import accuracyFormatted as accuracyLR_FA, confidence_df as results_LR_FA, metrics_data as metrics_data_LR_FA, division_gap as division_gap_LR_FA, plot_data as plot_dataLR_FA, cm as cmLR_FA, confusion_plot as confusion_plotLR_FA, predict_match_logistic as predict_match_fc_lr, predict_match_score_logistic as predict_match_score_fc_lr
+from Logistic_Regression_FA_Cup_3 import accuracyFormatted as accuracyLR_FA, confidence_df as results_LR_FA, metrics_data as metrics_data_LR_FA, division_gap as division_gap_LR_FA, plot_data as plot_dataLR_FA, cm as cmLR_FA, confusion_plot as confusion_plotLR_FA, predict_match_logistic as predict_match_fc_lr, predict_match_score_logistic as predict_match_score_fc_lr, stats_goal as stats_goalLR_FA
 from Logistic_Regression_FA_Cup_2 import accuracyFormatted as accuracyLR_FA_second
 from Logistic_Regression_FA_Cup import accuracyFormatted as accuracyLR_FA_first
 
@@ -61,6 +60,7 @@ Yg harus dikerjakan (Rayner):
 //** NEW TO-DO LIST **//:
 
 \\NOTE = predict_match_score() itu function buat ambil score prediction\\ 
+
 SUDAH:
 - pindahin confidence (5 recent) to statsfornerds
 - premier league udh ada prediction team + accuracy
@@ -70,9 +70,11 @@ SUDAH:
 - Precentage win + team yang menang (win loss bar)
 - prediction score buat FA dan Premier league (baru XGBoost_FA_Cup_3)
 - Tambahin Display untuk nentuin division berapa timnya itu. Misal divisi 1,2,3,4,5,atau 6.
+- Sambungin front end ke back end. Form yang di display harus sesuai dengan tim dan formnya pada tanggal itu. 
+    Selain itu confidence barnya, accuracynya harus sesuai dengan apa yang di outputkan oleh prediction function.
+-
 
 BELUM:
-- Sambungin front end ke back end. Form yang di display harus sesuai dengan tim dan formnya pada tanggal itu. Selain itu confidence barnya, accuracynya harus sesuai dengan apa yang di outputkan oleh prediction function.
 - Tambahin statistik gol ke stats for nerds. Masukin seperti RMSE, MSE, direction accuracy, exact, accuracy, within 1 score accuracy.
 - warna navbar, body, card bisa dibuat lebih formal (jgn putih polos doang)
 '''
@@ -107,9 +109,14 @@ formattedLR_PL = "{:.2f}".format(accuracyLR_PL)
 
 app = Flask(__name__)
 
-def get_team_form(team_name, num_matches=5):
+def get_team_form(team_name, num_matches=5, before_date=None):
     # Filter matches where the team was home or away
     team_matches = df[(df['Home'] == team_name) | (df['Away'] == team_name)]
+
+    # filter by date if before_date is provided
+    if before_date is not None:
+        # Ensure 'Date' column is datetime
+        team_matches = team_matches[pd.to_datetime(team_matches['Date']) < pd.to_datetime(before_date)]
 
     # Sort by date DESCENDING
     team_matches = team_matches.sort_values(by='Date', ascending=False)
@@ -134,8 +141,8 @@ def get_team_form(team_name, num_matches=5):
                 form.append('D')
             else:
                 form.append('L')
-
     return form
+
 
 # MAIN ROUTE VIEW
 @app.route('/', methods=['GET', 'POST'])
@@ -172,9 +179,9 @@ def home():
         team2 = request.args.get('team2')
 
         if team1:
-            form_team1 = get_team_form(team1)
+            form_team1 = get_team_form(team1, 5, date)
         if team2:
-            form_team2 = get_team_form(team2)
+            form_team2 = get_team_form(team2,5, date)
         if team1 and team2:
             if selected_type == 'fc':
                 prediction_xg1 = predict_match_fc_xg(date, team1, team2)
@@ -236,7 +243,7 @@ def home():
 # NERD STATS VIEWS
 @app.route('/statsfornerds')
 def stats_for_nerds():
-    #variables for accuracy graph
+    #variables
     iterasi = ['1', '2', '3']
 
     # Convert convert string to float soalnya aku banyak gaya pake formatting
@@ -262,16 +269,16 @@ def stats_for_nerds():
     ax.legend(fontsize=8, loc='lower right')
     ax.grid(True, linestyle='--', alpha=0.7)
 
-    # Save plot to a BytesIO object
+    # Save plot to BytesIO object for inject
     img = io.BytesIO()
     plt.savefig(img, format='png')
     img.seek(0)
     plot_url_perkembangan = base64.b64encode(img.getvalue()).decode()
     plt.close(fig)
     return render_template('stats.html',
-                           accuracyXG_FAcup=formattedXG_FA, results_XG_FA=results_XG_FA,
-                           accuracyRF_FAcup=formattedRF_FA, results_RF_FA=results_RF_FA,
-                           accuracyLR_FAcup=formattedLR_FA, results_LR_FA=results_LR_FA,
+                           accuracyXG_FAcup=formattedXG_FA, results_XG_FA=results_XG_FA, stats_goalXG_FA=stats_goalXG_FA,
+                           accuracyRF_FAcup=formattedRF_FA, results_RF_FA=results_RF_FA, stats_goalRF_FA=stats_goalRF_FA,
+                           accuracyLR_FAcup=formattedLR_FA, results_LR_FA=results_LR_FA, stats_goalLR_FA=stats_goalLR_FA,
                            accuracyXG_PL=formattedXG_PL,
                            accuracyRF_PL=formattedRF_PL,
                            accuracyLR_PL=formattedLR_PL,
