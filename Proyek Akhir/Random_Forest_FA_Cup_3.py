@@ -3,7 +3,7 @@ import numpy as np
 import seaborn as sns
 from sklearn.preprocessing import LabelEncoder
 from sklearn.metrics import accuracy_score, confusion_matrix, classification_report
-from sklearn.ensemble import RandomForestClassifier
+from sklearn.ensemble import RandomForestClassifier, RandomForestRegressor
 import matplotlib.pyplot as plt
 import base64
 import io
@@ -55,6 +55,16 @@ y_train = train_df['Winner']
 X_test = test_df[features]
 y_test = test_df['Winner']
 
+# training and testing for score prediction
+X_train_scores = train_df[features]
+y_train_home_goals = train_df['HomeGoals']  # Home goals as target
+y_train_away_goals = train_df['AwayGoals']  # Away goals as target
+
+X_test_scores = test_df[features]
+y_test_home_goals = test_df['HomeGoals']  # Home goals in test set
+y_test_away_goals = test_df['AwayGoals']  # Away goals in test set
+
+
 # Random Forest model
 model = RandomForestClassifier(
     n_estimators=500,
@@ -64,6 +74,91 @@ model = RandomForestClassifier(
 )
 model.fit(X_train, y_train)
 
+# Train home goals model
+home_goals_model = RandomForestRegressor(
+    n_estimators=500,
+    max_depth=10,
+    random_state=42
+)
+home_goals_model.fit(X_train_scores, y_train_home_goals)
+
+# Train away goals model
+away_goals_model = RandomForestRegressor(
+    n_estimators=500,
+    max_depth=10,
+    random_state=42
+)
+away_goals_model.fit(X_train_scores, y_train_away_goals)
+
+def predict_match_score(match_date_str, home_team, away_team,
+                        home_model=home_goals_model, away_model=away_goals_model,
+                        le=le_team, df_all=df):
+    """
+    Predict the scores for a match.
+    """
+    match_date = pd.to_datetime(match_date_str)
+    df_all = df_all.copy()
+    df_all['Date'] = pd.to_datetime(df_all['Date'])
+
+    def get_division(team):
+        matches = df_all[((df_all['Home'] == team) | (df_all['Away'] == team)) & (df_all['Date'] < match_date)]
+        if matches.empty:
+            print(f"⚠️ No division data for {team} before {match_date_str}")
+            return np.nan
+        latest = matches.sort_values(by='Date', ascending=False).iloc[0]
+        return latest['HomeDivision'] if latest['Home'] == team else latest['AwayDivision']
+
+    def get_form(team):
+        matches = df_all[((df_all['Home'] == team) | (df_all['Away'] == team)) & (df_all['Date'] < match_date)].sort_values(by='Date', ascending=False).head(5)
+        wins = 0
+        for _, row in matches.iterrows():
+            if row['Winner'] == 2 and row['Home'] == team:
+                wins += 1
+            elif row['Winner'] == 0 and row['Away'] == team:
+                wins += 1
+        return wins
+
+    def get_team_features(team, opponent, match_date):
+        division = get_division(team)
+        form = get_form(team)
+        opponent_division = get_division(opponent)
+        if np.isnan(division) or np.isnan(opponent_division):
+            print(f"⚠️ Missing division data for {team} or {opponent}. Skipping prediction.")
+            return None
+        division_gap = opponent_division - division
+
+        return {
+            'HomeTeam_enc': le.transform([team])[0],
+            'AwayTeam_enc': le.transform([opponent])[0],
+            'HomeDivision': division,
+            'AwayDivision': opponent_division,
+            'NeutralVenue': 1,
+            'DivisionGap': division_gap,
+            'AbsoluteDivisionGap': abs(division_gap),
+            'HomeLast5_Wins': form,
+            'AwayLast5_Wins': get_form(opponent),
+            'HomeFormWeighted': form / (abs(division_gap) + 1),
+            'AwayFormWeighted': get_form(opponent) * (abs(division_gap) + 1)
+        }
+
+    # Generate features
+    try:
+        home_features = pd.DataFrame([get_team_features(home_team, away_team, match_date)])
+        away_features = pd.DataFrame([get_team_features(away_team, home_team, match_date)])
+    except ValueError as e:
+        print(f"⚠️ Error generating features: {e}")
+        return
+
+    if home_features is None or away_features is None:
+        return
+
+    # Predict scores
+    home_score = round(home_model.predict(home_features)[0])
+    away_score = round(away_model.predict(away_features)[0])
+
+    print(f"\n📅 {match_date_str}: {home_team} vs {away_team}")
+    print(f"🔢 Predicted Score: {home_team} {home_score:.1f} - {away_score:.1f} {away_team}")
+    return {'home_score':home_score, 'away_score':away_score, 'home_team':home_team, 'away_team':away_team}
 
 # Function to calculate confidence
 def calculate_confidence(probs):
@@ -111,6 +206,8 @@ def predict_with_confidence(model, X, division_gap_threshold=3):
 
     confidence = calculate_confidence(probs)
     return np.array(y_pred), probs, confidence
+
+
 
 def predict_match_rf(match_date_str, home_team, away_team, model=model, le=le_team, df_all=df):
     import warnings
@@ -180,7 +277,7 @@ def predict_match_rf(match_date_str, home_team, away_team, model=model, le=le_te
     print(f"📈 Home form: {home_form}/5 | 📉 Away form: {away_form}/5")
     print(f"🔢 Divisions: {home_team} (D{home_div}) vs {away_team} (D{away_div})")
     print(f"📊 Probabilities: Home Win: {probs[0][2]*100:.1f}%, Draw: {probs[0][1]*100:.1f}%, Away Win: {probs[0][0]*100:.1f}%")
-
+    return {'win': probs[0][2], 'draw': probs[0][1], 'lose': probs[0][0], 'prediction': outcome_map[prediction]}
 
 
 # Use the updated function for prediction and confidence
@@ -305,8 +402,9 @@ if __name__ == '__main__':
     # confidence 5
     print(results_df[['Date', 'Home', 'Away', 'Predicted Outcome', 'Confidence']].head())
 
-
+    # predictions
     predict_match_rf("2024-05-24", "Manchester City", "Manchester Utd")
+    predict_match_score("2024-05-24", "Manchester City", "Manchester Utd")
 
     plt.figure(figsize=(10, 6))
     plt.title("Feature Importance (Random Forest)")

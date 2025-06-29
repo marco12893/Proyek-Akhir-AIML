@@ -52,6 +52,11 @@ y_train = train_df['Winner']
 X_test = test_df[features]
 y_test = test_df['Winner']
 
+# Train-test split for goals
+X_train_goals = train_df[features]
+X_test_goals = test_df[features]
+
+
 # Train logistic regression model
 model = LogisticRegression(
     class_weight='balanced',
@@ -62,6 +67,98 @@ model = LogisticRegression(
 )
 model.fit(X_train, y_train)
 
+# Home goals model
+home_goals_model = LogisticRegression(
+    solver='lbfgs',
+    max_iter=1000,
+    random_state=42
+)
+home_goals_model.fit(X_train_goals, train_df['HomeGoals'])
+
+# Away goals model
+away_goals_model = LogisticRegression(
+    solver='lbfgs',
+    max_iter=1000,
+    random_state=42
+)
+away_goals_model.fit(X_train_goals, train_df['AwayGoals'])
+
+# funciton to predict match with score
+def predict_match_score_logistic(match_date_str, home_team, away_team,
+                                 home_model=home_goals_model, away_model=away_goals_model,
+                                 le=le_team, df_all=df):
+    """
+    Predict the scores for a match using logistic regression.
+    """
+    match_date = pd.to_datetime(match_date_str)
+    df_all = df_all.copy()
+    df_all['Date'] = pd.to_datetime(df_all['Date'])
+
+    def get_division(team):
+        matches = df_all[((df_all['Home'] == team) | (df_all['Away'] == team)) & (df_all['Date'] < match_date)]
+        if matches.empty:
+            print(f"⚠️ No division data for {team} before {match_date_str}")
+            return np.nan
+        latest = matches.sort_values(by='Date', ascending=False).iloc[0]
+        return latest['HomeDivision'] if latest['Home'] == team else latest['AwayDivision']
+
+    def get_form(team):
+        matches = df_all[
+            ((df_all['Home'] == team) | (df_all['Away'] == team)) & (df_all['Date'] < match_date)].sort_values(
+            by='Date', ascending=False).head(5)
+        wins = 0
+        for _, row in matches.iterrows():
+            if row['Winner'] == 2 and row['Home'] == team:
+                wins += 1
+            elif row['Winner'] == 0 and row['Away'] == team:
+                wins += 1
+        return wins
+
+    def get_team_features(team, opponent):
+        division = get_division(team)
+        form = get_form(team)
+        opponent_division = get_division(opponent)
+        if np.isnan(division) or np.isnan(opponent_division):
+            print(f"⚠️ Missing division data for {team} or {opponent}. Skipping prediction.")
+            return None
+        division_gap = opponent_division - division
+
+        return {
+            'HomeTeam_enc': le.transform([team])[0],
+            'AwayTeam_enc': le.transform([opponent])[0],
+            'HomeDivision': division,
+            'AwayDivision': opponent_division,
+            'NeutralVenue': 1,
+            'DivisionGap': division_gap,
+            'AbsoluteDivisionGap': abs(division_gap),
+            'HomeLast5_Wins': form,
+            'AwayLast5_Wins': get_form(opponent),
+            'HomeFormWeighted': form / (abs(division_gap) + 1),
+            'AwayFormWeighted': get_form(opponent) * (abs(division_gap) + 1)
+        }
+
+    # Generate features
+    try:
+        row = pd.DataFrame([{
+            **get_team_features(home_team, away_team),
+            **get_team_features(away_team, home_team)
+        }])
+    except ValueError as e:
+        print(f"⚠️ Error generating features: {e}")
+        return
+
+    if row is None or row.empty:
+        return
+
+    # Predict outcome
+    probs = model.predict_proba(row)
+    home_score = round(probs[0][model.classes_ == 2][0] * 3)  # Approximation: scale probability to 0-3
+    away_score = round(probs[0][model.classes_ == 0][0] * 3)  # Approximation: scale probability to 0-3
+
+    # Print and return the prediction
+    print(f"\n📅 {match_date_str}: {home_team} vs {away_team}")
+    print(f"🔢 Predicted Score: {home_team} {home_score} - {away_score} {away_team}")
+    return {'home_score': home_score, 'away_score': away_score, 'home_team': home_team, 'away_team': away_team}
 
 def calculate_confidence(y_pred, y_proba, class_labels):
     """
@@ -148,6 +245,7 @@ def predict_match_logistic(match_date_str, home_team, away_team, model=model, le
     print(f"📈 Home form: {home_form}/5 | 📉 Away form: {away_form}/5")
     print(f"🔢 Divisions: {home_team} (D{home_div}) vs {away_team} (D{away_div})")
     print(f"📊 Probabilities → Home Win: {home_win_prob:.1f}%, Away Win: {away_win_prob:.1f}%")
+    return {'win': home_win_prob, 'lose': away_win_prob, 'prediction': outcome_map[prediction]}
 
 # Predict
 y_pred = model.predict(X_test)
@@ -297,7 +395,10 @@ if __name__ == '__main__':
     print(f"Intercept: {model.intercept_[0]:.4f}")
     for feature_name, coef in zip(features, model.coef_[0]):
         print(f"{feature_name}: {coef:.4f}")
+
+    # predictions
     predict_match_logistic("2024-05-24", "Manchester City", "Manchester Utd")
+    predict_match_score_logistic("2024-05-24", "Manchester City", "Manchester Utd")
 
     # Plot the feature importance
     plt.figure(figsize=(12, 8))

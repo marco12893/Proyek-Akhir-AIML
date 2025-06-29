@@ -154,7 +154,7 @@
 </head>
 
 <!--CONTENT STARTS HERE-->
-<body class="h-screen {% if not prediction %}
+<body class="h-screen {% if not is_prediction %}
 	overflow-hidden
 {% endif %} ">
     <!--simple header-->
@@ -170,11 +170,11 @@
         <a href="/statsfornerds" style="color: #fff; text-decoration: none; font-size: 16px;">More stats</a>
       </nav>
     </div>
-  <form action="" method="get" class="bg-white flex flex-col items-center {% if not prediction %}
+  <form action="" method="get" class="bg-white flex flex-col items-center {% if not is_prediction %}
   	h-full pt-24
   {% endif %} ">
       <label for="date" class="my-2 font-bold uppercase text-xl text-[#5bc0de]">Date of match</label>
-      <input type="date" name="date" id="date">
+      <input type="date" name="date" id="date" value="{{ date }}">
     <div class="flex justify-center gap-4 pt-4">
       <!--  Select a team from 2018-2023 with form  -->
        <select id="team1" name="team1" class="select2">
@@ -219,7 +219,7 @@
     </div>
   </form>
 
-  {% if prediction %}
+  {% if is_prediction %}
     <div style="display: flex; justify-content: space-around; margin: 20px 80px 0 80px; font-size: 20px;">
         <div class="flex gap-1">
           <strong>Form:</strong>
@@ -250,54 +250,66 @@
     </div>
   {% endif %}
 
-  {% if prediction %}
+  {% if is_prediction %}
   	<!--SHOW RESULTS FOR Premier League-->
   <div style="font-size: 32px;font-weight: bold;color: var(--accent);display:flex;justify-content: center;margin-top: 70px">
-    Premier League
+    {% if selected_type == 'fc' %}
+        FA Cup
+    {% elif selected_type == 'pl' %}
+        Premier League
+    {% endif %}
   </div>
 
   <div class="models-container">
     <div class="model-box">
       <h3>XGBoost</h3>
       <div class="flex text-white font-bold">
-        <div class="flex w-[60%] bg-red-500"><span>60% MU Win</span></div>
-        <div class="flex w-[25%] bg-yellow-500"><span>25% Draw</span></div>
-        <div class="flex w-[15%] bg-green-500"><span>15% City Win</span></div>
+        <div class="flex w-[{{ prediction_xg['win']|default(0)|round|int }}%] bg-red-500 justify-center rounded-l-full"><span>{{ prediction_xg['win']|default(0)|round|int }}% {{ prediction_xg['home_team'] }} Win</span></div>
+          {% if prediction_xg['draw'] %}
+              <div class="flex w-[{{ prediction_xg['draw']|default(0)|round|int }}%] bg-yellow-500 justify-center"><span>{{ prediction_xg['draw']|default(0)|round|int }}% Draw</span></div>
+          {% endif %}
+        <div class="flex w-[{{ prediction_xg['lose']|default(0)|round|int }}%] bg-green-500 justify-center rounded-r-full"><span>{{ prediction_xg['lose']|default(0)|round|int }}% {{ prediction_xg['away_team'] }} Win</span></div>
       </div>
 
       <div class="dummy-data">
-        • Accuracy: {{accuracyXG_PL}}%<br />
-        • Predicted Score: 2 - 1<br />
+        • Accuracy: {{accuracyXG}}%<br />
+        • Predicted Score: {{ prediction_xg['home_score'] }} - {{ prediction_xg['away_score'] }}<br />
       </div>
     </div>
 
     <div class="model-box">
       <h3>Random Forest</h3>
       <div class="flex text-white font-bold">
-        <div class="flex w-[60%] bg-red-500"><span>60% MU Win</span></div>
-        <div class="flex w-[25%] bg-yellow-500"><span>25% Draw</span></div>
-        <div class="flex w-[15%] bg-green-500"><span>15% City Win</span></div>
+        <div class="flex w-[{{ prediction_rf['win']|default(0)|round|int }}%] bg-red-500 justify-center rounded-l-full"><span>{{ prediction_rf['win']|default(0)|round|int }}% {{ prediction_rf['home_team'] }} Win</span></div>
+        {% if prediction_rf['draw'] %}
+            <div class="flex w-[{{ prediction_rf['draw']|default(0)|round|int }}%] bg-yellow-500 justify-center"><span>{{ prediction_rf['draw']|default(0)|round|int }}% Draw</span></div>
+        {% endif %}
+        <div class="flex w-[{{ prediction_rf['lose']|default(0)|round|int }}%] bg-green-500 justify-center rounded-r-full"><span>{{ prediction_rf['lose']|default(0)|round|int }}% {{ prediction_rf['away_team'] }} Win</span></div>
       </div>
 
       <div class="dummy-data">
-        • Accuracy: {{accuracyRF_PL}}%<br />
-        • Predicted Score: 1 - 1<br />
+        • Accuracy: {{accuracyRF}}%<br />
+        • Predicted Score: {{ prediction_rf['home_score'] }} - {{ prediction_rf['away_score'] }}<br />
       </div>
     </div>
 
-    <div class="model-box">
-      <h3>Logistic Regression</h3>
-      <div class="flex text-white font-bold">
-        <div class="flex w-[60%] bg-red-500"><span>60% MU Win</span></div>
-        <div class="flex w-[25%] bg-yellow-500"><span>25% Draw</span></div>
-        <div class="flex w-[15%] bg-green-500"><span>15% City Win</span></div>
-      </div>
+      {% if prediction_lr %}
+      	<div class="model-box">
+          <h3>Logistic Regression</h3>
+          <div class="flex text-white font-bold">
+            <div class="flex w-[{{ prediction_lr['win']|default(0)|round|int }}%] bg-red-500 justify-center rounded-l-full"><span>{{ prediction_lr['win']|default(0)|round|int }}% {{ prediction_lr['home_team'] }} Win</span></div>
+              {% if prediction_lr['draw'] %}
+                  <div class="flex w-[{{ prediction_lr['draw']|default(0)|round|int }}%] bg-yellow-500 justify-center"><span>{{ prediction_lr['draw']|default(0)|round|int }}% Draw</span></div>
+              {% endif %}
+            <div class="flex w-[{{ prediction_lr['lose']|default(0)|round|int }}%] bg-green-500 justify-center rounded-r-full"><span>{{ prediction_lr['lose']|default(0)|round|int }}% {{ prediction_lr['away_team'] }} Win</span></div>
+          </div>
 
-      <div class="dummy-data">
-        • Accuracy: {{accuracyLR_PL}}%<br />
-        • Predicted Score: 1 - 0<br />
-      </div>
-    </div>
+          <div class="dummy-data">
+            • Accuracy: {{accuracyLR}}%<br />
+            • Predicted Score: {{ prediction_lr['home_score']|default('Not found') }} - {{ prediction_lr['away_score']|default('Not found') }}<br />
+          </div>
+        </div>
+      {% endif %}
   </div>
 
   <br>

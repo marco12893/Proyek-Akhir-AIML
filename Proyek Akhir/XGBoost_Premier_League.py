@@ -135,7 +135,91 @@ def predict_match_premier_league(date_str, home_team, away_team, model=model, le
     print(f"📈 Home Form (last 5): {home_form} wins | 🧾 Division: {home_div}")
     print(f"📉 Away Form (last 5): {away_form} wins | 🧾 Division: {away_div}")
     print(f"📊 Probabilities — Home: {probs[2]*100:.1f}%, Draw: {probs[1]*100:.1f}%, Away: {probs[0]*100:.1f}%")
-    return {'win': probs[2]*100, 'draw': probs[1]*100, 'away': probs[0]*100, 'prediction': label_map[predicted_class]}
+    return {'win': probs[2]*100, 'draw': probs[1]*100, 'lose': probs[0]*100, 'prediction': label_map[predicted_class], 'home_team': home_team, 'away_team': away_team}
+
+# prediction score
+def predict_match_score_premier_league(date_str, home_team, away_team, model=model, le=le_team, df_all=df):
+    """
+    Predict the score for a Premier League match using XGBoost.
+
+    Args:
+        date_str (str): Match date in string format.
+        home_team (str): Home team name.
+        away_team (str): Away team name.
+        model (XGBClassifier): Trained XGBoost model.
+        le (LabelEncoder): Encoder for team names.
+        df_all (pd.DataFrame): Dataset with historical match data.
+
+    Returns:
+        dict: Predicted home and away scores.
+    """
+    match_date = pd.to_datetime(date_str)
+    df = df_all.copy()
+    df['Date'] = pd.to_datetime(df['Date'])
+
+    # Check if teams exist in historical data
+    teams_set = set(df['Home']).union(set(df['Away']))
+    if home_team not in teams_set or away_team not in teams_set:
+        print("⚠️ Teams not found in the historical dataset.")
+        return None
+
+    # Helper functions to get division and form
+    def get_division(team):
+        matches = df[((df['Home'] == team) | (df['Away'] == team)) & (df['Date'] < match_date)]
+        if matches.empty:
+            print(f"⚠️ No historical division data for {team}.")
+            return np.nan
+        latest = matches.sort_values(by='Date', ascending=False).iloc[0]
+        return latest['HomeDivision'] if latest['Home'] == team else latest['AwayDivision']
+
+    def get_form_wins(team):
+        matches = df[((df['Home'] == team) | (df['Away'] == team)) & (df['Date'] < match_date)].sort_values(by='Date',
+                                                                                                            ascending=False).head(
+            5)
+        wins = 0
+        for _, row in matches.iterrows():
+            if row['Winner'] == 2 and row['Home'] == team:
+                wins += 1
+            elif row['Winner'] == 0 and row['Away'] == team:
+                wins += 1
+        return wins
+
+    # Extract features
+    home_div = get_division(home_team)
+    away_div = get_division(away_team)
+    home_form = get_form_wins(home_team)
+    away_form = get_form_wins(away_team)
+    division_gap = away_div - home_div
+    abs_gap = abs(division_gap)
+
+    try:
+        input_data = pd.DataFrame([{
+            'HomeTeam_enc': le.transform([home_team])[0],
+            'AwayTeam_enc': le.transform([away_team])[0],
+            'HomeDivision': home_div,
+            'AwayDivision': away_div,
+            'NeutralVenue': 0,
+            'DivisionGap': division_gap,
+            'AbsoluteDivisionGap': abs_gap,
+            'HomeLast5_Wins': home_form,
+            'AwayLast5_Wins': away_form,
+            'HomeFormWeighted': home_form / (abs_gap + 1),
+            'AwayFormWeighted': away_form * (abs_gap + 1)
+        }])
+    except ValueError as e:
+        print(f"⚠️ Error encoding teams: {e}")
+        return None
+
+    # Predict probabilities
+    probs = model.predict_proba(input_data)[0]
+
+    # Approximate scores based on probabilities
+    home_score = round(probs[2] * 3)
+    away_score = round(probs[0] * 3)
+
+    print(f"\n📅 Match: {date_str} — {home_team} vs {away_team}")
+    print(f"🔢 Predicted Score: {home_team} {home_score} - {away_score} {away_team}")
+    return {'home_score': home_score, 'away_score': away_score}
 
 
 if __name__ == '__main__':
@@ -164,5 +248,5 @@ if __name__ == '__main__':
 
     print("\n🔮 Prediksi Pertandingan Baru:")
     predict_match_premier_league("2023-08-27", "Fulham", "Liverpool")
+    predict_match_score_premier_league("2023-08-27", "Fulham", "Liverpool")
 
-# if __name__ == 'app':

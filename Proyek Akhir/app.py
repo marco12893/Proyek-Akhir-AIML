@@ -6,20 +6,20 @@ import base64
 import io
 
 # Import method ataupun variable dari file yg diperlukan
-from XGBoost_FA_Cup_3 import accuracyFormatted as accuracyXG_FA, df, confidence_df as results_XG_FA, metrics_data, division_gap, plot_data as plot_dataXG_FA, cm as cmXG_FA, confusion_plot as confusion_plotXG_FA
+from XGBoost_FA_Cup_3 import accuracyFormatted as accuracyXG_FA, df, confidence_df as results_XG_FA, metrics_data, division_gap, plot_data as plot_dataXG_FA, cm as cmXG_FA, confusion_plot as confusion_plotXG_FA, predict_match_score as predict_match_fc_xg
 from XGBoost_FA_Cup_2 import accuracyFormatted as accuracyXG_FA_second
 from XGBoost_FA_Cup import accuracyFormatted as accuracyXG_FA_first
 
-from Random_Forest_FA_Cup_3 import accuracyFormatted as accuracyRF_FA, confidence_df as results_RF_FA, metrics_data as metrics_data_RF_FA, division_gap as division_gap_RF_FA, plot_data as plot_dataRF_FA, cm as cmRF_FA, confusion_plot as confusion_plotRF_FA
+from Random_Forest_FA_Cup_3 import accuracyFormatted as accuracyRF_FA, confidence_df as results_RF_FA, metrics_data as metrics_data_RF_FA, division_gap as division_gap_RF_FA, plot_data as plot_dataRF_FA, cm as cmRF_FA, confusion_plot as confusion_plotRF_FA, predict_match_score as predict_match_fc_rf
 from Random_Forest_FA_Cup_2 import accuracyFormatted as accuracyRF_FA_second
 from Random_Forest_FA_Cup import accuracyFormatted as accuracyRF_FA_first
 
-from Logistic_Regression_FA_Cup_3 import accuracyFormatted as accuracyLR_FA, confidence_df as results_LR_FA, metrics_data as metrics_data_LR_FA, division_gap as division_gap_LR_FA, plot_data as plot_dataLR_FA, cm as cmLR_FA, confusion_plot as confusion_plotLR_FA
+from Logistic_Regression_FA_Cup_3 import accuracyFormatted as accuracyLR_FA, confidence_df as results_LR_FA, metrics_data as metrics_data_LR_FA, division_gap as division_gap_LR_FA, plot_data as plot_dataLR_FA, cm as cmLR_FA, confusion_plot as confusion_plotLR_FA, predict_match_logistic as predict_match_fc_lr, predict_match_score_logistic as predict_match_score_fc_lr
 from Logistic_Regression_FA_Cup_2 import accuracyFormatted as accuracyLR_FA_second
 from Logistic_Regression_FA_Cup import accuracyFormatted as accuracyLR_FA_first
 
-from XGBoost_Premier_League import accuracyFormatted as accuracyXG_PL, predict_match_premier_league
-from Random_Forest_Premier_League import accuracyFormatted as accuracyRF_PL
+from XGBoost_Premier_League import accuracyFormatted as accuracyXG_PL, predict_match_premier_league as predict_match_premier_league_xg, predict_match_score_premier_league as predict_match_score_premier_league_xg
+from Random_Forest_Premier_League import accuracyFormatted as accuracyRF_PL, predict_match_premier_league_rf, predict_match_score_premier_league_rf
 from Logistic_Regression_Premier_League import accuracyFormatted as accuracyLR_PL
 '''
 //CATATAN PERSONAL//
@@ -68,9 +68,9 @@ SUDAH:
 - plot confusion matrix (stats for nerds) (aku gk ketemu plot confusion matrixnya marco jadi aku buat heatmap sendiri)
 - selection buat prediction yang mana (mau prediction FA CUP atau Premier league)
 - Precentage win + team yang menang (win loss bar)
+- prediction score buat FA dan Premier league (baru XGBoost_FA_Cup_3)
 
 BELUM:
-- prediction score buat FA dan Premier league (baru XGBoost_FA_Cup_3)
 - Sambungin front end ke back end. Form yang di display harus sesuai dengan tim dan formnya pada tanggal itu. Selain itu confidence barnya, accuracynya harus sesuai dengan apa yang di outputkan oleh prediction function.
 - Tambahin statistik gol ke stats for nerds. Masukin seperti RMSE, MSE, direction accuracy, exact, accuracy, within 1 score accuracy.
 - Tambahin Display untuk nentuin division berapa timnya itu. Misal divisi 1,2,3,4,5,atau 6.
@@ -140,12 +140,19 @@ def get_team_form(team_name, num_matches=5):
 # MAIN ROUTE VIEW
 @app.route('/', methods=['GET', 'POST'])
 def home():
+    date = []
     team1 = None
     team2 = None
     form_team1 = []
     form_team2 = []
     team_list=[]
     selected_type = request.args.get('type')
+    accuracyXG = None
+    accuracyRF = None
+    accuracyLR = None
+    prediction_xg = None
+    prediction_rf = None
+    prediction_lr = None
 
     # Get team
     if selected_type == 'fc':
@@ -160,6 +167,7 @@ def home():
         team_list = unique_values.tolist()
 
     if request.method == 'GET':
+        date = request.args.get('date')
         team1 = request.args.get('team1')
         team2 = request.args.get('team2')
 
@@ -168,24 +176,47 @@ def home():
         if team2:
             form_team2 = get_team_form(team2)
         if team1 and team2:
-            prediction = predict_match_premier_league("2023-08-27", team1, team2)
+            if selected_type == 'fc':
+                prediction_xg = predict_match_fc_xg(date, team1, team2)
+                prediction_rf = predict_match_fc_rf(date, team1, team2)
+                prediction_lr1 = predict_match_fc_lr(date, team1, team2)
+                prediction_lr2 = predict_match_score_fc_lr(date, team1, team2)
+                prediction_lr = prediction_lr1 | prediction_lr2
+                accuracyXG = "{:.2f}".format(accuracyXG_FA)
+                accuracyRF = "{:.2f}".format(accuracyRF_FA)
+                accuracyLR = "{:.2f}".format(accuracyLR_FA)
+            elif selected_type == 'pl':
+                prediction_xg1 = predict_match_premier_league_xg(date, team1, team2)
+                prediction_xg2 = predict_match_score_premier_league_xg(date, team1, team2)
+                prediction_xg = prediction_xg1 | prediction_xg2
+                prediction_rf1 = predict_match_premier_league_rf(date, team1, team2)
+                prediction_rf2 = predict_match_score_premier_league_rf(date, team1, team2)
+                prediction_rf = prediction_rf1 | prediction_rf2
+                accuracyXG = "{:.2f}".format(accuracyXG_PL)
+                accuracyRF = "{:.2f}".format(accuracyRF_PL)
+                accuracyLR = "{:.2f}".format(accuracyLR_PL)
             return render_template('starting_page.html',
-                                   accuracyXG_PL=formattedXG_PL,
-                                   accuracyRF_PL=formattedRF_PL,
-                                   accuracyLR_PL=formattedLR_PL,
+                                   accuracyXG=accuracyXG,
+                                   accuracyRF=accuracyRF,
+                                   accuracyLR=accuracyLR,
+                                   date=date,
                                    team_list=team_list,
                                    form_team1=form_team1,
                                    form_team2=form_team2,
                                    selected_team1=team1,
                                    selected_team2=team2,
                                    selected_type=selected_type,
-                                   prediction=prediction,
+                                   prediction_xg=prediction_xg,
+                                   prediction_rf=prediction_rf,
+                                   prediction_lr=prediction_lr,
+                                   is_prediction=True,
                                    )
 
     return render_template('starting_page.html',
                            accuracyXG_PL=formattedXG_PL,
                            accuracyRF_PL=formattedRF_PL,
                            accuracyLR_PL=formattedLR_PL,
+                           date=date,
                            team_list=team_list,
                            form_team1=form_team1,
                            form_team2=form_team2,

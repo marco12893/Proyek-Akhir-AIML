@@ -360,7 +360,7 @@ def predict_match_score(match_date_str, home_team, away_team, home_goal_model=ho
     pred_away_goals = round(away_goal_model.predict(row)[0])
 
     # return
-    return pred_home_goals, pred_away_goals, home_team, away_team
+    return {'home_score': pred_home_goals, 'away_score': pred_away_goals, 'home_team': home_team, 'away_team': away_team}
 
 
 
@@ -555,7 +555,8 @@ plt.close()
 # cm_html = cm_df.to_html(classes="table table-bordered table-hover", border=0)
 
 # predict score
-pred_home_goals, pred_away_goals, home_team, away_team = predict_match_score("2024-05-24", "Manchester City", "Manchester Utd")
+prediction = predict_match_score("2024-05-24", "Manchester City", "Manchester Utd")
+pred_home_goals, pred_away_goals, home_team, away_team = prediction['home_score'], prediction['away_score'], prediction['home_team'], prediction['away_team']
 
 if __name__ == '__main__':
     print(f"\nXGBoost Accuracy on FA Cup test set: {accuracy * 100:.2f}%\n")
