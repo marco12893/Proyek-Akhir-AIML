@@ -4,18 +4,17 @@ import numpy as np
 import matplotlib.pyplot as plt
 import base64
 import io
-from sklearn.preprocessing import MinMaxScaler
 
-#Import method ataupun variable dari file yg diperlukan
-from XGBoost_FA_Cup_3 import accuracyFormatted as accuracyXG_FA, df, confidence_df as results_XG_FA, metrics_data, division_gap, plot_data as plot_dataXG_FA, cm as cmXG_FA
+# Import method ataupun variable dari file yg diperlukan
+from XGBoost_FA_Cup_3 import accuracyFormatted as accuracyXG_FA, df, confidence_df as results_XG_FA, metrics_data, division_gap, plot_data as plot_dataXG_FA, cm as cmXG_FA, confusion_plot as confusion_plotXG_FA
 from XGBoost_FA_Cup_2 import accuracyFormatted as accuracyXG_FA_second
 from XGBoost_FA_Cup import accuracyFormatted as accuracyXG_FA_first
 
-from Random_Forest_FA_Cup_3 import accuracyFormatted as accuracyRF_FA, confidence_df as results_RF_FA, metrics_data as metrics_data_RF_FA, division_gap as division_gap_RF_FA, plot_data as plot_dataRF_FA, cm as cmRF_FA
+from Random_Forest_FA_Cup_3 import accuracyFormatted as accuracyRF_FA, confidence_df as results_RF_FA, metrics_data as metrics_data_RF_FA, division_gap as division_gap_RF_FA, plot_data as plot_dataRF_FA, cm as cmRF_FA, confusion_plot as confusion_plotRF_FA
 from Random_Forest_FA_Cup_2 import accuracyFormatted as accuracyRF_FA_second
 from Random_Forest_FA_Cup import accuracyFormatted as accuracyRF_FA_first
 
-from Logistic_Regression_FA_Cup_3 import accuracyFormatted as accuracyLR_FA, confidence_df as results_LR_FA, metrics_data as metrics_data_LR_FA, division_gap as division_gap_LR_FA, plot_data as plot_dataLR_FA, cm as cmLR_FA
+from Logistic_Regression_FA_Cup_3 import accuracyFormatted as accuracyLR_FA, confidence_df as results_LR_FA, metrics_data as metrics_data_LR_FA, division_gap as division_gap_LR_FA, plot_data as plot_dataLR_FA, cm as cmLR_FA, confusion_plot as confusion_plotLR_FA
 from Logistic_Regression_FA_Cup_2 import accuracyFormatted as accuracyLR_FA_second
 from Logistic_Regression_FA_Cup import accuracyFormatted as accuracyLR_FA_first
 
@@ -51,14 +50,28 @@ Yg harus dikerjakan (Rayner):
 - (SUDAHH) Betulin feature engineeringnya supaya form yang ditampilin itu udah bener 
   ini berpotensi naikin akurasi prediksi kita dengan buanyak kalau sukses
   
-(Chris):
+(Chris): 
 - (DONE) progress bar & small styling
 - Update & Sambungin dashboard dgn backend
 - Pindahin tabel ke stats for nerds, tambahin bar win rate and lose rate (winrate lose rate ini buat apa ya? Aku gk paham)
-- COnfusion matrix pakai pyplot
 - Tambahain logo untuk semua team (Gak terlalu penting ini, lakuin kalau udah ada waktu aja)
 - Tambahin search bar di drop down  
   
+  
+//** NEW TO-DO LIST **//:
+
+\\NOTE = predict_match_score() itu function buat ambil score prediction\\ 
+SUDAH:
+- pindahin confidence (5 recent) to statsfornerds
+- premier league udh ada prediction team + accuracy
+- normalize pada model accuracy di hilangin
+- plot confusion matrix (stats for nerds) (aku gk ketemu plot confusion matrixnya marco jadi aku buat heatmap sendiri)
+
+BELUM:
+- prediction score buat FA dan Premier league (baru XGBoost_FA_Cup_3)
+- selection buat prediction yang mana (mau prediction FA CUP atau Premier league)
+- Precentage win + team yang menang (win loss bar)
+- warna navbar, body, card bisa dibuat lebih formal (jgn putih polos doang)
 '''
 
 
@@ -183,32 +196,30 @@ def home():
 # NERD STATS VIEWS
 @app.route('/statsfornerds')
 def stats_for_nerds():
-    # Variables for accuracy graph
+    #variables for accuracy graph
     iterasi = ['1', '2', '3']
-    grafik_XG = [formattedXG_FA_first, formattedXG_FA_second, formattedXG_FA]
-    grafik_RF = [formattedRF_FA_first, formattedRF_FA_second, formattedRF_FA]
-    grafik_LR = [formattedLR_FA_first, formattedLR_FA_second, formattedLR_FA]
-    # Standardize accuracy values
-    scaler = MinMaxScaler()
-    data = np.array([grafik_XG, grafik_RF, grafik_LR]).T  # Transpose to shape (3, 3)
-    normalized_data = scaler.fit_transform(data).T  # Normalize and transpose back
 
-    # Assign normalized values
-    norm_grafik_XG, norm_grafik_RF, norm_grafik_LR = normalized_data
+    # Convert convert string to float soalnya aku banyak gaya pake formatting
+    grafik_XG = [float(formattedXG_FA_first), float(formattedXG_FA_second), float(formattedXG_FA)]
+    grafik_RF = [float(formattedRF_FA_first), float(formattedRF_FA_second), float(formattedRF_FA)]
+    grafik_LR = [float(formattedLR_FA_first), float(formattedLR_FA_second), float(formattedLR_FA)]
 
-    # Generate graph
+    # offset buat nampilin graph secara parallel (i spent about 45 minutes thinking of how to implement this. plshelp.)
+    offset = 0.02  # offset value (jujur aja aku ngawur tpi gpp)
+    grafik_RF_offset = [x + offset for x in grafik_RF]
+    grafik_LR_offset = [x + 2 * offset for x in grafik_LR]
+
+    # set figure plot and axis
     fig, ax = plt.subplots(figsize=(10, 6))
-    ax.plot(iterasi, norm_grafik_XG, label='XGBoost Accuracy', marker='o', linestyle='-', linewidth=2, color='blue')
-    ax.plot(iterasi, norm_grafik_RF, label='Random Forest Accuracy', marker='s', linestyle='--', linewidth=2,
-            color='green')
-    ax.plot(iterasi, norm_grafik_LR, label='Logistic Regression Accuracy', marker='^', linestyle='-.', linewidth=2,
-            color='red')
-
-    # Set labels, title, and legend
+    ax.plot(iterasi, grafik_XG, label='XGBoost Accuracy', marker='o', linestyle='-', linewidth=2, color='blue')
+    ax.plot(iterasi, grafik_RF_offset, label='Random Forest Accuracy', marker='o', linestyle='-',
+            linewidth=2, color='green')
+    ax.plot(iterasi, grafik_LR_offset, label='Logistic Regression Accuracy', marker='o', linestyle='-',
+            linewidth=2, color='red')
     ax.set_xlabel('Iteration', fontsize=12)
-    ax.set_ylabel('Normalized Accuracy', fontsize=12)
-    ax.set_title('Model Accuracy Over Iterations (Normalized)', fontsize=14)
-    ax.legend(fontsize=10)
+    ax.set_ylabel('Accuracy', fontsize=12)
+    ax.set_title('Model Accuracy Over Iterations', fontsize=14)
+    ax.legend(fontsize=8, loc='lower right')
     ax.grid(True, linestyle='--', alpha=0.7)
 
     # Save plot to a BytesIO object
@@ -224,7 +235,7 @@ def stats_for_nerds():
                            accuracyXG_PL=formattedXG_PL,
                            accuracyRF_PL=formattedRF_PL,
                            accuracyLR_PL=formattedLR_PL,
-                           plot_url_perkembangan=plot_url_perkembangan,
+                           plot_url_perkembangan=plot_url_perkembangan, confusion_plotXG_FA=confusion_plotXG_FA, confusion_plotRF_FA=confusion_plotRF_FA, confusion_plotLR_FA=confusion_plotLR_FA,
                            metrics_data_XG=metrics_data, division_gap_XG=division_gap, plot_dataXG_FA=plot_dataXG_FA, cmXG_FA=str(cmXG_FA),
                            metrics_data_RF=metrics_data_RF_FA, division_gap_RF_FA=division_gap_RF_FA, plot_dataRF_FA=plot_dataRF_FA, cmRF_FA=str(cmRF_FA),
                            metrics_data_LR=metrics_data_LR_FA, division_gap_LR_FA=division_gap_LR_FA, plot_dataLR_FA=plot_dataLR_FA, cmLR_FA=str(cmLR_FA),

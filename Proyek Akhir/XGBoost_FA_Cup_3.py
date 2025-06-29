@@ -1,5 +1,6 @@
 import pandas as pd
 import numpy as np
+import seaborn as sns
 from sklearn.preprocessing import LabelEncoder
 from sklearn.metrics import accuracy_score, confusion_matrix, classification_report, mean_squared_error, mean_absolute_error
 from xgboost import XGBClassifier, XGBRegressor
@@ -33,8 +34,8 @@ df = create_advanced_features(df)
 
 # Add goal columns if not already present
 if 'HomeGoals' not in df.columns or 'AwayGoals' not in df.columns:
-    df['HomeGoals'] = df['FTHG']  # replace if needed
-    df['AwayGoals'] = df['FTAG']  # replace if needed
+    df['HomeGoals'] = df['FTHG']
+    df['AwayGoals'] = df['FTAG']
 
 # Filter training and testing data
 train_df = df[~((df['Type'] == 'FA Cup') & (df['Season'] == 2023))]
@@ -262,6 +263,106 @@ def create_goal_features(df):
 
     return df
 
+# THIS MIGHT DESTROY THE ENTIRE CODEBASE (score prediction)
+train_df = create_goal_features(train_df)
+test_df = create_goal_features(test_df)
+
+goal_features = [
+    'HomeTeam_enc', 'AwayTeam_enc',
+    'HomeDivision', 'AwayDivision',
+    'AbsoluteDivisionGap',
+    'HomeOffensiveStrength', 'AwayOffensiveStrength',
+    'HomeDefensiveWeakness', 'AwayDefensiveWeakness',
+    'HomeGoalMomentum', 'AwayGoalMomentum',
+    'HomeDivisionFactor', 'AwayDivisionFactor',
+    'HomeLast5_CleanSheets', 'AwayLast5_CleanSheets'
+]
+
+X_train_goals = train_df[goal_features]
+X_test_goals = test_df[goal_features]
+y_train_home = train_df['HomeGoals']
+y_train_away = train_df['AwayGoals']
+y_test_home = test_df['HomeGoals']
+y_test_away = test_df['AwayGoals']
+
+# Train goal prediction models
+goal_model_params = {
+    'learning_rate': 0.05,
+    'max_depth': 3,
+    'n_estimators': 300,
+    'subsample': 0.7,
+    'colsample_bytree': 0.7,
+    'gamma': 0.1,
+    'reg_alpha': 0.1,
+    'reg_lambda': 1.0,
+    'objective': 'count:poisson',
+    'n_jobs': -1,
+    'random_state': 42,
+    'eval_metric': 'rmse'
+}
+# home goal model for score prediction
+home_goal_model = XGBRegressor(**goal_model_params)
+home_goal_model.fit(X_train_goals, y_train_home)
+
+# away goal model for score prediction
+away_goal_model = XGBRegressor(**goal_model_params)
+away_goal_model.fit(X_train_goals, y_train_away)
+
+# Score prediction function
+def predict_match_score(match_date_str, home_team, away_team, home_goal_model=home_goal_model, away_goal_model=away_goal_model, le=le_team, df_all=df):
+    match_date = pd.to_datetime(match_date_str)
+    df = df_all.copy()
+    df['Date'] = pd.to_datetime(df['Date'])
+
+    def get_division(team):
+        matches = df[((df['Home'] == team) | (df['Away'] == team)) & (df['Date'] < match_date)]
+        if matches.empty:
+            return np.nan
+        latest = matches.sort_values(by='Date', ascending=False).iloc[0]
+        return latest['HomeDivision'] if latest['Home'] == team else latest['AwayDivision']
+
+    def get_clean_sheets(team):
+        matches = df[((df['Home'] == team) | (df['Away'] == team)) & (df['Date'] < match_date)].sort_values(by='Date', ascending=False).head(5)
+        if matches.empty:
+            return 0
+        clean_sheets = 0
+        for _, row in matches.iterrows():
+            if row['Home'] == team and row['AwayGoals'] == 0:
+                clean_sheets += 1
+            elif row['Away'] == team and row['HomeGoals'] == 0:
+                clean_sheets += 1
+        return clean_sheets
+
+    home_div = get_division(home_team)
+    away_div = get_division(away_team)
+    home_clean_sheets = get_clean_sheets(home_team)
+    away_clean_sheets = get_clean_sheets(away_team)
+
+    row = pd.DataFrame([{
+        'HomeTeam_enc': le.transform([home_team])[0],
+        'AwayTeam_enc': le.transform([away_team])[0],
+        'HomeDivision': home_div,
+        'AwayDivision': away_div,
+        'AbsoluteDivisionGap': abs(away_div - home_div),
+        'HomeOffensiveStrength': 1,  # Replace with actual logic
+        'AwayOffensiveStrength': 1,
+        'HomeDefensiveWeakness': 1,
+        'AwayDefensiveWeakness': 1,
+        'HomeGoalMomentum': 0,
+        'AwayGoalMomentum': 0,
+        'HomeDivisionFactor': df[df['HomeDivision'] == home_div]['HomeGoals'].mean(),
+        'AwayDivisionFactor': df[df['AwayDivision'] == away_div]['AwayGoals'].mean(),
+        'HomeLast5_CleanSheets': home_clean_sheets,
+        'AwayLast5_CleanSheets': away_clean_sheets
+    }])
+
+    pred_home_goals = round(home_goal_model.predict(row)[0])
+    pred_away_goals = round(away_goal_model.predict(row)[0])
+
+    # return
+    return pred_home_goals, pred_away_goals, home_team, away_team
+
+
 
 def poisson_adjust_predictions(predictions):
     """Adjust predictions to better match real-world goal distributions"""
@@ -433,8 +534,18 @@ buf.seek(0)
 plot_data = base64.b64encode(buf.getvalue()).decode('utf-8')
 plt.close()
 
-# Compute confusion matrix
+# Generate confusion matrix
 cm = confusion_matrix(y_test, y_pred, labels=np.unique(y_test))
+
+# Plot confusion matrix + encode confusion image as base64 to import
+buf_cm = io.BytesIO()
+plt.figure(figsize=(8, 6))
+sns.heatmap(cm, annot=True, fmt='d', cmap='Blues', xticklabels=np.unique(y_test), yticklabels=np.unique(y_test))
+plt.title('Confusion Matrix')
+plt.savefig(buf_cm, format='png')
+buf_cm.seek(0)
+confusion_plot = base64.b64encode(buf_cm.getvalue()).decode('utf-8')
+plt.close()
 
 # # Convert to DataFrame for readability
 # labels = np.unique(y_test)  # Use unique values as labels
@@ -442,6 +553,9 @@ cm = confusion_matrix(y_test, y_pred, labels=np.unique(y_test))
 #
 # # Convert DataFrame to HTML table
 # cm_html = cm_df.to_html(classes="table table-bordered table-hover", border=0)
+
+# predict score
+pred_home_goals, pred_away_goals, home_team, away_team = predict_match_score("2024-05-24", "Manchester City", "Manchester Utd")
 
 if __name__ == '__main__':
     print(f"\nXGBoost Accuracy on FA Cup test set: {accuracy * 100:.2f}%\n")
@@ -463,6 +577,7 @@ if __name__ == '__main__':
     print("\nTop 5 Predictions with Confidence Levels:")
     print(results_df[['Date', 'Home', 'Away', 'Predicted Outcome', 'Confidence (%)']].head(), "\n")
     predict_match("2024-05-24", "Manchester City", "Manchester Utd")
+    print(f"Predicted Score: {home_team} {pred_home_goals:.1f} - {pred_away_goals:.1f} {away_team}")
 
     # Run goal prediction
     results_df = run_goal_prediction(train_df, test_df, results_df)

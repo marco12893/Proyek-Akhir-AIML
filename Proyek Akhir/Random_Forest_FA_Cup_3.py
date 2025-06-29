@@ -1,5 +1,6 @@
 import pandas as pd
 import numpy as np
+import seaborn as sns
 from sklearn.preprocessing import LabelEncoder
 from sklearn.metrics import accuracy_score, confusion_matrix, classification_report
 from sklearn.ensemble import RandomForestClassifier
@@ -264,6 +265,16 @@ plt.close()
 
 # Compute confusion matrix
 cm = confusion_matrix(y_test, y_pred, labels=np.unique(y_test))
+
+# Plot confusion matrix + encode confusion image as base64 to import
+buf_cm = io.BytesIO()
+plt.figure(figsize=(8, 6))
+sns.heatmap(cm, annot=True, fmt='d', cmap='Blues', xticklabels=np.unique(y_test), yticklabels=np.unique(y_test))
+plt.title('Confusion Matrix')
+plt.savefig(buf_cm, format='png')
+buf_cm.seek(0)
+confusion_plot = base64.b64encode(buf_cm.getvalue()).decode('utf-8')
+plt.close()
 
 if __name__ == '__main__':
     print(f"\nRandom Forest Accuracy on FA Cup test set: {accuracy * 100:.2f}%\n")
