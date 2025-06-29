@@ -66,11 +66,14 @@ SUDAH:
 - premier league udh ada prediction team + accuracy
 - normalize pada model accuracy di hilangin
 - plot confusion matrix (stats for nerds) (aku gk ketemu plot confusion matrixnya marco jadi aku buat heatmap sendiri)
+- selection buat prediction yang mana (mau prediction FA CUP atau Premier league)
+- Precentage win + team yang menang (win loss bar)
 
 BELUM:
 - prediction score buat FA dan Premier league (baru XGBoost_FA_Cup_3)
-- selection buat prediction yang mana (mau prediction FA CUP atau Premier league)
-- Precentage win + team yang menang (win loss bar)
+- Sambungin front end ke back end. Form yang di display harus sesuai dengan tim dan formnya pada tanggal itu. Selain itu confidence barnya, accuracynya harus sesuai dengan apa yang di outputkan oleh prediction function.
+- Tambahin statistik gol ke stats for nerds. Masukin seperti RMSE, MSE, direction accuracy, exact, accuracy, within 1 score accuracy.
+- Tambahin Display untuk nentuin division berapa timnya itu. Misal divisi 1,2,3,4,5,atau 6.
 - warna navbar, body, card bisa dibuat lebih formal (jgn putih polos doang)
 '''
 
