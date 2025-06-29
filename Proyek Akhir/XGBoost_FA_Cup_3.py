@@ -31,15 +31,56 @@ def create_advanced_features(df):
     return df
 
 df = create_advanced_features(df)
+def split_draws_into_weighted_wins(df):
+    """
+    buat draw jadi weight pake rumus ini:
+    - One for Away Win with weight = AwayFormWeighted / (total)
+    - One for Home Win with weight = HomeFormWeighted / (total)
+    """
+    win_df = df[df['Winner'].isin([0, 2])].copy()
+    win_df['sample_weight'] = 1.0
+
+    draw_df = df[df['Winner'] == 1].copy()
+    synthetic_rows = []
+
+    for _, row in draw_df.iterrows():
+        home_score = row['HomeFormWeighted']
+        away_score = row['AwayFormWeighted']
+        total = home_score + away_score
+
+        if total == 0:
+            continue  # skip if no no data, fun fact ini buat ak pusing banget kok sering problem ternyata ada beberapa data yang just gaonok data lol
+
+        home_weight = home_score / total
+        away_weight = away_score / total
+
+
+        home_row = row.copy()
+        home_row['Winner'] = 2
+        home_row['sample_weight'] = home_weight
+        synthetic_rows.append(home_row)
+
+
+        away_row = row.copy()
+        away_row['Winner'] = 0
+        away_row['sample_weight'] = away_weight
+        synthetic_rows.append(away_row)
+
+    synthetic_df = pd.DataFrame(synthetic_rows)
+    combined_df = pd.concat([win_df, synthetic_df], ignore_index=True)
+    return combined_df
 
 # Add goal columns if not already present
 if 'HomeGoals' not in df.columns or 'AwayGoals' not in df.columns:
-    df['HomeGoals'] = df['FTHG']
-    df['AwayGoals'] = df['FTAG']
+    df['HomeGoals'] = df['FTHG']  # replace if needed
+    df['AwayGoals'] = df['FTAG']  # replace if needed
 
 # Filter training and testing data
 train_df = df[~((df['Type'] == 'FA Cup') & (df['Season'] == 2023))]
-test_df = df[(df['Type'] == 'FA Cup') & (df['Season'] == 2023) & (df['Winner'] != 1)]
+# Filter test data and convert Winner = 2 (Home) to 1 (binary label)
+test_df = df[(df['Type'] == 'FA Cup') & (df['Season'] == 2023) & (df['Winner'] != 1)].copy()
+test_df['Winner'] = test_df['Winner'].replace({2: 1})
+
 
 # Feature selection
 base_features = [
@@ -65,14 +106,21 @@ form_features = [
 
 features = base_features + form_features
 
-# X and y for classification
+train_df = split_draws_into_weighted_wins(train_df)
+
+# Relabel 0 (Away) -> 0, 2 (Home) -> 1
+train_df['Winner'] = train_df['Winner'].replace({2: 1})
 X_train = train_df[features]
 y_train = train_df['Winner']
+sample_weights = train_df['sample_weight']
 X_test = test_df[features]
 y_test = test_df['Winner']
 
+
+
 # Train classification model
 model = XGBClassifier(
+    objective='binary:logistic',  # Only 2 classes
     eval_metric='logloss',
     learning_rate=0.01,
     max_depth=5,
@@ -80,7 +128,9 @@ model = XGBClassifier(
     colsample_bytree=0.8,
     n_estimators=1000
 )
-model.fit(X_train, y_train)
+
+model.fit(X_train, y_train, sample_weight=sample_weights)
+
 
 # Function to calculate confidence levels
 def get_prediction_confidence(probs):
@@ -94,23 +144,55 @@ def get_prediction_confidence(probs):
     confidence = np.max(probs, axis=1) * 100  # Max probability as percentage
     return confidence
 
+
+
+def redistribute_draw_probabilities(probs): #depracted, cuman tak keep buat dokum + progress reportn nanti
+    """
+  function baru untuk nge bagi draw prob nya
+    """
+    redistributed = []
+    for row in probs:
+        away, draw, home = row
+        total_non_draw = home + away
+        if total_non_draw == 0:
+            # supaya no div by zero tom foolery
+            new_home = new_away = 0.5
+        else:
+            home_weight = home / total_non_draw
+            away_weight = away / total_non_draw
+            redistributed_draw_home = draw * home_weight
+            redistributed_draw_away = draw * away_weight
+            new_home = home + redistributed_draw_home
+            new_away = away + redistributed_draw_away
+
+        redistributed.append([new_away * 100, new_home * 100])  # Return as percentages
+    return np.array(redistributed)
+
+
 # Prediction with division-aware logic
 def predict_with_division_rules(model, X, division_gap_threshold=3):
     probs = model.predict_proba(X)
     y_pred_raw = np.argmax(probs, axis=1)
     y_pred = []
     division_gaps = X['AbsoluteDivisionGap'].values
+
     for i, (pred, gap) in enumerate(zip(y_pred_raw, division_gaps)):
+        # Binary classifier: 0 = Away, 1 = Home
+        away_prob = probs[i][0]
+        home_prob = probs[i][1]
+
         if gap >= division_gap_threshold:
-            if probs[i][0] > 0.7:
+            if away_prob > 0.7:
                 y_pred.append(0)
-            elif probs[i][2] > 0.7:
-                y_pred.append(2)
+            elif home_prob > 0.7:
+                y_pred.append(1)
             else:
-                y_pred.append(0 if X.iloc[i]['DivisionGap'] < 0 else 2)
+                y_pred.append(0 if X.iloc[i]['DivisionGap'] > 0 else 1)
         else:
-            y_pred.append(0 if pred == 1 and probs[i][0] > probs[i][2] else (2 if pred == 1 else pred))
+            y_pred.append(pred)
+
     return np.array(y_pred), probs
+
 
 def predict_match(match_date_str, home_team, away_team, model=model, le=le_team, df_all=df):
     import warnings
@@ -124,14 +206,14 @@ def predict_match(match_date_str, home_team, away_team, model=model, le=le_team,
     # Check if teams exist
     teams_set = set(df['Home']).union(set(df['Away']))
     if home_team not in teams_set or away_team not in teams_set:
-        print(f"⚠️ One or both teams not found in the dataset.")
+        print(f"⚠ One or both teams not found in the dataset.")
         return
 
     # Get the most recent division for both teams before match date
     def get_division(team):
         matches = df[((df['Home'] == team) | (df['Away'] == team)) & (df['Date'] < match_date)]
         if matches.empty:
-            print(f"⚠️ No matches found for {team} before {match_date_str}")
+            print(f"⚠ No matches found for {team} before {match_date_str}")
             return np.nan
         latest = matches.sort_values(by='Date', ascending=False).iloc[0]
         if latest['Home'] == team:
@@ -146,7 +228,7 @@ def predict_match(match_date_str, home_team, away_team, model=model, le=le_team,
     def get_form(team):
         matches = df[((df['Home'] == team) | (df['Away'] == team)) & (df['Date'] < match_date)].sort_values(by='Date',ascending=False).head(5)
         if matches.empty:
-            print(f"⚠️ No recent matches for {team}")
+            print(f"⚠ No recent matches for {team}")
             return 0
         wins = 0
         for _, row in matches.iterrows():
@@ -175,7 +257,7 @@ def predict_match(match_date_str, home_team, away_team, model=model, le=le_team,
             'AwayFormWeighted': away_form * (abs(away_div - home_div) + 1)
         }])
     except:
-        print("⚠️ Failed to encode team names — likely due to unseen label.")
+        print("⚠ Failed to encode team names — likely due to unseen label.")
         return
 
     # Predict
@@ -183,27 +265,33 @@ def predict_match(match_date_str, home_team, away_team, model=model, le=le_team,
     confidence = np.max(probs) * 100
     predicted = np.argmax(probs)
 
-    outcome = {0: 'Away Win', 2: 'Home Win'}
+    outcome = {0: 'Away Win', 1: 'Home Win'}
     print(f"📅 {match_date_str}: {home_team} vs {away_team}")
     print(f"🏆 Predicted: {outcome.get(predicted)} ({confidence:.2f}% confidence)")
     print(f"📈 Home form: {home_form} wins in last 5")
     print(f"📉 Away form: {away_form} wins in last 5")
     print(f"🔢 Divisions: {home_team} (D{home_div}) vs {away_team} (D{away_div})")
-    print(f"📊 Probabilities: Home Win: {probs[0][2] * 100:.1f}%, Draw: {probs[0][1] * 100:.1f}%, Away Win: {probs[0][0] * 100:.1f}%")
+    home_prob = probs[0][1] * 100
+    away_prob = probs[0][0] * 100
+    print(f"📊 Probabilities: Home Win: {home_prob:.1f}%, Away Win: {away_prob:.1f}%")
+
 
 y_pred, probs = predict_with_division_rules(model, X_test)
 
-# Use the function to calculate confidence
-confidence = get_prediction_confidence(probs)
+
+confidence = np.max(probs, axis=1)
+
 
 # Result DataFrame
 results_df = test_df[['Date', 'Home', 'Away', 'Winner', 'DivisionGap', 'AbsoluteDivisionGap']].copy()
 results_df['Predicted'] = y_pred
 results_df['Correct'] = results_df['Winner'] == results_df['Predicted']
-results_df['Actual Outcome'] = results_df['Winner'].map({0: 'Away Win', 2: 'Home Win'})
-results_df['Predicted Outcome'] = results_df['Predicted'].map({0: 'Away Win', 2: 'Home Win'})
-results_df[['Away Win Prob', 'Draw Prob', 'Home Win Prob']] = (probs * 100).round(1)
+results_df['Actual Outcome'] = results_df['Winner'].map({0: 'Away Win', 1: 'Home Win'})
+results_df['Predicted Outcome'] = results_df['Predicted'].map({0: 'Away Win', 1: 'Home Win'})
+results_df['Away Win Prob'] = probs[:, 0] * 100
+results_df['Home Win Prob'] = probs[:, 1] * 100
 results_df['Confidence (%)'] = confidence.round(2)
+
 
 # Evaluate classification
 accuracy = accuracy_score(y_test, y_pred)
@@ -211,7 +299,9 @@ accuracyFormatted = accuracy * 100
 confidence_df = results_df[['Date', 'Home', 'Away', 'Predicted Outcome', 'Confidence (%)', 'Actual Outcome']].head()
 
 # Generate classification report as a dictionary
-report = classification_report(y_test, y_pred, labels=[0, 2], target_names=['Away Win', 'Home Win'], zero_division=0, output_dict=True)
+report = classification_report(y_test, y_pred, labels=[0, 1], target_names=['Away Win', 'Home Win'], zero_division=0, output_dict=True)
+
+
 # Extract metrics for each class
 away_win_metrics = report['Away Win']  # Dict for 'Away Win'
 home_win_metrics = report['Home Win']  # Dict for 'Home Win'
@@ -220,6 +310,8 @@ home_win_metrics = report['Home Win']  # Dict for 'Home Win'
 away_precision = away_win_metrics['precision']
 away_recall = away_win_metrics['recall']
 away_f1 = away_win_metrics['f1-score']
+print("Unique values in y_test:", np.unique(y_test))
+print("Unique values in y_pred:", np.unique(y_pred))
 
 # Example: accuracy
 accuracy = report['accuracy']
@@ -534,7 +626,7 @@ buf.seek(0)
 plot_data = base64.b64encode(buf.getvalue()).decode('utf-8')
 plt.close()
 
-# Generate confusion matrix
+# Compute confusion matrix
 cm = confusion_matrix(y_test, y_pred, labels=np.unique(y_test))
 
 # Plot confusion matrix + encode confusion image as base64 to import
@@ -561,7 +653,7 @@ pred_home_goals, pred_away_goals, home_team, away_team = prediction['home_score'
 if __name__ == '__main__':
     print(f"\nXGBoost Accuracy on FA Cup test set: {accuracy * 100:.2f}%\n")
     print("Overall Classification Report:")
-    print(classification_report(y_test, y_pred, labels=[0, 2], target_names=['Away Win', 'Home Win'], zero_division=0))
+    print(classification_report(y_test, y_pred, labels=[0, 1], target_names=['Away Win', 'Home Win'], zero_division=0))
 
     print("\nPerformance by Division Gap:")
     for gap_range in [(0, 1), (2, 3), (4, 6)]:
