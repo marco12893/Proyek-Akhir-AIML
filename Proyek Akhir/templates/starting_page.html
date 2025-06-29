@@ -274,6 +274,8 @@
       <div class="dummy-data">
         • Accuracy: {{accuracyXG}}%<br />
         • Predicted Score: {{ prediction_xg['home_score'] }} - {{ prediction_xg['away_score'] }}<br />
+        • {{ prediction_xg['home_team'] }} division: {{ prediction_xg['home_division'] }}<br />
+        • {{ prediction_xg['away_team'] }} division: {{ prediction_xg['away_division'] }}<br />
       </div>
     </div>
 
@@ -290,6 +292,8 @@
       <div class="dummy-data">
         • Accuracy: {{accuracyRF}}%<br />
         • Predicted Score: {{ prediction_rf['home_score'] }} - {{ prediction_rf['away_score'] }}<br />
+        • {{ prediction_rf['home_team'] }} division: {{ prediction_rf['home_division'] }}<br />
+        • {{ prediction_rf['away_team'] }} division: {{ prediction_rf['away_division'] }}<br />
       </div>
     </div>
 
@@ -307,6 +311,8 @@
           <div class="dummy-data">
             • Accuracy: {{accuracyLR}}%<br />
             • Predicted Score: {{ prediction_lr['home_score']|default('Not found') }} - {{ prediction_lr['away_score']|default('Not found') }}<br />
+            • {{ prediction_lr['home_team'] }} division: {{ prediction_lr['home_division'] }}<br />
+            • {{ prediction_lr['away_team'] }} division: {{ prediction_lr['away_division'] }}<br />
           </div>
         </div>
       {% endif %}

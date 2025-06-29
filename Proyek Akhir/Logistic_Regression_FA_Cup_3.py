@@ -158,7 +158,7 @@ def predict_match_score_logistic(match_date_str, home_team, away_team,
     # Print and return the prediction
     print(f"\n📅 {match_date_str}: {home_team} vs {away_team}")
     print(f"🔢 Predicted Score: {home_team} {home_score} - {away_score} {away_team}")
-    return {'home_score': home_score, 'away_score': away_score, 'home_team': home_team, 'away_team': away_team}
+    return {'home_score': home_score, 'away_score': away_score, 'home_team': home_team, 'away_team': away_team, 'home_division': get_division(home_team), 'away_division': get_division(away_team)}
 
 def calculate_confidence(y_pred, y_proba, class_labels):
     """

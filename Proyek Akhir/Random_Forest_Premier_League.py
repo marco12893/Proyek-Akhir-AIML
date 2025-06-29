@@ -130,7 +130,7 @@ def predict_match_premier_league_rf(date_str, home_team, away_team, model=model,
         print(f"📉 Away Form: {away_wins} wins | Division: {away_div}")
         print(f"📊 Probabilities — Home Win: {probs[2]*100:.1f}%, Draw: {probs[1]*100:.1f}%, Away Win: {probs[0]*100:.1f}%")
         return {'win': probs[2] * 100, 'draw': probs[1] * 100, 'lose': probs[0] * 100,
-                'prediction': label_map[pred], 'home_team': home_team, 'away_team': away_team}
+                'prediction': label_map[pred], 'home_team': home_team, 'away_team': away_team, 'home_division': home_div, 'away_division': away_div}
     except:
         print(f"🏆 Prediction: {label_map[pred]}")
         print("⚠️ Probabilities not available (model might not support them).")

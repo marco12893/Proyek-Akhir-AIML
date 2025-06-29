@@ -459,7 +459,7 @@ def predict_match_score(match_date_str, home_team, away_team, home_goal_model=ho
     pred_away_goals = round(away_goal_model.predict(row)[0])
 
     # return
-    return {'home_score': pred_home_goals, 'away_score': pred_away_goals, 'home_team': home_team, 'away_team': away_team}
+    return {'home_score': pred_home_goals, 'away_score': pred_away_goals, 'home_team': home_team, 'away_team': away_team, 'home_division': home_div, 'away_division': away_div}
 
 
 

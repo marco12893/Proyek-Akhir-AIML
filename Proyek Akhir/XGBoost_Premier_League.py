@@ -219,7 +219,7 @@ def predict_match_score_premier_league(date_str, home_team, away_team, model=mod
 
     print(f"\n📅 Match: {date_str} — {home_team} vs {away_team}")
     print(f"🔢 Predicted Score: {home_team} {home_score} - {away_score} {away_team}")
-    return {'home_score': home_score, 'away_score': away_score}
+    return {'home_score': home_score, 'away_score': away_score, 'home_division': home_div, 'away_division': away_div}
 
 
 if __name__ == '__main__':
