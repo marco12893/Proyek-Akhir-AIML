@@ -5,21 +5,17 @@ from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import accuracy_score, confusion_matrix, classification_report
 import matplotlib.pyplot as plt
 
-# Load data
 df = pd.read_csv("clean_data/English_Football_2018-2023_With_Form.csv")
 df['Date'] = pd.to_datetime(df['Date'])
 
-# Encode teams
 le_team = LabelEncoder()
 le_team.fit(pd.concat([df['Home'], df['Away']]))
 df['HomeTeam_enc'] = le_team.transform(df['Home'])
 df['AwayTeam_enc'] = le_team.transform(df['Away'])
 
-# Filter training and testing data
 train_df = df[~((df['Type'] == 'FA Cup') & (df['Season'] == 2023))]
 test_df = df[(df['Type'] == 'FA Cup') & (df['Season'] == 2023) & (df['Winner'] != 1)]
 
-# Use only 2 features
 features = ['HomeTeam_enc', 'AwayTeam_enc']
 
 X_train = train_df[features]
@@ -28,14 +24,11 @@ y_train = train_df['Winner']
 X_test = test_df[features]
 y_test = test_df['Winner']
 
-# Train Random Forest
 model = RandomForestClassifier(n_estimators=100, random_state=42)
 model.fit(X_train, y_train)
 
-# Predict class probabilities
 probs = model.predict_proba(X_test)
 
-# Convert predictions: draw (1) becomes 0 or 2 based on higher probability
 y_pred_raw = np.argmax(probs, axis=1)
 y_pred = []
 for i, pred in enumerate(y_pred_raw):
@@ -45,10 +38,8 @@ for i, pred in enumerate(y_pred_raw):
         y_pred.append(pred)
 y_pred = np.array(y_pred)
 
-# Create outcome mapping
 outcome_map = {0: 'Away Win', 1: 'Draw', 2: 'Home Win'}
 
-# Create results dataframe
 results_df = test_df[['Date', 'Home', 'Away', 'Winner']].copy()
 results_df['Predicted'] = y_pred
 results_df['Correct'] = results_df['Winner'] == results_df['Predicted']
@@ -58,7 +49,6 @@ results_df['Home Win Prob'] = (probs[:, 0] * 100).round(1)
 results_df['Draw Prob'] = (probs[:, 1] * 100).round(1)
 results_df['Away Win Prob'] = (probs[:, 2] * 100).round(1)
 
-# Evaluation
 accuracy = accuracy_score(y_test, y_pred)
 accuracyFormatted = accuracy*100
 

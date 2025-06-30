@@ -7,17 +7,15 @@ from sklearn.ensemble import RandomForestClassifier, RandomForestRegressor
 import matplotlib.pyplot as plt
 import base64
 import io
-# Load data
+
 df = pd.read_csv("clean_data/English_Football_2018-2023_With_Form.csv")
 df['Date'] = pd.to_datetime(df['Date'])
 
-# Encode teams
 le_team = LabelEncoder()
 le_team.fit(pd.concat([df['Home'], df['Away']]))
 df['HomeTeam_enc'] = le_team.transform(df['Home'])
 df['AwayTeam_enc'] = le_team.transform(df['Away'])
 
-# Enhanced feature engineering
 def create_advanced_features(df):
     df = df.copy()
     df['DivisionGap'] = df['AwayDivision'] - df['HomeDivision']
@@ -65,7 +63,7 @@ def split_draws_into_weighted_wins(df):
 
 df = create_advanced_features(df)
 
-# Filter training and testing data
+# Filter data
 train_df = df[~((df['Type'] == 'FA Cup') & (df['Season'] == 2023))]
 test_df = df[(df['Type'] == 'FA Cup') & (df['Season'] == 2023) & (df['Winner'] != 1)]
 
@@ -127,7 +125,6 @@ away_goals_model = RandomForestRegressor(
 )
 
 def evaluate_goal_predictions(actual_home, actual_away, pred_home, pred_away):
-    """Comprehensive evaluation of goal predictions"""
     rmse_home = np.sqrt(mean_squared_error(actual_home, pred_home))
     mae_home = mean_absolute_error(actual_home, pred_home)
 
@@ -280,7 +277,6 @@ def predict_match_score(match_date_str, home_team, away_team,
     print(f"🔢 Predicted Score: {home_team} {home_score:.1f} - {away_score:.1f} {away_team}")
     return {'home_score':home_score, 'away_score':away_score, 'home_team':home_team, 'away_team':away_team}
 
-# Function to calculate confidence
 def calculate_confidence(probs):
     """
     Calculate the confidence of predictions based on the highest probability.

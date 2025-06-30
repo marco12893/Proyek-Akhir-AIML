@@ -2,32 +2,28 @@ import pandas as pd
 import numpy as np
 from tqdm import tqdm
 
-# ======================
-# DATA CLEANING PHASE
-# ======================
-print("Starting data cleaning pipeline...")
-
-# Load datasets
 df = pd.read_csv('data/English_Football_2018-2025_With_Form.csv')
 team_divisions = pd.read_csv('data/League Division 2.csv')
 
+# Remove headers row
 df = df[~df.apply(lambda row: row.astype(str).str.contains('Attendance', case=False, na=False)).any(axis=1)]
-
 df_cleaned = df[df['Wk'] != 'Wk']
 
+# remove null rows
 df_cleaned = df_cleaned.dropna(thresh=3)
 
-
+# parse string to number
 df_cleaned['xG'] = pd.to_numeric(df_cleaned['xG'], errors='coerce')
 df_cleaned['xG.1'] = pd.to_numeric(df_cleaned['xG.1'], errors='coerce')
 
+# split score 2-1 menjadi 2 kolom terpisah
 df_cleaned[['HomeGoals', 'AwayGoals']] = df_cleaned['Score'].str.extract(r'(\d+)–(\d+)').astype(float)
 
-# 7. Convert dates and sort
+# parse date
 df_cleaned['Date'] = pd.to_datetime(df_cleaned['Date'])
 df_cleaned = df_cleaned.sort_values('Date').reset_index(drop=True)
 
-# 8. Update divisions for FA Cup matches
+# set division to home and away team
 print("Updating team divisions...")
 home_div_lookup = team_divisions.set_index(['Squad', 'Season'])['Division'].to_dict()
 df_cleaned['HomeDivision'] = df_cleaned.apply(
@@ -37,21 +33,11 @@ df_cleaned['AwayDivision'] = df_cleaned.apply(
     lambda row: home_div_lookup.get((row['Away'], row['Season']), 6), axis=1
 )
 
-# ======================
-# FEATURE ENGINEERING PHASE
-# ======================
-print("Calculating team form features...")
-
-
+# FEATURE ENGINEERING START
 def calculate_team_form(df, team_name, current_date, current_index):
-    """Calculate form metrics using only prior matches"""
-    # Get all previous matches for this team
+    # Get all matches before current_date
     team_matches = df[((df['Home'] == team_name) | (df['Away'] == team_name)) & (df['Date'] < current_date)].copy()
-
-    # Sort by date descending to get most recent matches first
     team_matches = team_matches.sort_values('Date', ascending=False)
-
-    # Take the last 5 matches (most recent)
     last_5 = team_matches.head(5)
     if len(last_5) < 5:
         return None
@@ -81,7 +67,6 @@ def calculate_team_form(df, team_name, current_date, current_index):
     return form
 
 
-# Add form features with progress bar
 form_features = [
     'HomeLast5_GoalsFor', 'AwayLast5_GoalsFor',
     'HomeLast5_GoalsAgainst', 'AwayLast5_GoalsAgainst',
@@ -113,12 +98,9 @@ for i, row in tqdm(df_cleaned.iterrows(), total=len(df_cleaned)):
         df_cleaned.loc[i, 'AwayLast5_Losses'] = away_form['Losses']
         df_cleaned.loc[i, 'AwayLast5_CleanSheets'] = away_form['CleanSheets']
 
-# Fill NA values for teams with insufficient history
 df_cleaned[form_features] = df_cleaned[form_features].fillna(0)
 
-# ======================
 # FINAL OUTPUT
-# ======================
 print("Saving cleaned dataset with form features...")
 df_cleaned.to_csv('clean_data/English_Football_2018-2025_With_Form 2.csv', index=False)
 print("Pipeline completed successfully!")

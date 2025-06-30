@@ -110,18 +110,13 @@ formattedLR_PL = "{:.2f}".format(accuracyLR_PL)
 app = Flask(__name__)
 
 def get_team_form(team_name, num_matches=5, before_date=None):
-    # Filter matches where the team was home or away
     team_matches = df[(df['Home'] == team_name) | (df['Away'] == team_name)]
 
-    # filter by date if before_date is provided
     if before_date is not None:
-        # Ensure 'Date' column is datetime
         team_matches = team_matches[pd.to_datetime(team_matches['Date']) < pd.to_datetime(before_date)]
 
-    # Sort by date DESCENDING
     team_matches = team_matches.sort_values(by='Date', ascending=False)
 
-    # Get only recent N matches
     recent_matches = team_matches.head(num_matches)
 
     form = []
@@ -264,7 +259,7 @@ def stats_for_nerds():
     ax.plot(iterasi, grafik_LR_offset, label='Logistic Regression Accuracy', marker='o', linestyle='-',
             linewidth=2, color='red')
     ax.set_xlabel('Iteration', fontsize=12)
-    ax.set_ylabel('Accuracy', fontsize=12)
+    ax.set_ylabel('Accuracy (%)', fontsize=12)
     ax.set_title('Model Accuracy Over Iterations', fontsize=14)
     ax.legend(fontsize=8, loc='lower right')
     ax.grid(True, linestyle='--', alpha=0.7)

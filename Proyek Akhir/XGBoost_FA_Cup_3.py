@@ -9,17 +9,14 @@ from xgboost import plot_importance
 import base64
 import io
 
-# Load data
 df = pd.read_csv("clean_data/English_Football_2018-2023_With_Form.csv")
 df['Date'] = pd.to_datetime(df['Date'])
 
-# Encode teams
 le_team = LabelEncoder()
 le_team.fit(pd.concat([df['Home'], df['Away']]))
 df['HomeTeam_enc'] = le_team.transform(df['Home'])
 df['AwayTeam_enc'] = le_team.transform(df['Away'])
 
-# Enhanced feature engineering
 def create_advanced_features(df):
     df = df.copy()
     df['DivisionGap'] = df['AwayDivision'] - df['HomeDivision']
@@ -75,7 +72,7 @@ if 'HomeGoals' not in df.columns or 'AwayGoals' not in df.columns:
     df['HomeGoals'] = df['FTHG']  # replace if needed
     df['AwayGoals'] = df['FTAG']  # replace if needed
 
-# Filter training and testing data
+# Filter data
 train_df = df[~((df['Type'] == 'FA Cup') & (df['Season'] == 2023))]
 # Filter test data and convert Winner = 2 (Home) to 1 (binary label)
 test_df = df[(df['Type'] == 'FA Cup') & (df['Season'] == 2023) & (df['Winner'] != 1)].copy()
@@ -132,7 +129,6 @@ model = XGBClassifier(
 model.fit(X_train, y_train, sample_weight=sample_weights)
 
 
-# Function to calculate confidence levels
 def get_prediction_confidence(probs):
     """
     Calculate the confidence for predictions.
@@ -334,10 +330,7 @@ metrics_data = [
 report = classification_report(y_test, y_pred, labels=[0, 2], target_names=['Away Win', 'Home Win'], zero_division=0,
                                output_dict=True)
 
-# -------------------------------
 # 🎯 Goal Prediction Functions
-# -------------------------------
-
 def create_goal_features(df):
     """Create features specifically optimized for goal prediction"""
     df = df.copy()

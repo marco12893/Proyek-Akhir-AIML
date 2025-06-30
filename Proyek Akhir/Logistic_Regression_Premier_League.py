@@ -4,30 +4,27 @@ from sklearn.preprocessing import LabelEncoder
 from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import accuracy_score, confusion_matrix, classification_report
 
-# Load data
 df = pd.read_csv("clean_data/English_Football_2018-2023_With_Form.csv")
 df['Date'] = pd.to_datetime(df['Date'])
 
-# Encode team names
 le_team = LabelEncoder()
 le_team.fit(pd.concat([df['Home'], df['Away']]))
 df['HomeTeam_enc'] = le_team.transform(df['Home'])
 df['AwayTeam_enc'] = le_team.transform(df['Away'])
 
-# Add division gap and weighted form features
+# division gap & weighted form features
 df['DivisionGap'] = df['AwayDivision'] - df['HomeDivision']
 df['AbsoluteDivisionGap'] = df['DivisionGap'].abs()
 df['HomeFormWeighted'] = df['HomeLast5_Wins'] / (df['AbsoluteDivisionGap'] + 1)
 df['AwayFormWeighted'] = df['AwayLast5_Wins'] * (df['AbsoluteDivisionGap'] + 1)
 
-# Split data: Train on all league games except Premier League 2023, Test on Premier League 2023
+# filter data
 train_df = df[
     (~((df['Type'] == 'League') & (df['Season'] == 2023) & (df['HomeDivision'] == 1) & (df['AwayDivision'] == 1))) &
     (df['Type'] == 'League')
 ]
 test_df = df[(df['Type'] == 'League') & (df['Season'] == 2023) & (df['HomeDivision'] == 1) & (df['AwayDivision'] == 1)]
 
-# Select features and target
 features = [
     'HomeTeam_enc', 'AwayTeam_enc',
     'HomeDivision', 'AwayDivision',
@@ -41,14 +38,11 @@ y_train = train_df['Winner']
 X_test = test_df[features]
 y_test = test_df['Winner']
 
-# Train Logistic Regression model
 model = LogisticRegression(max_iter=1000, multi_class='multinomial', solver='lbfgs')
 model.fit(X_train, y_train)
 
-# Predict
 y_pred = model.predict(X_test)
 
-# Evaluate
 accuracy = accuracy_score(y_test, y_pred)
 accuracyFormatted=accuracy*100
 

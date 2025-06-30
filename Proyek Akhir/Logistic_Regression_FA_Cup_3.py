@@ -32,7 +32,6 @@ df['AwayFormWeighted'] = df['AwayLast5_Wins'] * (df['AbsoluteDivisionGap'] + 1)
 train_df = df[~((df['Type'] == 'FA Cup') & (df['Season'] == 2023))]
 test_df = df[(df['Type'] == 'FA Cup') & (df['Season'] == 2023)]
 
-# Feature sets
 base_features = [
     'HomeTeam_enc', 'AwayTeam_enc',
     'HomeDivision', 'AwayDivision',
@@ -47,13 +46,11 @@ form_features = [
 
 features = base_features + form_features
 
-# Prepare data
 X_train = train_df[features]
 y_train = train_df['Winner']
 X_test = test_df[features]
 y_test = test_df['Winner']
 
-# Train-test split for goals
 X_train_goals = train_df[features]
 X_test_goals = test_df[features]
 
@@ -90,23 +87,19 @@ away_goals_model.fit(X_train_goals, train_df['AwayGoals'])
 
 #
 def evaluate_goal_predictions(actual_home, actual_away, pred_home, pred_away):
-    """Comprehensive evaluation of goal predictions"""
     rmse_home = np.sqrt(mean_squared_error(actual_home, pred_home))
     mae_home = mean_absolute_error(actual_home, pred_home)
 
     rmse_away = np.sqrt(mean_squared_error(actual_away, pred_away))
     mae_away = mean_absolute_error(actual_away, pred_away)
 
-    # Directional accuracy (home scores more/less than away)
     actual_direction = (actual_home > actual_away).astype(int)
     pred_direction = (pred_home > pred_away).astype(int)
     direction_acc = accuracy_score(actual_direction, pred_direction)
 
-    # Exact score accuracy
     exact_score = np.sum((actual_home == pred_home) & (actual_away == pred_away))
     exact_accuracy = exact_score / len(actual_home)
 
-    # Within 1 goal accuracy
     home_within_1 = np.abs(actual_home - pred_home) <= 1
     away_within_1 = np.abs(actual_away - pred_away) <= 1
     within_1_acc = np.sum(home_within_1 & away_within_1) / len(actual_home)
@@ -128,42 +121,34 @@ def poisson_adjust_predictions(predictions):
 
     adjusted = []
     for pred in predictions:
-        if pred > 3:  # For high predictions, add randomness
-            adj = np.random.poisson(pred * 0.9)  # Slightly reduce high predictions
+        if pred > 3:
+            adj = np.random.poisson(pred * 0.9)
         else:
             adj = pred
         adjusted.append(min(adj, 6))
     return np.array(adjusted)
 
 
-# Predict scores (kelanjutan dari line 71)
 LR_pred_home_goals = home_goals_model.predict(X_test)
 LR_pred_away_goals = away_goals_model.predict(X_test)
 
-# Adjust predictions
 LR_adjusted_home_goals = poisson_adjust_predictions(LR_pred_home_goals)
 LR_adjusted_away_goals = poisson_adjust_predictions(LR_pred_away_goals)
 
-# Evaluate goal predictions
 LR_goal_eval = evaluate_goal_predictions(
     y_test_home_goals.values, y_test_away_goals.values,
     LR_adjusted_home_goals, LR_adjusted_away_goals
 )
 
-# retrieve the evaluation as a dictionary for inject
 stats_goal = {'home_RMSE': LR_goal_eval['Home_RMSE'], 'away_RMSE': LR_goal_eval['Away_RMSE'],
                   'home_MAE': LR_goal_eval['Home_MAE'], 'away_MAE': LR_goal_eval['Away_MAE'],
                   'direction_accuracy': LR_goal_eval['Direction_Accuracy'],
                   'exact_accuracy': LR_goal_eval['Exact_Accuracy'],
                   '1goal': LR_goal_eval['Within_1_Goal_Accuracy']}
 
-# funciton to predict match with score
 def predict_match_score_logistic(match_date_str, home_team, away_team,
                                  home_model=home_goals_model, away_model=away_goals_model,
                                  le=le_team, df_all=df):
-    """
-    Predict the scores for a match using logistic regression.
-    """
     match_date = pd.to_datetime(match_date_str)
     df_all = df_all.copy()
     df_all['Date'] = pd.to_datetime(df_all['Date'])
@@ -229,7 +214,6 @@ def predict_match_score_logistic(match_date_str, home_team, away_team,
     home_score = round(probs[0][model.classes_ == 2][0] * 3)  # Approximation: scale probability to 0-3
     away_score = round(probs[0][model.classes_ == 0][0] * 3)  # Approximation: scale probability to 0-3
 
-    # Print and return the prediction
     print(f"\n📅 {match_date_str}: {home_team} vs {away_team}")
     print(f"🔢 Predicted Score: {home_team} {home_score} - {away_score} {away_team}")
     return {'home_score': home_score, 'away_score': away_score, 'home_team': home_team, 'away_team': away_team, 'home_division': get_division(home_team), 'away_division': get_division(away_team)}
@@ -245,10 +229,9 @@ def calculate_confidence(y_pred, y_proba, class_labels):
     Returns:
         numpy.ndarray: Confidence values corresponding to predictions.
     """
-    # Create a mapping of class labels to column indices
+    # mapping class labels to column indices
     label_to_index = {label: idx for idx, label in enumerate(class_labels)}
 
-    # Extract the probability corresponding to each predicted class
     return np.array([y_proba[i, label_to_index[pred]] for i, pred in enumerate(y_pred)])
 
 def predict_match_logistic(match_date_str, home_team, away_team, model=model, le=le_team, df_all=df):
@@ -321,19 +304,15 @@ def predict_match_logistic(match_date_str, home_team, away_team, model=model, le
     print(f"📊 Probabilities → Home Win: {home_win_prob:.1f}%, Away Win: {away_win_prob:.1f}%")
     return {'win': home_win_prob, 'lose': away_win_prob, 'prediction': outcome_map[prediction]}
 
-# Predict
 y_pred = model.predict(X_test)
 y_proba = model.predict_proba(X_test)
 
-# Get confidence values
 class_labels = model.classes_  # Retrieve class labels from the model
 confidence = calculate_confidence(y_pred, y_proba, class_labels)
 
-# Evaluation
 accuracy = accuracy_score(y_test, y_pred)
 accuracyFormatted = accuracy * 100
 
-# Results dataframe
 results_df = test_df[['Date', 'Home', 'Away', 'Winner','DivisionGap', 'AbsoluteDivisionGap']].copy()
 results_df['Predicted'] = y_pred
 results_df['Confidence'] = (confidence * 100).round(1)
@@ -343,22 +322,19 @@ results_df['Correct'] = results_df['Winner'] == results_df['Predicted']
 
 confidence_df=results_df[['Date', 'Home', 'Away', 'Winner', 'Predicted', 'Confidence', 'Home Loss Prob','Home Win Prob','Correct']].head()
 
-# Generate classification report as a dictionary
 report = classification_report(y_test, y_pred, labels=[0, 2], target_names=['Away Win', 'Home Win'], zero_division=0, output_dict=True)
 
-# Extract metrics for each class
-away_win_metrics = report['Away Win']  # Dict for 'Away Win'
-home_win_metrics = report['Home Win']  # Dict for 'Home Win'
+away_win_metrics = report['Away Win']
+home_win_metrics = report['Home Win']
 
-# Example: precision, recall, and F1-score for 'Away Win'
 away_precision = away_win_metrics['precision']
 away_recall = away_win_metrics['recall']
 away_f1 = away_win_metrics['f1-score']
 
-# Example: accuracy
+# example
 accuracy = report['accuracy']
 
-# Prepare data for HTML
+# data for HTML
 metrics_data = [
     {'Class': 'Away Win', 'Precision': away_precision, 'Recall': away_recall, 'F1-Score': away_f1},
     {'Class': 'Home Win', 'Precision': home_win_metrics['precision'], 'Recall': home_win_metrics['recall'], 'F1-Score': home_win_metrics['f1-score']},
@@ -396,10 +372,10 @@ def calculate_importance_scores(model, X_train, features):
 
 
 
-# Calculate importance scores
+# importance scores
 importance_df = calculate_importance_scores(model, X_train, features)
 
-# Plot the feature importance
+# Plot feature importance
 buf = io.BytesIO()
 plt.figure(figsize=(12, 8))
 plt.bar(importance_df['Feature'], importance_df['Importance'])
@@ -443,7 +419,6 @@ def show_division_gap(results_df=results_df):
             })
     return results
 
-# Division gap variable
 division_gap=show_division_gap(results_df)
 
 if __name__ == '__main__':
@@ -464,7 +439,7 @@ if __name__ == '__main__':
     print("\nSample Predictions:")
     print(results_df.head(10))
 
-    # Model coefficients
+    # coefficients
     print("\nModel Coefficients:")
     print(f"Intercept: {model.intercept_[0]:.4f}")
     for feature_name, coef in zip(features, model.coef_[0]):
