@@ -69,7 +69,6 @@ if __name__=='__main__':
                                target_names=target_names,
                                zero_division=0))
 
-    # Feature importance plot
     importances = model.feature_importances_
     plt.figure(figsize=(8, 4))
     plt.barh(features, importances)

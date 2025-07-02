@@ -9,26 +9,21 @@ from sklearn.metrics import accuracy_score, confusion_matrix, classification_rep
 import base64
 import io
 
-# Load data
 df = pd.read_csv("clean_data/English_Football_2018-2023_With_Form.csv")
 df['Date'] = pd.to_datetime(df['Date'])
 
-# Drop draws for binary classification: 0 = home loss, 2 = home win
 df = df[df['Winner'] != 1].copy()
 
-# Encode teams
 le_team = LabelEncoder()
 le_team.fit(pd.concat([df['Home'], df['Away']]))
 df['HomeTeam_enc'] = le_team.transform(df['Home'])
 df['AwayTeam_enc'] = le_team.transform(df['Away'])
 
-# Enhanced feature engineering
 df['DivisionGap'] = df['AwayDivision'] - df['HomeDivision']
 df['AbsoluteDivisionGap'] = abs(df['DivisionGap'])
 df['HomeFormWeighted'] = df['HomeLast5_Wins'] / (df['AbsoluteDivisionGap'] + 1)
 df['AwayFormWeighted'] = df['AwayLast5_Wins'] * (df['AbsoluteDivisionGap'] + 1)
 
-# Train-test split: FA Cup 2023 as test set
 train_df = df[~((df['Type'] == 'FA Cup') & (df['Season'] == 2023))]
 test_df = df[(df['Type'] == 'FA Cup') & (df['Season'] == 2023)]
 
@@ -56,10 +51,9 @@ X_test_goals = test_df[features]
 
 # DANGEROUS
 X_test_scores = test_df[features]
-y_test_home_goals = test_df['HomeGoals']  # Home goals in test set
-y_test_away_goals = test_df['AwayGoals']  # Away goals in test set
+y_test_home_goals = test_df['HomeGoals']
+y_test_away_goals = test_df['AwayGoals']
 
-# Train logistic regression model
 model = LogisticRegression(
     class_weight='balanced',
 
@@ -69,7 +63,6 @@ model = LogisticRegression(
 )
 model.fit(X_train, y_train)
 
-# Home goals model
 home_goals_model = LogisticRegression(
     solver='lbfgs',
     max_iter=1000,
@@ -77,7 +70,6 @@ home_goals_model = LogisticRegression(
 )
 home_goals_model.fit(X_train_goals, train_df['HomeGoals'])
 
-# Away goals model
 away_goals_model = LogisticRegression(
     solver='lbfgs',
     max_iter=1000,
@@ -85,7 +77,7 @@ away_goals_model = LogisticRegression(
 )
 away_goals_model.fit(X_train_goals, train_df['AwayGoals'])
 
-#
+
 def evaluate_goal_predictions(actual_home, actual_away, pred_home, pred_away):
     rmse_home = np.sqrt(mean_squared_error(actual_home, pred_home))
     mae_home = mean_absolute_error(actual_home, pred_home)
@@ -114,7 +106,6 @@ def evaluate_goal_predictions(actual_home, actual_away, pred_home, pred_away):
         'Within_1_Goal_Accuracy': within_1_acc
     }
 
-# poisson to make metrics more realistic
 def poisson_adjust_predictions(predictions):
     predictions = np.where(predictions < 0, 0, predictions)
     predictions = np.round(predictions)
@@ -156,7 +147,7 @@ def predict_match_score_logistic(match_date_str, home_team, away_team,
     def get_division(team):
         matches = df_all[((df_all['Home'] == team) | (df_all['Away'] == team)) & (df_all['Date'] < match_date)]
         if matches.empty:
-            print(f"⚠️ No division data for {team} before {match_date_str}")
+            print(f" No division data for {team} before {match_date_str}")
             return np.nan
         latest = matches.sort_values(by='Date', ascending=False).iloc[0]
         return latest['HomeDivision'] if latest['Home'] == team else latest['AwayDivision']
@@ -178,7 +169,7 @@ def predict_match_score_logistic(match_date_str, home_team, away_team,
         form = get_form(team)
         opponent_division = get_division(opponent)
         if np.isnan(division) or np.isnan(opponent_division):
-            print(f"⚠️ Missing division data for {team} or {opponent}. Skipping prediction.")
+            print(f" Missing division data for {team} or {opponent}. Skipping prediction.")
             return None
         division_gap = opponent_division - division
 
@@ -196,40 +187,27 @@ def predict_match_score_logistic(match_date_str, home_team, away_team,
             'AwayFormWeighted': get_form(opponent) * (abs(division_gap) + 1)
         }
 
-    # Generate features
     try:
         row = pd.DataFrame([{
             **get_team_features(home_team, away_team),
             **get_team_features(away_team, home_team)
         }])
     except ValueError as e:
-        print(f"⚠️ Error generating features: {e}")
+        print(f" Error generating features: {e}")
         return
 
     if row is None or row.empty:
         return
 
-    # Predict outcome
     probs = model.predict_proba(row)
-    home_score = round(probs[0][model.classes_ == 2][0] * 3)  # Approximation: scale probability to 0-3
-    away_score = round(probs[0][model.classes_ == 0][0] * 3)  # Approximation: scale probability to 0-3
+    home_score = round(probs[0][model.classes_ == 2][0] * 3)
+    away_score = round(probs[0][model.classes_ == 0][0] * 3)
 
-    print(f"\n📅 {match_date_str}: {home_team} vs {away_team}")
-    print(f"🔢 Predicted Score: {home_team} {home_score} - {away_score} {away_team}")
+    print(f"\n {match_date_str}: {home_team} vs {away_team}")
+    print(f" Predicted Score: {home_team} {home_score} - {away_score} {away_team}")
     return {'home_score': home_score, 'away_score': away_score, 'home_team': home_team, 'away_team': away_team, 'home_division': get_division(home_team), 'away_division': get_division(away_team)}
 
 def calculate_confidence(y_pred, y_proba, class_labels):
-    """
-    Calculate confidence for each prediction.
-    Args:
-        y_pred (numpy.ndarray): Predicted classes.
-        y_proba (numpy.ndarray): Probabilities for each class.
-        class_labels (list): List of class labels corresponding to columns in y_proba.
-
-    Returns:
-        numpy.ndarray: Confidence values corresponding to predictions.
-    """
-    # mapping class labels to column indices
     label_to_index = {label: idx for idx, label in enumerate(class_labels)}
 
     return np.array([y_proba[i, label_to_index[pred]] for i, pred in enumerate(y_pred)])
@@ -244,13 +222,13 @@ def predict_match_logistic(match_date_str, home_team, away_team, model=model, le
 
     teams_set = set(df['Home']).union(set(df['Away']))
     if home_team not in teams_set or away_team not in teams_set:
-        print("⚠️ One or both teams not found in dataset.")
+        print(" One or both teams not found in dataset.")
         return
 
     def get_division(team):
         matches = df[((df['Home'] == team) | (df['Away'] == team)) & (df['Date'] < match_date)]
         if matches.empty:
-            print(f"⚠️ No division data for {team} before {match_date_str}")
+            print(f" No division data for {team} before {match_date_str}")
             return np.nan
         latest = matches.sort_values(by='Date', ascending=False).iloc[0]
         return latest['HomeDivision'] if latest['Home'] == team else latest['AwayDivision']
@@ -285,10 +263,9 @@ def predict_match_logistic(match_date_str, home_team, away_team, model=model, le
             'AwayFormWeighted': away_form * (abs(away_div - home_div) + 1)
         }])
     except:
-        print("⚠️ Error encoding teams — likely unseen label.")
+        print(" Error encoding teams — likely unseen label.")
         return
 
-    # Predict
     probs = model.predict_proba(row)
     prediction = model.predict(row)[0]
     confidence = np.max(probs) * 100
@@ -297,17 +274,17 @@ def predict_match_logistic(match_date_str, home_team, away_team, model=model, le
     home_win_prob = probs[0][model.classes_ == 2][0] * 100
     away_win_prob = probs[0][model.classes_ == 0][0] * 100
 
-    print(f"\n📅 {match_date_str}: {home_team} vs {away_team}")
-    print(f"🏆 Predicted: {outcome_map[prediction]} ({confidence:.2f}% confidence)")
-    print(f"📈 Home form: {home_form}/5 | 📉 Away form: {away_form}/5")
-    print(f"🔢 Divisions: {home_team} (D{home_div}) vs {away_team} (D{away_div})")
-    print(f"📊 Probabilities → Home Win: {home_win_prob:.1f}%, Away Win: {away_win_prob:.1f}%")
+    print(f"\n {match_date_str}: {home_team} vs {away_team}")
+    print(f" Predicted: {outcome_map[prediction]} ({confidence:.2f}% confidence)")
+    print(f" Home form: {home_form}/5 |  Away form: {away_form}/5")
+    print(f" Divisions: {home_team} (D{home_div}) vs {away_team} (D{away_div})")
+    print(f" Probabilities → Home Win: {home_win_prob:.1f}%, Away Win: {away_win_prob:.1f}%")
     return {'win': home_win_prob, 'lose': away_win_prob, 'prediction': outcome_map[prediction]}
 
 y_pred = model.predict(X_test)
 y_proba = model.predict_proba(X_test)
 
-class_labels = model.classes_  # Retrieve class labels from the model
+class_labels = model.classes_
 confidence = calculate_confidence(y_pred, y_proba, class_labels)
 
 accuracy = accuracy_score(y_test, y_pred)
@@ -331,10 +308,8 @@ away_precision = away_win_metrics['precision']
 away_recall = away_win_metrics['recall']
 away_f1 = away_win_metrics['f1-score']
 
-# example
 accuracy = report['accuracy']
 
-# data for HTML
 metrics_data = [
     {'Class': 'Away Win', 'Precision': away_precision, 'Recall': away_recall, 'F1-Score': away_f1},
     {'Class': 'Home Win', 'Precision': home_win_metrics['precision'], 'Recall': home_win_metrics['recall'], 'F1-Score': home_win_metrics['f1-score']},
@@ -345,24 +320,11 @@ metrics_data = [
 
 
 def calculate_importance_scores(model, X_train, features):
-    """
-    Calculate feature importance scores based on scaled coefficients.
 
-    Args:
-        model: Trained logistic regression model.
-        X_train: Training data used for scaling.
-        features: List of feature names.
-
-    Returns:
-        pd.DataFrame: DataFrame containing feature names and importance scores.
-    """
-    # Get standard deviation of each feature from the training data
     feature_std = X_train.std(axis=0)
 
-    # Calculate importance scores as |coefficient| * feature_std
     importance_scores = np.abs(model.coef_[0]) * feature_std
 
-    # Create a DataFrame for better visualization
     importance_df = pd.DataFrame({
         'Feature': features,
         'Importance': importance_scores
@@ -372,10 +334,8 @@ def calculate_importance_scores(model, X_train, features):
 
 
 
-# importance scores
 importance_df = calculate_importance_scores(model, X_train, features)
 
-# Plot feature importance
 buf = io.BytesIO()
 plt.figure(figsize=(12, 8))
 plt.bar(importance_df['Feature'], importance_df['Importance'])
@@ -385,16 +345,13 @@ plt.xticks(range(len(features)), features, rotation=45)
 plt.title("Logistic Regression Feature Importance (Scores)")
 plt.tight_layout()
 
-# save plot for import
 plt.savefig(buf, format='png')
 buf.seek(0)
 plot_data = base64.b64encode(buf.getvalue()).decode('utf-8')
 plt.close()
 
-# Compute confusion matrix
 cm = confusion_matrix(y_test, y_pred, labels=np.unique(y_test))
 
-# Plot confusion matrix + encode confusion image as base64 to import
 buf_cm = io.BytesIO()
 plt.figure(figsize=(8, 6))
 sns.heatmap(cm, annot=True, fmt='d', cmap='Blues', xticklabels=np.unique(y_test), yticklabels=np.unique(y_test))
@@ -404,9 +361,8 @@ buf_cm.seek(0)
 confusion_plot = base64.b64encode(buf_cm.getvalue()).decode('utf-8')
 plt.close()
 
-# function to get division gap variable
 def show_division_gap(results_df=results_df):
-    results = []  # List to store the results
+    results = []
     for gap_range in [(0, 1), (2, 3), (4, 6)]:
         mask = results_df['AbsoluteDivisionGap'].between(*gap_range)
         if mask.any():
@@ -439,25 +395,21 @@ if __name__ == '__main__':
     print("\nSample Predictions:")
     print(results_df.head(10))
 
-    # coefficients
     print("\nModel Coefficients:")
     print(f"Intercept: {model.intercept_[0]:.4f}")
     for feature_name, coef in zip(features, model.coef_[0]):
         print(f"{feature_name}: {coef:.4f}")
 
-    # stats_goal
     print("\nRandom Forest Goal Prediction Evaluation:")
-    print(f"🏠 Home Goals - RMSE: {LR_goal_eval['Home_RMSE']:.3f}, MAE: {LR_goal_eval['Home_MAE']:.3f}")
-    print(f"🛫 Away Goals - RMSE: {LR_goal_eval['Away_RMSE']:.3f}, MAE: {LR_goal_eval['Away_MAE']:.3f}")
-    print(f"🧭 Direction Accuracy: {LR_goal_eval['Direction_Accuracy']:.2%}")
-    print(f"🎯 Exact Score Accuracy: {LR_goal_eval['Exact_Accuracy']:.2%}")
-    print(f"✅ Within 1 Goal Accuracy: {LR_goal_eval['Within_1_Goal_Accuracy']:.2%}")
+    print(f" Home Goals - RMSE: {LR_goal_eval['Home_RMSE']:.3f}, MAE: {LR_goal_eval['Home_MAE']:.3f}")
+    print(f" Away Goals - RMSE: {LR_goal_eval['Away_RMSE']:.3f}, MAE: {LR_goal_eval['Away_MAE']:.3f}")
+    print(f" Direction Accuracy: {LR_goal_eval['Direction_Accuracy']:.2%}")
+    print(f" Exact Score Accuracy: {LR_goal_eval['Exact_Accuracy']:.2%}")
+    print(f" Within 1 Goal Accuracy: {LR_goal_eval['Within_1_Goal_Accuracy']:.2%}")
     
-    # predictions
     predict_match_logistic("2024-05-24", "Manchester City", "Manchester Utd")
     predict_match_score_logistic("2024-05-24", "Manchester City", "Manchester Utd")
 
-    # Plot the feature importance
     plt.figure(figsize=(12, 8))
     plt.bar(importance_df['Feature'], importance_df['Importance'])
     plt.xlabel("Importance Score")

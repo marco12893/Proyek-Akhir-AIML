@@ -25,7 +25,7 @@ from Logistic_Regression_Premier_League import accuracyFormatted as accuracyLR_P
 - 0 itu kalah, 1 itu draw, 2 itu menang
 - Year yg dipake buat training (PREDIKSI !<= DATA ITU) = 2018 s.d. 2023 
 - Kata kata yang ditaruh di dalam tanda kurung () itu komentar dari Marco
-- 
+- app.py nya memang luama banget runningnya
 
 
 Yg harus dikerjakan (Rayner):
@@ -238,7 +238,6 @@ def home():
 # NERD STATS VIEWS
 @app.route('/statsfornerds')
 def stats_for_nerds():
-    #variables
     iterasi = ['1', '2', '3']
 
     # Convert convert string to float soalnya aku banyak gaya pake formatting
@@ -251,7 +250,6 @@ def stats_for_nerds():
     grafik_RF_offset = [x + offset for x in grafik_RF]
     grafik_LR_offset = [x + 2 * offset for x in grafik_LR]
 
-    # set figure plot and axis
     fig, ax = plt.subplots(figsize=(10, 6))
     ax.plot(iterasi, grafik_XG, label='XGBoost Accuracy', marker='o', linestyle='-', linewidth=2, color='blue')
     ax.plot(iterasi, grafik_RF_offset, label='Random Forest Accuracy', marker='o', linestyle='-',
@@ -264,7 +262,6 @@ def stats_for_nerds():
     ax.legend(fontsize=8, loc='lower right')
     ax.grid(True, linestyle='--', alpha=0.7)
 
-    # Save plot to BytesIO object for inject
     img = io.BytesIO()
     plt.savefig(img, format='png')
     img.seek(0)

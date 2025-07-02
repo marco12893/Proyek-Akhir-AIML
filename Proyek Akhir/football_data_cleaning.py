@@ -5,25 +5,20 @@ from tqdm import tqdm
 df = pd.read_csv('data/English_Football_2018-2025_With_Form.csv')
 team_divisions = pd.read_csv('data/League Division 2.csv')
 
-# Remove headers row
 df = df[~df.apply(lambda row: row.astype(str).str.contains('Attendance', case=False, na=False)).any(axis=1)]
 df_cleaned = df[df['Wk'] != 'Wk']
 
-# remove null rows
 df_cleaned = df_cleaned.dropna(thresh=3)
 
-# parse string to number
 df_cleaned['xG'] = pd.to_numeric(df_cleaned['xG'], errors='coerce')
 df_cleaned['xG.1'] = pd.to_numeric(df_cleaned['xG.1'], errors='coerce')
 
 # split score 2-1 menjadi 2 kolom terpisah
 df_cleaned[['HomeGoals', 'AwayGoals']] = df_cleaned['Score'].str.extract(r'(\d+)–(\d+)').astype(float)
 
-# parse date
 df_cleaned['Date'] = pd.to_datetime(df_cleaned['Date'])
 df_cleaned = df_cleaned.sort_values('Date').reset_index(drop=True)
 
-# set division to home and away team
 print("Updating team divisions...")
 home_div_lookup = team_divisions.set_index(['Squad', 'Season'])['Division'].to_dict()
 df_cleaned['HomeDivision'] = df_cleaned.apply(

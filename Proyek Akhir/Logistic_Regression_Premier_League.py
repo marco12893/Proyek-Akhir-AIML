@@ -12,13 +12,11 @@ le_team.fit(pd.concat([df['Home'], df['Away']]))
 df['HomeTeam_enc'] = le_team.transform(df['Home'])
 df['AwayTeam_enc'] = le_team.transform(df['Away'])
 
-# division gap & weighted form features
 df['DivisionGap'] = df['AwayDivision'] - df['HomeDivision']
 df['AbsoluteDivisionGap'] = df['DivisionGap'].abs()
 df['HomeFormWeighted'] = df['HomeLast5_Wins'] / (df['AbsoluteDivisionGap'] + 1)
 df['AwayFormWeighted'] = df['AwayLast5_Wins'] * (df['AbsoluteDivisionGap'] + 1)
 
-# filter data
 train_df = df[
     (~((df['Type'] == 'League') & (df['Season'] == 2023) & (df['HomeDivision'] == 1) & (df['AwayDivision'] == 1))) &
     (df['Type'] == 'League')
@@ -58,7 +56,6 @@ if __name__ == '__main__':
     print("\nClassification Report:")
     print(classification_report(y_test, y_pred, labels=classes, target_names=target_names, zero_division=0))
 
-    # Display results
     results_df = test_df[['Date', 'Home', 'Away', 'Winner']].copy()
     results_df['Predicted'] = y_pred
     results_df['Correct'] = results_df['Winner'] == results_df['Predicted']

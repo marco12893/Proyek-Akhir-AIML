@@ -67,19 +67,15 @@ def split_draws_into_weighted_wins(df):
     combined_df = pd.concat([win_df, synthetic_df], ignore_index=True)
     return combined_df
 
-# Add goal columns if not already present
 if 'HomeGoals' not in df.columns or 'AwayGoals' not in df.columns:
-    df['HomeGoals'] = df['FTHG']  # replace if needed
-    df['AwayGoals'] = df['FTAG']  # replace if needed
+    df['HomeGoals'] = df['FTHG']
+    df['AwayGoals'] = df['FTAG']
 
-# Filter data
 train_df = df[~((df['Type'] == 'FA Cup') & (df['Season'] == 2023))]
-# Filter test data and convert Winner = 2 (Home) to 1 (binary label)
 test_df = df[(df['Type'] == 'FA Cup') & (df['Season'] == 2023) & (df['Winner'] != 1)].copy()
 test_df['Winner'] = test_df['Winner'].replace({2: 1})
 
 
-# Feature selection
 base_features = [
     'HomeTeam_enc', 'AwayTeam_enc',
     'HomeDivision', 'AwayDivision',
@@ -105,7 +101,6 @@ features = base_features + form_features
 
 train_df = split_draws_into_weighted_wins(train_df)
 
-# Relabel 0 (Away) -> 0, 2 (Home) -> 1
 train_df['Winner'] = train_df['Winner'].replace({2: 1})
 X_train = train_df[features]
 y_train = train_df['Winner']
@@ -115,9 +110,8 @@ y_test = test_df['Winner']
 
 
 
-# Train classification model
 model = XGBClassifier(
-    objective='binary:logistic',  # Only 2 classes
+    objective='binary:logistic',
     eval_metric='logloss',
     learning_rate=0.01,
     max_depth=5,
@@ -130,14 +124,8 @@ model.fit(X_train, y_train, sample_weight=sample_weights)
 
 
 def get_prediction_confidence(probs):
-    """
-    Calculate the confidence for predictions.
-    Parameters:
-    probs (numpy array): Array of probabilities for each class.
-    Returns:
-    numpy array: Array of confidence levels for each prediction.
-    """
-    confidence = np.max(probs, axis=1) * 100  # Max probability as percentage
+
+    confidence = np.max(probs, axis=1) * 100
     return confidence
 
 
@@ -161,11 +149,10 @@ def redistribute_draw_probabilities(probs): #depracted, cuman tak keep buat doku
             new_home = home + redistributed_draw_home
             new_away = away + redistributed_draw_away
 
-        redistributed.append([new_away * 100, new_home * 100])  # Return as percentages
+        redistributed.append([new_away * 100, new_home * 100])
     return np.array(redistributed)
 
 
-# Prediction with division-aware logic
 def predict_with_division_rules(model, X, division_gap_threshold=3):
     probs = model.predict_proba(X)
     y_pred_raw = np.argmax(probs, axis=1)
@@ -173,7 +160,6 @@ def predict_with_division_rules(model, X, division_gap_threshold=3):
     division_gaps = X['AbsoluteDivisionGap'].values
 
     for i, (pred, gap) in enumerate(zip(y_pred_raw, division_gaps)):
-        # Binary classifier: 0 = Away, 1 = Home
         away_prob = probs[i][0]
         home_prob = probs[i][1]
 
@@ -194,22 +180,19 @@ def predict_match(match_date_str, home_team, away_team, model=model, le=le_team,
     import warnings
     warnings.filterwarnings("ignore")
 
-    # Convert string date to datetime
     match_date = pd.to_datetime(match_date_str)
     df = df_all.copy()
     df['Date'] = pd.to_datetime(df['Date'])
 
-    # Check if teams exist
     teams_set = set(df['Home']).union(set(df['Away']))
     if home_team not in teams_set or away_team not in teams_set:
-        print(f"⚠ One or both teams not found in the dataset.")
+        print(f" One or both teams not found in the dataset.")
         return
 
-    # Get the most recent division for both teams before match date
     def get_division(team):
         matches = df[((df['Home'] == team) | (df['Away'] == team)) & (df['Date'] < match_date)]
         if matches.empty:
-            print(f"⚠ No matches found for {team} before {match_date_str}")
+            print(f" No matches found for {team} before {match_date_str}")
             return np.nan
         latest = matches.sort_values(by='Date', ascending=False).iloc[0]
         if latest['Home'] == team:
@@ -220,11 +203,10 @@ def predict_match(match_date_str, home_team, away_team, model=model, le=le_team,
     home_div = get_division(home_team)
     away_div = get_division(away_team)
 
-    # Get last 5 results
     def get_form(team):
         matches = df[((df['Home'] == team) | (df['Away'] == team)) & (df['Date'] < match_date)].sort_values(by='Date',ascending=False).head(5)
         if matches.empty:
-            print(f"⚠ No recent matches for {team}")
+            print(f" No recent matches for {team}")
             return 0
         wins = 0
         for _, row in matches.iterrows():
@@ -237,7 +219,6 @@ def predict_match(match_date_str, home_team, away_team, model=model, le=le_team,
     home_form = get_form(home_team)
     away_form = get_form(away_team)
 
-    # Build feature row
     try:
         row = pd.DataFrame([{
             'HomeTeam_enc': le.transform([home_team])[0],
@@ -253,23 +234,22 @@ def predict_match(match_date_str, home_team, away_team, model=model, le=le_team,
             'AwayFormWeighted': away_form * (abs(away_div - home_div) + 1)
         }])
     except:
-        print("⚠ Failed to encode team names — likely due to unseen label.")
+        print(" Failed to encode team names — likely due to unseen label.")
         return
 
-    # Predict
     probs = model.predict_proba(row)
     confidence = np.max(probs) * 100
     predicted = np.argmax(probs)
 
     outcome = {0: 'Away Win', 1: 'Home Win'}
-    print(f"📅 {match_date_str}: {home_team} vs {away_team}")
-    print(f"🏆 Predicted: {outcome.get(predicted)} ({confidence:.2f}% confidence)")
-    print(f"📈 Home form: {home_form} wins in last 5")
-    print(f"📉 Away form: {away_form} wins in last 5")
-    print(f"🔢 Divisions: {home_team} (D{home_div}) vs {away_team} (D{away_div})")
+    print(f" {match_date_str}: {home_team} vs {away_team}")
+    print(f" Predicted: {outcome.get(predicted)} ({confidence:.2f}% confidence)")
+    print(f" Home form: {home_form} wins in last 5")
+    print(f" Away form: {away_form} wins in last 5")
+    print(f" Divisions: {home_team} (D{home_div}) vs {away_team} (D{away_div})")
     home_prob = probs[0][1] * 100
     away_prob = probs[0][0] * 100
-    print(f"📊 Probabilities: Home Win: {home_prob:.1f}%, Away Win: {away_prob:.1f}%")
+    print(f" Probabilities: Home Win: {home_prob:.1f}%, Away Win: {away_prob:.1f}%")
     return {'win': home_prob, 'lose': away_prob}
 
 
@@ -279,7 +259,6 @@ y_pred, probs = predict_with_division_rules(model, X_test)
 confidence = np.max(probs, axis=1)
 
 
-# Result DataFrame
 results_df = test_df[['Date', 'Home', 'Away', 'Winner', 'DivisionGap', 'AbsoluteDivisionGap']].copy()
 results_df['Predicted'] = y_pred
 results_df['Correct'] = results_df['Winner'] == results_df['Predicted']
@@ -290,66 +269,51 @@ results_df['Home Win Prob'] = probs[:, 1] * 100
 results_df['Confidence (%)'] = confidence.round(2)
 
 
-# Evaluate classification
 accuracy = accuracy_score(y_test, y_pred)
 accuracyFormatted = accuracy * 100
 
 
-# Fix confidence to be percentage
 results_df['Confidence (%)'] = results_df['Confidence (%)'] * 100
 
-# Extract top 5
 confidence_df = results_df[['Date', 'Home', 'Away', 'Predicted Outcome', 'Confidence (%)', 'Actual Outcome']].head()
 
-# Generate classification report as a dictionary
 report = classification_report(y_test, y_pred, labels=[0, 1], target_names=['Away Win', 'Home Win'], zero_division=0, output_dict=True)
 
 
-# Extract metrics for each class
-away_win_metrics = report['Away Win']  # Dict for 'Away Win'
-home_win_metrics = report['Home Win']  # Dict for 'Home Win'
+away_win_metrics = report['Away Win']
+home_win_metrics = report['Home Win']
 
-# Example: precision, recall, and F1-score for 'Away Win'
 away_precision = away_win_metrics['precision']
 away_recall = away_win_metrics['recall']
 away_f1 = away_win_metrics['f1-score']
 print("Unique values in y_test:", np.unique(y_test))
 print("Unique values in y_pred:", np.unique(y_pred))
 
-# Example: accuracy
 accuracy = report['accuracy']
 
-# Prepare data for HTML
 metrics_data = [
     {'Class': 'Away Win', 'Precision': away_precision, 'Recall': away_recall, 'F1-Score': away_f1},
     {'Class': 'Home Win', 'Precision': home_win_metrics['precision'], 'Recall': home_win_metrics['recall'], 'F1-Score': home_win_metrics['f1-score']},
     {'Class': 'Overall Accuracy', 'Precision': '', 'Recall': '', 'F1-Score': accuracy},
 ]
 
-# Generate classification report as a dictionary
 report = classification_report(y_test, y_pred, labels=[0, 2], target_names=['Away Win', 'Home Win'], zero_division=0,
                                output_dict=True)
 
-# 🎯 Goal Prediction Functions
 def create_goal_features(df):
-    """Create features specifically optimized for goal prediction"""
     df = df.copy()
 
-    # Calculate division average goals from your data
     division_avg_goals = df.groupby('HomeDivision')['HomeGoals'].mean().to_dict()
 
-    # Team offensive/defensive strength metrics
     df['HomeOffensiveStrength'] = df['HomeLast5_GoalsFor'] / (df['HomeLast5_GoalsAgainst'] + 1)
     df['AwayOffensiveStrength'] = df['AwayLast5_GoalsFor'] / (df['AwayLast5_GoalsAgainst'] + 1)
 
     df['HomeDefensiveWeakness'] = df['HomeLast5_GoalsAgainst'] / (df['HomeLast5_GoalsFor'] + 1)
     df['AwayDefensiveWeakness'] = df['AwayLast5_GoalsAgainst'] / (df['AwayLast5_GoalsFor'] + 1)
 
-    # Recent form metrics
     df['HomeGoalMomentum'] = df['HomeLast5_GoalsFor'] - df['HomeLast5_GoalsAgainst']
     df['AwayGoalMomentum'] = df['AwayLast5_GoalsFor'] - df['AwayLast5_GoalsAgainst']
 
-    # Division-based adjustments
     df['HomeDivisionFactor'] = df['HomeDivision'].map(division_avg_goals)
     df['AwayDivisionFactor'] = df['AwayDivision'].map(division_avg_goals)
 
@@ -377,7 +341,6 @@ y_train_away = train_df['AwayGoals']
 y_test_home = test_df['HomeGoals']
 y_test_away = test_df['AwayGoals']
 
-# Train goal prediction models
 goal_model_params = {
     'learning_rate': 0.05,
     'max_depth': 3,
@@ -392,15 +355,12 @@ goal_model_params = {
     'random_state': 42,
     'eval_metric': 'rmse'
 }
-# home goal model for score prediction
 home_goal_model = XGBRegressor(**goal_model_params)
 home_goal_model.fit(X_train_goals, y_train_home)
 
-# away goal model for score prediction
 away_goal_model = XGBRegressor(**goal_model_params)
 away_goal_model.fit(X_train_goals, y_train_away)
 
-# Score prediction function
 def predict_match_score(match_date_str, home_team, away_team, home_goal_model=home_goal_model, away_goal_model=away_goal_model, le=le_team, df_all=df):
     match_date = pd.to_datetime(match_date_str)
     df = df_all.copy()
@@ -436,7 +396,7 @@ def predict_match_score(match_date_str, home_team, away_team, home_goal_model=ho
         'HomeDivision': home_div,
         'AwayDivision': away_div,
         'AbsoluteDivisionGap': abs(away_div - home_div),
-        'HomeOffensiveStrength': 1,  # Replace with actual logic
+        'HomeOffensiveStrength': 1,
         'AwayOffensiveStrength': 1,
         'HomeDefensiveWeakness': 1,
         'AwayDefensiveWeakness': 1,
@@ -451,45 +411,38 @@ def predict_match_score(match_date_str, home_team, away_team, home_goal_model=ho
     pred_home_goals = round(home_goal_model.predict(row)[0])
     pred_away_goals = round(away_goal_model.predict(row)[0])
 
-    # return
     return {'home_score': pred_home_goals, 'away_score': pred_away_goals, 'home_team': home_team, 'away_team': away_team, 'home_division': home_div, 'away_division': away_div}
 
 
 
 def poisson_adjust_predictions(predictions):
-    """Adjust predictions to better match real-world goal distributions"""
-    predictions = np.where(predictions < 0, 0, predictions)  # No negative goals
-    predictions = np.round(predictions)  # Goals are integers
+    predictions = np.where(predictions < 0, 0, predictions)
+    predictions = np.round(predictions)
 
-    # Apply Poisson-inspired adjustments
     adjusted = []
     for pred in predictions:
-        if pred > 3:  # For high predictions, add some randomness
-            adj = np.random.poisson(pred * 0.9)  # Slightly reduce very high predictions
+        if pred > 3:
+            adj = np.random.poisson(pred * 0.9)
         else:
             adj = pred
-        adjusted.append(min(adj, 6))  # Cap at 6 goals
+        adjusted.append(min(adj, 6))
     return np.array(adjusted)
 
 
 def evaluate_goal_predictions(actual_home, actual_away, pred_home, pred_away):
-    """Comprehensive evaluation of goal predictions"""
     rmse_home = np.sqrt(mean_squared_error(actual_home, pred_home))
     mae_home = mean_absolute_error(actual_home, pred_home)
 
     rmse_away = np.sqrt(mean_squared_error(actual_away, pred_away))
     mae_away = mean_absolute_error(actual_away, pred_away)
 
-    # Directional accuracy (home scores more/less than away)
     actual_direction = (actual_home > actual_away).astype(int)
     pred_direction = (pred_home > pred_away).astype(int)
     direction_acc = accuracy_score(actual_direction, pred_direction)
 
-    # Exact score accuracy
     exact_score = np.sum((actual_home == pred_home) & (actual_away == pred_away))
     exact_accuracy = exact_score / len(actual_home)
 
-    # Within 1 goal accuracy
     home_within_1 = np.abs(actual_home - pred_home) <= 1
     away_within_1 = np.abs(actual_away - pred_away) <= 1
     within_1_acc = np.sum(home_within_1 & away_within_1) / len(actual_home)
@@ -506,12 +459,9 @@ def evaluate_goal_predictions(actual_home, actual_away, pred_home, pred_away):
 
 
 def run_goal_prediction(train_df, test_df, results_df):
-    """Run the complete goal prediction pipeline"""
-    # Create goal-specific features
     train_df = create_goal_features(train_df)
     test_df = create_goal_features(test_df)
 
-    # Goal prediction features
     goal_features = [
         'HomeTeam_enc', 'AwayTeam_enc',
         'HomeDivision', 'AwayDivision',
@@ -530,7 +480,6 @@ def run_goal_prediction(train_df, test_df, results_df):
     y_test_home = test_df['HomeGoals']
     y_test_away = test_df['AwayGoals']
 
-    # Optimized model parameters
     goal_model_params = {
         'learning_rate': 0.05,
         'max_depth': 3,
@@ -543,10 +492,9 @@ def run_goal_prediction(train_df, test_df, results_df):
         'objective': 'count:poisson',
         'n_jobs': -1,
         'random_state': 42,
-        'eval_metric': 'rmse'  # For regression
+        'eval_metric': 'rmse'
     }
 
-    # Initialize and train models
     print("\nTraining home goals model...")
     home_goal_model = XGBRegressor(**goal_model_params)
     home_goal_model.fit(X_train_goals, y_train_home)
@@ -555,38 +503,33 @@ def run_goal_prediction(train_df, test_df, results_df):
     away_goal_model = XGBRegressor(**goal_model_params)
     away_goal_model.fit(X_train_goals, y_train_away)
 
-    # Make predictions
     pred_home_goals = home_goal_model.predict(X_test_goals)
     pred_away_goals = away_goal_model.predict(X_test_goals)
 
-    # Adjust predictions
     adjusted_home_goals = poisson_adjust_predictions(pred_home_goals)
     adjusted_away_goals = poisson_adjust_predictions(pred_away_goals)
 
-    # Add to results
     results_df['Predicted Home Goals'] = adjusted_home_goals
     results_df['Predicted Away Goals'] = adjusted_away_goals
     results_df['Actual Home Goals'] = y_test_home.values
     results_df['Actual Away Goals'] = y_test_away.values
 
-    # Evaluate
     eval_results = evaluate_goal_predictions(
         y_test_home.values, y_test_away.values,
         adjusted_home_goals, adjusted_away_goals
     )
 
     print("\nEnhanced Goal Prediction Evaluation:")
-    print(f"🏠 Home Goals - RMSE: {eval_results['Home_RMSE']:.3f}, MAE: {eval_results['Home_MAE']:.3f}")
-    print(f"🛫 Away Goals - RMSE: {eval_results['Away_RMSE']:.3f}, MAE: {eval_results['Away_MAE']:.3f}")
-    print(f"🧭 Direction Accuracy: {eval_results['Direction_Accuracy']:.2%}")
-    print(f"🎯 Exact Score Accuracy: {eval_results['Exact_Accuracy']:.2%}")
-    print(f"✅ Within 1 Goal Accuracy: {eval_results['Within_1_Goal_Accuracy']:.2%}")
+    print(f" Home Goals - RMSE: {eval_results['Home_RMSE']:.3f}, MAE: {eval_results['Home_MAE']:.3f}")
+    print(f" Away Goals - RMSE: {eval_results['Away_RMSE']:.3f}, MAE: {eval_results['Away_MAE']:.3f}")
+    print(f" Direction Accuracy: {eval_results['Direction_Accuracy']:.2%}")
+    print(f" Exact Score Accuracy: {eval_results['Exact_Accuracy']:.2%}")
+    print(f" Within 1 Goal Accuracy: {eval_results['Within_1_Goal_Accuracy']:.2%}")
     stats_goal = {'home_RMSE': eval_results['Home_RMSE'], 'away_RMSE': eval_results['Away_RMSE'],
                   'home_MAE': eval_results['Home_MAE'], 'away_MAE': eval_results['Away_MAE'],
                   'direction_accuracy': eval_results['Direction_Accuracy'],
                   'exact_accuracy': eval_results['Exact_Accuracy'],
                   '1goal': eval_results['Within_1_Goal_Accuracy']}
-    # Show feature importance
     plt.figure(figsize=(12, 8))
     plot_importance(home_goal_model, max_num_features=15)
     plt.title('Home Goal Prediction Feature Importance')
@@ -594,9 +537,8 @@ def run_goal_prediction(train_df, test_df, results_df):
 
     return results_df, stats_goal
 
-# function to get division gap variable
 def show_division_gap(results_df=results_df):
-    results = []  # List to store the results
+    results = []
     for gap_range in [(0, 1), (2, 3), (4, 6)]:
         mask = results_df['AbsoluteDivisionGap'].between(*gap_range)
         if mask.any():
@@ -609,18 +551,15 @@ def show_division_gap(results_df=results_df):
             })
     return results
 
-# Division gap variable
 division_gap=show_division_gap(results_df)
 
 
-# Feature importance plot for outcome prediction
 plt.figure(figsize=(12, 8))
 plot_importance(model, max_num_features=15, importance_type='weight')
 plt.title('Outcome Prediction Feature Importance')
 
 
-# encode image as base64 to import
-buf = io.BytesIO()  # Create a buffer for the plot
+buf = io.BytesIO()
 plt.figure(figsize=(12, 8))
 plot_importance(model, max_num_features=15, importance_type='weight')
 plt.title('Outcome Prediction Feature Importance')
@@ -630,10 +569,8 @@ buf.seek(0)
 plot_data = base64.b64encode(buf.getvalue()).decode('utf-8')
 plt.close()
 
-# Compute confusion matrix
 cm = confusion_matrix(y_test, y_pred, labels=np.unique(y_test))
 
-# Plot confusion matrix + encode confusion image as base64 to import
 buf_cm = io.BytesIO()
 plt.figure(figsize=(8, 6))
 sns.heatmap(cm, annot=True, fmt='d', cmap='Blues', xticklabels=np.unique(y_test), yticklabels=np.unique(y_test))
@@ -643,7 +580,6 @@ buf_cm.seek(0)
 confusion_plot = base64.b64encode(buf_cm.getvalue()).decode('utf-8')
 plt.close()
 
-# predict score
 prediction = predict_match_score("2024-05-24", "Manchester City", "Manchester Utd")
 pred_home_goals, pred_away_goals, home_team, away_team = prediction['home_score'], prediction['away_score'], prediction['home_team'], prediction['away_team']
 
@@ -666,22 +602,18 @@ if __name__ == '__main__':
     print("Confusion Matrix:")
     print(cm)
 
-    # Display confidence levels
     print("\nTop 5 Predictions with Confidence Levels:")
     print(results_df[['Date', 'Home', 'Away', 'Predicted Outcome', 'Confidence (%)']].head(), "\n")
     predict_match("2024-05-24", "Manchester City", "Manchester Utd")
     print(f"Predicted Score: {home_team} {pred_home_goals:.1f} - {pred_away_goals:.1f} {away_team}")
 
-    # Run goal prediction
     prediction_df = run_goal_prediction(train_df, test_df, results_df)
 
-    # Show combined results
     print("\nCombined Predictions with Scores:")
     print(prediction_df[['Date', 'Home', 'Away', 'Predicted Outcome', 'Confidence (%)',
                       'Predicted Home Goals', 'Predicted Away Goals',
                       'Actual Outcome', 'Actual Home Goals', 'Actual Away Goals']].head(10))
 
-    # Feature importance plot for outcome prediction
     plt.figure(figsize=(16, 10))
     plot_importance(model, max_num_features=15, importance_type='weight')
     plt.title('Outcome Prediction Feature Importance')

@@ -12,7 +12,6 @@ le_team.fit(pd.concat([df['Home'], df['Away']]))
 df['HomeTeam_enc'] = le_team.transform(df['Home'])
 df['AwayTeam_enc'] = le_team.transform(df['Away'])
 
-# --- Add form and division features ---
 def add_form_and_division_features(df):
     df = df.copy()
 
@@ -25,14 +24,12 @@ def add_form_and_division_features(df):
 
 df = add_form_and_division_features(df)
 
-# Filter data
 train_df = df[
     (~((df['Type'] == 'League') & (df['Season'] == 2023) & (df['HomeDivision'] == 1) & (df['AwayDivision'] == 1))) &
     (df['Type'] == 'League')
 ]
 test_df = df[(df['Type'] == 'League') & (df['Season'] == 2023) & (df['HomeDivision'] == 1) & (df['AwayDivision'] == 1)]
 
-# Features
 features = [
     'HomeTeam_enc', 'AwayTeam_enc',
     'HomeDivision', 'AwayDivision',
@@ -46,14 +43,11 @@ y_train = train_df['Winner']
 X_test = test_df[features]
 y_test = test_df['Winner']
 
-# Train Random Forest model
 model = RandomForestClassifier(n_estimators=100, random_state=42)
 model.fit(X_train, y_train)
 
-# Predict
 y_pred = model.predict(X_test)
 
-# Evaluate
 accuracy = accuracy_score(y_test, y_pred)
 accuracyFormatted=accuracy*100
 
@@ -122,44 +116,27 @@ def predict_match_premier_league_rf(date_str, home_team, away_team, model=model,
     try:
         probs = model.predict_proba(feature_row)[0]
         confidence = probs[pred] * 100
-        print(f"📅 Match: {date_str} — {home_team} vs {away_team}")
-        print(f"🏆 Prediction: {label_map[pred]} ({confidence:.2f}% confidence)")
-        print(f"📈 Home Form: {home_wins} wins | Division: {home_div}")
-        print(f"📉 Away Form: {away_wins} wins | Division: {away_div}")
-        print(f"📊 Probabilities — Home Win: {probs[2]*100:.1f}%, Draw: {probs[1]*100:.1f}%, Away Win: {probs[0]*100:.1f}%")
+        print(f" Match: {date_str} — {home_team} vs {away_team}")
+        print(f" Prediction: {label_map[pred]} ({confidence:.2f}% confidence)")
+        print(f" Home Form: {home_wins} wins | Division: {home_div}")
+        print(f" Away Form: {away_wins} wins | Division: {away_div}")
+        print(f" Probabilities — Home Win: {probs[2]*100:.1f}%, Draw: {probs[1]*100:.1f}%, Away Win: {probs[0]*100:.1f}%")
         return {'win': probs[2] * 100, 'draw': probs[1] * 100, 'lose': probs[0] * 100,
                 'prediction': label_map[pred], 'home_team': home_team, 'away_team': away_team, 'home_division': home_div, 'away_division': away_div}
     except:
         print(f"🏆 Prediction: {label_map[pred]}")
         print("⚠️ Probabilities not available (model might not support them).")
 
-# predict score
 def predict_match_score_premier_league_rf(date_str, home_team, away_team, model=model, le=le_team, df_all=df):
-    """
-    Predict scores for a match using a trained Random Forest model.
-
-    Args:
-        date_str (str): Match date in string format.
-        home_team (str): Home team name.
-        away_team (str): Away team name.
-        model: Trained Random Forest model.
-        le: Label encoder for team names.
-        df_all (pd.DataFrame): Dataset with historical data.
-
-    Returns:
-        dict: Predicted home and away scores.
-    """
     match_date = pd.to_datetime(date_str)
     df = df_all.copy()
     df['Date'] = pd.to_datetime(df['Date'])
 
-    # Check if teams are valid
     known_teams = set(df['Home']).union(set(df['Away']))
     if home_team not in known_teams or away_team not in known_teams:
         print(f"⚠️ One or both teams not found in the dataset.")
         return None
 
-    # Helper functions for division and form
     def get_division(team):
         matches = df[((df['Home'] == team) | (df['Away'] == team)) & (df['Date'] < match_date)]
         if matches.empty:
@@ -180,7 +157,6 @@ def predict_match_score_premier_league_rf(date_str, home_team, away_team, model=
                 wins += 1
         return wins
 
-    # Compute features
     home_div = get_division(home_team)
     away_div = get_division(away_team)
     home_wins = get_last5_wins(home_team)
@@ -203,20 +179,18 @@ def predict_match_score_premier_league_rf(date_str, home_team, away_team, model=
             'AwayFormWeighted': away_wins * (abs_gap + 1)
         }])
     except Exception as e:
-        print(f"⚠️ Error encoding teams or creating features: {e}")
+        print(f" Error encoding teams or creating features: {e}")
         return None
 
-    # Predict probabilities and classes
     probs = model.predict_proba(feature_row)[0]
     home_win_prob = probs[2]
     away_win_prob = probs[0]
 
-    # Approximate scores based on probabilities
-    home_score = round(home_win_prob * 3)  # Scale probabilities to goals
+    home_score = round(home_win_prob * 3)
     away_score = round(away_win_prob * 3)
 
-    print(f"\n📅 Match: {date_str} — {home_team} vs {away_team}")
-    print(f"🔢 Predicted Score: {home_team} {home_score} - {away_score} {away_team}")
+    print(f"\n Match: {date_str} — {home_team} vs {away_team}")
+    print(f" Predicted Score: {home_team} {home_score} - {away_score} {away_team}")
     return {'home_score': home_score, 'away_score': away_score}
 
 
@@ -232,7 +206,6 @@ if __name__ == '__main__':
     print("\nClassification Report:")
     print(classification_report(y_test, y_pred, labels=classes, target_names=target_names, zero_division=0))
 
-    # Display results
     results_df = test_df[['Date', 'Home', 'Away', 'Winner']].copy()
     results_df['Predicted'] = y_pred
     results_df['Correct'] = results_df['Winner'] == results_df['Predicted']
@@ -243,6 +216,6 @@ if __name__ == '__main__':
 
     print("\nSample Predictions:")
     print(results_df[['Date', 'Home', 'Away', 'Actual Outcome', 'Predicted Outcome', 'Correct']].head(20))
-    print("\n🔮 Prediksi Match Interaktif:")
+    print("\n Prediksi Match Interaktif:")
     predict_match_premier_league_rf("2023-09-17", "Arsenal", "Manchester Utd")
     predict_match_score_premier_league_rf("2023-09-17", "Arsenal", "Manchester Utd")

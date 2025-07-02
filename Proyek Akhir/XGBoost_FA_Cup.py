@@ -54,14 +54,13 @@ results_df['Away Win Prob'] = (probs[:, 2] * 100).round(1)
 accuracy = accuracy_score(y_test, y_pred)
 accuracyFormatted = accuracy*100
 
-# Evaluation
 if __name__ == '__main__':
     print(f"XGBoost Accuracy on FA Cup test set (only 2 features): {accuracy * 100:.2f}%\n")
 
     unique_classes = np.unique(y_test)
     print(f"Classes present in test data: {unique_classes}")
 
-    target_names = ['Home Win', 'Away Win']  # No Draw in test set
+    target_names = ['Home Win', 'Away Win']
 
     print("Confusion Matrix:")
     print(confusion_matrix(y_test, y_pred, labels=unique_classes))
